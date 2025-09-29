@@ -1,0 +1,184 @@
+/* @import url(https://unpkg.com/bootstrap@4.1.0/dist/css/bootstrap.min.css) */
+
+body {
+    background-color: #242424;
+    color: whitesmoke;
+}
+
+.purple-titlebar {
+    background: #2f1e77;
+
+    .ptb-inner {
+        color: #fff;
+        padding: 20px 24px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .brand {
+        font-weight: 700;
+        font-size: large;
+        letter-spacing: 0.3px;
+    }
+
+    .spacer {
+        flex: 1;
+    }
+
+    #icon {
+        width: 24px;
+        height: 24px;
+    }
+
+    #search-bar {
+        background: #363636;
+    }
+}
+
+.yellow-sticky {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: #ffdc72;
+    color: #222;
+    border-bottom: 1px solid #e7e7e7;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 12px 16px;
+
+    .yub-left {
+        display: flex;
+        gap: 20px;
+        align-items: center;
+    }
+
+    .yub-link {
+        text-decoration: none;
+        color: #222;
+        font-weight: 600;
+    }
+
+    .demo-line {
+        padding: 6px 16px 10px;
+        text-align: right;
+        font-size: 0.8rem;
+        font-weight: 400;
+    }
+}
+
+main {
+    padding: 24px 16px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.back-link {
+    margin: 24px 0;
+}
+
+.solo-page {
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+.solo-car {
+    display: grid;
+    gap: 16px;
+    grid-template-columns: 220px 1fr;
+    align-items: start;
+}
+.solo-img {
+    width: 220px;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+.solo-name {
+    margin: 0 0 4px;
+    font-weight: 500;
+}
+
+.solo-title {
+    margin: 0 0 12px;
+    color: #666;
+    font-weight: 400;
+}
+
+.solo-bio {
+    line-height: 1.6;
+    margin: 0 0 12px;
+}
+
+.solo-links a {
+    margin-right: 12px;
+    text-decoration: underline;
+}
+
+.about-page-app h1 {
+    max-width: 960px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.thumb-wrap {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+}
+
+.thumb {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+}
+
+.tile {
+    display: block;
+    text-decoration: none;
+    background: #363636;
+    color: #c8c8c8;
+    border: 1px solid #777777;
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+}
+
+.tile :hover {
+    box-shadow: 0 4px 8px rgb(0 0 0 / 0.1);
+    border-color: #ddd;
+}
+
+.tile .name {
+    margin: 4px 4px 4px;
+    font-weight: 700;
+    font-size: 2rem;
+}
+
+.tile .title {
+    margin: 0;
+    color: #969696;
+    font-size: 1rem;
+    margin-left: 6px;
+}
+
+.team-members-list {
+    grid-row: 120px 120px;
+    gap: 16px;
+}
+
+.members-display {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+#list-header {
+    margin-left: 0px;
+    margin-bottom: 16px;
+}
