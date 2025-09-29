@@ -1,8 +1,6 @@
 # csc648 Repository
 
-### Please when ready add your teams application URL or IP to the repository description. This will help with grading. Teams are expected to keep this value up to date.
-
-## Project URL: [test.com](https://www.test.com)
+## Project URL: [18.144.101.99/](http://18.144.101.99/)
 
 ## Team Members:
 
@@ -13,5 +11,3 @@
 |       Jonah Hammond       |      jhammond@sfsu.edu       |      jonuuh       |
 |      Hill Kalathiya       |     hkalathiya@sfsu.edu      |      hill13       |
 |      Enrique Liganor      |      eliganor@sfsu.edu       |   RainyToaster    |
-
-### NO code needs to be stored in the root of your repository. You may rename the application folder if you like to your team's application name. But all source code related to your team's application should be stored inside the application folder.
