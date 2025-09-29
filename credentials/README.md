@@ -3,7 +3,8 @@
 ## SSH
 - Server URL or IP: `18.144.101.99`
 - SSH username: `ec2-user`
-- SSH password or key: Tutoring_Server_Key.pem (located in this folder)
+- SSH password or key: `Tutoring_Server_Key.pem` file (located in this folder)
+  - Note: permissions may need to be set with `chmod 400 Tutoring_Server_Key.pem`
 
 ## Database
 4. Database URL or IP and port used.
