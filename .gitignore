@@ -3,19 +3,27 @@
 Thumbs.db
 
 # --- Editors/IDE ---
-.vscode/
-.idea/
-*.iml
+.vscode/git
+
+# IntelliJ IDEA - Files to ignore (user-specific, local configuration, caches)
+.idea/workspace.xml
+.idea/jarRepositories.xml
+.idea/compiler.xml
+.idea/modules.xml
+.idea/csc648-fa25-03-team05.iml
+
+# IntelliJ IDEA - Files to keep (do NOT ignore these)
+# .idea/misc.xml
+# .idea/vcs.xml
+# .idea/encodings.xml
+# .idea/checkstyle-idea.xml
 
 # --- Java / Gradle / Build Artifacts ---
 *.class
 *.jar
 *.war
-.gradle/
 build/
 out/
-# Keep the Gradle wrapper JAR (needed in repo)
-!gradle/wrapper/gradle-wrapper.jar
 
 # (Optional, Maven-style. Safe to keep even if you use Gradle)
 target/
@@ -39,7 +47,7 @@ secrets/
 secrets/**
 
 # --- SSL / keys / certs (never commit) ---
-*.pem
+# *.pem
 *.key
 *.p12
 *.pfx
