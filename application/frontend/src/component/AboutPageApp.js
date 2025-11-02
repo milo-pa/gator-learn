@@ -5,7 +5,7 @@ class AboutPageApp extends Component {
     render() {
         return (
             <div className="about-page-app">
-                <h1 id="list-header">Meet Team Five</h1>
+                <h1 id="list-header">Meet Team 5</h1>
                 <TeamMembersList />
             </div>
         );

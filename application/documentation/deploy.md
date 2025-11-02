@@ -1,15 +1,15 @@
 ## Deploying Build
 
-SSH to server with the credentials. Must be in credentials folder  
-- `ssh -i Tutoring_Server_Key.pem ec2-user@18.144.101.99`
+SSH to server with the credentials.  
+- `ssh -i Tutoring_Server_Key.pem ec2-user@18.144.101.99` *(Must be in credentials folder)*
 - key may require permissions reset
   - `chmod 400 Tutoring_Server_Key.pem`
 
 Enter project folder  
 `cd /opt/tutoringapp`
 
-Delete old jar  
-`sudo rm SFSUTutoring-1.0.0.jar`
+Move and rename old jar  
+`sudo mv releases/SFSUTutoring-1.0.0.jar log/<version name>`
 
 Exit SSH  
 `logout`
@@ -25,8 +25,21 @@ Restart service after switching jar
 
 ## Notes
 
+files used on server can be found within this repository:  
+`documentation/server-files/` 
+
 Path to app files on server. Ownership assigned to default ec2-user user  
-`/opt/tutoringapp/`
+```
+/opt/tutoringapp
+├─ bin/
+│  ├─ deploy_inplace.sh            # for CI/CD
+├─ log/                            # optional app logs
+├─ releases/                       # backend jar (run by tutoring_jar.service systemctl)
+│  ├─ SFSUTutoring-1.0.0.jar
+├─ site/                           # React build output
+│  └─ index.html
+└─ src/                            # repository
+```
 
 Systemctl service file path  
 `/etc/systemd/system/tutoring_jar.service` 
