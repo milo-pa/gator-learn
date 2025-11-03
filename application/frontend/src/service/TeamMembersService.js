@@ -2,11 +2,13 @@ import axios from "axios";
 
 class TeamMembersService {
     getMemberByName(name) {
-        return axios.get(`/api/team-members/${encodeURIComponent(name)}`);
+        // This url assumes that the backend is running on http://18.144.101.99
+        return axios.get(`http://18.144.101.99/api/team-members/${encodeURIComponent(name)}`);
     }
 
     getAllMembers() {
-        return axios.get("/api/team-members");
+        // This url assumes that the backend is running on http://18.144.101.99
+        return axios.get("http://18.144.101.99/api/team-members");
     }
 }
 

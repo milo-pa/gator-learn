@@ -1,0 +1,18 @@
+[Unit]
+Description=Tutoring App
+After=network.target
+
+[Service]
+User=ec2-user
+Group=ec2-user
+WorkingDirectory=/opt/tutoringapp/releases
+# small memory flags; adjust Xmx as needed for t4g.small (2 GiB)
+ExecStart=/usr/bin/java -Xms256m -Xmx1024m -jar /opt/tutoringapp/SFSUTutoring-1.0.0.jar --server.port=8080 --server.address=127.0.0.1
+SuccessExitStatus=143
+Restart=on-failure
+RestartSec=10
+Environment=SPRING_PROFILES_ACTIVE=prod
+LimitNOFILE=65536
+
+[Install]
+WantedBy=multi-user.target
