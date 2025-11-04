@@ -17,7 +17,8 @@
     - **Option A: IntelliJ**
       - Open `Main.java` and click **Run**.
     - **Option B: Maven (terminal)**
-      - `mvn spring-boot:run`
+      - cd to `/backend` directory 
+      - Then run: `mvn spring-boot:run`
 
 3. **Verify**
     - Visit **http://localhost:8080** — you should see a Whitelabel Error Page.
@@ -32,7 +33,7 @@
      depending on which backend you want the frontend to call
 
 2. **Change into the frontend directory**
-   - `cd frontend`
+   - `cd <local-path>/frontend`
 
 3. **Start the Dev Server**
    - `npm run start`
