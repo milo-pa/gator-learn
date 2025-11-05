@@ -26,11 +26,11 @@
 
 ### 2) Start the Frontend (React)
 
-2. **Change into the frontend directory**
+1. **Change into the frontend directory**
    - `cd frontend`
 
-3. **Start the Dev Server**
+2. **Start the Dev Server**
    - `npm run start`
 
-4. **Verify**
+3. **Verify**
    - Visit http://localhost:3000.
