@@ -16,7 +16,8 @@
     - **Option A: IntelliJ**
       - Open `Main.java` and click **Run**.
     - **Option B: Maven (terminal)**
-      - `mvn spring-boot:run`
+      - cd to `/backend` directory 
+      - Then run: `mvn spring-boot:run`
 
 3. **Verify**
     - Visit **http://localhost:8080** — you should see a Whitelabel Error Page.
