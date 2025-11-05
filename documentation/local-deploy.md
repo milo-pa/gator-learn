@@ -3,7 +3,6 @@
 ## Overview
 - **Backend:** Runs on **port 8080** and serves all routes that begin with `/api`.
 - **Frontend:** Runs on **port 3000** and serves all other routes. Frontend will call the backend /api pages on 8080
-- **NOTE** we currently don't differentiate local deployment vs remote deployment, so you have to manually update the URL
 
 ---
 
@@ -26,10 +25,6 @@
 ---
 
 ### 2) Start the Frontend (React)
-
-1. **Update URL**
-   - In `frontend/src/service/TeamMembersService.js` change all references to either http://18.144.101.99 or http://localhost, 
-     depending on which backend you want the frontend to call
 
 2. **Change into the frontend directory**
    - `cd frontend`
