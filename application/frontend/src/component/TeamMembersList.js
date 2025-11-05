@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import TeamMembersService from "../service/TeamMembersService.js";
 import TeamMemberComponent from "./TeamMemberComponent.js";
 import { Link } from "react-router-dom";
+import { trackEvent } from "../analytics/ga";
 
 class TeamMembersList extends Component {
     constructor(props) {
@@ -22,6 +23,13 @@ class TeamMembersList extends Component {
             });
     }
 
+    handleMemberClick(member) {
+        trackEvent("team_member_clicked", {
+            memberName: member.name,
+            memberTitle: member.title,
+        });
+    }
+
     render() {
         if (this.state.error) {
             return <div>{this.state.error}</div>;
@@ -33,13 +41,14 @@ class TeamMembersList extends Component {
                     {this.state.members.map((member) => (
                         <Link key={member.name}
                               to={`/team-members/${encodeURIComponent( member.name)}`}
-                              className="tile-link">
+                              className="tile-link"
+                              onClick={() => this.handleMemberClick(member)}
+                        >
                             <TeamMemberComponent
                                 name={member.name}
                                 title={member.title}
                                 imagePath={member.imagePath} />
                         </Link>
-
                     ))}
                 </div>
             </div>
