@@ -5,20 +5,67 @@ class TopBarComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            lightMode: false,
+            // default is now light mode
+            theme: "light",
+            userSetPreference: false
         };
+        this.mql = null;
     }
+
+
+    applyTheme = (theme) => {
+        document.body.classList.toggle("dark-mode", theme === "dark");
+    };
+
+    componentDidMount() {
+        const saved = localStorage.getItem("theme");
+        if (saved === "light" || saved === "dark") {
+            this.setState({ theme: saved , userSetPreference: true}, () => this.applyTheme(saved));
+            return;
+        }
+
+        if (window.matchMedia) {
+            this.mql = window.matchMedia("(prefers-color-scheme: dark)");
+            const systemPrefersDark = this.mql.matches;
+            const initialTheme = systemPrefersDark ? "dark" : "light";
+            this.setState({ theme: initialTheme, userSetPreference: false}, () => {
+                this.applyTheme(initialTheme);
+            });
+            this.mql.addEventListener("change", this.handleSystemThemeChange);
+        } else 
+        {
+            this.applyTheme("light");
+        }
+    }
+    
+    componentWillUnmount() {
+        if (this.mql && this.mql.removeEventListener) {
+            this.mql.removeEventListener("change", this.handleSystemThemeChange);
+        }
+    }
+
+    handleSystemThemeChange = (e) => {
+        if (this.state.userSetPreference) {
+            return;
+        }
+        const newTheme = e.matches ? "dark" : "light";
+        this.setState({ theme: newTheme }, () => this.applyTheme(newTheme));
+    };
 
 
     toggleTheme = () => {
-        this.setState((prevState) => ({
-            lightMode: !prevState.lightMode,
-        }), () => {
-            document.body.classList.toggle('light-mode', this.state.lightMode);
-        });
-    }
+        this.setState(
+            (prevState) => ({
+                theme: prevState.theme === "light" ? "dark" : "light"
+            }), () => {
+                const {theme} = this.state;
+                this.applyTheme(theme);
+                localStorage.setItem("theme", theme);
+            });
+    };
+
     render() {
-        const { lightMode} = this.state;
+        const { theme } = this.state;
         return (
             <header className="purple-titlebar">
                 <div className="ptb-inner">
@@ -29,16 +76,20 @@ class TopBarComponent extends Component {
                         </a>
                     </div>
                     <div className="spacer"></div>
-                     <div className = "theme-toggle"> 
-                        <label className="switch">
-                            <input type="checkbox" onChange={this.toggleTheme} checked={lightMode} />
-                            <span className="slider">
-                                {lightMode ? "Light Mode" : "Dark Mode" }
-                            </span>
-                        </label>
-                    </div>
-                    <input id="search-bar" type="search" placeholder="Search..." className="search-input" />
-                    <button id="signup-button" className="signup-button">Sign Up</button>
+                    <form className = "search-container">
+                        <select className="search-category">
+                            <option value="all">All</option>
+                            <option value="subject">Subject</option>
+                        </select>
+                        <input
+                            type="text" 
+                            className="search-input" 
+                            placeholder="eg. CSC 648"
+                        />
+                    </form>
+                    {/* Will need to add function later to change login to log out when user signed in */}
+                    <button id="login-button" className="login-button">Login</button>
+                    <div className="profile-placeholder"></div>
                 </div>
             </header>
         );
