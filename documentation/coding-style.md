@@ -36,7 +36,12 @@
  * Project: Gator Learn, Tutoring Website
  * Author: [Your Name]
  * Created: [Date]
- * Description: [Brief explanation of this file’s purpose, 1-4 lines]
+ * Description: [Brief explanation of this file’s purpose, 1-3 lines]
+ *
+ * Copyright (c) 2025 San Francisco State University Team 05
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
  */
 ```
 
