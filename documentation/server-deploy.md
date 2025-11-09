@@ -9,7 +9,9 @@ You can also manually trigger deployment from any branch by starting the _"CI/CD
 
 ---
 
-## Manual Deployment
+## Manual Deployment (Outdated)
+
+Use Automatic Deployment when possible. Less error prone and we can track deployments.
 
 1. **Deploy the Backend JAR File**
    - Copy your local build to the remote live deployment folder. The file **must be named** `SFSUTutoring-1.0.0.jar` to overwrite the current running version.
