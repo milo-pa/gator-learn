@@ -5,6 +5,8 @@
 - SSH username: `ec2-user`
 - SSH password or key: `Tutoring_Server_Key.pem` file (located in this folder)
   - Note: permissions may need to be set with `chmod 400 Tutoring_Server_Key.pem`
+- Instructions on how to use the above information
+  - run `ssh -i <local path>/Tutoring_Server_Key.pem ec2-user@18.144.101.99`
 
 ## Database
 4. Database URL or IP and port used.
