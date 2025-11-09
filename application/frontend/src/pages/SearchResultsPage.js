@@ -1,6 +1,5 @@
 import {useLocation} from 'react-router-dom';
 import React, { useEffect, useState} from 'react';
-import {mockTutors} from '../mock/mockTutors.js';
 
 function useQueryParams() {
     const {search} = useLocation();
@@ -9,23 +8,33 @@ function useQueryParams() {
 
 function SearchResultsPage() {
     const params = useQueryParams();
-    const subject = (params.get('subject') || '').toLowerCase().trim();
-    const course = (params.get('course') || '').toLowerCase().trim();
+    const subject = (params.get("subject") || "").toLowerCase().trim();
+    const course = (params.get("course") || "").toLowerCase().trim();
 
     const [tutors, setTutors] = useState([]);
 
     useEffect(() => { 
-        let filtered = mockTutors;
-        if (subject !== "") {
-            filtered = filtered.filter(
-                (tutor) => tutor.subject.toLowerCase().includes(subject));
+        async function fetchListings() {
+            try {
+                let url = '/api/listings';
+                if (course) {
+                    url = `/api/listings?course=${encodeURIComponent(course)}`;
+                } else if (subject) {
+                    url = `/api/listings?subject=${encodeURIComponent(subject)}`;
+                }
+
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const data = await response.json();
+                setTutors(data);
+            } catch (error) {
+                console.error("Failed to fetch listings:", error);
+            }
         }
-        if (course !== "") {
-            filtered = filtered.filter(
-                (tutor) => tutor.course.toLowerCase().includes(course));
-        }
-        setTutors(filtered);
-    },[subject, course]);
+        fetchListings();
+    }, [subject, course]);
 
     return (
         <main className="search-results-page">
@@ -44,13 +53,13 @@ function SearchResultsPage() {
                         </div>
                         <div className="tutor-info">
                             <div className="tutor-info-header">
-                                <h2 className="tutor-name">{tutor.tutorName}</h2>
+                                <h2 className="tutor-name">{tutor.name}</h2>
                                 <a href="#" className="tutor-link-button">View more detail</a>
                             </div>
                             <p className="tutor-subject">Subject: {tutor.subject}</p>
                             <p className="tutor-price">Price: ${tutor.pricePerHour}/hr</p>
                         <div className="tutor-actions">
-                             <p className="tutor-availability">Availability: {tutor.availabilty}</p>
+                             <p className="tutor-availability">Availability: {tutor.availability}</p>
                             <button className="tutor-message-button">MESSAGE TUTOR</button>
                         </div>
                     </div>

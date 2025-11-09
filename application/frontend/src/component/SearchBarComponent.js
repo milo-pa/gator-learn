@@ -12,13 +12,11 @@ function SearchBarComponent() {
     const navigate = useNavigate();
     const handleSearch = (e) => {
         e.preventDefault();
-        let url = "/results?";
-        if (mode === "all") {
-            url += `query=${encodeURIComponent(text)}`;
+        if (mode === "all" || text.trim() === "") {
+            navigate("/results");
         } else {
-            url += `${mode}=${encodeURIComponent(text)}`;
+            navigate(`/results?${mode}=${encodeURIComponent(text)}`);
         }
-        navigate(url);
     };
 
     const handleDropdownChange = (e) => {
