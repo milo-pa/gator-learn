@@ -458,11 +458,12 @@ main {
     color: gray;
 }
 
+
 .home-text p {
     font-size: 1rem;
     line-height: 1.5;
     margin-bottom: 16px;
-    color: black;
+    color: inherit;
     max-width: 480px;
 }
 
