@@ -21,7 +21,7 @@
 
 5. **Deploy Frontend Build (React)**
    - Copy the compiled frontend build (check [frontend notes](./frontend-notes.md)) to the Nginx serving directory. This step is last, ensuring the frontend calls the new, already-running backend.
-    > `scp -i <local path>/Tutoring_Server_Key.pem <local path>/build/* ec2-user@18.144.101.99:/var/www/tutoringapp`
+    > `scp -i <local path>/Tutoring_Server_Key.pem -r <local path>/build/* ec2-user@18.144.101.99:/var/www/tutoringapp`
 
 ---
 
