@@ -10,4 +10,7 @@ class TeamMembersService {
     }
 }
 
-export default new TeamMembersService();
+
+const teamMembersService = new TeamMembersService();
+
+export default teamMembersService;
