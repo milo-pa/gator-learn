@@ -7,6 +7,7 @@ import TopBarComponent from "./component/TopBarComponent";
 import MenuComponent from "./component/MenuComponent";
 import TeamMemberDetail from "./component/TeamMemberDetail";
 import withNavigation from "./component/WithNavigation";
+import SearchResultsPage  from "./pages/SearchResultsPage";
 
 const DetailWithParams = withNavigation(TeamMemberDetail);
 
@@ -20,6 +21,8 @@ class App extends Component {
 
                 <main>
                     <Routes>
+                        <Route path ="/" element={<div>HomePage</div>} />
+                        <Route path ="/results" element={<SearchResultsPage />} />
                         <Route path="/team-members" element={<AboutPageApp />} />
                         <Route path="/team-members/:name" element={<DetailWithParams />} />
                     </Routes>
