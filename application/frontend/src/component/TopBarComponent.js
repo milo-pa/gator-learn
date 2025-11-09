@@ -1,4 +1,5 @@
-import React, { Component } from "react";
+import React, { Component, use } from "react";
+import SearchBar from "./SearchBarComponent";
 
 class TopBarComponent extends Component {
 
@@ -64,6 +65,8 @@ class TopBarComponent extends Component {
             });
     };
 
+    
+
     render() {
         const { theme } = this.state;
         return (
@@ -76,17 +79,8 @@ class TopBarComponent extends Component {
                         </a>
                     </div>
                     <div className="spacer"></div>
-                    <form className = "search-container">
-                        <select className="search-category">
-                            <option value="all">All</option>
-                            <option value="subject">Subject</option>
-                        </select>
-                        <input
-                            type="text" 
-                            className="search-input" 
-                            placeholder="eg. CSC 648"
-                        />
-                    </form>
+                    <SearchBar />
+                    
                     {/* Will need to add function later to change login to log out when user signed in */}
                     <button id="login-button" className="login-button">Login</button>
                     <div className="profile-placeholder"></div>
