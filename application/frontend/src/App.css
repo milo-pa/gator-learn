@@ -43,6 +43,20 @@ body.dark-mode .yub-link {
     color: #090909;
 }
 
+.body.dark-mode .tutor-name{
+    color: #f1f0f0;
+}
+body.dark-mode .tutor-info {
+    color: #f1f0f0;
+}
+body.dark-mode .tutor-card {
+    background: #353535;
+    border: 1px solid #666;
+}
+.body.dark-mode .tutor-link-button {
+    color: #f1f0f0;
+}
+
 .header-wrapper {
     position: sticky;
     top: 0;
