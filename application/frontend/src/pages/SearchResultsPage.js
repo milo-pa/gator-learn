@@ -1,5 +1,6 @@
 import {useLocation} from 'react-router-dom';
 import React, { useEffect, useState} from 'react';
+import TutorListingService from '../service/TutorListingService';
 
 function useQueryParams() {
     const {search} = useLocation();
@@ -11,29 +12,31 @@ function SearchResultsPage() {
     const subject = (params.get("subject") || "").toLowerCase().trim();
     const course = (params.get("course") || "").toLowerCase().trim();
 
-    const [tutors, setTutors] = useState([]);
+    const [listings, setListings] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
 
     useEffect(() => { 
-        async function fetchListings() {
+        async function loadListings() {
             try {
-                let url = '/api/listings';
-                if (course) {
-                    url = `/api/listings?course=${encodeURIComponent(course)}`;
-                } else if (subject) {
-                    url = `/api/listings?subject=${encodeURIComponent(subject)}`;
+                setLoading(true);
+                let response;
+                if (subject) {
+                    response = await TutorListingService.getListingsBySubjectSubstring(subject);
+                } else if (course) {
+                    response = await TutorListingService.getListingsByCourseSubstring(course);
+                } else {
+                    response = await TutorListingService.getListings();
                 }
-
-                const response = await fetch(url);
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                const data = await response.json();
-                setTutors(data);
+                setListings(response.data);
+                setLoading(false);
             } catch (error) {
-                console.error("Failed to fetch listings:", error);
+                setError("Failed to fetch listings.");
+                setLoading(false);
             }
         }
-        fetchListings();
+
+        loadListings();
     }, [subject, course]);
 
     return (
@@ -41,31 +44,33 @@ function SearchResultsPage() {
             <header className="results-header">
                 <h1 className="results-title">Current Listings</h1>
                 <p className="results-subtitle">
-                    Found <strong>{tutors.length}</strong> {tutors.length === 1 ? 'tutor' : 'tutors'}
+                    Found <strong>{listings.length}</strong> {listings.length === 1 ? 'tutor' : 'tutors'}
                 </p>
             </header>
+            {loading && <p className="loading-message">Loading listings...</p>}
+            {error && <p className="error-message">Error: {error}</p>}
             <section className="results-list">
-                {tutors.map((tutor) => (
-                    <article key={tutor.id} className="tutor-card">
+                {listings.map((listing) => (
+                    <article key={listing.id} className="tutor-card">
                         <div className="tutor-image-wrapper">
                             {/* Placeholder for tutor image */}
-                            <div className="tutor-image-placeholder">Image</div>
+                            <img className="tutor-image-placeholder" src = "/images/tutor/iu_.png" alt="Tutor" />
                         </div>
                         <div className="tutor-info">
                             <div className="tutor-info-header">
-                                <h2 className="tutor-name">{tutor.name}</h2>
+                                <h2 className="tutor-name">{listing.account.name}</h2>
                                 <a href="#" className="tutor-link-button">View more detail</a>
                             </div>
-                            <p className="tutor-subject">Subject: {tutor.subject}</p>
-                            <p className="tutor-price">Price: ${tutor.pricePerHour}/hr</p>
+                            <p className="tutor-subject">Subject: {listing.subject?.subjectName}</p>
+                            <p className="tutor-price">Price: ${listing.pricePerHour}/hr</p>
                         <div className="tutor-actions">
-                             <p className="tutor-availability">Availability: {tutor.availability}</p>
+                             <p className="tutor-availability">Availability: {listing.availableTime}</p>
                             <button className="tutor-message-button">MESSAGE TUTOR</button>
                         </div>
                     </div>
                 </article>
                 ))}
-                {tutors.length === 0 && (
+                {listings.length === 0 && (
                     <p className="no-results">No tutors found matching your criteria.</p>
                 )}
             </section>
