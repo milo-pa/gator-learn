@@ -2,7 +2,7 @@ name: CI/CD on Push to Main
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "feature/CI/CD" ]
   workflow_dispatch:
     inputs:
       deploy:
