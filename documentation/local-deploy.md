@@ -12,19 +12,17 @@
    - In the backend folder, right-click [pom.xml](../application/backend/pom.xml) → **Add as Maven Project**.
      - You should see Java files with blue circle icons (instead of orange mugs).
 
-
 2. **Open a local connection to the database running on AWS**
-- `ssh -i Tutoring_Server_Key.pem -L 3306:127.0.0.1:3306 ec2-user@18.144.101.99`
-  - This is the same as the command from milo's ssh command from 
-    https://github.com/CSC-648-SFSU/csc648-fa25-03-team05/blob/main/documentation/server-deploy.md,
-    except for the extra part in the middle to configure port forwarding
-  - This essentially forwards all traffic from your localhost port 3306 to the aws instance's port 3306
+   - `ssh -i Tutoring_Server_Key.pem -L 3306:127.0.0.1:3306 ec2-user@18.144.101.99`
+     - This is the same as the command from milo's ssh command from [server-deploy.md](./server-deploy.md)
+        except for the extra part in the middle to configure port forwarding
+     - This essentially forwards all traffic from your localhost port 3306 to the aws instance's port 3306
 
 3. **Run the server**
     - **Option A: IntelliJ**
       - Open `Main.java` and click **Run**.
     - **Option B: Maven (terminal)**
-      - cd to `/backend` directory 
+      - cd `<local path>/backend`
       - Then run: `mvn spring-boot:run`
 
 4. **Verify**
@@ -36,7 +34,7 @@
 ### 2) Start the Frontend (React)
 
 1. **Change into the frontend directory**
-   - `cd frontend`
+   - `cd <local path>/frontend`
 
 2. **Start the Dev Server**
    - `npm run start`
