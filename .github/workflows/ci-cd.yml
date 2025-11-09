@@ -29,9 +29,9 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ~/.m2/repository
-          key: ${{ runner.os }}-m2-${{ hashFiles('application/backend/pom.xml', 'application/backend/**/pom.xml') }}
+          key: backend-maven-${{ runner.os }}-${{ hashFiles('application/backend/pom.xml', 'application/backend/**/pom.xml') }}
           restore-keys: |
-            ${{ runner.os }}-m2-
+            backend-maven-${{ runner.os }}-
 
       - name: Build backend
         working-directory: ./application/backend
@@ -55,9 +55,9 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ~/.npm
-          key: ${{ runner.os }}-npm-${{ hashFiles('application/frontend/package-lock.json') }}
+          key: frontend-npm-${{ runner.os }}-${{ hashFiles('application/frontend/package-lock.json') }}
           restore-keys: |
-            ${{ runner.os }}-npm-
+            frontend-npm-${{ runner.os }}-
 
       - name: Build frontend
         working-directory: ./application/frontend
