@@ -1,3 +1,20 @@
+/*
+ * Institution: San Francisco State University
+ * Class: CSC 648 Project, Team 05
+ * Project: Gator Learn, Tutoring Website
+ * Author: Milo Pesce Ares
+ * Created: 11/5/25
+ * Description:
+ *  Defines functions for adding the git tag to index.html on refreshes and tracking events,
+ *  which is essential since we are using a Single Page Application, which means the index.html
+ *  is not updated on every page click. It only triggers in production
+ *
+ * Copyright (c) 2025 San Francisco State University Team 05
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 const GA_MEASUREMENT_ID = process.env.REACT_APP_GA_MEASUREMENT_ID;
 
 export function initAnalytics() {
