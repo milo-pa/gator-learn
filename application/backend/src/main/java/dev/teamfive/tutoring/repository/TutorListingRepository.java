@@ -12,9 +12,9 @@ import java.util.List;
 @Repository
 public interface TutorListingRepository extends JpaRepository<TutorListing, Long>
 {
-    @Query("SELECT t FROM TutorListing t WHERE t.course LIKE CONCAT('%', :course, '%')")
+    @Query("SELECT t FROM TutorListing t JOIN t.course c WHERE c.courseName LIKE CONCAT('%', :course, '%')")
     List<TutorListing> findByCourseContaining(@Param("course") String course);
 
-    @Query("SELECT t FROM TutorListing t WHERE t.subject LIKE CONCAT('%', :subject, '%')")
+    @Query("SELECT t FROM TutorListing t JOIN t.subject s WHERE s.subjectName LIKE CONCAT('%', :subject, '%')")
     List<TutorListing> findBySubjectContaining(@Param("subject") String subject);
 }
