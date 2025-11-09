@@ -59,13 +59,13 @@ jobs:
 #      github.ref == 'refs/heads/main'
 
     steps:
-      - name: Download backend artifact
+      - name: Download backend JAR artifact
         uses: actions/download-artifact@v4
         with:
           name: backend-jar
           path: backend-artifacts
 
-      - name: Download frontend artifact
+      - name: Download frontend build artifact
         uses: actions/download-artifact@v4
         with:
           name: frontend-build
@@ -84,11 +84,8 @@ jobs:
           ssh-private-key: ${{ secrets.EC2_SSH_KEY }}
 
       - name: Copy backend JAR to EC2
-        working-directory: ./application/backend
         run: |
-          JAR_PATH="target/SFSUTutoring-1.0.0.jar"
-          echo "Listing backend directory:"
-          ls -R .
+          JAR_PATH="backend-artifacts/SFSUTutoring-1.0.0.jar"
           if [ ! -f "$JAR_PATH" ]; then
             echo "Jar not found at $JAR_PATH"
             exit 1
@@ -98,14 +95,13 @@ jobs:
             ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}:${{ secrets.EC2_BACKEND_RELEASE_DIR }}/SFSUTutoring-1.0.0.jar
 
       - name: Copy frontend build to EC2
-        working-directory: ./application/frontend
         run: |
-          if [ ! -d "build" ]; then
-            echo "Frontend build directory not found"
+          if [ ! -d "frontend-artifacts" ]; then
+            echo "Frontend artifact directory not found"
             exit 1
           fi
 
-          scp -o StrictHostKeyChecking=no -r build/* \
+          scp -o StrictHostKeyChecking=no -r frontend-artifacts/* \
             ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}:${{ secrets.EC2_FRONTEND_DIR }}/
 
       - name: Run deploy script on EC2
