@@ -1,41 +1,57 @@
 import { useNavigate } from "react-router-dom";
-import React, {useState} from "react";
+import React, { useState } from "react";
 
 
 
 
 
 function SearchBarComponent() {
-        const [subject, setSubject] = useState("");
-        const  navigate = useNavigate();
-        const handleSearch = (e) => {
-            e.preventDefault();
-            navigate(`/results?subject=${encodeURIComponent(subject)}`);
-        }
 
-        const handleDropdownChange = (e) => {
-            const selectedValue = e.target.value;
-            setSubject(selectedValue === "all" ? "" : selectedValue);
+    const [mode, setMode] = useState("subject");
+    const [text, setText] = useState("");
+    const navigate = useNavigate();
+    const handleSearch = (e) => {
+        e.preventDefault();
+        let url = "/results?";
+        if (mode === "all") {
+            url += `query=${encodeURIComponent(text)}`;
+        } else {
+            url += `${mode}=${encodeURIComponent(text)}`;
         }
+        navigate(url);
+    };
 
-        return (
-        <form className = "search-container" onSubmit={handleSearch}>
-            <select className="search-category" onChange={handleDropdownChange}>
-                {/* Placeholder options for categories
-                 Ideally we want this to be suppplied by DB */}
+    const handleDropdownChange = (e) => {
+        const selectedValue = e.target.value;
+        setMode(selectedValue);
+        setText("");
+    }
+
+    const suggestions = 
+        mode === "course" 
+        ? "eg. CSC 648"
+        : mode === "subject"
+        ? "eg. Computer Science"
+        : "eg. Computer Science, CSC 648, etc.";
+
+
+    return (
+        <form className="search-container" onSubmit={handleSearch}>
+            <select className="search-category" value= {mode} onChange={handleDropdownChange}>
                 <option value="all">All</option>
-                <option value="cs">Computer Science</option>
-                <option value="business">Business</option>
+                <option value="subject">Subject</option>
+                <option value="course">Course</option>
+
             </select>
             <input
-                type="text" 
-                className="search-input" 
-                placeholder="eg. CSC 648"
-                value={subject}
-                onChange={(e) => setSubject(e.target.value)}
+                type="text"
+                className="search-input"
+                placeholder={suggestions}
+                value={text}
+                onChange={(e) => setText(e.target.value)}
             />
         </form>
     );
-}  
+}
 
 export default SearchBarComponent;
