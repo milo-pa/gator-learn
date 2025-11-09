@@ -12,12 +12,20 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Backend build (no tests)
+      # Backend build
       - name: Set up JDK 21
         uses: actions/setup-java@v4
         with:
           distribution: "corretto"
           java-version: "21"
+
+      - name: Cache Maven repository
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-m2-${{ hashFiles('application/backend/pom.xml', 'application/backend/**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-m2-
 
       - name: Build backend
         working-directory: ./application/backend
@@ -31,11 +39,19 @@ jobs:
           name: backend-jar
           path: application/backend/target/SFSUTutoring-1.0.0.jar
 
-      # Frontend build (no tests)
+      # Frontend build
       - name: Set up Node
         uses: actions/setup-node@v4
         with:
           node-version: "18"
+
+      - name: Cache npm
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-npm-${{ hashFiles('application/frontend/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-npm-
 
       - name: Build frontend
         working-directory: ./application/frontend
