@@ -21,8 +21,9 @@ public class TutorListing
     @Column(name = "listing_id")
     private Long listingId;
 
-    @Column(name = "user_id")
-    private Long userId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private UserAccount account;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "subject_id")
@@ -61,14 +62,14 @@ public class TutorListing
         this.listingId = listingId;
     }
 
-    public Long getUserId()
+    public UserAccount getAccount()
     {
-        return userId;
+        return account;
     }
 
-    public void setUserId(Long userId)
+    public void setAccount(UserAccount account)
     {
-        this.userId = userId;
+        this.account = account;
     }
 
     public Subject getSubject()
@@ -154,6 +155,6 @@ public class TutorListing
     @Override
     public String toString()
     {
-        return "TutorListing{" + "listingId=" + listingId + ", userId=" + userId + ", subject=" + subject + ", course=" + course + ", pricePerHour=" + pricePerHour + ", availableTime='" + availableTime + '\'' + ", resumePath='" + resumePath + '\'' + ", description='" + description + '\'' + ", tutoringVideoSamplePath='" + tutoringVideoSamplePath + '\'' + ", live=" + live + '}';
+        return "TutorListing{" + "listingId=" + listingId + ", account=" + account + ", subject=" + subject + ", course=" + course + ", pricePerHour=" + pricePerHour + ", availableTime='" + availableTime + '\'' + ", resumePath='" + resumePath + '\'' + ", description='" + description + '\'' + ", tutoringVideoSamplePath='" + tutoringVideoSamplePath + '\'' + ", live=" + live + '}';
     }
 }
