@@ -27,6 +27,12 @@ public class TutorListingController
         return repository.findAll();
     }
 
+    @GetMapping("/{id}")
+    public TutorListing getListingById(@PathVariable Long id)
+    {
+        return repository.findById(id).orElse(null);
+    }
+
     @GetMapping("/by-course/{course}")
     public List<TutorListing> getListingsByCourse(@PathVariable String course)
     {
