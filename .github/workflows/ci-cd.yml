@@ -25,6 +25,12 @@ jobs:
           mvn -B clean package
           ls -l target
 
+      - name: Upload backend artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: backend-jar
+          path: application/backend/target/SFSUTutoring-1.0.0.jar
+
       # Frontend build (no tests)
       - name: Set up Node
         uses: actions/setup-node@v4
@@ -38,15 +44,39 @@ jobs:
           npm run build
           ls -R build
 
+      - name: Upload frontend artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: frontend-build
+          path: application/frontend/build
+
   deploy:
     needs: build
     runs-on: ubuntu-latest
 
-
+#    if: |
+#      github.event_name == 'push' &&
+#      github.ref == 'refs/heads/main'
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - name: Download backend artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: backend-jar
+          path: backend-artifacts
+
+      - name: Download frontend artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: frontend-build
+          path: frontend-artifacts
+
+      - name: Debug artifact contents
+        run: |
+          echo "Backend artifacts:"
+          ls -R backend-artifacts || true
+          echo "Frontend artifacts:"
+          ls -R frontend-artifacts || true
 
       - name: Set up SSH agent
         uses: webfactory/ssh-agent@v0.9.0
@@ -57,6 +87,8 @@ jobs:
         working-directory: ./application/backend
         run: |
           JAR_PATH="target/SFSUTutoring-1.0.0.jar"
+          echo "Listing backend directory:"
+          ls -R .
           if [ ! -f "$JAR_PATH" ]; then
             echo "Jar not found at $JAR_PATH"
             exit 1
