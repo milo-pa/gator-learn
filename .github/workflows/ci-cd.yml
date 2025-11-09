@@ -2,7 +2,13 @@ name: CI/CD on Push to Main
 
 on:
   push:
-    branches: [ "feature/CI/CD" ]
+    branches: [ "main" ]
+  workflow_dispatch:
+    inputs:
+      deploy:
+        description: "Run deploy step (true/false)"
+        required: true
+        default: "true"
 
 jobs:
   build:
