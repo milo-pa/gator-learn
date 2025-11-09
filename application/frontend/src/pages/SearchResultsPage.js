@@ -1,5 +1,5 @@
 import {useLocation} from 'react-router-dom';
-import {use, useEffect, useState} from 'react';
+import React, { useEffect, useState} from 'react';
 import {mockTutors} from '../mock/mockTutors.js';
 
 function useQueryParams() {
@@ -9,8 +9,8 @@ function useQueryParams() {
 
 function SearchResultsPage() {
     const params = useQueryParams();
-    const subject = (params.get('subject') || 'all').toLowerCase().trim();
-    const query = (params.get('query') || '').toLowerCase().trim();
+    const subject = (params.get('subject') || '').toLowerCase().trim();
+    const course = (params.get('course') || '').toLowerCase().trim();
 
     const [tutors, setTutors] = useState([]);
 
@@ -20,14 +20,12 @@ function SearchResultsPage() {
             filtered = filtered.filter(
                 (tutor) => tutor.subject.toLowerCase().includes(subject));
         }
-        if (query !== "") {
-            filtered = filtered.filter((tutor) =>
-            (
-                tutor.tutorName + " " + tutor.subject + " " + (tutor.description || "")
-            ).toLowerCase().includes(query));
+        if (course !== "") {
+            filtered = filtered.filter(
+                (tutor) => tutor.course.toLowerCase().includes(course));
         }
         setTutors(filtered);
-    },[subject, query]);
+    },[subject, course]);
 
     return (
         <main className="search-results-page">
@@ -45,12 +43,14 @@ function SearchResultsPage() {
                             <div className="tutor-image-placeholder">Image</div>
                         </div>
                         <div className="tutor-info">
-                            <h2 className="tutor-name">{tutor.name}</h2>
+                            <div className="tutor-info-header">
+                                <h2 className="tutor-name">{tutor.tutorName}</h2>
+                                <a href="#" className="tutor-link-button">View more detail</a>
+                            </div>
                             <p className="tutor-subject">Subject: {tutor.subject}</p>
-                            <p className="tutor-price">Price: ${tutor.price}/hr</p>
-                            <p className="tutor-availability">Availability: {tutor.availability}</p>
+                            <p className="tutor-price">Price: ${tutor.pricePerHour}/hr</p>
                         <div className="tutor-actions">
-                            <button className="tutor-link-button">View more detail</button>
+                             <p className="tutor-availability">Availability: {tutor.availabilty}</p>
                             <button className="tutor-message-button">MESSAGE TUTOR</button>
                         </div>
                     </div>
