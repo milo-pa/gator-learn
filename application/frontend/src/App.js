@@ -16,8 +16,10 @@ class App extends Component {
         return (
             <Router>
                 <RouteChangeTracker />
-                <TopBarComponent />
-                <MenuComponent />
+                <header className="header-wrapper">
+                    <TopBarComponent />
+                    <MenuComponent />
+                </header>
 
                 <main>
                     <Routes>
