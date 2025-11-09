@@ -1,7 +1,15 @@
 # 📚 Tutoring Application Deployment & Server Documentation
 
+## Automatic Deployment
 
-## 🚀 Deployment Steps (Recommended Order)
+Pushes to `main` automatically get deployed to the website through GitHub Actions.  
+
+You can also manually trigger deployment from any branch by starting the _"CI/CD on Push to Main"_ Workflow in GitHub Actions.
+- Note: This only takes effect after `.github/workflows/ci-cd.yml` is merged to default branch `main`
+
+---
+
+## Manual Deployment
 
 1. **Deploy the Backend JAR File**
    - Copy your local build to the remote live deployment folder. The file **must be named** `SFSUTutoring-1.0.0.jar` to overwrite the current running version.
@@ -25,7 +33,7 @@
 
 ---
 
-## ⚙️ Server File Paths & Configuration
+### ⚙️ Server File Paths & Configuration
 
 This section provides an overview of important file locations and configuration notes on the server. 
 System files used on the server are here in `/server_files`
