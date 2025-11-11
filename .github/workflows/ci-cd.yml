@@ -5,10 +5,11 @@ on:
     branches: [ "main" ]
   workflow_dispatch:
     inputs:
-      deploy:
-        description: "Run deploy step (true/false)"
+      eslint_strict:
+        description: "Treat ESLint warnings as errors?"
         required: true
-        default: "true"
+        default: true
+        type: boolean
 
 jobs:
   build:
@@ -63,7 +64,15 @@ jobs:
         working-directory: ./application/frontend
         run: |
           npm ci
-          npm run build
+
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ github.event.inputs.eslint_strict }}" = "false" ]; then
+            echo "Running build with CI=false (warnings are NOT treated as errors)"
+            CI=false npm run build
+          else
+            echo "Running build with default CI behavior (warnings ARE treated as errors)"
+            npm run build
+          fi
+
           ls -R build
 
       - name: Upload frontend artifact
@@ -75,10 +84,6 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
-
-#    if: |
-#      github.event_name == 'push' &&
-#      github.ref == 'refs/heads/main'
 
     steps:
       - name: Download backend JAR artifact
