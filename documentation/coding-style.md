@@ -3,7 +3,7 @@
 - Naming Conventions (variables, functions, classes)
   - **Be consistent with design document and use natural, easy to
 	understand names for everything**
-  - Make program be “self documenting” by chosing good naming
+  - Make program be “self documenting” by choosing good naming
 - File Naming and Organization
   - Group files of a similar purpose in folders named in lowercase
   - Java Backend:

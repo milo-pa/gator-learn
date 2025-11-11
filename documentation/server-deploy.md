@@ -2,6 +2,8 @@
 
 ## Automatic Deployment
 
+All builds with eslint errors will fail automatic deployment. eslint errors 
+
 Pushes to `main` automatically get deployed to the website through GitHub Actions.  
 
 You can also manually trigger deployment from any branch by starting the _"CI/CD on Push to Main"_ Workflow in GitHub Actions.
@@ -47,11 +49,10 @@ The backend application files are located here. Ownership is assigned to the def
 /opt/tutoringapp
 ├─ bin/                            # scripts & operational helpers
 │  └─ deploy_inplace.sh            # for CI/CD
-├─ releases/
-│  ├─ SFSUTutoring-1.0.0.jar       # versioned release
-│  ├─ current.jar -> SFSUTutoring-1.0.0.jar   # symlink used by systemd (not yet implemented)
-│  └─ ...                          # future versioned JARs
-└─ src/                            # git repository (app source)
+└──releases/
+   ├─ SFSUTutoring-1.0.0.jar       # versioned release
+   ├─ current.jar -> SFSUTutoring-1.0.0.jar   # symlink used by systemd (not yet implemented)
+   └─ ...                          # future versioned JARs
 ```
 
 #### Frontend Application Files (React Build)
