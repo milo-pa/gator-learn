@@ -26,8 +26,8 @@
       - Then run: `mvn spring-boot:run`
 
 4. **Verify**
-    - Visit **http://localhost:8080** — you should see a Whitelabel Error Page.
-    - Test an API route like **http://localhost:8080/api/team-members** to see a sample JSON.
+    - Visit http://localhost:8080 — you should see a 404 error page.
+    - Test an API route like http://localhost:8080/api/listings to see a sample JSON.
 
 ---
 
@@ -40,4 +40,4 @@
    - `npm run start`
 
 3. **Verify**
-   - Visit http://localhost:3000.
+   - Visit http://localhost:3000 - you should see the home page
