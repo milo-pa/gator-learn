@@ -16,12 +16,13 @@
    - `ssh -i Tutoring_Server_Key.pem -L 3306:127.0.0.1:3306 ec2-user@18.144.101.99`
      - This is the same as the command from milo's ssh command from [server-deploy.md](./server-deploy.md)
         except for the extra part in the middle to configure port forwarding
-     - This essentially forwards all traffic from your localhost port 3306 to the aws instance's port 3306
+     - This essentially forwards all traffic from your localhost port 3306 to the aws instance's port 3306. 
+     - Keep this terminal window open or the connection will terminate. It can also time-out
 
 3. **Run the server**
     - **Option A: IntelliJ**
       - Open `Main.java` and click **Run**.
-    - **Option B: Maven (terminal)**
+    - **Option B: Maven (terminal)** in a new terminal window
       - cd `<local path>/backend`
       - Then run: `mvn spring-boot:run`
 
