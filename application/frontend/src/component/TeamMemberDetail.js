@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import TeamMembersService from "../service/TeamMembersService";
+import TeamMembersService from "../service/teamMembersService";
 import { Link } from "react-router-dom";
 
 class TeamMemberDetail extends Component {
