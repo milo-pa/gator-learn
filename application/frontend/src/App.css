@@ -216,6 +216,7 @@ body.dark-mode .tutor-card {
     background-color: #7f6d2c;
     border-color: #ffcc00;
     color: #000;
+    cursor: pointer;
 }
 
 .yellow-sticky .demo-line {

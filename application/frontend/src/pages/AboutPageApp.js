@@ -2,7 +2,7 @@
  * Institution: San Francisco State University
  * Class: CSC 648 Project, Team 05
  * Project: Gator Learn, Tutoring Website
- * Author: Samantha Chombo-Rodriguez
+ * Author: Samantha or Jonah 
  * Created: 09/29/25
  * Description: 
  * Page component for the About Page, displaying information about Team 5 members.

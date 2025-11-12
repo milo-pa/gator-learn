@@ -32,23 +32,40 @@ function SearchResultsPage() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
+    function removeDuplicates(arr) {
+        const uniqueIds = new Set();
+        return arr.filter(item => !uniqueIds.has(item.id) && uniqueIds.add(item.id));
+    }
+
     useEffect(() => { 
         async function loadListings() {
             try {
                 setLoading(true);
                 setError(null);
                 let response;
+                if (all) {
+                    const [subjectRes, courseRes] = await Promise.all([
+                        TutorListingService.getListingsBySubjectSubstring(all),
+                        TutorListingService.getListingsByCourseSubstring(all)
+                    ]);
+                    setListings(removeDuplicates([...subjectRes.data, ...courseRes.data]));
+                    setLoading(false);
+                    return;
+                    
+                }
                 if (subject) {
                     response = await TutorListingService.getListingsBySubjectSubstring(subject);
+                    setListings(response.data);
+                    setLoading(false);
+                    return;
                 } 
                 if (course) {
                     response = await TutorListingService.getListingsByCourseSubstring(course);
+                    setListings(response.data);
+                    setLoading(false);  
+                    return;
                 } 
-                if (all) {
-                    response = await TutorListingService.getListings();
-                }
-                setListings(response.data);
-                setLoading(false);
+                
             } catch (error) {
                 setError("Failed to fetch listings.");
                 setLoading(false);
