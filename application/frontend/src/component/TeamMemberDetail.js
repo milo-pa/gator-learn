@@ -1,3 +1,16 @@
+/*
+ * Institution: San Francisco State University
+ * Class: CSC 648 Project, Team 05
+ * Project: Gator Learn, Tutoring Website
+ * Author: Samantha Chombo-Rodriguez
+ * Created: 09/29/25
+ * Description: Component to display detailed information about a single team member
+ *
+ * Copyright (c) 2025 San Francisco State University Team 05
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
 import React, { Component } from "react";
 
 import TeamMembersService from "../service/teamMembersService";
