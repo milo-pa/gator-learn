@@ -206,9 +206,16 @@ body.dark-mode .tutor-card {
     text-decoration: none;
     color: #222;
     font-weight: 600;
+    display: inline-block;
+    padding: 8px 16px;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 .yellow-sticky .yub-link:hover {
     background-color: #7f6d2c;
+    border-color: #ffcc00;
+    color: #000;
 }
 
 .yellow-sticky .demo-line {
