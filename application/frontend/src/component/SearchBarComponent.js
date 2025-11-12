@@ -14,14 +14,21 @@
 import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 
+
+
+
 function SearchBarComponent() {
 
     const [mode, setMode] = useState("all");
     const [text, setText] = useState("");
     const navigate = useNavigate();
+
+    const sanitizeInput = (input) => {
+        return input.replace(/[^a-zA-Z0-9\s]/g, "").slice(0, 40);
+    }
     const handleSearch = (e) => {
         e.preventDefault();
-        if (mode === "all" || text.trim() === "") {
+        if (mode === "all" ) {
             navigate(`/results?subject=${encodeURIComponent(text)}&course=${encodeURIComponent(text)}`);
         } else {
             navigate(`/results?${mode}=${encodeURIComponent(text)}`);
@@ -55,7 +62,8 @@ function SearchBarComponent() {
                 className="search-input"
                 placeholder={suggestions}
                 value={text}
-                onChange={(e) => setText(e.target.value)}
+                onChange={(e) => setText(sanitizeInput(e.target.value))}
+                maxLength={40}
             />
         </form>
     );
