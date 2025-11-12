@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import TeamMembersService from "../service/TeamMembersService.js";
+import TeamMembersService from "../service/teamMembersService.js";
 import TeamMemberComponent from "./TeamMemberComponent.js";
 import { Link } from "react-router-dom";
 import { trackEvent } from "../analytics/googleAnalytics";

@@ -1,4 +1,4 @@
-import React, { Component, use } from "react";
+import React, { Component} from "react";
 import SearchBar from "./SearchBarComponent";
 
 class TopBarComponent extends Component {
@@ -68,7 +68,6 @@ class TopBarComponent extends Component {
     
 
     render() {
-        const { theme } = this.state;
         return (
             <header className="purple-titlebar">
                 <div className="ptb-inner">
