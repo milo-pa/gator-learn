@@ -1,19 +1,28 @@
+/*
+ * Institution: San Francisco State University
+ * Class: CSC 648 Project, Team 05
+ * Project: Gator Learn, Tutoring Website
+ * Author: Samantha Chombo-Rodriguez 
+ * Created: 11/08/25
+ * Description: Component for the search bar allowing users to search tutor listings by subject or course.
+ *
+ * Copyright (c) 2025 San Francisco State University Team 05
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
 import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 
-
-
-
-
 function SearchBarComponent() {
 
-    const [mode, setMode] = useState("subject");
+    const [mode, setMode] = useState("all");
     const [text, setText] = useState("");
     const navigate = useNavigate();
     const handleSearch = (e) => {
         e.preventDefault();
         if (mode === "all" || text.trim() === "") {
-            navigate("/results");
+            navigate(`/results?subject=${encodeURIComponent(text)}&course=${encodeURIComponent(text)}`);
         } else {
             navigate(`/results?${mode}=${encodeURIComponent(text)}`);
         }
@@ -27,10 +36,10 @@ function SearchBarComponent() {
 
     const suggestions = 
         mode === "course" 
-        ? "eg. CSC 648"
+        ? "Search eg. CSC 648"
         : mode === "subject"
-        ? "eg. Computer Science"
-        : "eg. Computer Science, CSC 648, etc.";
+        ? " Search eg. Computer Science"
+        : " Search eg. Computer Science, CSC 648, etc.";
 
 
     return (
