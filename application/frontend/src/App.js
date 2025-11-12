@@ -1,8 +1,21 @@
+/*
+ * Institution: San Francisco State University
+ * Class: CSC 648 Project, Team 05
+ * Project: Gator Learn, Tutoring Website
+ * Author: [Your Name]
+ * Created: [Date]
+ * Description: [Brief explanation of this file’s purpose, 1-3 lines]
+ *
+ * Copyright (c) 2025 San Francisco State University Team 05
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
 import React, { Component } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import RouteChangeTracker from "./analytics/RouteChangeTracker";
-import AboutPageApp from "./component/AboutPageApp";
+import AboutPageApp from "./pages/AboutPageApp";
 import TopBarComponent from "./component/TopBarComponent";
 import MenuComponent from "./component/MenuComponent";
 import TeamMemberDetail from "./component/TeamMemberDetail";
