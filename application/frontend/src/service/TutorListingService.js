@@ -2,7 +2,7 @@
  * Institution: San Francisco State University
  * Class: CSC 648 Project, Team 05
  * Project: Gator Learn, Tutoring Website
- * Author: 
+ * Author: Samantha Chombo-Rodriguez
  * Created: 11/08/25
  * Description: Service for fetching tutor listings from the backend API
  *
