@@ -12,7 +12,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 import React, { Component } from "react";
-import TeamMembersService from "../service/teamMembersService.js";
+import teamMembersService from "../service/teamMemberServices.js";
 import TeamMemberComponent from "./TeamMemberComponent.js";
 import { Link } from "react-router-dom";
 import { trackEvent } from "../analytics/googleAnalytics";
@@ -27,7 +27,7 @@ class TeamMembersList extends Component {
     }
 
     componentDidMount() {
-        TeamMembersService.getAllMembers()
+        teamMembersService.getAllMembers()
             .then((response) => {
                 this.setState({ members: response.data.members });
             })
