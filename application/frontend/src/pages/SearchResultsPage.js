@@ -14,7 +14,7 @@
  */
 import {useLocation} from 'react-router-dom';
 import React, { useEffect, useState} from 'react';
-import TutorListingService from '../service/tutorListingService';
+import TutorListingService from '../service/tutorsListingService';
 
 /* Custom hook to parse query parameters */
 function useQueryParams() {

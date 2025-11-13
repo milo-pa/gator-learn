@@ -13,7 +13,7 @@
  */
 import React, { Component } from "react";
 
-import TeamMembersService from "../service/teamMembersService";
+import TeamMembersService from "../service/teamMemberServices";
 import { Link } from "react-router-dom";
 
 class TeamMemberDetail extends Component {
