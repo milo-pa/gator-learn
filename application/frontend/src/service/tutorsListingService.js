@@ -13,7 +13,7 @@
  */
 import api from './api';
 
-class TutorListingService {
+class TutorListingsService {
     getListings() {
         return api.get("/api/listings");
     }
@@ -26,5 +26,5 @@ class TutorListingService {
         return api.get(`/api/listings/by-subject/${str}`);
     }
 }
-const tutorListingService = new TutorListingService();
-export default tutorListingService;
+const tutorListingsService = new TutorListingsService();
+export default tutorListingsService;
