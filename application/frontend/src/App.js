@@ -12,7 +12,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 import React, { Component } from "react";
-import "./App.css";
+import "./App.scss";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import RouteChangeTracker from "./analytics/RouteChangeTracker";
 import AboutPageApp from "./pages/AboutPageApp";
