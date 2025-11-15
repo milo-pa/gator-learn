@@ -13,9 +13,9 @@
  */
 import React, { Component } from "react";
 import teamMembersService from "../service/teamMemberServices.js";
-import TeamMemberComponent from "./TeamMemberComponent.js";
+import TeamMemberComponent from "./TeamMemberComponent.jsx";
 import { Link } from "react-router-dom";
-import { trackEvent } from "../analytics/googleAnalytics";
+import { trackEvent } from "../analytics/googleAnalytics.js";
 
 class TeamMembersList extends Component {
     constructor(props) {
