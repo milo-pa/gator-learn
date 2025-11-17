@@ -4,18 +4,34 @@
  * Project: Gator Learn, Tutoring Website
  * Author: Milo Pesce Ares
  * Created: 11/17/25
- * Description: This is the login page. nuff said
+ * Description: Functional component for the Login Page
  *
  * Copyright (c) 2025 San Francisco State University Team 05
  *
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import React, { Component } from "react";
 
-class LoginPage extends Component {
-  render() {
-    return (
+import React, {useState} from "react";
+import { useForm } from "react-hook-form";
+
+function LoginPage() {
+  const [showPassword, setShowPassword] = useState(false);
+
+  const {
+    register,
+    handleSubmit ,
+    formState: { errors }
+  } = useForm({
+    mode: "onBlur",
+    reValidateMode: "onBlur"
+  });
+
+  const onSubmit = (data) => {
+    alert(`Form submitted with data: ${JSON.stringify(data)}`);
+  };
+
+  return (
       <div className="login-page">
         <header className="login-header">
           <h1>Gator Learn Login</h1>
@@ -23,24 +39,62 @@ class LoginPage extends Component {
         </header>
 
         <main className="login-main">
-          <form className="login-form">
+          <form className="login-form" onSubmit={handleSubmit(onSubmit)}>
             {/* School Email */}
             <div className="form-row">
               <label htmlFor="school-email">School Email:</label>
-              <div className="input-wrapper with-suffix">
-                <input id="school-email" type="email" />
-                <span className="email-suffix">@sfsu.edu</span>
-              </div>
-            </div>
-            {/* Password */}
-            <div className="form-row">
-              <label htmlFor="password">Password:</label>
-              <div className="input-wrapper">
-                <input id="password" type="password" />
+              <div className={`input-wrapper ${errors.email ? "input-error" : ""}`}>
+                <input
+                    id="school-email"
+                    placeholder="example@sfsu.edu"
+                    {...register("email", {
+                      required: "Email is required",
+                      validate: value =>
+                          value.endsWith("@sfsu.edu") || "Email must end with @sfsu.edu"
+                    })}
+                />
               </div>
             </div>
 
-            {/* Buttons */}
+            {/* Password */}
+            <div className="form-row">
+              <label htmlFor="password">Password:</label>
+              <div className={`input-wrapper password-wrapper ${errors.password ? "input-error" : ""}`}>
+                <input
+                    type={showPassword ? "text" : "password"}
+                    id="password"
+                    {...register("password", {
+                      required: "Password is required",
+                      minLength: {
+                        value: 6,
+                        message: "Min password length is 6 characters"
+                      }
+                    })}
+                />
+                <button
+                    type="button"
+                    className="toggle-password"
+                    onClick={() => setShowPassword((prev) => !prev)}
+                >
+                  {showPassword ? "Hide" : "Show"}
+                </button>
+              </div>
+            </div>
+
+            {/* Error Message Popups*/}
+            {(errors.email || errors.password) && (
+                <div className="error-popup-container">
+                  {errors.email && (
+                      <div className="error-popup">{errors.email.message}</div>
+                  )}
+                  {errors.password && (
+                      <div className="error-popup">{errors.password.message}</div>
+                  )}
+                </div>
+            )}
+
+
+            {/* Cancel/Login Buttons */}
             <div className="button-row">
               <button type="button" className="btn btn-secondary">
                 CANCEL
@@ -49,27 +103,26 @@ class LoginPage extends Component {
                 LOGIN
               </button>
             </div>
-
-            {/* Forgot Password */}
-            <div className="helper-row">
-              <p className="helper-text">Forgot your password?</p>
-              <button type="button" className="btn btn-light">
-                Click here
-              </button>
-            </div>
-
-            {/* Sign Up */}
-            <div className="helper-row">
-              <p className="helper-text">Don’t have an account?</p>
-              <button type="button" className="btn btn-secondary">
-                SIGN UP
-              </button>
-            </div>
           </form>
+
+          {/* Forgot Password */}
+          <div className="helper-row">
+            <p className="helper-text">Forgot your password?</p>
+            <button type="button" className="btn btn-light">
+              Click here
+            </button>
+          </div>
+
+          {/* Sign Up */}
+          <div className="helper-row">
+            <p className="helper-text">Don’t have an account?</p>
+            <button type="button" className="btn btn-secondary">
+              SIGN UP
+            </button>
+          </div>
         </main>
       </div>
-    );
-  }
+  );
 }
 
 export default LoginPage;
