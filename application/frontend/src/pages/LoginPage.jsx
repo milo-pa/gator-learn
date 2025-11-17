@@ -21,7 +21,8 @@ function LoginPage() {
   const {
     register,
     handleSubmit ,
-    formState: { errors, submitCount }
+    formState: { errors, submitCount },
+    reset
   } = useForm({
     mode: "onBlur",
     reValidateMode: "onBlur"
@@ -29,6 +30,10 @@ function LoginPage() {
 
   const onSubmit = (data) => {
     alert(`Form submitted with data: ${JSON.stringify(data)}`);
+    reset({
+      email: "",
+      password: ""
+    })
   };
 
   return (
