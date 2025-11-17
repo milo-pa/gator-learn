@@ -56,7 +56,7 @@ body.dark-mode {
 	}
 	.search-input {
 		background: #2b2b2b;
-		color: $color_3;
+		color: $card-text-gray;
 	}
 	.tile {
 		background: #353535;
@@ -73,7 +73,7 @@ body.dark-mode {
 		color: $color-text-main;
 	}
 	.yub-link {
-		color: $color-text-on-dark;
+		color: $color-text-main;
 	}
 	.tutor-name {
 		color: $color-text-on-dark;
@@ -122,7 +122,7 @@ body.dark-mode {
 	display: flex;
 	align-items: center;
 	text-decoration: none;
-	color: $color_6;
+	color: $color-text-on-dark;
 	font-weight: 600;
 	gap: 8px;
 }
@@ -134,7 +134,7 @@ body.dark-mode {
 	font-size: 1.8rem;
 	font-weight: 700;
 	letter-spacing: 0.5px;
-	color: $color_6;
+	color: $color-text-on-dark;
 }
 .spacer {
 	flex: 1;
@@ -142,7 +142,7 @@ body.dark-mode {
 .search-container {
 	display: flex;
 	align-items: stretch;
-	background: $color-surface-white;
+	background: $card-text-gray;
 	border-radius: 8px;
 	overflow: hidden;
 	border: 2px solid #febd69;
@@ -151,7 +151,7 @@ body.dark-mode {
 	max-width: 60vw;
 }
 .search-category {
-	background: $color-surface-white;
+	background: $border-gray;
 	border: none;
 	height: 100%;
 	padding: 0 10px;
@@ -194,7 +194,7 @@ body.dark-mode {
 .yellow-sticky {
 	position: static;
 	background: $yub-gold;
-	color: $color_1;
+	color: $color-text-main;
 	border-bottom: 1px solid #0a0a0a;
 	display: flex;
 	align-items: center;
@@ -344,11 +344,27 @@ main {
 .results-header {
 	display: flex;
 	justify-content: space-between;
-	align-items: flex-end;
+	align-items: center;
 	gap: 16px;
 	margin-bottom: 16px;
 	border-bottom: 2px solid $border-gray;
 	padding: 6px;
+}
+.results-header-left {
+	display: flex;
+	flex-direction: row;
+	gap: 0.25rem;
+}
+.results-header-right {
+	display: flex; 
+	align-items: center;
+	gap: 0.5rem;
+}
+.sort-dropdown {
+	border: 2px solid #febd69;
+	background-color:$border-gray;
+	padding: 4px 8px;
+	border-radius: 4px;
 }
 .results-title-block {
 	display: flex;
@@ -361,6 +377,8 @@ main {
 	font-weight: 700;
 }
 .results-subtitle {
+	margin-top: 25px;
+	margin-left: 5px;
 	font-size: 1rem;
 }
 .results-list {
@@ -437,7 +455,7 @@ main {
 }
 .tutor-message-button {
 	background-color: $border-accent-gold;
-	color: $color_1;
+	color: $color-text-main;
 	border: none;
 	font-weight: 800;
 	padding: 12px 14px;

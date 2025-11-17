@@ -14,16 +14,26 @@
 import api from './api';
 
 class TutorListingsService {
-    getListings() {
+    getAllListings() {
         return api.get("/api/listings");
     }
 
-    getListingsByCourseSubstring(str) {
-        return api.get(`/api/listings/by-course/${str}`);
+    getListingsBySubjectSubstring(str) {
+        return api.get("/api/listings/search", {
+            params: {subjectName: str},
+        });
     }
 
-    getListingsBySubjectSubstring(str) {
-        return api.get(`/api/listings/by-subject/${str}`);
+    getListingsByCourseSubstring(str) {
+        return api.get("/api/listings/search", {
+            params: {
+                courseName: str,
+                courseNumber: str,
+            },
+        });
+    }
+    searchListings(params) {
+        return api.get("/api/listings/search", {params});
     }
 }
 const tutorListingsService = new TutorListingsService();
