@@ -11,8 +11,9 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import React, { Component} from "react";
+import React, {Component} from "react";
 import SearchBar from "./SearchBarComponent";
+import { Link } from "react-router-dom";
 
 class TopBarComponent extends Component {
 
@@ -66,7 +67,6 @@ class TopBarComponent extends Component {
         this.setState({ theme: newTheme }, () => this.applyTheme(newTheme));
     };
 
-
     toggleTheme = () => {
         this.setState(
             (prevState) => ({
@@ -77,8 +77,6 @@ class TopBarComponent extends Component {
                 localStorage.setItem("theme", theme);
             });
     };
-
-    
 
     render() {
         return (
@@ -94,7 +92,11 @@ class TopBarComponent extends Component {
                     <SearchBar />
                     
                     {/* Will need to add function later to change login to log out when user signed in */}
-                    <button id="login-button" className="login-button">Login</button>
+                    <button id="login-button" className="login-button">
+                        <Link to="/login" style={{ color: "inherit", textDecoration: "none" }}>
+                            Login
+                        </Link>
+                    </button>
                     <div className="profile-placeholder"></div>
                 </div>
             </header>

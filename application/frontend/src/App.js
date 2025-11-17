@@ -15,12 +15,13 @@ import React, { Component } from "react";
 import "./App.scss";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import RouteChangeTracker from "./analytics/RouteChangeTracker";
-import AboutPageApp from "./pages/AboutPageApp";
 import TopBarComponent from "./component/TopBarComponent";
 import MenuComponent from "./component/MenuComponent";
 import TeamMemberDetail from "./component/TeamMemberDetail";
 import withNavigation from "./component/WithNavigation";
-import SearchResultsPage  from "./pages/SearchResultsPage";
+import AboutPageApp from "./pages/AboutPageApp";
+import SearchResultsPage from "./pages/SearchResultsPage";
+import LoginPage from "./pages/LoginPage"
 
 const DetailWithParams = withNavigation(TeamMemberDetail);
 
@@ -60,6 +61,7 @@ class App extends Component {
                             }
                         />
                         <Route path="/results" element={<SearchResultsPage />} />
+                        <Route path="/login" element={<LoginPage />} />
                         <Route path="/team-members" element={<AboutPageApp />} />
                         <Route path="/team-members/:name" element={<DetailWithParams />} />
                     </Routes>
