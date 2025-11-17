@@ -21,7 +21,7 @@ function LoginPage() {
   const {
     register,
     handleSubmit ,
-    formState: { errors }
+    formState: { errors, submitCount }
   } = useForm({
     mode: "onBlur",
     reValidateMode: "onBlur"
@@ -43,7 +43,8 @@ function LoginPage() {
             {/* School Email */}
             <div className="form-row">
               <label htmlFor="school-email">School Email:</label>
-              <div className={`input-wrapper ${errors.email ? "input-error" : ""}`}>
+              <div className={`input-wrapper 
+                ${submitCount > 0 && errors.email ? "input-error" : ""}`}>
                 <input
                     id="school-email"
                     placeholder="example@sfsu.edu"
@@ -59,7 +60,8 @@ function LoginPage() {
             {/* Password */}
             <div className="form-row">
               <label htmlFor="password">Password:</label>
-              <div className={`input-wrapper password-wrapper ${errors.password ? "input-error" : ""}`}>
+              <div className={`input-wrapper password-wrapper
+                ${submitCount > 0 && errors.password ? "input-error" : ""}`}>
                 <input
                     type={showPassword ? "text" : "password"}
                     id="password"
@@ -82,7 +84,7 @@ function LoginPage() {
             </div>
 
             {/* Error Message Popups*/}
-            {(errors.email || errors.password) && (
+            {submitCount > 0 && (errors.email || errors.password) && (
                 <div className="error-popup-container">
                   {errors.email && (
                       <div className="error-popup">{errors.email.message}</div>
