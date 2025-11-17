@@ -4,11 +4,7 @@ import "./HomePage.css";
 export default function HomePage() {
     return (
         <div className="home-hero">
-            <img
-                src="/images/HomePage/CoolGator.webp"
-                alt="Gator mascot"
-                className="hero-image"
-            />
+            <img src="/images/HomePage/CoolGator.webp"  alt="Gator mascot"  className="hero-image"/>
 
             <div className="hero-text">
                 <h1>Studying for Gators by Gators!</h1>
