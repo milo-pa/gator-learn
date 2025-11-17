@@ -27,7 +27,7 @@ class TopBarComponent extends Component {
         this.mql = null;
     }
 
-
+    // Need to move these dark theme functions to their own class
     applyTheme = (theme) => {
         document.body.classList.toggle("dark-mode", theme === "dark");
     };
