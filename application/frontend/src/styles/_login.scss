@@ -61,7 +61,8 @@
     border: 1px solid $border-gray;
     border-radius: 6px;
     background-color: #ffffff;
-    padding-left: 12px;
+    padding-left: 11px;
+    padding-right: 11px;
     box-sizing: border-box;
 
     input {
@@ -76,6 +77,10 @@
         outline: none;
       }
     }
+  }
+
+  .input-wrapper:focus-within {
+    border: 1px solid #1773ea;  /* blue highlight */
   }
 
   // Error css for input fields
