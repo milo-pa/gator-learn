@@ -22,6 +22,7 @@ import withNavigation from "./component/WithNavigation";
 import AboutPageApp from "./pages/AboutPageApp";
 import SearchResultsPage from "./pages/SearchResultsPage";
 import LoginPage from "./pages/LoginPage"
+import RegistrationPage from "./pages/RegistrationPage";
 
 const DetailWithParams = withNavigation(TeamMemberDetail);
 
@@ -62,6 +63,7 @@ class App extends Component {
                         />
                         <Route path="/results" element={<SearchResultsPage />} />
                         <Route path="/login" element={<LoginPage />} />
+                        <Route path="/register" element={<RegistrationPage />} />
                         <Route path="/team-members" element={<AboutPageApp />} />
                         <Route path="/team-members/:name" element={<DetailWithParams />} />
                     </Routes>
