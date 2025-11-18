@@ -14,6 +14,7 @@
  */
 import {useLocation} from 'react-router-dom';
 import React, { useEffect, useState} from 'react';
+import { Link } from "react-router-dom";
 import TutorListingService from '../service/tutorsListingService';
 
 /* Custom hook to parse query parameters */
@@ -136,7 +137,7 @@ function SearchResultsPage() {
             {error && <p className="error-message">Error: {error}</p>}
             <section className="results-list">
                 {sortedListings.map((listing) => (
-                    <article key={listing.id} className="tutor-card">
+                    <article key={listing.listingId} className="tutor-card">
                         <div className="tutor-image-wrapper">
                             {/* Placeholder for tutor image */}
                             <img className="tutor-image-placeholder" src = "/images/tutor/iu_.png" alt="Tutor" />
@@ -144,9 +145,7 @@ function SearchResultsPage() {
                         <div className="tutor-info">
                             <div className="tutor-info-header">
                                 <h2 className="tutor-name">{listing.account.name}</h2>
-                                {/* Placeholder link for more details - reference to be implemented */}
-                                {/* current references home page to remove errors*/}
-                                <a href="/" className="tutor-link-button">View more detail</a>
+                                <Link className="tutor-link-button" to={`/listing/${encodeURIComponent(listing.listingId)}`}>View details</Link>
                             </div>
                             <p className="tutor-subject">Subject: {listing.subject?.subjectName}</p>
                             <p className="tutor-price">Price: ${listing.pricePerHour}/hr</p>
