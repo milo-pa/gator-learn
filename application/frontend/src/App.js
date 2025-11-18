@@ -18,7 +18,7 @@ import RouteChangeTracker from "./analytics/RouteChangeTracker";
 import AboutPage from "./pages/AboutPage";
 import TopBarComponent from "./component/TopBarComponent";
 import MenuComponent from "./component/MenuComponent";
-import TeamMemberDetail from "./component/TeamMemberDetail";
+import TeamMemberDetail from "./component/about/TeamMemberDetail";
 import withNavigation from "./component/WithNavigation";
 import SearchResultsPage  from "./pages/SearchResultsPage";
 

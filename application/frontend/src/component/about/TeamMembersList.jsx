@@ -12,10 +12,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 import React, { Component } from "react";
-import teamMembersService from "../service/teamMemberServices.js";
+import teamMembersService from "../../service/teamMemberServices.js";
 import TeamMemberComponent from "./TeamMemberComponent.jsx";
 import { Link } from "react-router-dom";
-import { trackEvent } from "../analytics/googleAnalytics.js";
+import { trackEvent } from "../../analytics/googleAnalytics.js";
 
 class TeamMembersList extends Component {
     constructor(props) {
