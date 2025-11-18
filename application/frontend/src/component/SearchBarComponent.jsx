@@ -14,18 +14,12 @@
 import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 
-
-
-
 function SearchBarComponent() {
 
     const [mode, setMode] = useState("all");
     const [text, setText] = useState("");
     const navigate = useNavigate();
 
-    const sanitizeInput = (input) => {
-        return input.replace(/[^a-zA-Z0-9\s]/g, "").slice(0, 40);
-    }
     const handleSearch = (e) => {
         e.preventDefault();
         if (mode === "all" ) {
@@ -39,24 +33,27 @@ function SearchBarComponent() {
         const selectedValue = e.target.value;
         setMode(selectedValue);
         setText("");
-    }
+    };
 
-    const suggestions = 
-        mode === "course" 
-        ? "Search eg. CSC 648"
-        : mode === "subject"
-        ? " Search eg. Computer Science"
-        : " Search eg. Computer Science, CSC 648, etc.";
-
+    const suggestions =
+        mode === "course"
+            ? "eg. CSC 648"
+            : mode === "subject"
+                ? "eg. Computer Science"
+                : "eg. Computer Science, CSC 648, etc.";
 
     return (
         <form className="search-container" onSubmit={handleSearch}>
-            <select className="search-category" value= {mode} onChange={handleDropdownChange}>
+            <select
+                className="search-category"
+                value={mode}
+                onChange={handleDropdownChange}
+            >
                 <option value="all">All</option>
                 <option value="subject">Subject</option>
                 <option value="course">Course</option>
-
             </select>
+
             <input
                 type="text"
                 className="search-input"
@@ -65,6 +62,11 @@ function SearchBarComponent() {
                 onChange={(e) => setText(sanitizeInput(e.target.value))}
                 maxLength={40}
             />
+
+            {/* ✅ ADD THIS BUTTON */}
+            <button type="submit" className="search-button">
+                Search
+            </button>
         </form>
     );
 }
