@@ -13,6 +13,7 @@
  */
 import React, { Component} from "react";
 import SearchBar from "./SearchBarComponent";
+import "../TopBarComponent.css";
 
 class TopBarComponent extends Component {
 
@@ -85,17 +86,18 @@ class TopBarComponent extends Component {
             <header className="purple-titlebar">
                 <div className="ptb-inner">
                     <div className="brand-section">
-                        <a href= "/" className="brand-link">
-                            <img id="logo" src="favicon.ico" alt="logo" />
+                        <a href="/" className="brand-link">
+                            <img id="logo" src="favicon.ico" alt="logo"/>
                             <span className="brand">Gator Learn</span>
+                            <span className="brand-team">by Team 5</span>
                         </a>
                     </div>
                     <div className="spacer"></div>
-                    <SearchBar />
-                    
+                    <SearchBar/>
+
                     {/* Will need to add function later to change login to log out when user signed in */}
                     <button id="login-button" className="login-button">Login</button>
-                    <div className="profile-placeholder"></div>
+                    <img src="/images/default-profile.png" alt="Profile" className="profile-icon"/>
                 </div>
             </header>
         );
