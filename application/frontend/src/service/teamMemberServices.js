@@ -11,15 +11,17 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import api from './api';
+import teamMembers from "../data/team-member-data";
 
 class TeamMembersService {
-    getMemberByName(name) {
-        return api.get(`/api/team-members/${encodeURIComponent(name)}`);
+    getAllMembers() {
+        return Promise.resolve({ data: { members: teamMembers } });
     }
 
-    getAllMembers() {
-        return api.get("/api/team-members");
+    getMemberByName(name) {
+        const decoded = decodeURIComponent(name || "");
+        const found = teamMembers.find(m => m.name.toLowerCase() === decoded.toLowerCase());
+        return Promise.resolve({ data: found || null });
     }
 }
 
