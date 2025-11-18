@@ -21,7 +21,7 @@ import MenuComponent from "./component/MenuComponent";
 import TeamMemberDetail from "./component/about/TeamMemberDetail";
 import withNavigation from "./component/WithNavigation";
 import SearchResultsPage  from "./pages/SearchResultsPage";
-import HomePage from "./HomePage";
+import HomePage from "./pages/HomePage";
 
 const DetailWithParams = withNavigation(TeamMemberDetail);
 
