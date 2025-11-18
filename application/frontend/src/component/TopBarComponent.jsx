@@ -1,4 +1,17 @@
-import React, { Component, use } from "react";
+/*
+ * Institution: San Francisco State University
+ * Class: CSC 648 Project, Team 05
+ * Project: Gator Learn, Tutoring Website
+ * Author: Samantha Chombo-Rodriguez
+ * Created: 09/29/25
+ * Description: Top bar component including branding, search, and user actions
+ *
+ * Copyright (c) 2025 San Francisco State University Team 05
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+import React, { Component} from "react";
 import SearchBar from "./SearchBarComponent";
 
 class TopBarComponent extends Component {
@@ -68,7 +81,6 @@ class TopBarComponent extends Component {
     
 
     render() {
-        const { theme } = this.state;
         return (
             <header className="purple-titlebar">
                 <div className="ptb-inner">
