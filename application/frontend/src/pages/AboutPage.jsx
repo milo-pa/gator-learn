@@ -15,10 +15,10 @@
 import React, { Component } from "react";
 import TeamMembersList from "../component/TeamMembersList";
 
-class AboutPageApp extends Component {
+class AboutPage extends Component {
     render() {
         return (
-            <div className="about-page-app">
+            <div className="about-page">
                 <h1 id="list-header">Meet Team 5</h1>
                 <TeamMembersList />
             </div>
@@ -26,4 +26,4 @@ class AboutPageApp extends Component {
     }
 }
 
-export default AboutPageApp;
+export default AboutPage;
