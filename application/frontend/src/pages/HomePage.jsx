@@ -1,10 +1,25 @@
+/*
+ * Institution: San Francisco State University
+ * Class: CSC 648 Project, Team 05
+ * Project: Gator Learn, Tutoring Website
+ * Author: Enrique Liganor
+ * Created: 11/08/25
+ * Description:
+ * Home Page functional component routed to default.
+ *
+ * Copyright (c) 2025 San Francisco State University Team 05
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 import React, { Component } from "react";
-import "./HomePage.css";
+import "../HomePage.css";
 
 export default function HomePage() {
     return (
         <div className="home-hero">
-            <img src="/images/HomePage/CoolGator.webp"  alt="Gator mascot"  className="hero-image"/>
+            <img src="/images/HomePage/CoolGator.webp" alt="Gator mascot" className="hero-image"/>
 
             <div className="hero-text">
                 <h1>Studying for Gators by Gators!</h1>
