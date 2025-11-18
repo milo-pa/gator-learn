@@ -15,8 +15,7 @@ $border-gray: #ccc;
 $subtitle-text-gray: #666666;
 $card-text-gray: #c8c8c8;
 $card-text-muted-gray: #969696;
-$gray-text-home: gray;	// same one as before 
-
+$gray-text-home: gray;	// same one as before
 
 $home-img-bg: #d3d3d3;
 
@@ -24,7 +23,8 @@ $gray-border-stronger: #999999;
 
 $border-accent-gold: #ffcc00;
 
-@import "./styles/login.scss";
+@import "./styles/buttons.scss";
+@import "./styles/forms.scss";
 
 /* Global Styles- default light mode */
 body {
