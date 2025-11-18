@@ -12,7 +12,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 import React from "react";
-import "./index.css";
+import "./styles/index.css";
 import App from "./App";
 import { createRoot } from "react-dom/client";
 import { initAnalytics } from "./analytics/googleAnalytics";
