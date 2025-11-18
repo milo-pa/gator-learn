@@ -38,14 +38,14 @@ function LoginPage() {
   };
 
   return (
-      <div className="login-page">
-        <header className="login-header">
+      <div className="form-page">
+        <header className="form-header">
           <h1>Gator Learn Login</h1>
           <div className="underline"></div>
         </header>
 
-        <main className="login-main">
-          <form className="login-form" onSubmit={handleSubmit(onSubmit)}>
+        <main className="form-main">
+          <form className="form" onSubmit={handleSubmit(onSubmit)}>
             {/* School Email */}
             <div className="form-row">
               <label htmlFor="school-email">School Email:</label>
