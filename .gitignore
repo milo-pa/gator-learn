@@ -1,3 +1,4 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 # --- OS cruft ---
 .DS_Store
 Thumbs.db
@@ -54,3 +55,27 @@ dist/
 # --- Database dumps (but keep Flyway migrations) ---
 *.sql
 dump*.sql
+
+
+# ===== FRONTEND IGNORE RULES =====
+# (moved from application/frontend/.gitignore)
+
+# dependencies
+application/frontend/node_modules
+application/frontend/.pnp
+.pnp.js
+
+# testing
+application/frontend/coverage
+
+# production
+application/frontend/build
+# misc
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
