@@ -59,11 +59,10 @@ function SearchBarComponent() {
                 className="search-input"
                 placeholder={suggestions}
                 value={text}
-                onChange={(e) => setText(sanitizeInput(e.target.value))}
+                onChange={(e) => setText(e.target.value)}
                 maxLength={40}
             />
 
-            {/* ✅ ADD THIS BUTTON */}
             <button type="submit" className="search-button">
                 Search
             </button>

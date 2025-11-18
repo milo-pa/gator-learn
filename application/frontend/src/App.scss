@@ -37,6 +37,9 @@ $home-img-bg: #d3d3d3;
 $gray-border-stronger: #999999;
 
 $border-accent-gold: #ffcc00;
+
+@import "./styles/login.scss";
+
 /* Global Styles- default light mode */
 body {
 	background-color: $page-bg-light;
