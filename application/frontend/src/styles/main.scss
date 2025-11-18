@@ -1,3 +1,4 @@
+<<<<<<< HEAD:application/frontend/src/App.scss
 /* Some Standard Colors around the pages
 	add more if needed to suit your needs
 	if not repeated anywhere else use # instead of $*/
@@ -16,6 +17,25 @@ $color-surface-white: #fdfdfd;
 
 
 
+=======
+/*
+ * Institution: San Francisco State University
+ * Class: CSC 648 Project, Team 05
+ * Project: Gator Learn, Tutoring Website
+ * Author: Samantha & Enrique 
+ * Created: 09/29/25
+ * Description: CSS styles for the frontend application
+ *
+ * Copyright (c) 2025 San Francisco State University Team 05
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@import '../css/colors';
+
+<<<<<<< HEAD:application/frontend/src/App.scss
+>>>>>>> 3057f4c (Move css and scss files into src/css package):application/frontend/src/css/app.scss
 $page-bg-light: #f5f5f5;
 $page-bg-dark: #242424;
 
@@ -38,6 +58,8 @@ $border-accent-gold: #ffcc00;
 @import "./styles/forms.scss";
 @import "./styles/registration.scss";
 
+=======
+>>>>>>> bb7f1ac (Move css and scss files into src/css package):application/frontend/src/css/app.scss
 /* Global Styles- default light mode */
 body {
 	background-color: $page-bg-light;
