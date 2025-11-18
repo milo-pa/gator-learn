@@ -15,7 +15,7 @@ import React, { Component } from "react";
 import "./App.scss";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import RouteChangeTracker from "./analytics/RouteChangeTracker";
-import AboutPageApp from "./pages/AboutPageApp";
+import AboutPage from "./pages/AboutPage";
 import TopBarComponent from "./component/TopBarComponent";
 import MenuComponent from "./component/MenuComponent";
 import TeamMemberDetail from "./component/TeamMemberDetail";
