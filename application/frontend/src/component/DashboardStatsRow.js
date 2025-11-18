@@ -1,24 +1,24 @@
 import React from "react";
 
 export default function DashboardStatsRow({
-    activeListings = 2,
-    pendingRequests = 1,
-    totalRequests = 9,
-                                          }){
-    const items = [
-        { label: "Acitve Listings", value: activeListings},
-        { label: "Pending Requests", value: pendingRequests},
-        { label: "Total Requests", value: totalRequests},
-    ];
-
+                                              activeListings = 0,
+                                              pendingRequests = 0,
+                                              totalRequests = 0,
+                                          }) {
     return (
-        <div className="db-stats">
-            {items.map((it) => (
-                <div key={it.label} className="db-stats__card">
-                    <div className="db-stats__value">{it.value}</div>
-                    <div className="db-stats__label">{it.label}</div>
-                </div>
-            ))}
+        <div className="db-stats-mini" role="group" aria-label="Listing stats">
+            <Stat title="Active Listings" value={activeListings} />
+            <Stat title="Pending Request" value={pendingRequests} />
+            <Stat title="Total Request" value={totalRequests} />
+        </div>
+    );
+}
+
+function Stat({ title, value }) {
+    return (
+        <div className="db-stat-mini">
+            <div className="db-stat__title">{title}</div>
+            <div className="db-stat__value">{value}</div>
         </div>
     );
 }

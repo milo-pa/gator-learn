@@ -7,35 +7,31 @@ export default function MyListingsPanel({
                                                 { course: "MATH 226", price: "$18/hr", requests: 4, status: "Active" },
                                             ],
                                         }) {
-    return (
-        <section className="db-panel">
-            <div className="db-panel__header">My Listings</div>
+    const badgeClass = (status) =>
+        status === "Active"  ? "badge badge--success" :
+            status === "Pending" ? "badge badge--warning" :
+                "badge badge--muted";
 
-            <div className="db-table-wrap">
-                <table className="db-table">
-                    <thead>
-                    <tr>
-                        <th>Courses</th>
-                        <th>Price</th>
-                        <th>Requests</th>
-                        <th>Status</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {items.map((row, i) => (
-                        <tr key={`${row.course}-${i}`}>
-                            <td>{row.course}</td>
-                            <td>{row.price}</td>
-                            <td>{row.requests}</td>
-                            <td>
-                  <span className={`db-badge ${row.status.toLowerCase()}`}>
-                    {row.status}
-                  </span>
-                            </td>
-                        </tr>
-                    ))}
-                    </tbody>
-                </table>
+    return (
+        <section className="db-card">
+            <h3 style={{ marginBottom: "0.75rem" }}>My Listings</h3>
+
+            <div className="db-table db-table--listings">
+                <div className="db-table__head">
+                    <div>Courses</div>
+                    <div>Price</div>
+                    <div>Requests</div>
+                    <div>Status</div>
+                </div>
+
+                {items.map((row, i) => (
+                    <div key={`${row.course}-${i}`} className="db-table__row">
+                        <div>{row.course}</div>
+                        <div>{row.price}</div>
+                        <div>{row.requests}</div>
+                        <div><span className={badgeClass(row.status)}>{row.status}</span></div>
+                    </div>
+                ))}
             </div>
         </section>
     );
