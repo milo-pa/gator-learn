@@ -11,16 +11,23 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import api from './api';
+import api from "./api";
 
 class TutorListingsService {
     getAllListings() {
         return api.get("/api/listings");
     }
 
+    async getListingById(id) {
+        const res = await api.get("/api/listings/search", {
+            params: { listingId: id },
+        });
+        return res.data[0];;
+    }
+
     getListingsBySubjectSubstring(str) {
         return api.get("/api/listings/search", {
-            params: {subjectName: str},
+            params: { subjectName: str },
         });
     }
 
@@ -33,7 +40,7 @@ class TutorListingsService {
         });
     }
     searchListings(params) {
-        return api.get("/api/listings/search", {params});
+        return api.get("/api/listings/search", { params });
     }
 }
 const tutorListingsService = new TutorListingsService();
