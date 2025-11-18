@@ -13,7 +13,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 import React, { Component } from "react";
-import TeamMembersList from "../component/TeamMembersList";
+import TeamMembersList from "../component/about/TeamMembersList";
 
 class AboutPage extends Component {
     render() {
