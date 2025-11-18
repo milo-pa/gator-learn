@@ -1,65 +1,15 @@
-<<<<<<< HEAD:application/frontend/src/App.scss
-/* Some Standard Colors around the pages
-	add more if needed to suit your needs
-	if not repeated anywhere else use # instead of $*/
-$color-text-main: #090909;
-$color-text-on-dark: whitesmoke;
-$color-surface-white: #fdfdfd;
+@import "./colors";
+@import "./login";
+@import "./user-profile";
+@import "./tutor-listings";
+@import "./pop-up";
+@import "./tutor-listing-form";
+@import "./loading";
+@import "./dashboard";
+@import "./buttons";
+@import "./forms";
+@import "./registration";
 
-@import "./styles/colors.scss";
-@import "./styles/login.scss";
-@import "./styles/user-profile.scss";
-@import "./styles/tutor-listings.scss";
-@import "./styles/pop-up.scss";
-@import "./styles/tutor-listing-form.scss";
-@import "./styles/loading.scss";
-@import "./styles/dashboard.scss";
-
-
-
-=======
-/*
- * Institution: San Francisco State University
- * Class: CSC 648 Project, Team 05
- * Project: Gator Learn, Tutoring Website
- * Author: Samantha & Enrique 
- * Created: 09/29/25
- * Description: CSS styles for the frontend application
- *
- * Copyright (c) 2025 San Francisco State University Team 05
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-@import '../css/colors';
-
-<<<<<<< HEAD:application/frontend/src/App.scss
->>>>>>> 3057f4c (Move css and scss files into src/css package):application/frontend/src/css/app.scss
-$page-bg-light: #f5f5f5;
-$page-bg-dark: #242424;
-
-$yub-gold: #ffdc72;
-$yub-hover: #7f6d2c;
-
-$border-gray: #ccc;
-$subtitle-text-gray: #666666;
-$card-text-gray: #c8c8c8;
-$card-text-muted-gray: #969696;
-$gray-text-home: gray;	// same one as before
-
-$home-img-bg: #d3d3d3;
-
-$gray-border-stronger: #999999;
-
-$border-accent-gold: #ffcc00;
-
-@import "./styles/buttons.scss";
-@import "./styles/forms.scss";
-@import "./styles/registration.scss";
-
-=======
->>>>>>> bb7f1ac (Move css and scss files into src/css package):application/frontend/src/css/app.scss
 /* Global Styles- default light mode */
 body {
 	background-color: $page-bg-light;
