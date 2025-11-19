@@ -1,0 +1,13 @@
+.registration-page {
+  .description-area {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;  // contents start at left edge
+    width: 100%;
+    max-width: 350px;         // same width as other inputs
+
+    label {
+      align-self: flex-start;
+    }
+  }
+}
