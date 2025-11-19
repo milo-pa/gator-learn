@@ -16,7 +16,7 @@ import React, { useState } from "react";
 
 function SearchBarComponent() {
 
-    const [mode, setMode] = useState("all");
+    const [mode, setMode] = useState("subject");
     const [text, setText] = useState("");
     const navigate = useNavigate();
 
