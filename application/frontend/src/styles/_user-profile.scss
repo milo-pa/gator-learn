@@ -1,4 +1,4 @@
-@import "../App.scss";
+
 
 .user-profile-page {
     max-width: 1100px;
@@ -26,7 +26,7 @@
 }
 
 .user-photo {
-    width: 500px;
+    width: 400px;
     height: 100%;
     object-fit: cover;
 }
@@ -36,19 +36,19 @@
 }
 
 .user-name {
-    font-size: 2.25rem;
+    font-size: 3.5rem;
     font-weight: 700;
     margin: 0 0 0.4rem;
 }
 
 .user-pronouns {
-    font-size: 1rem;
-    font-weight: 500;
-    margin: 0 0 0.75rem;
+    font-size: 2rem;
+    font-weight: 600;
+    margin: 10px 0 0.75rem;
 }
 
-.user-description {
-    font-size: 1rem;
+.user-bio {
+    font-size: 1.5rem;
     line-height: 1.6;
     max-width: 700px;
 }
@@ -58,7 +58,7 @@
 }
 
 .user-listings-title {
-  font-size: 1.75rem;
+  font-size: 2rem;
   font-weight: 700;
   margin-bottom: 1.25rem;
 }
@@ -98,11 +98,11 @@
   display: flex;
   flex-direction: column;
   gap: 0.35rem;
-  font-size: 0.95rem;
+  font-size: 1.25rem;
 }
 
 .listing-tutor-name {
-  font-size: 1.25rem;
+  font-size: 1.75rem;
   font-weight: 700;
   margin: 0 0 0.35rem;
 }
@@ -123,7 +123,7 @@
   background: transparent;
   border: none;
   padding: 0;
-  font-size: 1rem;
+  font-size: 1.25rem;
   font-weight: 600;
   text-decoration: underline;
   cursor: pointer;
@@ -137,7 +137,7 @@
   border-radius: 4px;
   border: 1px solid #111;
   font-weight: 700;
-  font-size: 0.95rem;
+  font-size: 1rem;
   cursor: pointer;
   background: $border-accent-gold;
   color: $color-text-main;

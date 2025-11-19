@@ -1,5 +1,4 @@
 import React from "react";
-import "../styles/user-profile.scss";
 
 import {MOCK_USER, MOCK_USER_LISTINGS} from "../mock/mockUser";
 

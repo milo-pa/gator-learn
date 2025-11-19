@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import TutorListingService from "../service/tutorsListingService";
 import "../styles/loading.scss";
-import "../styles/tutor-listing.scss";
 
 function TutorListingPage(props) {
     const [listing, setListing] = useState(null);
@@ -35,7 +34,7 @@ function TutorListingPage(props) {
 
             <div className="tutor-top-row">
                 <div className="tutor-image-box">
-                    <img src={listing.account.photoPath} alt="User Account Photo"></img>
+                    <img src={listing.account.photoPath} alt="User Account"></img>
                 </div>
 
                 <div className="tutor-info-col">
