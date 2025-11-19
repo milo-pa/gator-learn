@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import TutorListingService from "../service/tutorsListingService";
-import "../styles/loading.scss";
 
 function TutorListingPage(props) {
     const [listing, setListing] = useState(null);
