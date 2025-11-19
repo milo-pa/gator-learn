@@ -13,21 +13,22 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { mockListingService as TutorListingService } from "../../service/mockTutorListingService";
 
-export default function MyListingsPanel({
-    items = [
-        { course: "CSC 220", price: "$20/hr", requests: 2, status: "Active" },
-        { course: "CSC 230", price: "$20/hr", requests: 0, status: "Pending" },
-        { course: "MATH 226", price: "$18/hr", requests: 4, status: "Active" },
-    ],
-}) {
+export default function MyListingsPanel() {
+    const [listings, setListings] = useState([]);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        TutorListingService.getListingsByAccount(1).then((res) => setListings(res.data));
+    }, []);
+
+    console.log(listings);
+
     const badgeClass = (status) =>
-        status === "Active"
-            ? "badge badge--success"
-            : status === "Pending"
-            ? "badge badge--warning"
-            : "badge badge--muted";
+        status === 1 ? "badge badge--success" : status === 0 ? "badge badge--warning" : "badge badge--muted";
 
     return (
         <section className="db-card">
@@ -41,13 +42,17 @@ export default function MyListingsPanel({
                     <div>Status</div>
                 </div>
 
-                {items.map((row, i) => (
-                    <div key={`${row.course}-${i}`} className="db-table__row">
-                        <div>{row.course}</div>
-                        <div>{row.price}</div>
-                        <div>{row.requests}</div>
+                {listings.map((row, i) => (
+                    <div
+                        key={`${row.course.courseNumber}-${i}`}
+                        className="db-table__row"
+                        onClick={() => navigate(`/listing/${encodeURIComponent(row.listingId)}`)}
+                    >
+                        <div>{row.course.courseNumber}</div>
+                        <div>{row.pricePerHour}$ / hr</div>
+                        <div>???</div>
                         <div>
-                            <span className={badgeClass(row.status)}>{row.status}</span>
+                            <span className={badgeClass(row.live)}>{row.live === 1 ? "Active" : "Inactive"}</span>
                         </div>
                     </div>
                 ))}
