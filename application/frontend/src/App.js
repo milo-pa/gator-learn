@@ -25,14 +25,10 @@ import withNavigation from "./component/WithNavigation";
 import HomePage from "./pages/HomePage";
 import DashboardPage from "./pages/DashboardPage";
 import SearchResultsPage from "./pages/SearchResultsPage";
-<<<<<<< HEAD
 import TutorListingPage from "./pages/TutorListingPage";
 import AboutPage from "./pages/AboutPage";
 import LoginPage from "./pages/LoginPage";
-=======
-import LoginPage from "./pages/LoginPage"
 import RegistrationPage from "./pages/RegistrationPage";
->>>>>>> feature/registration-page
 
 const DetailWithParams = withNavigation(TeamMemberDetail);
 const ListingWithParams = withNavigation(TutorListingPage);
