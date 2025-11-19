@@ -1,0 +1,303 @@
+@import "../App.scss";
+
+.create-listing-page {
+    margin: 3rem auto 4rem;
+    padding: 0 2rem;
+    color: $color-text-main;
+    text-align: center;
+    width: 700px;
+
+
+    h1 {
+        font-size: 3rem;
+        font-weight: 700;
+        margin-bottom: 2.5rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid $color-text-main;
+    }
+}
+
+.tutor-listing-form {
+    width: 700px;
+    margin: 3rem auto 4rem;
+}
+
+
+.row-subject {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.2rem;
+}
+
+.label-subject {
+    width: 180px;
+    text-align: right;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: $color-text-main;
+    margin-right: 1rem;
+}
+
+.input-subject {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    font-size: 1.3rem;
+    border: 1px solid #d1d1d1;
+    border-radius: 4px;
+    background: $color-surface-white;
+    color: $color-text-main;
+
+}
+
+.row-course {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.2rem;
+}
+
+.label-course {
+    width: 180px;
+    text-align: right;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: $color-text-main;
+    margin-right: 1rem;
+}
+
+.input-course {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    font-size: 1.3rem;
+    border: 1px solid #d1d1d1;
+    border-radius: 4px;
+    background: $color-surface-white;
+    color: $color-text-main;
+}
+
+.row-price {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.2rem;
+}
+
+.label-price {
+    width: 180px;
+    text-align: right;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: $color-text-main;
+    margin-right: 1rem;
+}
+
+.input-price {
+    width: 200px;
+    padding: 0.75rem 1rem;
+    font-size: 1.3rem;
+    border: 1px solid #d1d1d1;
+    border-radius: 4px;
+    background: $color-surface-white;
+    color: $color-text-main;
+}
+
+.price-unit {
+    margin-left: 0.5rem;
+    font-size: 1.2rem;
+    white-space: nowrap;
+}
+
+.row-description {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 1.2rem;
+}
+
+.label-description {
+    width: 180px;
+    text-align: right;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: $color-text-main;
+    margin-right: 1rem;
+    padding-top: 0.4rem;
+}
+
+.input-description {
+    flex: 1;
+    min-height: 200px;
+    padding: 1rem;
+    font-size: 1.3rem;
+    border: 1px solid #d1d1d1;
+    border-radius: 4px;
+    background: $color-surface-white;
+    color: $color-text-main;
+    resize: vertical;
+}
+
+
+.row-availability {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 2rem;
+}
+
+.label-availability {
+    width: 180px;
+    text-align: right;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: $color-text-main;
+    margin-right: 1rem;
+    padding-top: 0.2rem;
+}
+
+.availability-block {
+    flex: 1;
+}
+
+.days-column {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    font-size: 1.3rem;
+}
+
+.day-row {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.day-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.day-checkbox input[type="checkbox"] {
+    width: 22px;
+    height: 22px;
+    accent-color: $color-text-on-dark;
+}
+
+
+
+.day-time-range {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-left: 2.1rem;
+    font-size: 1.2rem;
+}
+
+.time-label {
+    font-weight: 600;
+    font-size: 1.25rem;
+}
+
+.time-input {
+    width: 140px;
+    padding: 0.6rem;
+    font-size: 1.25rem;
+    border: 1px solid #b5b5b5;
+    border-radius: 5px;
+}
+
+.row-optional {
+    display: flex;
+    align-items: flex-start;
+    margin-top: 2rem;
+}
+
+.label-optional {
+    width: 180px;
+    text-align: right;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: $color-text-main;
+    margin-right: 1rem;
+    padding-top: 0.2rem;
+}
+
+.optional-block {
+    flex: 1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+}
+
+.optional-item {
+    flex: 1 1 30%;
+    min-width: 180px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.optional-label {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: $color-text-main;
+}
+
+.file-button {
+    position: relative;
+    display: inline-block;
+    padding: 0.45rem 1rem;
+    border-radius: 4px;
+    border: 1px solid $color-text-main;
+    background: $color-surface-white;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.file-button input[type="file"] {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.optional-hint {
+    font-size: 1rem;
+    color: #505050;
+}
+
+.form-submit-row {
+    margin-top: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5rem;
+}
+
+.btn-cancel,
+.btn-submit {
+    padding: 0.9rem 2.6rem;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 1.25rem;
+    cursor: pointer;
+}
+
+.btn-cancel {
+    border: 1px solid #d1d1d1;
+    background: $color-surface-white;
+}
+
+.btn-submit {
+    border: 1px solid #111;
+    background: #ffdc72;
+}
+
+.btn-submit:hover {
+    background: $yub-hover;
+}
+
+/* ERRORS */
+
+.form-error {
+    margin: 0.2rem 0 0.6rem 180px;
+    font-size: 0.9rem;
+    color: #c0392b;
+}
