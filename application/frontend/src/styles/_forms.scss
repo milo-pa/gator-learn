@@ -1,0 +1,266 @@
+.form-page {
+  max-width: 900px;
+  margin: 18px auto;
+
+  // Header at top of form page (login, registration, etc.)
+  .form-header {
+    text-align: center;
+
+    h1 {
+      font-size: 2.6rem;
+      font-weight: 800;
+      margin: 0;
+      color: $color-text-main;
+    }
+
+    .underline {
+      width: 60%;
+      height: 3px;
+      margin: 16px auto 16px auto;
+      background-color: $color-text-main;
+    }
+  }
+
+  // Main area with form + buttons + helpers
+  .form-main {
+    // The actual form element
+    .form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      width: 100%;
+    }
+
+    // Label + field row (shared across login / registration)
+    .form-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      max-width: 900px;
+      gap: 15px;
+      margin-right: 80px;
+
+      label {
+        font-size: 1.2rem;
+        font-weight: 600;
+        width: 190px;
+        text-align: right;
+        color: $color-text-main;
+      }
+    }
+
+    .required-label::before {
+      content: "*";
+      color: #e63946;      // red asterisk
+      margin-right: 4px;
+      font-weight: 700;
+    }
+
+    /* Make ONLY the description row use a vertical layout */
+    .form-column {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: left;
+      row-gap: 12px; // vertical space between label and textarea
+    }
+
+    // HCI text
+    .hci-text {
+      font-size: 0.85rem;
+      color: $gray-text-home;
+      white-space: nowrap;             // prevent wrapping
+      flex-shrink: 0;                  // do not shrink and pull the row left
+    }
+
+    // ---------- Terms & conditions row ----------
+    .terms-content {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-right: 100px;
+    }
+
+    .terms-content input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+    }
+
+    .terms-text {
+      font-size: 1rem;
+      font-weight: 600;
+      color: $color-text-main;
+
+      button {
+        text-decoration: underline;
+        font-weight: 700;
+        color: inherit;
+      }
+    }
+
+    // Shared wrapper for text inputs
+    .input-wrapper {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      max-width: 350px;
+      height: 42px;
+      border: 1px solid $border-gray;
+      border-radius: 6px;
+      background-color: #ffffff;
+      padding-left: 11px;
+      padding-right: 11px;
+      box-sizing: border-box;
+
+      input {
+        flex: 1;
+        border: none;
+        background: transparent;
+        font-size: 1rem;
+        color: $color-text-main;
+        outline: none;
+
+        &:focus {
+          outline: none;
+        }
+      }
+    }
+
+    .input-wrapper.textarea-wrapper {
+      height: auto;
+      min-height: 120px;
+      align-items: flex-start;
+      padding-top: 8px;
+      padding-bottom: 8px;
+
+      textarea {
+        flex: 1;
+        width: 100%;
+        border: none;
+        background: transparent;
+        font-size: 1rem;
+        color: $color-text-main;
+        resize: vertical;
+        outline: none;
+
+        &:focus {
+          outline: none;
+        }
+      }
+    }
+
+    .small-input-wrapper {
+      max-width: 140px;
+    }
+
+    // Focus highlight for any form input
+    .input-wrapper:focus-within {
+      border: 1px solid #1773ea;
+    }
+
+    // Error styles that apply to any form
+    .input-wrapper.input-error {
+      border: 1px solid #e63946;
+    }
+
+    // Error popups and colors
+    .error-popup-container {
+      margin-top: 8px;
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      gap: 6px;
+    }
+
+    .error-popup {
+      background-color: #ffe5e5;
+      border: 1px solid #e63946;
+      color: #b00020;
+      padding: 6px 6px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+    }
+
+    // Password Hide/Show button
+    .password-wrapper {
+      display: flex;
+      justify-content: space-between;
+      padding-right: 15px; // space for the button
+    }
+
+    .toggle-password {
+      background: none;
+      border: none;
+      font-size: 0.85rem;
+      color: #555;
+      cursor: pointer;
+      padding: 0;
+
+      &:hover {
+        color: #000;
+      }
+    }
+
+    // Cancel / Login / Register buttons row
+    .button-row {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      margin-top: 8px;
+    }
+
+    // Helper rows (forgot password, sign up, etc.)
+    .helper-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 24px;
+
+      .helper-text {
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin: 0;
+        color: $gray-text-home;
+      }
+    }
+  }
+}
+
+body.dark-mode {
+  .form-page {
+    color: $color-text-on-dark;
+
+    .form-header {
+      h1 {
+        color: $color-text-on-dark;
+      }
+
+      .underline {
+        background-color: $color-text-on-dark;
+      }
+    }
+
+    .form-main {
+      .form-row label {
+        color: $color-text-on-dark;
+      }
+
+      .input-wrapper {
+        background-color: #2b2b2b;
+        border-color: $subtitle-text-gray;
+
+        input {
+          color: $color-text-on-dark;
+        }
+      }
+
+      .helper-row .helper-text {
+        color: $color-text-on-dark;
+      }
+    }
+  }
+}

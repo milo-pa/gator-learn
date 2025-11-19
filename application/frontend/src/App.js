@@ -28,6 +28,9 @@ import SearchResultsPage from "./pages/SearchResultsPage";
 import TutorListingPage from "./pages/TutorListingPage";
 import AboutPage from "./pages/AboutPage";
 import LoginPage from "./pages/LoginPage";
+import UserProfilePage from "./pages/UserProfilePage";
+import CreateTutorListingPage from "./pages/CreateTutorListingPage";
+import RegistrationPage from "./pages/RegistrationPage";
 
 import ReceivedMessageDashboardPage from "./pages/ReceivedMessageDashboardPage.jsx";
 import SentMessageDashboardPage from "./pages/SentMessageDashboardPage.jsx";
@@ -51,11 +54,16 @@ class App extends Component {
                         <Route path="/results" element={<SearchResultsPage />} />
                         <Route path="/team-members" element={<AboutPage />} />
                         <Route path="/login" element={<LoginPage />} />
+                        <Route path="/register" element={<RegistrationPage />} />
                         <Route path="/team-members/:name" element={<DetailWithParams />} />
                         <Route path="/dashboard" element={<DashboardPage />} />
                         <Route path="/listing/:id" element={<ListingWithParams />} />
                         <Route path="/messages/received" element={<ReceivedMessageDashboardPage />} />
                         <Route path="/messages/sent" element={<SentMessageDashboardPage />} />
+
+                        <Route path="/user-profile" element={<UserProfilePage/>}/>
+                        <Route path="/create-tutor-listing" element={<CreateTutorListingPage/>}/>
+                        
                     </Routes>
                 </main>
             </Router>

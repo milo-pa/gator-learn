@@ -12,7 +12,7 @@ const teamMembers = [
     {
         name: "Sam",
         imagePath: "/images/team/sam.webp",
-        title: "Github Lead",
+        title: "Support",
         bio: "I'm a senior at San Francisco State University, studying Computer Science. I'm excited to keep learning, building projects, and preparing for my career after graduation",
         links: [
             { label: "GitHub", href: "https://github.com/smunthe" },
@@ -40,7 +40,7 @@ const teamMembers = [
     {
         name: "Hill",
         imagePath: "/images/team/hill.webp",
-        title: "Support",
+        title: "GitHub Lead",
         bio: "I'm Hill, a senior Computer Science student at SFSU. I'm aiming for a software engineering role and actively learning more about AI and cybersecurity. I'm excited to collaborate and turn solid specs into working features.",
         links: [
             { label: "LinkedIn", href: "https://www.linkedin.com/in/hill-kalathiya-2bb0a7297/" }
