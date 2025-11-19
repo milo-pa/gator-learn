@@ -85,7 +85,7 @@ class TopBarComponent extends Component {
                 <div className="ptb-inner">
                     <div className="brand-section">
                         <a href="/" className="brand-link">
-                            <img id="logo" src="favicon.ico" alt="logo" />
+                            <img id="logo" src="/favicon.ico" alt="logo"/>
                             <span className="brand">Gator Learn</span>
                             <span className="brand-team">by Team 5</span>
                         </a>
