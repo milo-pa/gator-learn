@@ -15,7 +15,7 @@
 import {useLocation} from 'react-router-dom';
 import React, { useEffect, useState} from 'react';
 import { Link } from "react-router-dom";
-import TutorListingService from '../service/tutorsListingService';
+import { mockListingService as TutorListingService } from "../service/mockTutorListingService";
 
 /* Custom hook to parse query parameters */
 function useQueryParams() {

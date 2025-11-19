@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import TutorListingService from "../service/tutorsListingService";
+import { mockListingService as TutorListingService } from "../service/mockTutorListingService";
 
 function TutorListingPage(props) {
     const [listing, setListing] = useState(null);
