@@ -67,7 +67,6 @@ function TutorListingForm() {
     <>
       <form className="tutor-listing-form" onSubmit={handleSubmit(onSubmit)}>
 
-
         <div className="row-subject">
           <label className="label-subject" htmlFor="subject">For:</label>
           <select
@@ -87,61 +86,58 @@ function TutorListingForm() {
 
 
         <div className="row-course">
-  <label className="label-course" htmlFor="course">Course:</label>
-  <select
-    id="course"
-    className="input-course"
-    disabled={!subject}
-    {...register("course", {
-      required: subject ? "Course is required" : false,
-    })}
-  >
-    <option value="">
-      {subject ? "Select class" : "Choose subject first"}
-    </option>
-    {filteredCourses.map((c) => (
-      <option key={c.id} value={c.code}>
-        {c.code} {c.name}
-      </option>
-    ))}
-  </select>
-</div>
+          <label className="label-course" htmlFor="course">Course:</label>
+          <select
+            id="course"
+            className="input-course"
+            disabled={!subject}
+            {...register("course", {
+              required: subject ? "Course is required" : false,
+            })}
+          >
+            <option value="">
+              {subject ? "Select class" : "Choose subject first"}
+            </option>
+            {filteredCourses.map((c) => (
+              <option key={c.id} value={c.code}>
+                {c.code} {c.name}
+              </option>
+            ))}
+          </select>
+        </div>
         {errors.course && (
           <p className="form-error">{errors.course.message}</p>
         )}
 
-
         <div className="row-price">
-  <label className="label-price" htmlFor="pricePerHour">Price per hour:</label>
-  <input
-    id="pricePerHour"
-    type="number"
-    className="input-price"
-    {...register("pricePerHour", { required: "Price required" })}
-  />
-  <span className="price-unit">$/hr</span>
-</div>
+          <label className="label-price" htmlFor="pricePerHour">Price per hour:</label>
+          <input
+            id="pricePerHour"
+            type="number"
+            className="input-price"
+            {...register("pricePerHour", { required: "Price required" })}
+          />
+          <span className="price-unit">$/hr</span>
+        </div>
 
         {errors.pricePerHour && (
           <p className="form-error">{errors.pricePerHour.message}</p>
         )}
 
-
         <div className="row-description">
-  <label className="label-description" htmlFor="description">Description:</label>
-  <textarea
-    id="description"
-    className="input-description"
-    rows="5"
-    placeholder="Brag and describe yourself"
-    {...register("description", { required: "Description required" })}
-  />
-</div>
+          <label className="label-description" htmlFor="description">Description:</label>
+          <textarea
+            id="description"
+            className="input-description"
+            rows="5"
+            placeholder="Brag and describe yourself"
+            {...register("description", { required: "Description required" })}
+          />
+        </div>
         {errors.description && (
           <p className="form-error">{errors.description.message}</p>
         )}
-
-
+        
         <div className="row-availability">
           <span className="label-availability">Availability:</span>
           <div className="availability-block">
