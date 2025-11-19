@@ -1,6 +1,21 @@
-import React, { Component, use } from "react";
+/*
+ * Institution: San Francisco State University
+ * Class: CSC 648 Project, Team 05
+ * Project: Gator Learn, Tutoring Website
+ * Author: Samantha Chombo-Rodriguez
+ * Created: 09/29/25
+ * Description: Top bar component including branding, search, and user actions
+ *
+ * Copyright (c) 2025 San Francisco State University Team 05
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+import React, {Component} from "react";
 import SearchBar from "./SearchBarComponent";
+
 import "../TopBarComponent.css";
+import { Link } from "react-router-dom";
 
 class TopBarComponent extends Component {
 
@@ -54,7 +69,6 @@ class TopBarComponent extends Component {
         this.setState({ theme: newTheme }, () => this.applyTheme(newTheme));
     };
 
-
     toggleTheme = () => {
         this.setState(
             (prevState) => ({
@@ -66,10 +80,7 @@ class TopBarComponent extends Component {
             });
     };
 
-    
-
     render() {
-        const { theme } = this.state;
         return (
             <header className="purple-titlebar">
                 <div className="ptb-inner">
@@ -84,8 +95,13 @@ class TopBarComponent extends Component {
                     <SearchBar/>
 
                     {/* Will need to add function later to change login to log out when user signed in */}
-                    <button id="login-button" className="login-button">Login</button>
+                    <button id="login-button" className="login-button">
                     <img src="/images/default-profile.png" alt="Profile" className="profile-icon"/>
+                        <Link to="/login" style={{ color: "inherit", textDecoration: "none" }}>
+                            Login
+                        </Link>
+                    </button>
+                    <div className="profile-placeholder"></div>
                 </div>
             </header>
         );
