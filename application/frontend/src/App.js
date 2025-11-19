@@ -27,7 +27,6 @@ import SearchResultsPage from "./pages/SearchResultsPage";
 import TutorListingPage from "./pages/TutorListingPage";
 import AboutPage from "./pages/AboutPage";
 import LoginPage from "./pages/LoginPage";
-import SearchResultsPage  from "./pages/SearchResultsPage";
 import CreateTutorListingPage from "./pages/CreateTutorListingPage";
 
 const DetailWithParams = withNavigation(TeamMemberDetail);
