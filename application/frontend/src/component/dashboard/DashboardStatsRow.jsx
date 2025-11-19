@@ -1,10 +1,6 @@
 import React from "react";
 
-export default function DashboardStatsRow({
-                                              activeListings = 0,
-                                              pendingRequests = 0,
-                                              totalRequests = 0,
-                                          }) {
+export default function DashboardStatsRow({ activeListings = 0, pendingRequests = 0, totalRequests = 0 }) {
     return (
         <div className="db-stats-mini" role="group" aria-label="Listing stats">
             <Stat title="Active Listings" value={activeListings} />
