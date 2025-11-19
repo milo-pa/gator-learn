@@ -27,6 +27,8 @@ import SearchResultsPage from "./pages/SearchResultsPage";
 import TutorListingPage from "./pages/TutorListingPage";
 import AboutPage from "./pages/AboutPage";
 import LoginPage from "./pages/LoginPage";
+import SearchResultsPage  from "./pages/SearchResultsPage";
+import CreateTutorListingPage from "./pages/CreateTutorListingPage";
 
 const DetailWithParams = withNavigation(TeamMemberDetail);
 const ListingWithParams = withNavigation(TutorListingPage);
@@ -49,6 +51,8 @@ class App extends Component {
                         <Route path="/login" element={<LoginPage />} />
                         <Route path="/team-members/:name" element={<DetailWithParams />} />
                         <Route path="/listing/:id" element={<ListingWithParams />} />
+                        <Route path="/create-tutor-listing" element={<CreateTutorListingPage/>}/>
+                        
                     </Routes>
                 </main>
             </Router>
