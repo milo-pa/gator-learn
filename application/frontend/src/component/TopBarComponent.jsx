@@ -11,7 +11,7 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import React, {Component} from "react";
+import React, { Component } from "react";
 import SearchBar from "./SearchBarComponent";
 
 import "../TopBarComponent.css";
@@ -37,7 +37,7 @@ class TopBarComponent extends Component {
     componentDidMount() {
         const saved = localStorage.getItem("theme");
         if (saved === "light" || saved === "dark") {
-            this.setState({ theme: saved , userSetPreference: true}, () => this.applyTheme(saved));
+            this.setState({ theme: saved, userSetPreference: true }, () => this.applyTheme(saved));
             return;
         }
 
@@ -45,16 +45,15 @@ class TopBarComponent extends Component {
             this.mql = window.matchMedia("(prefers-color-scheme: dark)");
             const systemPrefersDark = this.mql.matches;
             const initialTheme = systemPrefersDark ? "dark" : "light";
-            this.setState({ theme: initialTheme, userSetPreference: false}, () => {
+            this.setState({ theme: initialTheme, userSetPreference: false }, () => {
                 this.applyTheme(initialTheme);
             });
             this.mql.addEventListener("change", this.handleSystemThemeChange);
-        } else 
-        {
+        } else {
             this.applyTheme("light");
         }
     }
-    
+
     componentWillUnmount() {
         if (this.mql && this.mql.removeEventListener) {
             this.mql.removeEventListener("change", this.handleSystemThemeChange);
@@ -74,7 +73,7 @@ class TopBarComponent extends Component {
             (prevState) => ({
                 theme: prevState.theme === "light" ? "dark" : "light"
             }), () => {
-                const {theme} = this.state;
+                const { theme } = this.state;
                 this.applyTheme(theme);
                 localStorage.setItem("theme", theme);
             });
@@ -86,22 +85,23 @@ class TopBarComponent extends Component {
                 <div className="ptb-inner">
                     <div className="brand-section">
                         <a href="/" className="brand-link">
-                            <img id="logo" src="favicon.ico" alt="logo"/>
+                            <img id="logo" src="favicon.ico" alt="logo" />
                             <span className="brand">Gator Learn</span>
                             <span className="brand-team">by Team 5</span>
                         </a>
                     </div>
                     <div className="spacer"></div>
-                    <SearchBar/>
+                    <SearchBar />
 
                     {/* Will need to add function later to change login to log out when user signed in */}
                     <button id="login-button" className="login-button">
-                    <img src="/images/default-profile.png" alt="Profile" className="profile-icon"/>
                         <Link to="/login" style={{ color: "inherit", textDecoration: "none" }}>
                             Login
                         </Link>
                     </button>
-                    <div className="profile-placeholder"></div>
+                    <Link to= "/user-profile" className="profile-placeholder">
+                        <img src="/images/default-profile.png" alt="Profile" className="profile-icon" />
+                    </Link>
                 </div>
             </header>
         );
