@@ -16,7 +16,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { SUBJECT_OPTIONS, COURSE_OPTIONS } from "../mock/mockOptions";
 import PopUpComponent from "./PopUpComponent";
-import "../styles/TutorListingForm.scss";
+import "../styles/tutor-listing-form.scss";
 
 function TutorListingForm() {
   const navigate = useNavigate();

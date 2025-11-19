@@ -12,7 +12,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 import React from "react";
-import "../styles/PopUpComponent.scss";
+import "../styles/pop-up.scss";
 
 function PopUpComponent({title,content,onClose}) {
     return(
