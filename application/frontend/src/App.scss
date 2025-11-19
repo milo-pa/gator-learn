@@ -159,12 +159,10 @@ body.dark-mode {
 .profile-placeholder {
 	width: 40px;
 	height: 40px;
-	background-color: $yub-gold;
 	border-radius: 8px;
 	margin-left: 12px;
 	flex-shrink: 0;
 	&:hover {
-		background-color: $yub-hover;
 		cursor: pointer;
 	}
 }
