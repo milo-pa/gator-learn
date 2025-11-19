@@ -18,7 +18,7 @@ import DashboardSidebar from "../component/dashboard/DashboardSidebar";
 import DashboardStatsRow from "../component/dashboard/DashboardStatsRow";
 import MyListingsPanel from "../component/dashboard/MyListingPanel";
 import DashboardMessagesPanel from "../component/dashboard/DashboardMessagesPanel";
-import "../styles/dashboard.scss";
+import "../styles/_dashboard.scss";
 import { DASHBOARD_STATS, MY_LISTINGS, MESSAGES } from "../mock/dashboardData";
 
 
