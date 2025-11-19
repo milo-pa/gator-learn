@@ -3,6 +3,8 @@ import DashboardSidebar from "../component/dashboard/DashboardSidebar";
 import DashboardStatsRow from "../component/dashboard/DashboardStatsRow";
 import MyListingsPanel from "../component/dashboard/MyListingPanel";
 import DashboardMessagesPanel from "../component/dashboard/DashboardMessagesPanel";
+import "../styles/dashboard.scss";
+
 export default function DashboardPage() {
     const [active, setActive] = useState("overview");
 
