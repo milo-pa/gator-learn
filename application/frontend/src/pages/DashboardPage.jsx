@@ -1,15 +1,14 @@
 import React, { useState } from "react";
-import DashboardSidebar from "../component/DashboardSidebar";
-import DashboardStatsRow from "../component/DashboardStatsRow";
-import MyListingsPanel from "../component/MyListingPanel";
-import DashboardMessagesPanel from "../component/DashboardMessagesPanel";
+import DashboardSidebar from "../component/dashboard/DashboardSidebar";
+import DashboardStatsRow from "../component/dashboard/DashboardStatsRow";
+import MyListingsPanel from "../component/dashboard/MyListingPanel";
+import DashboardMessagesPanel from "../component/dashboard/DashboardMessagesPanel";
 export default function DashboardPage() {
     const [active, setActive] = useState("overview");
 
     return (
         <div className="db_page">
-            <h1>Hello!</h1>
-            <p>Welcome back, Gator Learner!</p>
+            <h2>Welcome back, Gator Learner!</h2>
 
             <div className="db-wrap">
                 <DashboardSidebar active={active} onSelect={setActive} />
@@ -18,7 +17,6 @@ export default function DashboardPage() {
                     {active === "overview" && (
                         <>
                             <DashboardStatsRow activeListings={2} pendingRequests={1} totalRequests={9} />
-
 
                             <MyListingsPanel
                                 rows={[
@@ -35,9 +33,6 @@ export default function DashboardPage() {
                                 ]}
                             />
                         </>
-
-
-
                     )}
 
                     {active === "messages" && <div className="db-muted">Latest Messages (coming next)</div>}
