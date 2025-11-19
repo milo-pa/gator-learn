@@ -1,0 +1,40 @@
+// Buttons
+.btn {
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 10px 18px;
+  border-radius: 6px;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-primary {
+  background-color: $border-accent-gold;
+  color: $color-text-main;
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: $color-text-main;
+  border: 1px solid $border-gray;
+}
+
+.btn-light {
+  background-color: transparent;
+  color: $color-text-main;
+  border: none;
+  padding: 0;
+  text-decoration: underline;
+  font-weight: 600;
+}
+
+body.dark-mode {
+  .btn-secondary {
+    color: $color-text-on-dark;
+    border-color: $subtitle-text-gray;
+  }
+
+  .btn-light {
+    color: $yub-gold;
+  }
+}
