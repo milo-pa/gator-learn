@@ -1,8 +1,26 @@
+/*
+ * Institution: San Francisco State University
+ * Class: CSC 648 Project, Team 05
+ * Project: Gator Learn, Tutoring Website
+ * Author: Hill Kalathiya
+ * Created: 11/17/2025
+ * Description: Main Dashboard page shell. Renders the sidebar, stats pills,
+ *              My Listings table, and Messages panel. Uses mock data only (no backend calls).
+ *
+ * Copyright (c) 2025 San Francisco State University Team 05
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 import React, { useState } from "react";
 import DashboardSidebar from "../component/dashboard/DashboardSidebar";
 import DashboardStatsRow from "../component/dashboard/DashboardStatsRow";
 import MyListingsPanel from "../component/dashboard/MyListingPanel";
 import DashboardMessagesPanel from "../component/dashboard/DashboardMessagesPanel";
+import "../styles/dashboard.scss";
+import { DASHBOARD_STATS, MY_LISTINGS, MESSAGES } from "../mock/dashboardData";
+
 
 export default function DashboardPage() {
     const [active, setActive] = useState("overview");
@@ -17,27 +35,21 @@ export default function DashboardPage() {
                 <section className="db-card db-main">
                     {active === "overview" && (
                         <>
-                            <DashboardStatsRow activeListings={2} pendingRequests={1} totalRequests={9} />
+                            <DashboardStatsRow activeListings={DASHBOARD_STATS.activeListings} pendingRequests={DASHBOARD_STATS.pendingRequests} totalRequests={DASHBOARD_STATS.totalRequests} />
 
                             <MyListingsPanel
-                                rows={[
-                                    { id: 1, course: "CSC 220", price: "$20/hr", requests: 2, status: "Active" },
-                                    { id: 2, course: "CSC 220", price: "$20/hr", requests: 0, status: "Pending" },
-                                    { id: 3, course: "CSC 220", price: "$20/hr", requests: 4, status: "Active" },
-                                ]}
+                                items = {MY_LISTINGS}
                             />
 
                             <DashboardMessagesPanel
-                                messages={[
-                                    { id: 1, name: "Sarah", course: "CSC 220", kind: "received", ago: "2 hr" },
-                                    { id: 2, name: "Jamal", course: "CSC 220", kind: "sent", ago: "10 hr" },
-                                ]}
+                                messages= {MESSAGES}
                             />
                         </>
                     )}
 
-                    {active === "messages" && <div className="db-muted">Latest Messages (coming next)</div>}
-                    {active === "myListings" && <div className="db-muted">My Listings (coming soon)</div>}
+                    {active === "messages" && (<DashboardMessagesPanel messages={MESSAGES} />)}
+
+                    {active === "myListings" && (<MyListingsPanel items={MY_LISTINGS} />)}
                 </section>
             </div>
         </div>

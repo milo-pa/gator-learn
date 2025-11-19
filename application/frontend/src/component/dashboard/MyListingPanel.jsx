@@ -1,3 +1,18 @@
+/*
+ * Institution: San Francisco State University
+ * Class: CSC 648 Project, Team 05
+ * Project: Gator Learn, Tutoring Website
+ * Author: Hill Kalathiya
+ * Created: 11/17/2025
+ * Description: Displays the user's tutor listings in a 4-column table (Course, Price,
+ *              Requests, Status) with status badges.
+ *
+ * Copyright (c) 2025 San Francisco State University Team 05
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 import React from "react";
 
 export default function MyListingsPanel({
