@@ -1,8 +1,21 @@
+/*
+ * Institution: San Francisco State University
+ * Class: CSC 648 Project, Team 05
+ * Project: Gator Learn, Tutoring Website
+ * Author: Jonah 
+ * Created: 09/29/25
+ * Description: Component to display a list of team members with links to their profiles
+ *
+ * Copyright (c) 2025 San Francisco State University Team 05
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
 import React, { Component } from "react";
-import TeamMembersService from "../service/TeamMembersService.js";
-import TeamMemberComponent from "./TeamMemberComponent.js";
+import teamMembersService from "../../service/teamMemberServices.js";
+import TeamMemberComponent from "./TeamMemberComponent.jsx";
 import { Link } from "react-router-dom";
-import { trackEvent } from "../analytics/googleAnalytics";
+import { trackEvent } from "../../analytics/googleAnalytics.js";
 
 class TeamMembersList extends Component {
     constructor(props) {
@@ -14,7 +27,7 @@ class TeamMembersList extends Component {
     }
 
     componentDidMount() {
-        TeamMembersService.getAllMembers()
+        teamMembersService.getAllMembers()
             .then((response) => {
                 this.setState({ members: response.data.members });
             })

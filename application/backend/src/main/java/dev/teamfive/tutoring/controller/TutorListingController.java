@@ -14,10 +14,11 @@
 package dev.teamfive.tutoring.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import dev.teamfive.tutoring.model.TutorListing;
@@ -41,9 +42,9 @@ public class TutorListingController
     }
 
     /**
-     * API endpoint for retrieving a list of TutorListings
+     * API endpoint for retrieving a list of all TutorListings
      *
-     * @return The list of TutorListings
+     * @return The list of all TutorListings
      */
     @GetMapping
     public List<TutorListing> getAllListings()
@@ -52,38 +53,51 @@ public class TutorListingController
     }
 
     /**
-     * API endpoint for retrieving a TutorListing by listing id
+     * API endpoint for retrieving a list of TutorListings, each of whose properties match ALL the given search parameters.
+     * <p>
+     * An api call might look like {@code api/listings/search?listingDescription=calc&accountName=Alice}.
+     * The key value pairs (search parameters) for this call are {@code listingDescription : calc} and {@code accountName : Alice}.
+     * <p>
+     * An api call can have an infinite number of search parameters, however a finite number are actually recognized.
+     * Currently, the recognized parameters, as well as their corresponding fields of a TutorListing object,
+     * and columns in database tables are:
+     * <pre>{@code
+     * ----------------------------------------------------------------------------------
+     * |  Search Parameter    |  TutorListing Field     |  Database Table/Col           |
+     * ----------------------------------------------------------------------------------
+     * |  listingId           |  listingId              |  tutor_listing / listing_id   |
+     * |  listingDescription  |  description            |  tutor_listing / description  |
+     * |  accountName         |  account#name           |  user_account / name          |
+     * |  subjectName         |  subject#subjectName    |  subject / subject_name       |
+     * |  courseName          |  course#courseName      |  course / course_name         |
+     * |  courseNumber        |  course#courseNumber    |  course / course_number       |
+     * ----------------------------------------------------------------------------------
+     * }</pre>
      *
-     * @param id An id
-     * @return A TutorListing whose listingId matches the given id
+     * @param params A map of search parameters, where a key is the query key of the api call, and a value is a query value.
+     * @return A list of TutorListings that match the search parameters
      */
-    @GetMapping("/{id}")
-    public TutorListing getListingById(@PathVariable Long id)
+    @GetMapping("/search")
+    public List<TutorListing> searchListings(@RequestParam Map<String, String> params)
     {
-        return repository.findById(id).orElse(null);
-    }
+        boolean allBlank = params.values().stream().allMatch(value -> value == null || value.isBlank());
 
-    /**
-     * API endpoint for retrieving a list of TutorListings whose course name contains a string
-     *
-     * @param str A string
-     * @return A list of TutorListings whose course name contains the given string
-     */
-    @GetMapping("/by-course/{str}")
-    public List<TutorListing> getListingsByCourse(@PathVariable String str)
-    {
-        return repository.findByCourseContaining(str);
-    }
+        if (allBlank)
+        {
+            return getAllListings();
+        }
 
-    /**
-     * API endpoint for retrieving a list of TutorListings whose subject name contains a string
-     *
-     * @param str A string
-     * @return A list of TutorListings whose subject name contains the given string
-     */
-    @GetMapping("/by-subject/{str}")
-    public List<TutorListing> getListingsBySubject(@PathVariable String str)
-    {
-        return repository.findBySubjectContaining(str);
+        Long listingId = params.containsKey("listingId") ? Long.valueOf(params.get("listingId")) : null;
+
+        String listingDesc = params.get("listingDescription");
+
+        String accountName = params.get("accountName");
+
+        String subjectName = params.get("subjectName");
+
+        String courseName = params.get("courseName");
+        String courseNumber = params.get("courseNumber");
+
+        return repository.findBySearchQueryCombination(listingId, listingDesc, accountName, subjectName, courseName, courseNumber);
     }
 }
