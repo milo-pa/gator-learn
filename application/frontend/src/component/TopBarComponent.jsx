@@ -96,12 +96,11 @@ class TopBarComponent extends Component {
 
                     {/* Will need to add function later to change login to log out when user signed in */}
                     <button id="login-button" className="login-button">
-                    <img src="/images/default-profile.png" alt="Profile" className="profile-icon"/>
                         <Link to="/login" style={{ color: "inherit", textDecoration: "none" }}>
                             Login
                         </Link>
                     </button>
-                    <div className="profile-placeholder"></div>
+                    <img src="/images/default-profile.png" alt="Profile" className="profile-icon"/>
                 </div>
             </header>
         );
