@@ -23,21 +23,31 @@ function RegistrationPage() {
         register,
         handleSubmit ,
         formState: { errors, submitCount },
-        reset
+        reset,
+        watch
     } = useForm({
         mode: "onBlur",
         reValidateMode: "onBlur"
     });
 
+    const passwordValue = watch("password");
+
     const onSubmit = (data) => {
         alert(`Form submitted with data: ${JSON.stringify(data)}`);
         reset({
-            // fill this
+            name: "",
+            email: "",
+            password: "",
+            confirmPassword: "",
+            pronouns: "",
+            photo: null,
+            description: "",
+            terms: false,
         })
     };
 
     return (
-        <div className="form-page">
+        <div className="form-page registration-page">
             <header className="form-header">
                 <h1>Gator Learn Registration</h1>
                 <div className="underline"></div>
@@ -46,8 +56,8 @@ function RegistrationPage() {
             <main className="form-main">
                 <form className="form" onSubmit={handleSubmit(onSubmit)}>
                     {/* Name */}
-                    <div className={"form-row"}>
-                        <label htmlFor="name">Name:</label>
+                    <div className="form-row">
+                        <label htmlFor="name" className="required-label">Name:</label>
                         <div className={`input-wrapper
                             ${submitCount > 0 && errors.name ? "input-error" : ""}`}>
                             <input
@@ -61,7 +71,7 @@ function RegistrationPage() {
 
                     {/* School Email */}
                     <div className="form-row">
-                        <label htmlFor="school-email">School Email:</label>
+                        <label htmlFor="school-email" className="required-label">School Email:</label>
                         <div className={`input-wrapper 
                             ${submitCount > 0 && errors.email ? "input-error" : ""}`}>
                             <input
@@ -78,7 +88,7 @@ function RegistrationPage() {
 
                     {/* Password */}
                     <div className="form-row">
-                        <label htmlFor="password">Password:</label>
+                        <label htmlFor="password" className="required-label">Password:</label>
                         <div className={`input-wrapper password-wrapper
                             ${submitCount > 0 && errors.password ? "input-error" : ""}`}>
                             <input
@@ -104,12 +114,19 @@ function RegistrationPage() {
 
                     {/* Confirm Password */}
                     <div className="form-row">
-                        <label htmlFor="password">Confirm Password:</label>
-                        <div className={`input-wrapper password-wrapper
-                            ${submitCount > 0 && errors.password ? "input-error" : ""}`}>
+                        <label htmlFor="confirm-password" className="required-label">Confirm Password:</label>
+                        <div
+                            className={`input-wrapper password-wrapper
+                            ${submitCount > 0 && errors.confirmPassword ? "input-error" : ""}`}
+                        >
                             <input
                                 type={showPassword ? "text" : "password"}
-                                id="password"
+                                id="confirm-password"
+                                {...register("confirmPassword", {
+                                    required: "Please confirm your password",
+                                    validate: (value) =>
+                                        value === passwordValue || "Passwords do not match",
+                                })}
                             />
                             <button
                                 type="button"
@@ -123,17 +140,17 @@ function RegistrationPage() {
 
                     {/* Pronouns */}
                     <div className={"form-row"}>
-                        <label htmlFor="name">(Opt.) Pronouns:</label>
-                        <div className={`input-wrapper
-                            ${submitCount > 0}`}>
+                        <label htmlFor="name">Pronouns:</label>
+                        <div className={"input-wrapper small-input-wrapper"}>
                             <input id="name" />
                         </div>
+                        <div style={{ width: "195px" }}></div>
                     </div>
 
                     {/* Profile Photo upload */}
-                    <div className="form-row photo-row">
-                        <label htmlFor="profile-photo">(Opt.) Photo:</label>
-                        <div className="input-wrapper">
+                    <div className="form-row">
+                        <label htmlFor="profile-photo">Photo:</label>
+                        <div className={"input-wrapper"}>
                             <input
                                 type="file"
                                 id="profile-photo"
@@ -142,25 +159,27 @@ function RegistrationPage() {
                             />
                         </div>
                         <span className="hci-text">
-                            Only JPG, PNG, and WEBP images are allowed.
+                            Allows JPG, PNG, and WEBP
                         </span>
                     </div>
 
                     {/* Description */}
-                    <div className="form-row description-row">
-                        <label htmlFor="description">(Opt.) Description:</label>
-                        <div className="description-wrapper input-wrapper">
+                    <div className="form-row">
+                        <div className="form-column description-area">
+                            <label htmlFor="description">Description:</label>
+                            <div className="input-wrapper textarea-wrapper">
                             <textarea
                                 id="description"
-                                rows={4}
+                                rows="5"
                                 {...register("description")}
                             />
+                            </div>
                         </div>
                     </div>
 
                     {/* Terms and Conditions */}
-                    <div className="form-row terms-row">
-                        <label htmlFor="terms"></label>
+                    <div className="form-row">
+                        <label htmlFor="terms" className="required-label"></label>
                         <div className="terms-content">
                             <input
                                 type="checkbox"
@@ -179,21 +198,33 @@ function RegistrationPage() {
                     </div>
 
                     {/* Error Message Popups*/}
-                    {submitCount > 0 && (errors.email || errors.password || errors.name) && (
-                        <div className="error-popup-container">
-                            {errors.name && (
-                                <div className="error-popup">{errors.name.message}</div>
-                            )}
-                            {errors.email && (
-                                <div className="error-popup">{errors.email.message}</div>
-                            )}
-                            {errors.password && (
-                                <div className="error-popup">{errors.password.message}</div>
-                            )}
-                        </div>
-                    )}
+                    {submitCount > 0 &&
+                        (errors.email ||
+                        errors.password ||
+                        errors.name ||
+                        errors.confirmPassword ||
+                        errors.terms) &&
+                        (
+                            <div className="error-popup-container">
+                                {errors.name && (
+                                    <div className="error-popup">{errors.name.message}</div>
+                                )}
+                                {errors.email && (
+                                    <div className="error-popup">{errors.email.message}</div>
+                                )}
+                                {errors.password && (
+                                    <div className="error-popup">{errors.password.message}</div>
+                                )}
+                                {errors.confirmPassword && (
+                                    <div className="error-popup">{errors.confirmPassword.message}</div>
+                                )}
+                                {errors.terms && (
+                                    <div className="error-popup">{errors.terms.message}</div>
+                                )}
+                            </div>
+                        )}
 
-                    {/* Cancel/Login Buttons */}
+                    {/* Cancel/Sign up Buttons */}
                     <div className="button-row">
                         <button type="button" className="btn btn-secondary">
                             <Link to="/" style={{ color: "inherit", textDecoration: "none" }}>

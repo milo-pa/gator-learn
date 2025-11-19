@@ -1,5 +1,5 @@
 .form-page {
-  max-width: 1000px;
+  max-width: 900px;
   margin: 18px auto;
 
   // Header at top of form page (login, registration, etc.)
@@ -39,46 +39,35 @@
       justify-content: center;
       width: 100%;
       max-width: 900px;
-      gap: 20px;
+      gap: 15px;
+      margin-right: 80px;
 
       label {
         font-size: 1.2rem;
         font-weight: 600;
-        width: 200px;
+        width: 190px;
         text-align: right;
         color: $color-text-main;
       }
-
-      /* Make ONLY the description row use a vertical layout */
-      .description-row {
-        flex-direction: column;
-        align-items: flex-start;     /* label aligns to the left edge */
-        gap: 8px;                    /* space between label and box */
-
-        label {
-          width: auto;               /* override 160px fixed width */
-          text-align: left;
-          font-size: 1.2rem;
-          font-weight: 700;
-        }
-
-        .description-wrapper {
-          width: 100%;
-          max-width: 900px;
-        }
-      }
     }
 
-    // Photo input
-    .photo-row {
-      justify-content: center;         // keep row visually aligned
+    .required-label::before {
+      content: "*";
+      color: #e63946;      // red asterisk
+      margin-right: 4px;
+      font-weight: 700;
+    }
+
+    /* Make ONLY the description row use a vertical layout */
+    .form-column {
+      display: flex;
+      flex-direction: column;
       align-items: center;
+      text-align: left;
+      row-gap: 12px; // vertical space between label and textarea
     }
 
-    .photo-row .input-wrapper {
-      max-width: 260px;                // a bit narrower so the HCI text has room
-    }
-
+    // HCI text
     .hci-text {
       font-size: 0.85rem;
       color: $gray-text-home;
@@ -87,14 +76,11 @@
     }
 
     // ---------- Terms & conditions row ----------
-    .terms-row {
-      justify-content: center;
-    }
-
     .terms-content {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 16px;
+      margin-right: 100px;
     }
 
     .terms-content input[type="checkbox"] {
@@ -108,7 +94,7 @@
       font-weight: 600;
       color: $color-text-main;
 
-      a {
+      button {
         text-decoration: underline;
         font-weight: 700;
         color: inherit;
@@ -141,6 +127,33 @@
           outline: none;
         }
       }
+    }
+
+    .input-wrapper.textarea-wrapper {
+      height: auto;
+      min-height: 120px;
+      align-items: flex-start;
+      padding-top: 8px;
+      padding-bottom: 8px;
+
+      textarea {
+        flex: 1;
+        width: 100%;
+        border: none;
+        background: transparent;
+        font-size: 1rem;
+        color: $color-text-main;
+        resize: vertical;
+        outline: none;
+
+        &:focus {
+          outline: none;
+        }
+      }
+    }
+
+    .small-input-wrapper {
+      max-width: 140px;
     }
 
     // Focus highlight for any form input
