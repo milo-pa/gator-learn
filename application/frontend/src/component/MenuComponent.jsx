@@ -22,7 +22,6 @@ class MenuComponent extends Component {
             <div className="yellow-sticky">
                 {/* yub - yellow utility bar*/}
                 <nav className="yub-left">
-                    <Link className="yub-link" to="/">Home</Link>
                     <Link className ="yub-link" to="/team-members">About</Link>
                     <Link className = "yub-link" to="/results">Browse Listings</Link>
                     <Link className = "yub-link" to="/create-tutor-listing">Create Listing</Link>
