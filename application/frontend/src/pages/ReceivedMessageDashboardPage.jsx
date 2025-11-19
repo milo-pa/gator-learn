@@ -11,18 +11,25 @@ const sampleMessages = [
     },
     {
         id: 2,
-        sender: "Mike",
+        sender: "Michael Lee",
         course: "CSC 210 / Intro to CS",
         contact: "(555) 555-5555",
         comments: "Can we schedule another tutoring session?"
     },
     {
         id: 3,
+        sender: "Enrique Liganor",
+        course: "CSC 648 / Software Engineering",
+        contact: "(234) 272-8328",
+        comments: "I am in need of assistance in terms of learning ReactJS for my 648 class. Can you help me?"
+    },
+    {
+        id: 4,
         sender: "Dragutin Petkovic",
         course: "CSC 648 / Software Engineering",
         contact: "(999) 234-9823",
         comments: "This Milestone makes me go bananas."
-    }
+    },
 ];
 
 export default function MessageDashboard() {
@@ -30,10 +37,9 @@ export default function MessageDashboard() {
 
     return (
         <div className="message-dashboard">
-            <h1>Messages</h1>
+            <h1>Received Messages</h1>
 
             <div className="message-layout">
-
                 <div className="message-list">
                     {sampleMessages.map(msg => (
                         <div
@@ -47,6 +53,7 @@ export default function MessageDashboard() {
                     ))}
                 </div>
 
+                {/* Right Column — selected message details */}
                 <div className="message-details">
                     <div className="detail-header">
                         <p><strong>From:</strong> {selected.sender}</p>
@@ -64,4 +71,5 @@ export default function MessageDashboard() {
             </div>
         </div>
     );
+
 }

@@ -28,7 +28,9 @@ import SearchResultsPage from "./pages/SearchResultsPage";
 import TutorListingPage from "./pages/TutorListingPage";
 import AboutPage from "./pages/AboutPage";
 import LoginPage from "./pages/LoginPage";
-import MessageDashboardPage from "./pages/MessageDashboardPage.jsx";
+
+import ReceivedMessageDashboardPage from "./pages/ReceivedMessageDashboardPage.jsx";
+import SentMessageDashboardPage from "./pages/SentMessageDashboardPage.jsx";
 
 const DetailWithParams = withNavigation(TeamMemberDetail);
 const ListingWithParams = withNavigation(TutorListingPage);
@@ -52,7 +54,8 @@ class App extends Component {
                         <Route path="/team-members/:name" element={<DetailWithParams />} />
                         <Route path="/dashboard" element={<DashboardPage />} />
                         <Route path="/listing/:id" element={<ListingWithParams />} />
-                        <Route path="/messages" element={<MessageDashboardPage />} />
+                        <Route path="/messages/received" element={<ReceivedMessageDashboardPage />} />
+                        <Route path="/messages/sent" element={<SentMessageDashboardPage />} />
                     </Routes>
                 </main>
             </Router>
