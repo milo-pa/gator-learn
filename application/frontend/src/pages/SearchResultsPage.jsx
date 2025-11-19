@@ -16,6 +16,7 @@ import {useLocation} from 'react-router-dom';
 import React, { useEffect, useState} from 'react';
 import { Link } from "react-router-dom";
 import { mockListingService as TutorListingService } from "../service/mockTutorListingService";
+import MessageTutorPopUp from "../component/MessageTutorPopUp";
 
 /* Custom hook to parse query parameters */
 function useQueryParams() {
@@ -34,6 +35,20 @@ function SearchResultsPage() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [sortOrder,setSortOrder] = useState(null);
+    const [showPopUp, setShowPopUp] = useState(false);
+    const [selectedListing, setSelectedListing] = useState(null);
+
+    // open popup for a specific listing
+    const handleMessageClick = (listing) => {
+        setSelectedListing(listing);
+        setShowPopUp(true);
+    };
+
+    // close popup
+    const handleClosePopUp = () => {
+        setShowPopUp(false);
+        setSelectedListing(null);
+    };
 
     function removeDuplicates(arr) {
         const uniqueIds = new Set();
@@ -87,7 +102,6 @@ function SearchResultsPage() {
                 setLoading(false);
             }
         }
-
         loadListings();
     }, [subject, course, all]);
     
@@ -119,7 +133,6 @@ function SearchResultsPage() {
                     </p>
                 </div>
                 <div className="results-header-right">
-                    
                     <select 
                         id = "results-sort-select"
                         className="sort-dropdown"
@@ -130,7 +143,6 @@ function SearchResultsPage() {
                         <option value="asc">$ to $$$ (cheapest first)</option>
                         <option value="desc">$$$ to $ (most expensive first)</option>
                     </select>
-
                 </div>
             </header>
             {loading && <p className="loading-message">Loading listings...</p>}
@@ -150,8 +162,13 @@ function SearchResultsPage() {
                             <p className="tutor-subject">Subject: {listing.subject?.subjectName}</p>
                             <p className="tutor-price">Price: ${listing.pricePerHour}/hr</p>
                         <div className="tutor-actions">
-                             <p className="tutor-availability">Availability: {listing.availableTime}</p>
-                            <button className="tutor-message-button">MESSAGE TUTOR</button>
+                            <p className="tutor-availability">Availability: {listing.availableTime}</p>
+                            <button
+                                className="tutor-message-button"
+                                onClick={() => handleMessageClick(listing)}
+                            >
+                                MESSAGE TUTOR
+                            </button>
                         </div>
                     </div>
                 </article>
@@ -160,6 +177,14 @@ function SearchResultsPage() {
                     <p className="no-results">No tutors found matching your criteria.</p>
                 )}
             </section>
+
+            {showPopUp && selectedListing && (
+                <MessageTutorPopUp
+                    listing={selectedListing}
+                    onClose={handleClosePopUp}
+                />
+            )}
+
         </main>
     );
 }
