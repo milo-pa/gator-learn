@@ -24,7 +24,7 @@ class MenuComponent extends Component {
                 <nav className="yub-left">
                     <Link className="yub-link" to="/">Home</Link>
                     <Link className ="yub-link" to="/team-members">About</Link>
-                    <Link className = "yub-link" to="/browse-listings">Browse Listings</Link>
+                    <Link className = "yub-link" to="/results">Browse Listings</Link>
                     <Link className = "yub-link" to="/create-tutor-listing">Create Listing</Link>
                     <Link className = "yub-link" to="/dashboard">Dashboard</Link>
                 </nav>
