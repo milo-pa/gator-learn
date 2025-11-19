@@ -14,6 +14,7 @@
 
 import React, {useState} from "react";
 import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 
 function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
@@ -37,14 +38,14 @@ function LoginPage() {
   };
 
   return (
-      <div className="login-page">
-        <header className="login-header">
+      <div className="form-page">
+        <header className="form-header">
           <h1>Gator Learn Login</h1>
           <div className="underline"></div>
         </header>
 
-        <main className="login-main">
-          <form className="login-form" onSubmit={handleSubmit(onSubmit)}>
+        <main className="form-main">
+          <form className="form" onSubmit={handleSubmit(onSubmit)}>
             {/* School Email */}
             <div className="form-row">
               <label htmlFor="school-email">School Email:</label>
@@ -100,11 +101,12 @@ function LoginPage() {
                 </div>
             )}
 
-
             {/* Cancel/Login Buttons */}
             <div className="button-row">
               <button type="button" className="btn btn-secondary">
-                CANCEL
+                <Link to="/" style={{ color: "inherit", textDecoration: "none" }}>
+                  CANCEL
+                </Link>
               </button>
               <button type="submit" className="btn btn-primary">
                 LOGIN
@@ -124,7 +126,9 @@ function LoginPage() {
           <div className="helper-row">
             <p className="helper-text">Don’t have an account?</p>
             <button type="button" className="btn btn-secondary">
-              SIGN UP
+              <Link to="/register" style={{ color: "inherit", textDecoration: "none" }}>
+                SIGN UP
+              </Link>
             </button>
           </div>
         </main>
