@@ -25,9 +25,14 @@ import withNavigation from "./component/WithNavigation";
 import HomePage from "./pages/HomePage";
 import DashboardPage from "./pages/DashboardPage";
 import SearchResultsPage from "./pages/SearchResultsPage";
+<<<<<<< HEAD
 import TutorListingPage from "./pages/TutorListingPage";
 import AboutPage from "./pages/AboutPage";
 import LoginPage from "./pages/LoginPage";
+=======
+import LoginPage from "./pages/LoginPage"
+import RegistrationPage from "./pages/RegistrationPage";
+>>>>>>> feature/registration-page
 
 const DetailWithParams = withNavigation(TeamMemberDetail);
 const ListingWithParams = withNavigation(TutorListingPage);
@@ -48,6 +53,7 @@ class App extends Component {
                         <Route path="/results" element={<SearchResultsPage />} />
                         <Route path="/team-members" element={<AboutPage />} />
                         <Route path="/login" element={<LoginPage />} />
+                        <Route path="/register" element={<RegistrationPage />} />
                         <Route path="/team-members/:name" element={<DetailWithParams />} />
                         <Route path="/dashboard" element={<DashboardPage />} />
                         <Route path="/listing/:id" element={<ListingWithParams />} />
