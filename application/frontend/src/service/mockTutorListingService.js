@@ -5,7 +5,7 @@ class MockTutorListingsService {
         return Promise.resolve({ data: MOCK_LISTINGS });
     }
 
-    async getListingById(id) {
+    getListingById(id) {
         return Promise.resolve(MOCK_LISTINGS.find((l) => l.listingId === Number(id)));
     }
 
@@ -21,6 +21,11 @@ class MockTutorListingsService {
             (l) =>
                 l.course.courseName.toLowerCase().includes(lower) || l.course.courseNumber.toLowerCase().includes(lower)
         );
+        return Promise.resolve({ data: filtered });
+    }
+
+    getListingsByAccount(accountId) {
+        const filtered = MOCK_LISTINGS.filter((l) => l.account.userId === Number(accountId));
         return Promise.resolve({ data: filtered });
     }
 }
