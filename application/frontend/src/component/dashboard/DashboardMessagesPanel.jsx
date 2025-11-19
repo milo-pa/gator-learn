@@ -13,7 +13,7 @@ export default function DashboardMessagesPanel({ messages = [] }) {
 
     const filtered = useMemo(() => {
         if (tab === "all") return messages;
-        return messages.filter(m => m.kind === tab);
+        return messages.filter((m) => m.kind === tab);
     }, [messages, tab]);
 
     return (
@@ -21,7 +21,7 @@ export default function DashboardMessagesPanel({ messages = [] }) {
             <div className="db-card__title">Messages</div>
 
             <div className="db-tabs">
-                {TABS.map(t => (
+                {TABS.map((t) => (
                     <button
                         key={t.key}
                         type="button"
@@ -41,7 +41,7 @@ export default function DashboardMessagesPanel({ messages = [] }) {
                     <div className="col col--ago">Time</div>
                 </div>
 
-                {filtered.map(row => (
+                {filtered.map((row) => (
                     <div key={row.id} className="db-table__row">
                         <div className="col col--name">{row.name}</div>
                         <div className="col col--course">{row.course}</div>
@@ -50,9 +50,7 @@ export default function DashboardMessagesPanel({ messages = [] }) {
                     </div>
                 ))}
 
-                {filtered.length === 0 && (
-                    <div className="db-table__empty">No messages in this view.</div>
-                )}
+                {filtered.length === 0 && <div className="db-table__empty">No messages in this view.</div>}
             </div>
         </section>
     );
