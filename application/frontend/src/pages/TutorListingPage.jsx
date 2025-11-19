@@ -35,7 +35,7 @@ function TutorListingPage(props) {
 
             <div className="tutor-top-row">
                 <div className="tutor-image-box">
-                    <img src={listing.account.photoPath} alt="User Account Photo"></img>
+                    <img src={listing.account.photoPath} alt="User Account"></img>
                 </div>
 
                 <div className="tutor-info-col">
