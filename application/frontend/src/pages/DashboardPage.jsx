@@ -18,6 +18,8 @@ import DashboardSidebar from "../component/dashboard/DashboardSidebar";
 import DashboardStatsRow from "../component/dashboard/DashboardStatsRow";
 import MyListingsPanel from "../component/dashboard/MyListingPanel";
 import DashboardMessagesPanel from "../component/dashboard/DashboardMessagesPanel";
+import SentMessageDashboardPage from "./SentMessageDashboardPage.jsx";
+import ReceivedMessageDashboardPage from "./ReceivedMessageDashboardPage.jsx";
 import "../styles/_dashboard.scss";
 import { DASHBOARD_STATS, MY_LISTINGS, MESSAGES } from "../mock/dashboardData";
 
@@ -47,7 +49,9 @@ export default function DashboardPage() {
                         </>
                     )}
 
-                    {active === "messages" && (<DashboardMessagesPanel messages={MESSAGES} />)}
+                    {active === "sentMessages" && (<SentMessageDashboardPage />)}
+
+                    {active === "receivedMessages" && (<ReceivedMessageDashboardPage />)}
 
                     {active === "myListings" && (<MyListingsPanel items={MY_LISTINGS} />)}
                 </section>
