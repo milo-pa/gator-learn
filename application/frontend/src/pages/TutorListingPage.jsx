@@ -61,13 +61,13 @@ function TutorListingPage(props) {
             </div>
 
             <div className="tutor-buttons-row">
-                <button className="tutor-small-button">View Resume</button>
-                <button className="tutor-small-button">View Sample Video</button>
-                <button className="tutor-small-button">Contact</button>
+                <button className="btn btn-secondary">View Resume</button>
+                <button className="btn btn-secondary">View Sample Video</button>
+                <button className="btn btn-primary">Contact</button>
             </div>
 
             <div className="tutor-back-wrap">
-                <button className="tutor-back-button" onClick={navigateBack}>Back</button>
+                <button className="btn tutor-back-button" onClick={navigateBack}>Back</button>
             </div>
         </div>
     );
