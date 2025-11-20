@@ -164,7 +164,7 @@ function SearchResultsPage() {
                         <div className="tutor-actions">
                             <p className="tutor-availability">Availability: {listing.availableTime}</p>
                             <button
-                                className="tutor-message-button"
+                                className="btn btn-primary"
                                 onClick={() => handleMessageClick(listing)}
                             >
                                 MESSAGE TUTOR

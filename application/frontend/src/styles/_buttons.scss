@@ -6,6 +6,10 @@
   border-radius: 6px;
   cursor: pointer;
   border: none;
+  appearance: none;
+  -webkit-appearance: none;
+  outline: none;
+  box-shadow: none;
 }
 
 .btn-primary {
