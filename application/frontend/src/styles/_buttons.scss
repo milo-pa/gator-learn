@@ -28,6 +28,21 @@
   font-weight: 600;
 }
 
+// Hovers
+.btn-primary:hover {
+  background-color: darken($border-accent-gold, 12%);
+}
+
+.btn-secondary:hover {
+  background-color: lighten($border-gray, 32%);
+  border-color: darken($border-gray, 10%);
+}
+
+.btn-light:hover {
+  color: darken($color-text-main, 18%);
+  text-decoration: none;
+}
+
 body.dark-mode {
   .btn-secondary {
     color: $color-text-on-dark;
@@ -36,5 +51,20 @@ body.dark-mode {
 
   .btn-light {
     color: $yub-gold;
+  }
+
+  // Hovers
+  .btn-primary:hover {
+    background-color: lighten($border-accent-gold, 14%);
+  }
+
+  .btn-secondary:hover {
+    background-color: lighten(#2b2b2b, 8%);
+    border-color: lighten($subtitle-text-gray, 15%);
+  }
+
+  .btn-light:hover {
+    color: lighten($yub-gold, 12%);
+    text-decoration: none;
   }
 }

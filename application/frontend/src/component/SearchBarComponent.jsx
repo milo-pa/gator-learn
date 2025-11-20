@@ -63,7 +63,7 @@ function SearchBarComponent() {
                 maxLength={40}
             />
 
-            <button type="submit" className="search-button">
+            <button type="submit" className="btn-primary search-btn">
                 Search
             </button>
         </form>
