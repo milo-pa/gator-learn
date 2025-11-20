@@ -61,7 +61,6 @@ export default function UserProfilePage() {
                                 >
                                     View more details
                                 </button>
-                                <button className="listing-message-btn">MESSAGE TUTOR</button>
                             </div>
                         </article>
                     ))}
