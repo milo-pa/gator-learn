@@ -152,19 +152,20 @@ function SearchResultsPage() {
                     <article key={listing.listingId} className="tutor-card">
                         <div className="tutor-image-wrapper">
                             {/* Placeholder for tutor image */}
-                            <img className="tutor-image-placeholder" src = "/images/tutor/iu_.png" alt="Tutor" />
+                            <Link className="tutor-link-button" to={`/listing/${encodeURIComponent(listing.listingId)}`}>                            <img className="tutor-image-placeholder" src = "/images/tutor/iu_.png" alt="Tutor" /></Link>
+
+
                         </div>
                         <div className="tutor-info">
                             <div className="tutor-info-header">
                                 <h2 className="tutor-name">{listing.account.name}</h2>
-                                <Link className="tutor-link-button" to={`/listing/${encodeURIComponent(listing.listingId)}`}>View details</Link>
                             </div>
                             <p className="tutor-subject">Subject: {listing.subject?.subjectName}</p>
                             <p className="tutor-price">Price: ${listing.pricePerHour}/hr</p>
                         <div className="tutor-actions">
                             <p className="tutor-availability">Availability: {listing.availableTime}</p>
                             <button
-                                className="tutor-message-button"
+                                className="btn btn-primary"
                                 onClick={() => handleMessageClick(listing)}
                             >
                                 MESSAGE TUTOR

@@ -32,7 +32,7 @@ const sampleMessages = [
     },
 ];
 
-export default function MessageDashboard() {
+export default function ReceivedMessageDashboard() {
     const [selected, setSelected] = useState(sampleMessages[0]);
 
     return (

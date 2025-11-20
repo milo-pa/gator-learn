@@ -34,7 +34,7 @@ const sampleMessages = [
     },
 ];
 
-export default function MessageDashboard() {
+export default function SentMessageDashboard() {
     const [selected, setSelected] = useState(sampleMessages[0]);
 
     return (
