@@ -22,7 +22,9 @@ function PopUpComponent({title,content,onClose}) {
                 <div className = "popup-body">{content}</div>
                 <button className="close-btn" onClick={onClose}>
                     Close
-                </button>
+                    </button>
+                
+                
 
             </div>
         </div>
