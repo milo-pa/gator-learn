@@ -1,14 +1,29 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { mockListingService as TutorListingService } from "../service/mockTutorListingService";
+import MessageTutorPopUp from "../component/MessageTutorPopUp";
+
+
 
 function TutorListingPage(props) {
     const [listing, setListing] = useState(null);
     const navigate = useNavigate();
+    const [showPopUp, setShowPopUp] = useState(false);
+     const [selectedListing, setSelectedListing] = useState(null);
+    
+    
 
     function navigateBack() {
         navigate(-1);
     }
+    const handleContact = (listing) => {
+        setSelectedListing(listing);
+        setShowPopUp(true);
+    };
+    const handleClosePopUp = () => {
+        setShowPopUp(false);
+        setSelectedListing(null);
+    };
 
     useEffect(() => {
         async function loadListing() {
@@ -63,13 +78,20 @@ function TutorListingPage(props) {
             <div className="tutor-buttons-row">
                 <button className="btn btn-secondary">View Resume</button>
                 <button className="btn btn-secondary">View Sample Video</button>
-                <button className="btn btn-primary">Contact</button>
+                <button className="btn btn-primary" onClick={() => handleContact(listing)}>Contact</button>
             </div>
+            {showPopUp && selectedListing && (
+                <MessageTutorPopUp
+                    listing={selectedListing}
+                    onClose={handleClosePopUp}
+                />
+            )}
 
             <div className="tutor-back-wrap">
                 <button className="btn tutor-back-button" onClick={navigateBack}>Back</button>
             </div>
         </div>
+
     );
 }
 
