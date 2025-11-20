@@ -1,10 +1,26 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { mockListingService as TutorListingService } from "../service/mockTutorListingService";
+import MessageTutorPopUp from "../component/MessageTutorPopUp";
 
 function TutorListingPage(props) {
     const [listing, setListing] = useState(null);
     const navigate = useNavigate();
+
+    const [showPopUp, setShowPopUp] = useState(false);
+    const [selectedListing, setSelectedListing] = useState(null);
+
+    // open popup for a specific listing
+    const handleMessageClick = (listing) => {
+        setSelectedListing(listing);
+        setShowPopUp(true);
+    };
+
+    // close popup
+    const handleClosePopUp = () => {
+        setShowPopUp(false);
+        setSelectedListing(null);
+    };
 
     function navigateBack() {
         navigate(-1);
@@ -33,12 +49,16 @@ function TutorListingPage(props) {
 
             <div className="tutor-top-row">
                 <div className="tutor-image-box">
-                    <img src="/images/tutor/iu_.png"/*{listing.account.photoPath}*/ alt="User Account" width="200px"></img>
+                    <img
+                        src="/images/tutor/iu_.png"
+                        /*{listing.account.photoPath}*/ alt="User Account"
+                        width="200px"
+                    ></img>
                 </div>
 
                 <div className="tutor-info-col">
                     <div className="tutor-title">
-                        <span className="tutor-underline">{listing.account.name}</span> is tutoring {" "}
+                        <span className="tutor-underline">{listing.account.name}</span> is tutoring{" "}
                         <span className="tutor-underline">
                             {listing.course.courseNumber} {listing.course.courseName}
                         </span>
@@ -63,12 +83,18 @@ function TutorListingPage(props) {
             <div className="tutor-buttons-row">
                 <button className="btn btn-secondary">View Resume</button>
                 <button className="btn btn-secondary">View Sample Video</button>
-                <button className="btn btn-primary">Contact</button>
+                <button className="btn btn-primary" onClick={() => handleMessageClick(listing)}>
+                    Contact
+                </button>
             </div>
 
             <div className="tutor-back-wrap">
-                <button className="btn tutor-back-button" onClick={navigateBack}>Back</button>
+                <button className="btn tutor-back-button" onClick={navigateBack}>
+                    Back
+                </button>
             </div>
+
+            {showPopUp && selectedListing && <MessageTutorPopUp listing={selectedListing} onClose={handleClosePopUp} />}
         </div>
     );
 }
