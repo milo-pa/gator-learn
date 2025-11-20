@@ -16,7 +16,8 @@ import React from "react";
 
 const ITEMS = [
     { key: "overview", label: "Overview" },
-    { key: "messages", label: "Messages" },
+    { key: "sentMessages", label: "Sent Messages" },
+    { key: "receivedMessages", label: "Received Messages" },
     { key: "myListings", label: "My Listings" },
 ];
 
