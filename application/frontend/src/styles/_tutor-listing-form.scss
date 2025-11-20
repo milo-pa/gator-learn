@@ -9,7 +9,7 @@
 
 
     h1 {
-        font-size: 3rem;
+        font-size: 2.6rem;
         font-weight: 700;
         margin-bottom: 2.5rem;
         padding-bottom: 0.5rem;
@@ -32,7 +32,7 @@
 .label-subject {
     width: 180px;
     text-align: right;
-    font-size: 1.6rem;
+    font-size: 1.25rem;
     font-weight: 600;
     color: $color-text-main;
     margin-right: 1rem;
@@ -41,11 +41,12 @@
 .input-subject {
     flex: 1;
     padding: 0.75rem 1rem;
-    font-size: 1.3rem;
+    font-size: 1rem;
     border: 1px solid #d1d1d1;
     border-radius: 4px;
     background: $color-surface-white;
     color: $color-text-main;
+    height: 42px;
 
 }
 
@@ -58,7 +59,7 @@
 .label-course {
     width: 180px;
     text-align: right;
-    font-size: 1.6rem;
+    font-size: 1.25rem;
     font-weight: 600;
     color: $color-text-main;
     margin-right: 1rem;
@@ -67,11 +68,12 @@
 .input-course {
     flex: 1;
     padding: 0.75rem 1rem;
-    font-size: 1.3rem;
+    font-size: 1rem;
     border: 1px solid #d1d1d1;
     border-radius: 4px;
     background: $color-surface-white;
     color: $color-text-main;
+    height: 42px;
 }
 
 .row-price {
@@ -83,7 +85,7 @@
 .label-price {
     width: 180px;
     text-align: right;
-    font-size: 1.6rem;
+    font-size: 1.25rem;
     font-weight: 600;
     color: $color-text-main;
     margin-right: 1rem;
@@ -97,6 +99,7 @@
     border-radius: 4px;
     background: $color-surface-white;
     color: $color-text-main;
+    height: 16px;
 }
 
 .price-unit {
@@ -114,7 +117,7 @@
 .label-description {
     width: 180px;
     text-align: right;
-    font-size: 1.6rem;
+    font-size: 1.25rem;
     font-weight: 600;
     color: $color-text-main;
     margin-right: 1rem;
@@ -123,9 +126,9 @@
 
 .input-description {
     flex: 1;
-    min-height: 200px;
+    min-height: 100px;
     padding: 1rem;
-    font-size: 1.3rem;
+    font-size: 1rem;
     border: 1px solid #d1d1d1;
     border-radius: 4px;
     background: $color-surface-white;
@@ -143,7 +146,7 @@
 .label-availability {
     width: 180px;
     text-align: right;
-    font-size: 1.6rem;
+    font-size: 1.25rem;
     font-weight: 600;
     color: $color-text-main;
     margin-right: 1rem;
@@ -158,7 +161,7 @@
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    font-size: 1.3rem;
+    font-size: 0.85rem;
 }
 
 .day-row {
@@ -174,8 +177,8 @@
 }
 
 .day-checkbox input[type="checkbox"] {
-    width: 22px;
-    height: 22px;
+    width: 18px;
+    height: 18px;
     accent-color: $color-text-on-dark;
 }
 
@@ -191,7 +194,7 @@
 
 .time-label {
     font-weight: 600;
-    font-size: 1.25rem;
+    font-size: 1rem;
 }
 
 .time-input {
@@ -200,6 +203,7 @@
     font-size: 1.25rem;
     border: 1px solid #b5b5b5;
     border-radius: 5px;
+    height: 15px;
 }
 
 .row-optional {
@@ -211,7 +215,7 @@
 .label-optional {
     width: 180px;
     text-align: right;
-    font-size: 1.6rem;
+    font-size: 1.25rem;
     font-weight: 600;
     color: $color-text-main;
     margin-right: 1rem;
@@ -234,7 +238,7 @@
 }
 
 .optional-label {
-    font-size: 1.3rem;
+    font-size: 1rem;
     font-weight: 600;
     color: $color-text-main;
 }
@@ -242,11 +246,11 @@
 .file-button {
     position: relative;
     display: inline-block;
-    padding: 0.45rem 1rem;
+    padding: 0.35rem 0.85rem;
     border-radius: 4px;
     border: 1px solid $color-text-main;
     background: $color-surface-white;
-    font-size: 0.95rem;
+    font-size: 0.85rem;
     font-weight: 600;
     cursor: pointer;
 }
@@ -259,7 +263,7 @@
 }
 
 .optional-hint {
-    font-size: 1rem;
+    font-size: 0.85rem;
     color: #505050;
 }
 
@@ -283,6 +287,10 @@
 .btn-cancel {
     border: 1px solid #d1d1d1;
     background: $color-surface-white;
+}
+
+.btn-cancel:hover {
+    background: #b5b5b5;
 }
 
 .btn-submit {
