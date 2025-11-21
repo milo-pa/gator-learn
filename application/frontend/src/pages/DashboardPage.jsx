@@ -20,7 +20,7 @@ import MyListingsPanel from "../component/dashboard/MyListingPanel";
 import DashboardMessagesPanel from "../component/dashboard/DashboardMessagesPanel";
 import SentMessageDashboardPage from "./SentMessageDashboardPage.jsx";
 import ReceivedMessageDashboardPage from "./ReceivedMessageDashboardPage.jsx";
-import "../styles/_dashboard.scss";
+
 import { DASHBOARD_STATS, MY_LISTINGS, MESSAGES } from "../mock/dashboardData";
 
 
