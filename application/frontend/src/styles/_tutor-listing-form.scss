@@ -1,19 +1,18 @@
-
+@use "./colors";
 
 .create-listing-page {
     margin: 3rem auto 4rem;
     padding: 0 2rem;
-    color: $color-text-main;
+    color: colors.$color-text-main;
     text-align: center;
     width: 700px;
-
 
     h1 {
         font-size: 2.6rem;
         font-weight: 700;
         margin-bottom: 2.5rem;
         padding-bottom: 0.5rem;
-        border-bottom: 2px solid $color-text-main;
+        border-bottom: 2px solid colors.$color-text-main;
     }
 }
 
@@ -21,7 +20,6 @@
     width: 700px;
     margin: 3rem auto 4rem;
 }
-
 
 .row-subject {
     display: flex;
@@ -34,7 +32,7 @@
     text-align: right;
     font-size: 1.25rem;
     font-weight: 600;
-    color: $color-text-main;
+    color: colors.$color-text-main;
     margin-right: 1rem;
 }
 
@@ -44,10 +42,9 @@
     font-size: 1rem;
     border: 1px solid #d1d1d1;
     border-radius: 4px;
-    background: $color-surface-white;
-    color: $color-text-main;
+    background: colors.$color-surface-white;
+    color: colors.$color-text-main;
     height: 42px;
-
 }
 
 .row-course {
@@ -61,7 +58,7 @@
     text-align: right;
     font-size: 1.25rem;
     font-weight: 600;
-    color: $color-text-main;
+    color: colors.$color-text-main;
     margin-right: 1rem;
 }
 
@@ -71,8 +68,8 @@
     font-size: 1rem;
     border: 1px solid #d1d1d1;
     border-radius: 4px;
-    background: $color-surface-white;
-    color: $color-text-main;
+    background: colors.$color-surface-white;
+    color: colors.$color-text-main;
     height: 42px;
 }
 
@@ -87,7 +84,7 @@
     text-align: right;
     font-size: 1.25rem;
     font-weight: 600;
-    color: $color-text-main;
+    color: colors.$color-text-main;
     margin-right: 1rem;
 }
 
@@ -97,8 +94,8 @@
     font-size: 1.3rem;
     border: 1px solid #d1d1d1;
     border-radius: 4px;
-    background: $color-surface-white;
-    color: $color-text-main;
+    background: colors.$color-surface-white;
+    color: colors.$color-text-main;
     height: 16px;
 }
 
@@ -119,7 +116,7 @@
     text-align: right;
     font-size: 1.25rem;
     font-weight: 600;
-    color: $color-text-main;
+    color: colors.$color-text-main;
     margin-right: 1rem;
     padding-top: 0.4rem;
 }
@@ -131,11 +128,10 @@
     font-size: 1rem;
     border: 1px solid #d1d1d1;
     border-radius: 4px;
-    background: $color-surface-white;
-    color: $color-text-main;
+    background: colors.$color-surface-white;
+    color: colors.$color-text-main;
     resize: vertical;
 }
-
 
 .row-availability {
     display: flex;
@@ -148,7 +144,7 @@
     text-align: right;
     font-size: 1.25rem;
     font-weight: 600;
-    color: $color-text-main;
+    color: colors.$color-text-main;
     margin-right: 1rem;
     padding-top: 0.2rem;
 }
@@ -179,10 +175,8 @@
 .day-checkbox input[type="checkbox"] {
     width: 18px;
     height: 18px;
-    accent-color: $color-text-on-dark;
+    accent-color: colors.$color-text-on-dark;
 }
-
-
 
 .day-time-range {
     display: flex;
@@ -217,7 +211,7 @@
     text-align: right;
     font-size: 1.25rem;
     font-weight: 600;
-    color: $color-text-main;
+    color: colors.$color-text-main;
     margin-right: 1rem;
     padding-top: 0.2rem;
 }
@@ -240,7 +234,7 @@
 .optional-label {
     font-size: 1rem;
     font-weight: 600;
-    color: $color-text-main;
+    color: colors.$color-text-main;
 }
 
 .file-button {
@@ -248,8 +242,8 @@
     display: inline-block;
     padding: 0.35rem 0.85rem;
     border-radius: 4px;
-    border: 1px solid $color-text-main;
-    background: $color-surface-white;
+    border: 1px solid colors.$color-text-main;
+    background: colors.$color-surface-white;
     font-size: 0.85rem;
     font-weight: 600;
     cursor: pointer;
@@ -286,7 +280,7 @@
 
 .btn-cancel {
     border: 1px solid #d1d1d1;
-    background: $color-surface-white;
+    background: colors.$color-surface-white;
 }
 
 .btn-cancel:hover {
@@ -299,7 +293,7 @@
 }
 
 .btn-submit:hover {
-    background: $yub-hover;
+    background: colors.$yub-hover;
 }
 
 /* ERRORS */

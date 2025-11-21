@@ -1,41 +1,41 @@
-@import "./colors";
-@import "./user-profile";
-@import "./tutor-listing-page";
-@import "./tutor-listing-form";
-@import "./tutor-listing";
-@import "./pop-up";
-@import "./message-pop-up";
-@import "./loading";
-@import "./dashboard";
-@import "./buttons";
-@import "./forms";
-@import "./registration";
-@import "./top-bar";
+@use "./colors";
+@use "./user-profile";
+@use "./tutor-listing-page";
+@use "./tutor-listing-form";
+@use "./tutor-listing";
+@use "./pop-up";
+@use "./message-pop-up";
+@use "./loading";
+@use "./dashboard";
+@use "./buttons";
+@use "./forms";
+@use "./registration";
+@use "./top-bar";
 
 /* Global Styles- default light mode */
 body {
-	background-color: $page-bg-light;
-	color: $color-text-main;
+	background-color: colors.$page-bg-light;
+	color: colors.$color-text-main;
 }
 
 /* Dark Mode Styles */
 body.dark-mode {
-	background-color: $page-bg-dark;
-	color: $color-text-on-dark;
+	background-color: colors.$page-bg-dark;
+	color: colors.$color-text-on-dark;
 
 	.tile {
 		background: #353535;
-		color: $color-text-on-dark;
-		border: 1px solid $subtitle-text-gray;
+		color: colors.$color-text-on-dark;
+		border: 1px solid colors.$subtitle-text-gray;
 		&:hover {
-			border-color: $gray-border-stronger;
+			border-color: colors.$gray-border-stronger;
 		}
 		.title {
 			background: transparent;
 		}
 	}
 	a {
-		color: $color-text-main;
+		color: colors.$color-text-main;
 	}
 }
 
@@ -46,7 +46,7 @@ main {
 }
 .back-link {
 	margin: 24px 0;
-	color: $card-text-muted-gray;
+	color: colors.$card-text-muted-gray;
 	text-decoration: underline;
 }
 
@@ -73,7 +73,7 @@ main {
 }
 .solo-title {
 	margin: 0 0 12px;
-	color: $subtitle-text-gray;
+	color: colors.$subtitle-text-gray;
 	font-weight: 400;
 }
 .solo-bio {
@@ -84,7 +84,7 @@ main {
 	a {
 		margin-right: 12px;
 		text-decoration: underline;
-		color: $color-text-on-dark;
+		color: colors.$color-text-on-dark;
 	}
 }
 
@@ -111,13 +111,13 @@ main {
 	display: block;
 	text-decoration: none;
 	background: #e4e3e3;
-	color: $color-text-main;
+	color: colors.$color-text-main;
 	border: 1px solid #777777;
 	border-radius: 12px;
 	overflow: hidden;
 	position: relative;
 	&:hover {
-		border-color: $border-gray;
+		border-color: colors.$border-gray;
 	}
 	.name {
 		margin: 4px 4px 4px;
@@ -126,7 +126,7 @@ main {
 	}
 	.title {
 		margin: 0;
-		color: $subtitle-text-gray;
+		color: colors.$subtitle-text-gray;
 		font-size: 1rem;
 		margin-left: 6px;
 		background: transparent;
@@ -160,21 +160,21 @@ main {
 .home-image {
 	width: 100%;
 	aspect-ratio: 1 / 1;
-	background-color: $home-img-bg;
-	border: 1px solid $gray-border-stronger;
+	background-color: colors.$home-img-bg;
+	border: 1px solid colors.$gray-border-stronger;
 }
 .home-text {
 	h1 {
 		font-size: 2.8rem;
 		font-weight: 900;
 		margin-bottom: 20px;
-		color: $gray-text-home;
+		color: colors.$gray-text-home;
 	}
 	p {
 		font-size: 1rem;
 		line-height: 1.5;
 		margin-bottom: 16px;
-		color: $gray-text-home;
+		color: colors.$gray-text-home;
 		max-width: 480px;
 	}
 }
