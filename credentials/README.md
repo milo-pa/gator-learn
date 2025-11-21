@@ -9,38 +9,26 @@
   - run `ssh -i <local path>/Tutoring_Server_Key.pem ec2-user@18.144.101.99`
 
 ## Database
-4. Database URL or IP and port used:
-
-   `localhost:3306/tutoring_production`
-5. Database username:
-
-   `root`
-6. Database password
-
-   `GatorLearn@Team5`
-7. Database name (basically the name that contains all your tables)
-
-   `tutoring_production`
-8. Instructions on how to use the above information.
-
+1. Database URL or IP and port used:
+   - `localhost:3306/tutoring_production` Database    
+2. Database username:
+   - `ec2-user`
+3. Database password
+   - `GatorLearn@Team5`
+4. Database name (basically the name that contains all your tables)
+   - `tutoring_production`   This is our production database
+   - `tutoring_test`         This is our database for testing
+5. Instructions on how to use the above information.
     - Connect to the server via SSH
       - Move into credentials folder: `cd application/credentials`
       - Make the connection: `ssh -i Tutoring_Server_Key.pem ec2-user@18.144.101.99`
         - This may first require a permissions change of the .pem file: `chmod 400 Tutoring_Server_Key.pem`
     
     - Login to the database
-      - `mysql -u root -p`, Then enter password `GatorLearn@Team5` when prompted
+      - `mysql -u ec2-user -p`, Then enter password `GatorLearn@Team5` when prompted
     
     - Then, view or modify the database; For example, viewing table rows
       - View all databases: `SHOW DATABASES;`
-      - Select one: `USE <database_name>`
+      - Select one: `USE <database_name>;`
       - View tables of that database: `SHOW TABLES;`
       - View the rows of a table: `SELECT * FROM <table_name>;`
-    
-    
-
-# Most important things to Remember
-## Above is a list of items required. Missing items will causes points to be deducted from multiple milestone submissions.
-## These values need to kept update to date throughout the semester. <br>
-## <strong>Failure to do so will result it points be deducted from milestone submissions.</strong><br>
-## You may store the most of the above in this README.md file. DO NOT Store the SSH key or any keys in this README.md file.
