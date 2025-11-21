@@ -1,49 +1,59 @@
+@use "./colors";
+
 // Search Results Page Styles
 .search-results-page {
   margin: 0 auto;
   gap: 16px;
   max-width: 1250px;
 }
+
 .results-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 16px;
   margin-bottom: 16px;
-  border-bottom: 2px solid $border-gray;
+  border-bottom: 2px solid colors.$border-gray;
   padding: 6px;
 }
+
 .results-header-left {
   display: flex;
   flex-direction: row;
   gap: 0.25rem;
 }
+
 .results-header-right {
   display: flex;
   align-items: center;
   gap: 0.5rem;
 }
+
 .sort-dropdown {
-  border: 1.5px solid $border-accent-gold;
-  background-color: $color-surface-white;
+  border: 1.5px solid colors.$border-accent-gold;
+  background-color: colors.$color-surface-white;
   padding: 4px 8px;
   border-radius: 4px;
 }
+
 .results-title-block {
   display: flex;
   align-items: baseline;
   gap: 8px;
 }
+
 .results-title {
   margin: 0;
   font-size: 2.5rem;
   font-weight: 700;
 }
+
 .results-subtitle {
   margin-top: 25px;
   margin-left: 5px;
   font-size: 1rem;
 }
+
 .results-list {
   display: flex;
   flex-direction: column;
@@ -55,57 +65,66 @@
   grid-template-columns: 160px 1fr;
   gap: 18px;
   padding: 12px;
-  background: $color-surface-white;
-  border: 1px solid $border-gray;
+  background: colors.$color-surface-white;
+  border: 1px solid colors.$border-gray;
   border-radius: 8px;
 }
+
 .tutor-image-wrapper {
   display: flex;
   align-self: center;
   justify-content: center;
 }
+
 .tutor-image-placeholder {
   width: 160px;
   height: 160px;
-  background: $color-surface-white;
-  border: 1px solid $border-gray;
+  background: colors.$color-surface-white;
+  border: 1px solid colors.$border-gray;
   position: relative;
   border-radius: 4px;
 }
+
 .tutor-info-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
+
 .tutor-info {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  color: $color-text-main;
+  color: colors.$color-text-main;
 }
+
 .tutor-name {
   margin: 0;
   font-size: 1.8rem;
   font-weight: 700;
-  color: $color-text-main;
+  color: colors.$color-text-main;
 }
+
 .tutor-subject {
   margin: 0;
   font-size: 1.2rem;
   font-weight: 500;
 }
+
 .tutor-price {
   margin: 0;
   font-size: 1.2rem;
   font-weight: 500;
 }
+
 .tutor-availability {
   margin: 0;
   font-size: 1.2rem;
   font-weight: 500;
 }
+
 .tutor-link-button {
-  color: $color-text-main;
+  color: colors.$color-text-main;
   border: none;
   font-weight: 600;
   padding: 8px 14px;
@@ -114,6 +133,7 @@
   text-decoration: underline;
   margin-right: 12px;
 }
+
 .tutor-actions {
   display: flex;
   align-items: center;
@@ -123,16 +143,19 @@
 // Dark Mode
 body.dark-mode {
   .tutor-name {
-    color: $color-text-on-dark;
+    color: colors.$color-text-on-dark;
   }
+
   .tutor-link-button {
-    color: $color-text-on-dark;
+    color: colors.$color-text-on-dark;
   }
+
   .tutor-info {
-    color: $color-text-on-dark;
+    color: colors.$color-text-on-dark;
   }
+
   .tutor-card {
     background: #353535;
-    border: 1px solid $subtitle-text-gray;
+    border: 1px solid colors.$subtitle-text-gray;
   }
 }

@@ -1,3 +1,5 @@
+@use "./colors";
+
 .form-page {
   max-width: 900px;
   margin: 18px auto;
@@ -10,14 +12,14 @@
       font-size: 2.6rem;
       font-weight: 800;
       margin: 0;
-      color: $color-text-main;
+      color: colors.$color-text-main;
     }
 
     .underline {
       width: 60%;
       height: 3px;
       margin: 16px auto 16px auto;
-      background-color: $color-text-main;
+      background-color: colors.$color-text-main;
     }
   }
 
@@ -47,7 +49,7 @@
         font-weight: 600;
         width: 190px;
         text-align: right;
-        color: $color-text-main;
+        color: colors.$color-text-main;
       }
     }
 
@@ -70,7 +72,7 @@
     // HCI text
     .hci-text {
       font-size: 0.85rem;
-      color: $gray-text-home;
+      color: colors.$gray-text-home;
       white-space: nowrap;             // prevent wrapping
       flex-shrink: 0;                  // do not shrink and pull the row left
     }
@@ -92,7 +94,7 @@
     .terms-text {
       font-size: 1rem;
       font-weight: 600;
-      color: $color-text-main;
+      color: colors.$color-text-main;
 
       button {
         text-decoration: underline;
@@ -108,7 +110,7 @@
       width: 100%;
       max-width: 350px;
       height: 42px;
-      border: 1px solid $border-gray;
+      border: 1px solid colors.$border-gray;
       border-radius: 6px;
       background-color: #ffffff;
       padding-left: 11px;
@@ -120,7 +122,7 @@
         border: none;
         background: transparent;
         font-size: 1rem;
-        color: $color-text-main;
+        color: colors.$color-text-main;
         outline: none;
 
         &:focus {
@@ -142,7 +144,7 @@
         border: none;
         background: transparent;
         font-size: 1rem;
-        color: $color-text-main;
+        color: colors.$color-text-main;
         resize: vertical;
         outline: none;
 
@@ -224,7 +226,7 @@
         font-size: 1.1rem;
         font-weight: 600;
         margin: 0;
-        color: $gray-text-home;
+        color: colors.$gray-text-home;
       }
     }
   }
@@ -232,34 +234,34 @@
 
 body.dark-mode {
   .form-page {
-    color: $color-text-on-dark;
+    color: colors.$color-text-on-dark;
 
     .form-header {
       h1 {
-        color: $color-text-on-dark;
+        color: colors.$color-text-on-dark;
       }
 
       .underline {
-        background-color: $color-text-on-dark;
+        background-color: colors.$color-text-on-dark;
       }
     }
 
     .form-main {
       .form-row label {
-        color: $color-text-on-dark;
+        color: colors.$color-text-on-dark;
       }
 
       .input-wrapper {
         background-color: #2b2b2b;
-        border-color: $subtitle-text-gray;
+        border-color: colors.$subtitle-text-gray;
 
         input {
-          color: $color-text-on-dark;
+          color: colors.$color-text-on-dark;
         }
       }
 
       .helper-row .helper-text {
-        color: $color-text-on-dark;
+        color: colors.$color-text-on-dark;
       }
     }
   }
