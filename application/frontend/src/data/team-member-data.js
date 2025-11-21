@@ -1,3 +1,16 @@
+/*
+ * Institution: San Francisco State University
+ * Class: CSC 648 Project, Team 05
+ * Project: Gator Learn, Tutoring Website
+ * Author: Jonah
+ * Created: 11/17/2025
+ * Description: Data file containing static information on team members, used for the About Page.
+ *
+ * Copyright (c) 2025 San Francisco State University Team 05
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
 const teamMembers = [
     {
         name: "Milo",
