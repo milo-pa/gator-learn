@@ -1,3 +1,17 @@
+/*
+ * Institution: San Francisco State University
+ * Class: CSC 648 Project, Team 05
+ * Project: Gator Learn, Tutoring Website
+ * Author: Milo Pesce Ares
+ * Created:
+ * Description: Functional component for the pop up to send a message to a tutor
+ *
+ * Copyright (c) 2025 San Francisco State University Team 05
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 import React, { useState } from "react";
 
 function MessageTutorPopUp({ listing, onClose }) {
