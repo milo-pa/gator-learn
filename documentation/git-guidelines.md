@@ -5,6 +5,7 @@
 - **Keep short commit titles, details in description**
   - Makes it clear which changes were implemented by each commit. Increases legibility and makes debugging easier.
   - `git commit -m <title>` or `git commit -m <title> -m <optional-description>`
+  - Commit titles should be less than 60 characters
 
 - **Small, frequent commits grouped by concept.**
   - Makes it clear which files were changed for each feature. Saves work progress, and makes debugging easier.
@@ -57,10 +58,7 @@
   
 ### Settings
 
-- **Disable fast-forwarding with `git config --add merge.ff false`**
-  - Helps keep our git flow and branching easy to understand and follow, which is important for git workflow
-
-- **Set-up a global gitignore**
+- **Setup a global gitignore**
     - Make `.gitignore_global` file in user directory (or wherever you like)
       - Put OS and editor specific files in here, like DS_Store, Thumbs.db, or Word progress files
     - Command to set: `git config --global core.excludesfile ~/.gitignore_global`

@@ -1,7 +1,4 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-# --- OS cruft ---
-.DS_Store
-Thumbs.db
 
 # --- Editors/IDE ---
 .vscode/git
@@ -19,33 +16,15 @@ Thumbs.db
 # .idea/encodings.xml
 # .idea/checkstyle-idea.xml
 
-# --- Java / Gradle / Build Artifacts ---
+# --- Java / Maven / Build Artifacts ---
 *.class
 *.jar
 *.war
-build/
-out/
-
-# (Optional, Maven-style. Safe to keep even if you use Gradle)
 target/
 
 # --- Logs ---
 logs/
 *.log
-
-# Secret dirs (never commit)
-secrets/
-secrets/**
-
-# --- SSL / keys / certs (never commit) ---
-# *.pem
-*.key
-*.p12
-*.pfx
-*.jks
-*.keystore
-*.csr
-*.crt
 
 # --- Node / Sass caches (for Dart Sass via npx) ---
 node_modules/
@@ -70,6 +49,7 @@ application/frontend/coverage
 
 # production
 application/frontend/build
+
 # misc
 .env.local
 .env.development.local
