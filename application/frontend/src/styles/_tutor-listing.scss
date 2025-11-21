@@ -1,4 +1,4 @@
-/* Search Results Page Styles */
+// Search Results Page Styles
 .search-results-page {
   margin: 0 auto;
   gap: 16px;
@@ -118,4 +118,21 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+// Dark Mode
+body.dark-mode {
+  .tutor-name {
+    color: $color-text-on-dark;
+  }
+  .tutor-link-button {
+    color: $color-text-on-dark;
+  }
+  .tutor-info {
+    color: $color-text-on-dark;
+  }
+  .tutor-card {
+    background: #353535;
+    border: 1px solid $subtitle-text-gray;
+  }
 }
