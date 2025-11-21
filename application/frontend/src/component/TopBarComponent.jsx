@@ -14,7 +14,6 @@
 import React, { Component } from "react";
 import SearchBar from "./SearchBarComponent";
 import { Link } from "react-router-dom";
-import "../styles/TopBarComponent.css";
 
 class TopBarComponent extends Component {
 
