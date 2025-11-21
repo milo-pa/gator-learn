@@ -5,7 +5,7 @@
  * Author: Milo Pesce Ares
  * Created: 11/5/2025
  * Description:
- *  This component is added to all pages in App.js and tracks page changes
+ *  This component is added to all pages in App.jsx and tracks page changes
  *
  * Copyright (c) 2025 San Francisco State University Team 05
  *
