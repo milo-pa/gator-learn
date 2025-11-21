@@ -1,3 +1,16 @@
+/*
+ * Institution: San Francisco State University
+ * Class: CSC 648 Project, Team 05
+ * Project: Gator Learn, Tutoring Website
+ * Author: Jonah
+ * Created: 11/17/2025
+ * Description: React component for displaying detailed information on a single tutor listing.
+ *
+ * Copyright (c) 2025 San Francisco State University Team 05
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { mockListingService as TutorListingService } from "../service/mockTutorListingService";
@@ -9,9 +22,6 @@ function TutorListingPage(props) {
     const [showPopUp, setShowPopUp] = useState(false);
     const [selectedListing, setSelectedListing] = useState(null);
     
-    
-
-
     function navigateBack() {
         navigate(-1);
     }
