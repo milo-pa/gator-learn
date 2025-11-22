@@ -19,8 +19,11 @@ import TutorListingForm from "../component/TutorListingForm";
 class CreateTutorListingPage extends Component {
     render () {
         return (
-            <main className="create-listing-page">
-                <h1>Create Tutor Listing</h1>
+            <main className="form-page">
+                <header className="form-header">
+                    <h1>Create Tutor Listing</h1>
+                    <div className="underline"></div>
+                </header>
                 <TutorListingForm/>
             </main>
         );
