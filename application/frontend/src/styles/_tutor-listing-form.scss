@@ -19,6 +19,7 @@
 .tutor-listing-form {
     width: 700px;
     margin: 3rem auto 4rem;
+    border-radius: 6px;
 }
 
 .row-subject {
@@ -302,4 +303,48 @@
     margin: 0.2rem 0 0.6rem 180px;
     font-size: 0.9rem;
     color: #c0392b;
+}
+
+body.dark-mode {
+    .create-listing-page {
+        color: colors.$color-text-on-dark;
+    }
+    .tutor-listing-form {
+        color: colors.$color-text-on-dark;
+        background-color: colors.$color-surface-dark;
+    }
+    .label-availability,
+    .label-description,
+    .label-price,
+    .label-course,
+    .label-subject,
+    .label-optional,
+    .optional-label {
+        color: colors.$color-text-on-dark;
+    }
+
+    .input-subject,
+    .input-course,
+    .input-price,
+    .input-description,
+    .time-input {
+        background: colors.$gray-input-bg-dark;
+        border: 1px solid colors.$border-dark;
+        color: #222;
+    }
+
+    .file-button {
+        border: 1px solid colors.$color-text-on-dark;
+        background: colors.$color-surface-dark;
+        color: colors.$color-text-on-dark;
+    }
+
+    .btn-cancel {
+        background: colors.$gray-input-bg-dark;
+        border: 1px solid colors.$border-dark;
+
+        &:hover {
+            background: colors.$hover-dark;
+        }
+    }
 }
