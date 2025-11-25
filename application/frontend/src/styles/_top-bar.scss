@@ -135,6 +135,7 @@
     display: flex;
     gap: 8px;
     align-items: center;
+    width: 100%;
   }
 
   .yub-link {
@@ -154,6 +155,11 @@
       color: colors.$color-text-main;
       cursor: pointer;
     }
+
+    &.right-link {
+      margin-left: auto;
+    }
+
   }
 
   .demo-line {
