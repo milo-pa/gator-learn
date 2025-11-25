@@ -27,7 +27,7 @@ function useQueryParams() {
 function SearchResultsPage() {
     const params = useQueryParams();
 
-    const subject = (params.get("subject") || "").toLowerCase().trim();
+    const subject = (params.get("subject") || "all").toLowerCase().trim();
     const course = (params.get("course") || "").toLowerCase().trim();
     const all = (params.get("all") || "").toLowerCase().trim();
 
@@ -81,7 +81,7 @@ function SearchResultsPage() {
                     return;
                     
                 }
-                if (subject) {
+                if (subject && subject !== "all") {
                     const response = await TutorListingService.getListingsBySubjectSubstring(subject);
                     setListings(response.data);
                     setLoading(false);
