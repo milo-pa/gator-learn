@@ -55,6 +55,12 @@
 
 .spacer {
   flex: 1;
+  &.demo-line {
+    padding: 6px 16px 10px;
+    text-align: right;
+    font-size: 0.8rem;
+    font-weight: 400;
+  }
 }
 
 .search-container {
@@ -162,12 +168,7 @@
 
   }
 
-  .demo-line {
-    padding: 6px 16px 10px;
-    text-align: right;
-    font-size: 0.8rem;
-    font-weight: 400;
-  }
+  
 }
 
 .profile-icon {

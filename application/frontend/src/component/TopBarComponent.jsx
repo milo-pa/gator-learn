@@ -83,12 +83,16 @@ class TopBarComponent extends Component {
                 <div className="ptb-inner">
                     <div className="brand-section">
                         <a href="/" className="brand-link">
-                            <img id="logo" src="/favicon.ico" alt="logo"/>
+                            <img id="logo" src="/favicon.ico" alt="logo" />
                             <span className="brand">Gator Learn</span>
                             <span className="brand-team">by Team 5</span>
                         </a>
                     </div>
-                    <div className="spacer"></div>
+                    <div className="spacer">
+                        <div className="demo-line">
+                            <em>SFSU Software Engineering Project CSC 648-848, Fall 2025. For Demonstration Only</em>
+                        </div>
+                    </div>
                     <SearchBar />
 
                     {/* Will need to add function later to change login to log out when user signed in */}
@@ -97,7 +101,7 @@ class TopBarComponent extends Component {
                             Login
                         </Link>
                     </button>
-                    <Link to= "/user-profile" className="profile-placeholder">
+                    <Link to="/user-profile" className="profile-placeholder">
                         <img src="/images/default-profile.png" alt="Profile" className="profile-icon" />
                     </Link>
                 </div>
