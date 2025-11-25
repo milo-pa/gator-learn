@@ -10,7 +10,7 @@
 .purple-titlebar {
   position: static;
   background: #2f1e77;
-  padding: 12px 40px;
+  padding: 5px 35px;
   display: flex;
   justify-content: flex-start;
   flex-direction: row;
@@ -135,7 +135,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  padding: 12px 16px;
+  
 
   .yub-left {
     display: flex;
@@ -153,7 +153,7 @@
     border: 2px solid transparent;
     border-radius: 8px;
     transition: background-color 0.2s ease, border-color 0.2s ease;
-    font-size: large;
+    font-size: 14px;
 
     &:hover {
       background-color: colors.$yub-hover;
