@@ -5,8 +5,8 @@
   margin: 18px auto;
 
   background: colors.$color-surface-white;
-  border: 3px solid #d7d7d7;   // <<< added
-  border-radius: 12px;         // optional, but looks better
+  border: 3px solid #d7d7d7;
+  border-radius: 12px;
   padding: 24px;
 
   // Header at top of form page (login, registration, etc.)
@@ -30,12 +30,16 @@
 
   // Main area with form + buttons + helpers
   .form-main {
+    display: flex;
+    flex-direction: column;
+    gap:24px;
+
     // The actual form element
     .form {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 20px;
+      gap: 18px;
       width: 100%;
     }
 
@@ -46,7 +50,7 @@
       align-items: center;
       width: 100%;
       max-width: 900px;
-      column-gap: 15px;
+      column-gap: 20px;
 
       label {
         font-size: 1.2rem;
@@ -56,12 +60,9 @@
         color: colors.$color-text-main;
       }
 
-      // Error popups and colors
-      .row-error {
-        grid-column: 2;      // align under the input, not the label
+      .desc-text {
+        grid-column-start: 2;
         margin: 3px;
-        font-size: 0.85rem;
-        color: #c0392b;
       }
     }
 
@@ -87,32 +88,6 @@
       color: colors.$gray-text-home;
       white-space: nowrap;             // prevent wrapping
       flex-shrink: 0;                  // do not shrink and pull the row left
-    }
-
-    // ---------- Terms & conditions row ----------
-    .terms-content {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      margin-right: 100px;
-    }
-
-    .terms-content input[type="checkbox"] {
-      width: 20px;
-      height: 20px;
-      cursor: pointer;
-    }
-
-    .terms-text {
-      font-size: 1rem;
-      font-weight: 600;
-      color: colors.$color-text-main;
-
-      button {
-        text-decoration: underline;
-        font-weight: 700;
-        color: inherit;
-      }
     }
 
     // Shared wrapper for text inputs
@@ -175,11 +150,16 @@
       border: 1px solid #1773ea;
     }
 
-    // Error styles that apply to any form
+    // Error styles
     .input-wrapper.input-error {
       border: 1px solid #e63946;
     }
 
+    // Error popups and colors
+    .error-text {
+      font-size: 0.85rem;
+      color: #c0392b;
+    }
 
     // Password Hide/Show button
     .password-wrapper {
@@ -215,7 +195,6 @@
       align-items: center;
       justify-content: center;
       gap: 16px;
-      margin-top: 24px;
 
       .helper-text {
         font-size: 1.1rem;

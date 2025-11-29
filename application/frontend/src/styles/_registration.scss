@@ -1,3 +1,5 @@
+@use "./colors";
+
 .registration-page {
   .description-area {
     display: flex;
@@ -8,6 +10,32 @@
 
     label {
       align-self: flex-start;
+    }
+  }
+
+  // ---------- Terms & conditions row ----------
+  .terms-content {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-right: 100px;
+  }
+
+  .terms-content input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+  }
+
+  .terms-text {
+    font-size: 1rem;
+    font-weight: 600;
+    color: colors.$color-text-main;
+
+    button {
+      text-decoration: underline;
+      font-weight: 700;
+      color: inherit;
     }
   }
 }
