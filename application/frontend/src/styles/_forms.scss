@@ -41,13 +41,12 @@
 
     // Label + field row (shared across login / registration)
     .form-row {
-      display: flex;
+      display: grid;
+      grid-template-columns: 190px 1fr;  // label | input
       align-items: center;
-      justify-content: center;
       width: 100%;
       max-width: 900px;
-      gap: 15px;
-      margin-right: 80px;
+      column-gap: 15px;
 
       label {
         font-size: 1.2rem;
@@ -55,6 +54,14 @@
         width: 190px;
         text-align: right;
         color: colors.$color-text-main;
+      }
+
+      // Error popups and colors
+      .row-error {
+        grid-column: 2;      // align under the input, not the label
+        margin: 3px;
+        font-size: 0.85rem;
+        color: #c0392b;
       }
     }
 
@@ -173,23 +180,6 @@
       border: 1px solid #e63946;
     }
 
-    // Error popups and colors
-    .error-popup-container {
-      margin-top: 8px;
-      display: flex;
-      flex-direction: column;
-      text-align: center;
-      gap: 6px;
-    }
-
-    .error-popup {
-      background-color: #ffe5e5;
-      border: 1px solid #e63946;
-      color: #b00020;
-      padding: 6px 6px;
-      border-radius: 6px;
-      font-size: 0.85rem;
-    }
 
     // Password Hide/Show button
     .password-wrapper {
