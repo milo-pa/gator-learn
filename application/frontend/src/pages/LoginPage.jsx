@@ -64,7 +64,7 @@ function LoginPage() {
               />
             </div>
             {submitCount > 0 && errors.email && (
-                    <div className="row-error">{errors.email.message}</div>
+                    <div className="error-text desc-text">{errors.email.message}</div>
             )}
           </div>
 
@@ -93,7 +93,7 @@ function LoginPage() {
               </button>
             </div>
             {submitCount > 0 && errors.password && (
-                    <div className="row-error">{errors.password.message}</div>
+                    <div className="error-text desc-text">{errors.password.message}</div>
             )}
           </div>
 
