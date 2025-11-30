@@ -189,15 +189,17 @@ function RegistrationPage() {
 
           {/* Terms and Conditions */}
           <div className="form-row">
-            <label htmlFor="terms" className="required-label"></label>
-            <div className="terms-content">
+            <div className="terms-box-container required-label">
               <input
-                type="checkbox"
-                id="terms"
-                {...register("terms", {
-                  required: "You must agree to the terms and conditions",
-                })}
+                      className="terms-input"
+                      type="checkbox"
+                      id="terms"
+                      {...register("terms", {
+                        required: "You must agree to the terms and conditions",
+                      })}
               />
+            </div>
+            <div className="terms-content">
               <span className="terms-text">
                 Check box to agree to{" "}
                 <button type="button" className="btn btn-light">
