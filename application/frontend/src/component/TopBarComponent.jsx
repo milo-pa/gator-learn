@@ -92,7 +92,7 @@ class TopBarComponent extends Component {
                     <SearchBar />
 
                     {/* Will need to add function later to change login to log out when user signed in */}
-                    <button id="login-button" className="login-button">
+                    <button id="login-button" className="btn-primary login-button">
                         <Link to="/login" style={{ color: "inherit", textDecoration: "none" }}>
                             Login
                         </Link>

@@ -1,4 +1,5 @@
 @use "./colors";
+@use "./buttons";
 @use "./user-profile";
 @use "./tutor-listing-page";
 @use "./tutor-listing-form";
@@ -7,10 +8,9 @@
 @use "./message-pop-up";
 @use "./loading";
 @use "./dashboard";
-@use "./buttons";
+@use "./top-bar";
 @use "./forms";
 @use "./registration";
-@use "./top-bar";
 
 /* Global Styles- default light mode */
 body {
