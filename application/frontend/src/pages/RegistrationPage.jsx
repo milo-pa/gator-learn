@@ -212,11 +212,9 @@ function RegistrationPage() {
 
           {/* Cancel/Sign up Buttons */}
           <div className="button-row">
-            <button type="button" className="btn btn-secondary">
-              <Link to="/" style={{ color: "inherit", textDecoration: "none" }}>
-                CANCEL
-              </Link>
-            </button>
+            <Link className="btn btn-secondary" to="/">
+              CANCEL
+            </Link>
             <button type="submit" className="btn btn-primary">
               SIGN UP
             </button>
@@ -226,11 +224,9 @@ function RegistrationPage() {
         {/* Login */}
         <div className="helper-row">
           <p className="helper-text">Already have an account?</p>
-          <button type="button" className="btn btn-secondary">
-            <Link to="/login" style={{ color: "inherit", textDecoration: "none" }}>
+            <Link className="btn btn-secondary" to="/login">
               LOGIN
             </Link>
-          </button>
         </div>
       </main>
     </div>

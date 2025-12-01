@@ -93,11 +93,13 @@ class TopBarComponent extends Component {
                     <div className="spacer"></div>
 
                     {/* Will need to add function later to change login to log out when user signed in */}
-                    <button id="login-button" className="btn-primary login-button">
-                        <Link to="/login" style={{ color: "inherit", textDecoration: "none" }}>
-                            Login
-                        </Link>
-                    </button>
+                    <Link
+                            id="login-button"
+                            to="/login"
+                            className="btn btn-primary login-button"
+                    >
+                        Login
+                    </Link>
                     <Link to="/user-profile">
                         <img src="/images/default-profile.png" alt="Profile" className="profile-icon" />
                     </Link>
