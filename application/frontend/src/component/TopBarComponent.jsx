@@ -90,6 +90,7 @@ class TopBarComponent extends Component {
                     </div>
                     <div className="spacer"></div>
                     <SearchBar />
+                    <div className="spacer"></div>
 
                     {/* Will need to add function later to change login to log out when user signed in */}
                     <button id="login-button" className="btn-primary login-button">
@@ -97,7 +98,7 @@ class TopBarComponent extends Component {
                             Login
                         </Link>
                     </button>
-                    <Link to= "/user-profile" className="profile-placeholder">
+                    <Link to="/user-profile">
                         <img src="/images/default-profile.png" alt="Profile" className="profile-icon" />
                     </Link>
                 </div>
