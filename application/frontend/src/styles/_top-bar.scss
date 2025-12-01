@@ -91,10 +91,12 @@
   color: colors.$color-text-main;
   border: none;
   font-weight: 600;
+  font-size: 0.85rem;
   padding: 8px 14px;
   border-radius: 6px;
   cursor: pointer;
   flex: 0 0 auto;
+  text-decoration: none;
 }
 
 // Yellow Bar Styles
