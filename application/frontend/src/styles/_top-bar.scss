@@ -10,9 +10,9 @@
 .purple-titlebar {
   position: static;
   background: #2f1e77;
-  padding: 12px 40px;
+  padding: 10px 24px;
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   flex-direction: row;
   border-bottom: 1px solid #1c1050;
 }
@@ -20,16 +20,13 @@
 .ptb-inner {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   width: 100%;
   margin: 0 auto;
-  gap: 16px;
+  gap: 24px;
 }
 
 .brand-section {
   display: flex;
-  align-items: center;
-  gap: 10px;
 }
 
 .brand-link {
@@ -44,13 +41,6 @@
 #logo {
   width: 40px;
   height: 40px;
-}
-
-.brand {
-  font-size: 1.8rem;
-  font-weight: 700;
-  letter-spacing: 0.5px;
-  color: colors.$color-text-on-dark;
 }
 
 .spacer {
@@ -104,20 +94,7 @@
   padding: 8px 14px;
   border-radius: 6px;
   cursor: pointer;
-  margin-left: 12px;
   flex: 0 0 auto;
-}
-
-.profile-placeholder {
-  width: 40px;
-  height: 40px;
-  border-radius: 8px;
-  margin-left: 12px;
-  flex-shrink: 0;
-
-  &:hover {
-    cursor: pointer;
-  }
 }
 
 // Yellow Bar Styles
@@ -169,14 +146,25 @@
   height: 40px;
   border-radius: 8px;
   object-fit: cover;
-  margin-left: 15px;
   cursor: pointer;
   border: 2px solid #d0d0d0;
   background-color: #e6e6e6;
+
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .profile-icon:hover {
   opacity: 0.85;
+}
+
+.brand {
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: colors.$color-text-on-dark;
+  text-wrap: nowrap;
 }
 
 .brand-team {
@@ -185,7 +173,8 @@
   margin-left: 4px;
   color: white;
   position: relative;
-  top: -2px;
+  text-wrap: nowrap;
+  align-self: center;
 }
 
 .brand-link {
