@@ -1,3 +1,5 @@
+@use "./colors";
+
 .registration-page {
   .description-area {
     display: flex;
@@ -9,5 +11,28 @@
     label {
       align-self: flex-start;
     }
+  }
+
+  // ---------- Terms & conditions row ----------
+  .terms-content {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .terms-box-container {
+    justify-self: flex-end;
+  }
+
+  .terms-input {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    justify-self: flex-end;
+  }
+
+  .terms-text {
+    font-size: 1rem;
+    font-weight: 600;
   }
 }

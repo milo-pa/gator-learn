@@ -5,8 +5,8 @@
   margin: 18px auto;
 
   background: colors.$color-surface-white;
-  border: 3px solid #d7d7d7;   // <<< added
-  border-radius: 12px;         // optional, but looks better
+  border: 3px solid #d7d7d7;
+  border-radius: 12px;
   padding: 24px;
 
   // Header at top of form page (login, registration, etc.)
@@ -16,62 +16,60 @@
     h1 {
       font-size: 2.6rem;
       font-weight: 800;
-      margin: 0;
       color: colors.$color-text-main;
     }
 
     .underline {
       width: 80%;
       height: 3px;
-      margin: 16px auto 16px auto;
+      margin: auto auto 12px auto;
       background-color: colors.$color-text-main;
     }
   }
 
   // Main area with form + buttons + helpers
   .form-main {
+    display: flex;
+    flex-direction: column;
+    gap:24px;
+
     // The actual form element
     .form {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 20px;
+      gap: 18px;
       width: 100%;
     }
 
     // Label + field row (shared across login / registration)
     .form-row {
-      display: flex;
+      display: grid;
+      grid-template-columns: 200px 1fr;  // label | input
       align-items: center;
-      justify-content: center;
       width: 100%;
       max-width: 900px;
-      gap: 15px;
-      margin-right: 80px;
+      column-gap: 20px;
 
       label {
         font-size: 1.2rem;
         font-weight: 600;
-        width: 190px;
+        width: 200px;
         text-align: right;
         color: colors.$color-text-main;
+      }
+
+      .desc-text {
+        grid-column: 2;
+        margin: 3px;
       }
     }
 
     .required-label::before {
       content: "*";
-      color: #e63946;      // red asterisk
-      margin-right: 4px;
+      color: #e63946;
+      margin-right: 5px;
       font-weight: 700;
-    }
-
-    /* Make ONLY the description row use a vertical layout */
-    .form-column {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: left;
-      row-gap: 12px; // vertical space between label and textarea
     }
 
     // HCI text
@@ -79,33 +77,6 @@
       font-size: 0.85rem;
       color: colors.$gray-text-home;
       white-space: nowrap;             // prevent wrapping
-      flex-shrink: 0;                  // do not shrink and pull the row left
-    }
-
-    // ---------- Terms & conditions row ----------
-    .terms-content {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      margin-right: 100px;
-    }
-
-    .terms-content input[type="checkbox"] {
-      width: 20px;
-      height: 20px;
-      cursor: pointer;
-    }
-
-    .terms-text {
-      font-size: 1rem;
-      font-weight: 600;
-      color: colors.$color-text-main;
-
-      button {
-        text-decoration: underline;
-        font-weight: 700;
-        color: inherit;
-      }
     }
 
     // Shared wrapper for text inputs
@@ -146,6 +117,7 @@
       textarea {
         flex: 1;
         width: 100%;
+        min-height: 120px;
         border: none;
         background: transparent;
         font-size: 1rem;
@@ -159,6 +131,7 @@
       }
     }
 
+    // To be used in addition with .input-wrapper
     .small-input-wrapper {
       max-width: 140px;
     }
@@ -168,27 +141,15 @@
       border: 1px solid #1773ea;
     }
 
-    // Error styles that apply to any form
+    // Error styles
     .input-wrapper.input-error {
       border: 1px solid #e63946;
     }
 
     // Error popups and colors
-    .error-popup-container {
-      margin-top: 8px;
-      display: flex;
-      flex-direction: column;
-      text-align: center;
-      gap: 6px;
-    }
-
-    .error-popup {
-      background-color: #ffe5e5;
-      border: 1px solid #e63946;
-      color: #b00020;
-      padding: 6px 6px;
-      border-radius: 6px;
+    .error-text {
       font-size: 0.85rem;
+      color: #c0392b;
     }
 
     // Password Hide/Show button
@@ -225,7 +186,6 @@
       align-items: center;
       justify-content: center;
       gap: 16px;
-      margin-top: 24px;
 
       .helper-text {
         font-size: 1.1rem;
