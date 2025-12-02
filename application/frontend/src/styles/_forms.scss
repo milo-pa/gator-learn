@@ -200,7 +200,8 @@
 body.dark-mode {
   .form-page {
     color: colors.$color-text-on-dark;
-    border: 3px solid #dddddd;
+    border: 3px solid #7c7b7b;
+    background-color: colors.$color-surface-dark;
 
     .form-header {
       h1 {
