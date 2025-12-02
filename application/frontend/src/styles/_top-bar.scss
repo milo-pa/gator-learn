@@ -46,6 +46,12 @@
 
 .spacer {
   flex: 1;
+  &.demo-line {
+    padding: 6px 16px 10px;
+    text-align: right;
+    font-size: 0.8rem;
+    font-weight: 400;
+  }
 }
 
 .search-container {
@@ -109,12 +115,13 @@
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  padding: 12px 16px;
+  
 
   .yub-left {
     display: flex;
     gap: 8px;
     align-items: center;
+    width: 100%;
   }
 
   .yub-link {
@@ -126,7 +133,7 @@
     border: 2px solid transparent;
     border-radius: 8px;
     transition: background-color 0.2s ease, border-color 0.2s ease;
-    font-size: large;
+    font-size: 14px;
 
     &:hover {
       background-color: colors.$yub-hover;
@@ -134,6 +141,11 @@
       color: colors.$color-text-main;
       cursor: pointer;
     }
+
+    &.right-link {
+      margin-left: auto;
+    }
+
   }
 }
 
