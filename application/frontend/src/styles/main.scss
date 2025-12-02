@@ -1,4 +1,6 @@
 @use "./colors";
+@use "./buttons";
+@use "about-page";
 @use "./user-profile";
 @use "./tutor-listing-page";
 @use "./tutor-listing-form";
@@ -7,10 +9,9 @@
 @use "./message-pop-up";
 @use "./loading";
 @use "./dashboard";
-@use "./buttons";
+@use "./top-bar";
 @use "./forms";
 @use "./registration";
-@use "./top-bar";
 
 /* Global Styles- default light mode */
 body {
@@ -22,21 +23,6 @@ body {
 body.dark-mode {
 	background-color: colors.$page-bg-dark;
 	color: colors.$color-text-on-dark;
-
-	.tile {
-		background: #353535;
-		color: colors.$color-text-on-dark;
-		border: 1px solid colors.$subtitle-text-gray;
-		&:hover {
-			border-color: colors.$gray-border-stronger;
-		}
-		.title {
-			background: transparent;
-		}
-	}
-	a {
-		color: colors.$color-text-main;
-	}
 }
 
 /* Content Styles */
@@ -49,103 +35,6 @@ main {
 	color: colors.$card-text-muted-gray;
 	text-decoration: underline;
 }
-
-/* Team Member Solo Page Styles */
-.solo-page {
-	max-width: 960px;
-	margin: 0 auto;
-}
-.solo-car {
-	display: grid;
-	gap: 16px;
-	grid-template-columns: 220px 1fr;
-	align-items: start;
-}
-.solo-img {
-	width: 220px;
-	height: 220px;
-	object-fit: cover;
-	border-radius: 12px;
-}
-.solo-name {
-	margin: 0 0 4px;
-	font-weight: 500;
-}
-.solo-title {
-	margin: 0 0 12px;
-	color: colors.$subtitle-text-gray;
-	font-weight: 400;
-}
-.solo-bio {
-	line-height: 1.6;
-	margin: 0 0 12px;
-}
-.solo-links {
-	a {
-		margin-right: 12px;
-		text-decoration: underline;
-		color: colors.$color-text-on-dark;
-	}
-}
-
-/* About Page Styles */
-.about-page {
-	h1 {
-		max-width: 960px;
-		margin: 0 auto;
-		text-align: left;
-	}
-}
-.thumb-wrap {
-	position: relative;
-	width: 100%;
-	aspect-ratio: 1 / 1;
-	overflow: hidden;
-}
-.thumb {
-	width: 200px;
-	height: 200px;
-	object-fit: cover;
-}
-.tile {
-	display: block;
-	text-decoration: none;
-	background: #e4e3e3;
-	color: colors.$color-text-main;
-	border: 1px solid #777777;
-	border-radius: 12px;
-	overflow: hidden;
-	position: relative;
-	&:hover {
-		border-color: colors.$border-gray;
-	}
-	.name {
-		margin: 4px 4px 4px;
-		font-weight: 700;
-		font-size: 2rem;
-	}
-	.title {
-		margin: 0;
-		color: colors.$subtitle-text-gray;
-		font-size: 1rem;
-		margin-left: 6px;
-		background: transparent;
-	}
-}
-.team-members-list {
-	gap: 16px;
-}
-.members-display {
-	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
-	gap: 16px;
-}
-#list-header {
-	margin-left: 0px;
-	margin-bottom: 16px;
-}
-
 
 /* Home Page Styles */
 .home-container {

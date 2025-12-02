@@ -26,7 +26,6 @@ class MenuComponent extends Component {
                     <Link className = "yub-link" to="/team-members">About</Link>
                     <Link className = "yub-link right-link" to="/dashboard">Dashboard</Link>
                 </nav>
-                
             </div>
         );
     }

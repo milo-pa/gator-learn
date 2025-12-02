@@ -80,6 +80,9 @@ class TopBarComponent extends Component {
     render() {
         return (
             <header className="purple-titlebar">
+                <em className="demo-line">
+                    SFSU Software Engineering Project CSC 648-848, Fall 2025. For Demonstration Only
+                </em>
                 <div className="ptb-inner">
                     <div className="brand-section">
                         <a href="/" className="brand-link">
@@ -88,20 +91,19 @@ class TopBarComponent extends Component {
                             <span className="brand-team">by Team 5</span>
                         </a>
                     </div>
-                    <div className="spacer">
-                        <div className="demo-line">
-                            <em>SFSU Software Engineering Project CSC 648-848, Fall 2025. For Demonstration Only</em>
-                        </div>
-                    </div>
+                    <div className="spacer"/>
                     <SearchBar />
+                    <div className="spacer"/>
 
                     {/* Will need to add function later to change login to log out when user signed in */}
-                    <button id="login-button" className="login-button">
-                        <Link to="/login" style={{ color: "inherit", textDecoration: "none" }}>
-                            Login
-                        </Link>
-                    </button>
-                    <Link to="/user-profile" className="profile-placeholder">
+                    <Link
+                            id="login-button"
+                            to="/login"
+                            className="btn btn-primary login-button"
+                    >
+                        Login
+                    </Link>
+                    <Link to="/user-profile">
                         <img src="/images/default-profile.png" alt="Profile" className="profile-icon" />
                     </Link>
                 </div>

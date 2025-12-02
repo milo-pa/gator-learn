@@ -10,26 +10,24 @@
 .purple-titlebar {
   position: static;
   background: #2f1e77;
-  padding: 5px 35px;
+  padding: 10px 24px 10px 24px;
   display: flex;
-  justify-content: flex-start;
-  flex-direction: row;
-  border-bottom: 1px solid #1c1050;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
+  gap: 8px;
 }
 
 .ptb-inner {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   width: 100%;
   margin: 0 auto;
-  gap: 16px;
+  gap: 24px;
 }
 
 .brand-section {
   display: flex;
-  align-items: center;
-  gap: 10px;
 }
 
 .brand-link {
@@ -44,13 +42,6 @@
 #logo {
   width: 40px;
   height: 40px;
-}
-
-.brand {
-  font-size: 1.8rem;
-  font-weight: 700;
-  letter-spacing: 0.5px;
-  color: colors.$color-text-on-dark;
 }
 
 .spacer {
@@ -107,23 +98,12 @@
   color: colors.$color-text-main;
   border: none;
   font-weight: 600;
+  font-size: 0.85rem;
   padding: 8px 14px;
   border-radius: 6px;
   cursor: pointer;
-  margin-left: 12px;
   flex: 0 0 auto;
-}
-
-.profile-placeholder {
-  width: 40px;
-  height: 40px;
-  border-radius: 8px;
-  margin-left: 12px;
-  flex-shrink: 0;
-
-  &:hover {
-    cursor: pointer;
-  }
+  text-decoration: none;
 }
 
 // Yellow Bar Styles
@@ -167,8 +147,6 @@
     }
 
   }
-
-  
 }
 
 .profile-icon {
@@ -176,14 +154,25 @@
   height: 40px;
   border-radius: 8px;
   object-fit: cover;
-  margin-left: 15px;
   cursor: pointer;
   border: 2px solid #d0d0d0;
   background-color: #e6e6e6;
+
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .profile-icon:hover {
   opacity: 0.85;
+}
+
+.brand {
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: colors.$color-text-on-dark;
+  text-wrap: nowrap;
 }
 
 .brand-team {
@@ -192,7 +181,8 @@
   margin-left: 4px;
   color: white;
   position: relative;
-  top: -2px;
+  text-wrap: nowrap;
+  align-self: center;
 }
 
 .brand-link {
@@ -204,6 +194,13 @@
 
 .brand-link img {
   align-self: center;
+}
+
+.demo-line {
+  text-align: right;
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: white;
 }
 
 // Dark Mode
