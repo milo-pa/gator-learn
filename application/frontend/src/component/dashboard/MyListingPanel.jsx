@@ -45,12 +45,14 @@ export default function MyListingsPanel() {
                 {listings.map((row, i) => (
                     <div
                         key={`${row.course.courseNumber}-${i}`}
-                        className="db-table__row"
+                        className="db-table__row db-table__row--clickable"
                         onClick={() => navigate(`/listing/${encodeURIComponent(row.listingId)}`)}
                     >
-                        <div>{row.course.courseNumber}</div>
-                        <div>{row.pricePerHour}$ / hr</div>
-                        <div>???</div>
+                        <div className="db-table__cell db-table__cell--course">
+                            <span className="db-table__course-name">{row.course.courseNumber}</span>
+                        </div>
+                        <div className="db-table__cell">{row.pricePerHour}$ / hr</div>
+                        <div className="db-table__cell">???</div>
                         <div>
                             <span className={badgeClass(row.live)}>{row.live === 1 ? "Active" : "Inactive"}</span>
                         </div>
