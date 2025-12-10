@@ -28,8 +28,9 @@ export default function DashboardPage() {
     const [active, setActive] = useState("overview");
 
     return (
-        <div className="db_page">
-            <h2>Welcome back, Gator Learner!</h2>
+        <div className="db-page">
+            <div><h2>Welcome back, Gator Learner!</h2></div>
+
 
             <div className="db-wrap">
                 <DashboardSidebar active={active} onSelect={setActive} />
