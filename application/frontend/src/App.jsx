@@ -2,9 +2,9 @@
  * Institution: San Francisco State University
  * Class: CSC 648 Project, Team 05
  * Project: Gator Learn, Tutoring Website
- * Author: [Your Name]
- * Created: [Date]
- * Description: [Brief explanation of this file’s purpose, 1-3 lines]
+ * Author: Milo, Samantha, Jonah
+ * Created: 11/2/25
+ * Description: The App.jsx is included in the index.js and routes to all pages
  *
  * Copyright (c) 2025 San Francisco State University Team 05
  *
