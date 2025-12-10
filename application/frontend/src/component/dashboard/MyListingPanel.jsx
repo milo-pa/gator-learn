@@ -32,7 +32,9 @@ export default function MyListingsPanel() {
 
     return (
         <section className="db-card">
-            <h3 style={{ marginBottom: "0.75rem" }}>My Listings</h3>
+            <div className="db-panel__header">
+                <h3 >My Listings</h3>
+            </div>
 
             <div className="db-table db-table--listings">
                 <div className="db-table__head">
@@ -53,7 +55,7 @@ export default function MyListingsPanel() {
                         </div>
                         <div className="db-table__cell">{row.pricePerHour}$ / hr</div>
                         <div className="db-table__cell">???</div>
-                        <div>
+                        <div className="db-table__cell">
                             <span className={badgeClass(row.live)}>{row.live === 1 ? "Active" : "Inactive"}</span>
                         </div>
                     </div>
