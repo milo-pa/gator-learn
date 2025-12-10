@@ -31,8 +31,8 @@ export default function DashboardMessagesPanel({ messages = [] }) {
     }, [messages, tab]);
 
     return (
-        <section className="db-card">
-            <div className="db-card__title">Messages</div>
+        <section className="db-card db-card--messages">
+            <header className="db-panel__header" ><h3>Messages</h3></header>
 
             <div className="db-tabs">
                 {TABS.map((t) => (
@@ -47,7 +47,7 @@ export default function DashboardMessagesPanel({ messages = [] }) {
                 ))}
             </div>
 
-            <div className="db-table">
+            <div className="db-table db-table--messages">
                 <div className="db-table__head">
                     <div className="col col--name">Name</div>
                     <div className="col col--course">Course</div>
