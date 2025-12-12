@@ -67,6 +67,7 @@
   height: 36px;
   flex: 0 1 520px;
   max-width: 60vw;
+  
 
   .search-btn {
     height: 100%;
@@ -80,10 +81,12 @@
 .search-category {
   background: colors.$border-gray;
   border: none;
-  height: 100%;
-  padding: 0 10px;
-  font-size: 14px;
+  width: 120px;
+  padding: 10px auto;
+  font-size: 12px;
   outline: none;
+  text-align: center;
+  white-space: nowrap;  
 }
 
 .search-input {
@@ -212,7 +215,7 @@ body.dark-mode {
   .search-category {
     background: #3c3c3c;
     color: colors.$color-text-on-dark;
-    border-right: 1px solid colors.$subtitle-text-gray;
+    border-right: solid colors.$subtitle-text-gray;
   }
 
   .search-input {
