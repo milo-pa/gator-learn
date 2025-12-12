@@ -154,22 +154,19 @@ function TutorListingForm() {
             <p className="form-error">{errors.pricePerHour.message}</p>
           )}
 
-          <div className="row-description">
-            <label className="label-description" htmlFor="description">Description:</label>
-            <textarea
-              id="description"
-              className="input-description"
-              rows="5"
-              placeholder="Brag and describe yourself"
-              {...register("description", { required: "Description required" })}
-            />
+          <div className="form-row description-area">
+            <label htmlFor="description">Description:</label>
+            <div className="input-wrapper textarea-wrapper">
+              <textarea
+                id="description"
+                rows="5"
+                {...register("description")}
+              />
+            </div>
           </div>
-          {errors.description && (
-            <p className="form-error">{errors.description.message}</p>
-          )}
 
-          <div className="row-availability">
-            <span className="label-availability">Availability:</span>
+          <div className="form-row">
+            <label className="required-label">Availablity: </label>
             <div className="availability-block">
               <div className="days-column">
                 {[
@@ -217,34 +214,50 @@ function TutorListingForm() {
             </div>
           </div>
 
-          <div className="form-row">
-            <div className="optional-block">
-              <div className="optional-item">
-                <span className="optional-label">Attach Resume/CV:</span>
-                <label className="file-button">
-                  Attach File
-                  <input
-                    type="file"
-                    {...register("resumeFile")}
-                    accept=".pdf,.jpg,.jpeg,.webp"
-                  />
-                </label>
-                <p className="optional-hint">Accepts JPEG, PDF, WEBP</p>
-              </div>
 
-              <div className="optional-item">
-                <span className="optional-label">Attach Tutoring Video Sample:</span>
-                <label className="file-button">
-                  Attach File
-                  <input
-                    type="file"
-                    {...register("videoSample")}
-                    accept=".mp4,.mov"
-                  />
-                </label>
-                <p className="optional-hint">Accepts MOV, MP4</p>
-              </div>
+          <div className="form-row">
+            <label htmlFor="resume-file">Resume/CV:</label>
+            <div className={"input-wrapper"}>
+              <input
+                type="file"
+                id="resume-file"
+                accept=".pdf, .jpg,.jpeg, .webp"
+                {...register("resume-file")}
+              />
             </div>
+
+            <span className="hci-text desc-text">
+              Allows JPG, PNG, and WEBP
+            </span>
+          </div>
+
+          <div className="form-row">
+            <label htmlFor="sample-file">Sample Video:</label>
+            <div className={"input-wrapper"}>
+              <input
+                type="file"
+                id="sample-file"
+                accept=".mov, .mp4, .webm"
+                {...register("sample-file")}
+              />
+            </div>
+
+            <span className="hci-text desc-text">
+              Allows MOV, MP4, and WEBM
+            </span>
+          </div>
+
+          <div className="button-row ">
+            <button
+              type="button"
+              className="btn btn-secondary"
+              onClick={() => navigate(-1)}
+            >
+              CANCEL
+            </button>
+            <button type="submit" className="btn btn-primary" onClick={handleSubmit(onSubmit)}>
+              SUBMIT
+            </button>
           </div>
 
 
@@ -252,18 +265,7 @@ function TutorListingForm() {
 
       </main>
 
-      <div className="form-submit-row">
-        <button
-          type="button"
-          className="btn-cancel"
-          onClick={() => navigate(-1)}
-        >
-          CANCEL
-        </button>
-        <button type="submit" className="btn-submit">
-          SUBMIT
-        </button>
-      </div>
+
 
       {showPopUp && (
         <PopUpComponent
