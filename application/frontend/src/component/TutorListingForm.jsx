@@ -81,6 +81,8 @@ function TutorListingForm() {
     setPriceValue(formattedPrice);
   };
 
+const hasAnyDaySelected = Object.values(availableDays || {}).some((d) => d?.enabled);
+
   return (
     // Title in pages folder
     <>
@@ -99,10 +101,11 @@ function TutorListingForm() {
                 <option key={s.id} value={s.name}>{s.name}</option>
               ))}
             </select>
+
+            {errors.subject && (
+              (<div className="error-text desc-text">{errors.subject.message}</div>)
+            )}
           </div>
-          {errors.subject && (
-            <p className="form-error">{errors.subject.message}</p>
-          )}
 
 
           <div className="form-row">
@@ -124,14 +127,14 @@ function TutorListingForm() {
                 </option>
               ))}
             </select>
+            {errors.course && (
+              (<div className="error-text desc-text">{errors.course.message}</div>))}
           </div>
-          {errors.course && (
-            <p className="form-error">{errors.course.message}</p>
-          )}
+
 
           <div className="form-row">
             <label className="required-label" htmlFor="pricePerHour">Price per hour: $</label>
-            <div className={`input-wrapper small-input-wrapper${errors.pricePerHour ? "input-error" : ""}`}>
+            <div className={`input-wrapper small-input-wrapper ${errors.pricePerHour ? "input-error" : ""}`}>
               <input
                 id="pricePerHour"
                 type="text"
@@ -149,10 +152,10 @@ function TutorListingForm() {
                 }}
               />
             </div>
+            {errors.pricePerHour && (
+              (<div className="error-text desc-text">{errors.pricePerHour.message}</div>))}
           </div>
-          {errors.pricePerHour && (
-            <p className="form-error">{errors.pricePerHour.message}</p>
-          )}
+
 
           <div className="form-row description-area">
             <label htmlFor="description">Description:</label>
@@ -164,10 +167,17 @@ function TutorListingForm() {
               />
             </div>
           </div>
-
+          <input
+            type="hidden"
+            {...register("availableDays", {
+              required: "Please select at least one available day",
+              validate: () =>
+                hasAnyDaySelected || "Please select at least one available day",
+            })}
+          />
           <div className="form-row">
             <label className="required-label">Availablity: </label>
-            <div className="availability-block">
+            <div className={`availability-block ${errors.availableDays && !hasAnyDaySelected ? "input-error" : ""}`}>
               <div className="days-column">
                 {[
                   "monday",
@@ -180,9 +190,12 @@ function TutorListingForm() {
                 ].map((day) => {
                   const label = day.charAt(0).toUpperCase() + day.slice(1);
                   const dayData = availableDays?.[day] || {};
+                  const fromError = errors?.availableDays?.[day]?.fromTime;
+                  const toError = errors?.availableDays?.[day]?.toTime;
+                  const hasTimeError = !!(fromError || toError);
 
                   return (
-                    <div key={day} className="day-row">
+                    <div key={day} className={`day-row ${hasTimeError ? "input-error" : ""}`}>
                       <label className="day-checkbox">
                         <input
                           type="checkbox"
@@ -192,37 +205,58 @@ function TutorListingForm() {
                       </label>
 
                       {dayData.enabled && (
-                        <div className="day-time-range">
-                          <span className="time-label">From:</span>
-                          <input
-                            type="time"
-                            className="time-input"
-                            {...register(`availableDays.${day}.fromTime`)}
-                          />
-                          <span className="time-label">To:</span>
-                          <input
-                            type="time"
-                            className="time-input"
-                            {...register(`availableDays.${day}.toTime`)}
-                          />
-                        </div>
+                        <>
+                          <div className="day-time-range">
+                            <span className="time-label">From:</span>
+                            <input
+                              type="time"
+                              className={`time-input ${fromError ? "input-error" : ""}`}
+                              {...register(`availableDays.${day}.fromTime`,
+                                {
+                                  required: "Start time required",
+                                }
+                              )}
+                            />
+                            <span className="time-label">To:</span>
+                            <input
+                              type="time"
+                              className={`time-input ${toError ? "input-error" : ""}`}
+                              {...register(`availableDays.${day}.toTime`,
+                                {
+                                  required: "End time required",
+                                }
+                              )}
+                            />
+                          </div>
+                          {(fromError || toError) && (
+                            <div className="error-text day-error-text">
+                              {fromError?.message || toError?.message}
+                            </div>
+                          )}
+
+                        </>
+
                       )}
                     </div>
                   );
                 })}
               </div>
             </div>
+            {errors.availableDays && !hasAnyDaySelected && (
+              (<div className="error-text desc-text">{errors.availableDays.message}</div>))}
           </div>
 
 
+
+
           <div className="form-row">
-            <label htmlFor="resume-file">Resume/CV:</label>
+            <label htmlFor="resumeFile">Resume/CV:</label>
             <div className={"input-wrapper"}>
               <input
                 type="file"
-                id="resume-file"
+                id="resumeFile"
                 accept=".pdf, .jpg,.jpeg, .webp"
-                {...register("resume-file")}
+                {...register("resumeFile")}
               />
             </div>
 
@@ -241,7 +275,7 @@ function TutorListingForm() {
                 {...register("sample-file", {
                   required: "Sample video is required",
                   validate: {
-                    isVideo: (files) => 
+                    isVideo: (files) =>
                       files?.[0]?.type.startsWith("video/") || "only video files are allowed",
                   },
 
