@@ -1,0 +1,77 @@
+@use "./colors";
+
+// Buttons
+.btn {
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 10px 18px;
+  border-radius: 6px;
+  cursor: pointer;
+  border: none;
+  appearance: none;
+  -webkit-appearance: none;
+  text-decoration: none;
+  outline: none;
+  box-shadow: none;
+}
+
+.btn-primary {
+  background-color: colors.$border-accent-gold;
+  color: colors.$color-text-main;
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: colors.$color-text-main;
+  border: 1px solid colors.$border-gray;
+}
+
+.btn-light {
+  background-color: transparent;
+  color: colors.$color-text-main;
+  border: none;
+  padding: 0;
+  text-decoration: underline;
+  font-weight: 600;
+}
+
+// Hovers
+.btn-primary:hover {
+  background-color: darken(colors.$border-accent-gold, 12%);
+}
+
+.btn-secondary:hover {
+  background-color: lighten(colors.$border-gray, 32%);
+  border-color: darken(colors.$border-gray, 10%);
+}
+
+.btn-light:hover {
+  color: darken(colors.$color-text-main, 18%);
+  text-decoration: none;
+}
+
+body.dark-mode {
+  .btn-secondary {
+    color: colors.$color-text-on-dark;
+    border-color: colors.$subtitle-text-gray;
+  }
+
+  .btn-light {
+    color: colors.$yub-gold;
+  }
+
+  // Hovers
+  .btn-primary:hover {
+    background-color: lighten(colors.$border-accent-gold, 14%);
+  }
+
+  .btn-secondary:hover {
+    background-color: lighten(#2b2b2b, 8%);
+    border-color: lighten(colors.$subtitle-text-gray, 15%);
+  }
+
+  .btn-light:hover {
+    color: lighten(colors.$yub-gold, 12%);
+    text-decoration: none;
+  }
+}

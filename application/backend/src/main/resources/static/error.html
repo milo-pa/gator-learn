@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Error | Unexpected Response</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f8f9fa;
+            color: #212529;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            line-height: 1.5;
+        }
+        h1 {
+            font-size: 4rem;
+            margin: 0;
+            color: #495057;
+        }
+        h2 {
+            font-size: 1.5rem;
+            margin: 0.5rem 0 1rem;
+        }
+        p {
+            max-width: 700px;
+            margin: 0.5rem auto;
+            color: #6c757d;
+        }
+        code {
+            background: #e9ecef;
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+<h1>Error</h1>
+<h2>Unexpected Response from Backend Server</h2>
+<p>
+    The server encountered an unexpected issue while processing your request.
+    This may result from an invalid endpoint, a temporary backend failure, or a missing database connection.
+</p>
+<p>
+    Verify that the backend service is running and connected to the database.
+    If testing locally, confirm that port forwarding and environment variables are correctly configured.
+</p>
+<p>
+    For reference, this backend serves API routes such as
+    <code>/api/listings</code> and other documented endpoints.
+</p>
+</body>
+</html>

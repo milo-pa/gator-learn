@@ -1,0 +1,235 @@
+@use "./colors";
+
+.form-page {
+  max-width: 700px;
+  margin: 18px auto;
+
+  background: colors.$color-surface-white;
+  border: 3px solid #d7d7d7;
+  border-radius: 12px;
+  padding: 24px;
+
+  // Header at top of form page (login, registration, etc.)
+  .form-header {
+    text-align: center;
+
+    h1 {
+      font-size: 2.6rem;
+      font-weight: 800;
+      color: colors.$color-text-main;
+    }
+
+    .underline {
+      width: 80%;
+      height: 3px;
+      margin: auto auto 12px auto;
+      background-color: colors.$color-text-main;
+    }
+  }
+
+  // Main area with form + buttons + helpers
+  .form-main {
+    display: flex;
+    flex-direction: column;
+    gap:24px;
+
+    // The actual form element
+    .form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 18px;
+      width: 100%;
+    }
+
+    // Label + field row (shared across login / registration)
+    .form-row {
+      display: grid;
+      grid-template-columns: 200px 1fr;  // label | input
+      align-items: center;
+      width: 100%;
+      max-width: 900px;
+      column-gap: 20px;
+
+      label {
+        font-size: 1.2rem;
+        font-weight: 600;
+        width: 200px;
+        text-align: right;
+        color: colors.$color-text-main;
+      }
+
+      .desc-text {
+        grid-column: 2;
+        margin: 3px;
+      }
+    }
+
+    .required-label::before {
+      content: "*";
+      color: #e63946;
+      margin-right: 5px;
+      font-weight: 700;
+    }
+
+    // HCI text
+    .hci-text {
+      font-size: 0.85rem;
+      color: colors.$gray-text-home;
+      white-space: nowrap;             // prevent wrapping
+    }
+
+    // Shared wrapper for text inputs
+    .input-wrapper {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      max-width: 350px;
+      height: 42px;
+      border: 1px solid colors.$border-gray;
+      border-radius: 6px;
+      background-color: #ffffff;
+      padding-left: 11px;
+      padding-right: 11px;
+      box-sizing: border-box;
+
+      input {
+        flex: 1;
+        border: none;
+        background: transparent;
+        font-size: 1rem;
+        color: colors.$color-text-main;
+        outline: none;
+
+        &:focus {
+          outline: none;
+        }
+      }
+    }
+
+    .input-wrapper.textarea-wrapper {
+      height: auto;
+      min-height: 120px;
+      align-items: flex-start;
+      padding-top: 8px;
+      padding-bottom: 8px;
+
+      textarea {
+        flex: 1;
+        width: 100%;
+        min-height: 120px;
+        border: none;
+        background: transparent;
+        font-size: 1rem;
+        color: colors.$color-text-main;
+        resize: vertical;
+        outline: none;
+
+        &:focus {
+          outline: none;
+        }
+      }
+    }
+
+    // To be used in addition with .input-wrapper
+    .small-input-wrapper {
+      max-width: 140px;
+    }
+
+    // Focus highlight for any form input
+    .input-wrapper:focus-within {
+      border: 1px solid #1773ea;
+    }
+
+    // Error styles
+    .input-wrapper.input-error {
+      border: 1px solid #e63946;
+    }
+
+    // Error popups and colors
+    .error-text {
+      font-size: 0.85rem;
+      color: #c0392b;
+    }
+
+    // Password Hide/Show button
+    .password-wrapper {
+      display: flex;
+      justify-content: space-between;
+      padding-right: 15px; // space for the button
+    }
+
+    .toggle-password {
+      background: none;
+      border: none;
+      font-size: 0.85rem;
+      color: #555;
+      cursor: pointer;
+      padding: 0;
+
+      &:hover {
+        color: #000;
+      }
+    }
+
+    // Cancel / Login / Register buttons row
+    .button-row {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      margin-top: 8px;
+    }
+
+    // Helper rows (forgot password, sign up, etc.)
+    .helper-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+
+      .helper-text {
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin: 0;
+        color: colors.$gray-text-home;
+      }
+    }
+  }
+}
+
+body.dark-mode {
+  .form-page {
+    color: colors.$color-text-on-dark;
+    border: 3px solid #7c7b7b;
+    background-color: colors.$color-surface-dark;
+
+    .form-header {
+      h1 {
+        color: colors.$color-text-on-dark;
+      }
+
+      .underline {
+        background-color: colors.$color-text-on-dark;
+      }
+    }
+
+    .form-main {
+      .form-row label {
+        color: colors.$color-text-on-dark;
+      }
+
+      .input-wrapper {
+        background-color: colors.$page-bg-dark;
+        border-color: colors.$subtitle-text-gray;
+
+        input {
+          color: colors.$color-text-on-dark;
+        }
+      }
+
+      .helper-row .helper-text {
+        color: colors.$color-text-on-dark;
+      }
+    }
+  }
+}
