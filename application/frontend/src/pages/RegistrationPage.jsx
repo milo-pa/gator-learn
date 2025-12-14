@@ -12,7 +12,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, {Component, useState} from "react";
+import React, {useState} from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 
