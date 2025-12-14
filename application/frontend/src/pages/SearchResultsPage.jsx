@@ -157,8 +157,8 @@ function SearchResultsPage() {
                         onChange={(e) => setSortKey(e.target.value)}
                     >
                         <option value="">-- Sort --</option>
-                        <option value="asc">$ to $$$ (cheapest first)</option>
-                        <option value="desc">$$$ to $ (most expensive first)</option>
+                        <option value="asc">$ to $$$</option>
+                        <option value="desc">$$$ to $</option>
                         <option value="newest">Newest Listings</option>
                         <option value="oldest">Oldest Listings</option>
                     </select>
