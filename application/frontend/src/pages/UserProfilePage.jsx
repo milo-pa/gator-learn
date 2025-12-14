@@ -31,7 +31,7 @@ export default function UserProfilePage() {
         <main className="user-profile-page">
             <header className="user-header">
                 <div className="user-photo-wrapper">
-                    <img src="/images/tutor/iu_.png" alt="Profile Image" className="user-photo" />
+                    <img src="/images/tutor/iu_.png" alt="Profile" className="user-photo" />
                 </div>
                 <div className="user-info">
                     <h1 className="user-name">{listings[0].account.name}</h1>
