@@ -1,0 +1,27 @@
+@use './_colors.scss';
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading-wheel {
+  border: 6px solid colors.$color-text-main;
+  border-top: 6px solid #b0b0b0;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  animation: spin 1.0s linear infinite;
+}
+
+body.dark-mode .loading-wheel {
+  border: 6px solid colors.$color-text-on-dark;
+  border-top: 6px solid #555;
+}
+  
+.loading-wheel-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
