@@ -17,9 +17,11 @@ import { useNavigate } from "react-router-dom";
 import { SUBJECT_OPTIONS, COURSE_OPTIONS } from "../mock/mockOptions";
 import PopUpComponent from "./PopUpComponent";
 
+
 function TutorListingForm() {
   const navigate = useNavigate();
   const [showPopUp, setPopUp] = useState(false);
+  const [priceValue, setPriceValue] = useState("");
 
   const {
     register,
@@ -46,6 +48,9 @@ function TutorListingForm() {
       videoSample: null,
     },
   });
+  const priceReg = register("pricePerHour", {
+    required: "Price required",
+  });
 
   const availableDays = watch("availableDays");
   const subject = watch("subject");
@@ -62,187 +67,247 @@ function TutorListingForm() {
     setPopUp(true);
   };
 
+  const handlePriceChange = (e) => {
+    const value = e.target.value;
+    const regex = /^\d*\.?\d{0,2}$/;
+    if (value === "" || regex.test(value)) {
+      setPriceValue(value);
+    }
+  };
+
+  const handleBlur = () => {
+    if (priceValue === "") return;
+    let formattedPrice = parseFloat(priceValue).toFixed(2);
+    setPriceValue(formattedPrice);
+  };
+
+const hasAnyDaySelected = Object.values(availableDays || {}).some((d) => d?.enabled);
+
   return (
+    // Title in pages folder
     <>
-      <form className="tutor-listing-form" onSubmit={handleSubmit(onSubmit)}>
+      <main className="form-main">
+        <form className="form" onSubmit={handleSubmit(onSubmit)}>
 
-        <div className="row-subject">
-          <label className="label-subject" htmlFor="subject">For:</label>
-          <select
-            id="subject"
-            className="input-subject"
-            {...register("subject", { required: "Subject is required" })}
-          >
-            <option value="">Select a subject</option>
-            {SUBJECT_OPTIONS.map((s) => (
-              <option key={s.id} value={s.name}>{s.name}</option>
-            ))}
-          </select>
-        </div>
-        {errors.subject && (
-          <p className="form-error">{errors.subject.message}</p>
-        )}
+          <div className="form-row">
+            <label className="required-label" htmlFor="subject">Subject:</label>
+            <select
+              id="subject"
+              className={`input-wrapper ${errors.subject ? "input-error" : ""}`}
+              {...register("subject", { required: "Subject is required" })}
+            >
+              <option value="">Select a subject</option>
+              {SUBJECT_OPTIONS.map((s) => (
+                <option key={s.id} value={s.name}>{s.name}</option>
+              ))}
+            </select>
+
+            {errors.subject && (
+              (<div className="error-text desc-text">{errors.subject.message}</div>)
+            )}
+          </div>
 
 
-        <div className="row-course">
-          <label className="label-course" htmlFor="course">Course:</label>
-          <select
-            id="course"
-            className="input-course"
-            disabled={!subject}
-            {...register("course", {
-              required: subject ? "Course is required" : false,
-            })}
-          >
-            <option value="">
-              {subject ? "Select class" : "Choose subject first"}
-            </option>
-            {filteredCourses.map((c) => (
-              <option key={c.id} value={c.code}>
-                {c.code} {c.name}
-              </option>
-            ))}
-          </select>
-        </div>
-        {errors.course && (
-          <p className="form-error">{errors.course.message}</p>
-        )}
-
-        <div className="row-price">
-          <label className="label-price" htmlFor="pricePerHour">Price per hour:</label>
-          <input
-            id="pricePerHour"
-            type="number"
-            className="input-price"
-            {...register("pricePerHour", { required: "Price required" })}
-          />
-          <span className="price-unit">$/hr</span>
-        </div>
-
-        {errors.pricePerHour && (
-          <p className="form-error">{errors.pricePerHour.message}</p>
-        )}
-
-        <div className="row-description">
-          <label className="label-description" htmlFor="description">Description:</label>
-          <textarea
-            id="description"
-            className="input-description"
-            rows="5"
-            placeholder="Brag and describe yourself"
-            {...register("description", { required: "Description required" })}
-          />
-        </div>
-        {errors.description && (
-          <p className="form-error">{errors.description.message}</p>
-        )}
-        
-        <div className="row-availability">
-          <span className="label-availability">Availability:</span>
-          <div className="availability-block">
-            <div className="days-column">
-              {[
-                "monday",
-                "tuesday",
-                "wednesday",
-                "thursday",
-                "friday",
-                "saturday",
-                "sunday",
-              ].map((day) => {
-                const label = day.charAt(0).toUpperCase() + day.slice(1);
-                const dayData = availableDays?.[day] || {};
-
-                return (
-                  <div key={day} className="day-row">
-                    <label className="day-checkbox">
-                      <input
-                        type="checkbox"
-                        {...register(`availableDays.${day}.enabled`)}
-                      />
-                      <span>{label}</span>
-                    </label>
-
-                    {dayData.enabled && (
-                      <div className="day-time-range">
-                        <span className="time-label">From:</span>
-                        <input
-                          type="time"
-                          className="time-input"
-                          {...register(`availableDays.${day}.fromTime`)}
-                        />
-                        <span className="time-label">To:</span>
-                        <input
-                          type="time"
-                          className="time-input"
-                          {...register(`availableDays.${day}.toTime`)}
-                        />
-                      </div>
-                    )}
-                  </div>
-                );
+          <div className="form-row">
+            <label className="required-label" htmlFor="course">Course:</label>
+            <select
+              id="course"
+              className={`input-wrapper ${errors.course ? "input-error" : ""}`}
+              disabled={!subject}
+              {...register("course", {
+                required: subject ? "Course is required" : false,
               })}
+            >
+              <option value="">
+                {subject ? "Select class" : "Choose subject first"}
+              </option>
+              {filteredCourses.map((c) => (
+                <option key={c.id} value={c.code}>
+                  {c.code} {c.name}
+                </option>
+              ))}
+            </select>
+            {errors.course && (
+              (<div className="error-text desc-text">{errors.course.message}</div>))}
+          </div>
+
+
+          <div className="form-row">
+            <label className="required-label" htmlFor="pricePerHour">Price per hour: $</label>
+            <div className={`input-wrapper small-input-wrapper ${errors.pricePerHour ? "input-error" : ""}`}>
+              <input
+                id="pricePerHour"
+                type="text"
+                inputMode="decimal"
+                placeholder="0.00"
+                value={priceValue}
+                {...priceReg}
+                onChange={(e) => {
+                  priceReg.onChange(e);
+                  handlePriceChange(e);
+                }}
+                onBlur={(e) => {
+                  priceReg.onBlur(e);
+                  handleBlur();
+                }}
+              />
+            </div>
+            {errors.pricePerHour && (
+              (<div className="error-text desc-text">{errors.pricePerHour.message}</div>))}
+          </div>
+
+
+          <div className="form-row description-area">
+            <label htmlFor="description">Description:</label>
+            <div className="input-wrapper textarea-wrapper">
+              <textarea
+                id="description"
+                rows="5"
+                {...register("description")}
+              />
             </div>
           </div>
-        </div>
+          <input
+            type="hidden"
+            {...register("availableDays", {
+              required: "Please select at least one available day",
+              validate: () =>
+                hasAnyDaySelected || "Please select at least one available day",
+            })}
+          />
+          <div className="form-row">
+            <label className="required-label">Availablity: </label>
+            <div className={`availability-block ${errors.availableDays && !hasAnyDaySelected ? "input-error" : ""}`}>
+              <div className="days-column">
+                {[
+                  "monday",
+                  "tuesday",
+                  "wednesday",
+                  "thursday",
+                  "friday",
+                  "saturday",
+                  "sunday",
+                ].map((day) => {
+                  const label = day.charAt(0).toUpperCase() + day.slice(1);
+                  const dayData = availableDays?.[day] || {};
+                  const fromError = errors?.availableDays?.[day]?.fromTime;
+                  const toError = errors?.availableDays?.[day]?.toTime;
+                  const hasTimeError = !!(fromError || toError);
 
-        <div className="row-optional">
-          <span className="label-optional">Optional:</span>
-          <div className="optional-block">
-            <div className="optional-item">
-              <span className="optional-label">Attach Resume/CV:</span>
-              <label className="file-button">
-                Attach File
-                <input
-                  type="file"
-                  {...register("resumeFile")}
-                  accept=".pdf,.jpg,.jpeg,.webp"
-                />
-              </label>
-              <p className="optional-hint">Accepts JPEG, PDF, WEBP</p>
-            </div>
+                  return (
+                    <div key={day} className={`day-row ${hasTimeError ? "input-error" : ""}`}>
+                      <label className="day-checkbox">
+                        <input
+                          type="checkbox"
+                          {...register(`availableDays.${day}.enabled`)}
+                        />
+                        <span>{label}</span>
+                      </label>
 
-            <div className="optional-item">
-              <span className="optional-label">Attach Profile Image:</span>
-              <label className="file-button">
-                Attach File
-                <input
-                  type="file"
-                  {...register("profileImage")}
-                  accept=".png,.jpg,.jpeg,.webp"
-                />
-              </label>
-              <p className="optional-hint">Accepts JPEG, PNG, WEBP</p>
-            </div>
+                      {dayData.enabled && (
+                        <>
+                          <div className="day-time-range">
+                            <span className="time-label">From:</span>
+                            <input
+                              type="time"
+                              className={`time-input ${fromError ? "input-error" : ""}`}
+                              {...register(`availableDays.${day}.fromTime`,
+                                {
+                                  required: "Start time required",
+                                }
+                              )}
+                            />
+                            <span className="time-label">To:</span>
+                            <input
+                              type="time"
+                              className={`time-input ${toError ? "input-error" : ""}`}
+                              {...register(`availableDays.${day}.toTime`,
+                                {
+                                  required: "End time required",
+                                }
+                              )}
+                            />
+                          </div>
+                          {(fromError || toError) && (
+                            <div className="error-text day-error-text">
+                              {fromError?.message || toError?.message}
+                            </div>
+                          )}
 
-            <div className="optional-item">
-              <span className="optional-label">Attach Tutoring Video Sample:</span>
-              <label className="file-button">
-                Attach File
-                <input
-                  type="file"
-                  {...register("videoSample")}
-                  accept=".mp4,.mov"
-                />
-              </label>
-              <p className="optional-hint">Accepts MOV, MP4</p>
+                        </>
+
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
             </div>
+            {errors.availableDays && !hasAnyDaySelected && (
+              (<div className="error-text desc-text">{errors.availableDays.message}</div>))}
           </div>
-        </div>
 
-        <div className="form-submit-row">
-          <button
-            type="button"
-            className="btn-cancel"
-            onClick={() => navigate(-1)}
-          >
-            CANCEL
-          </button>
-          <button type="submit" className="btn-submit">
-            SUBMIT
-          </button>
-        </div>
-      </form>
+
+
+
+          <div className="form-row">
+            <label htmlFor="resumeFile">Resume/CV:</label>
+            <div className={"input-wrapper"}>
+              <input
+                type="file"
+                id="resumeFile"
+                accept=".pdf, .jpg,.jpeg, .webp"
+                {...register("resumeFile")}
+              />
+            </div>
+
+            <span className="hci-text desc-text">
+              Allows JPG, PNG, and WEBP
+            </span>
+          </div>
+
+          <div className="form-row">
+            <label htmlFor="sample-file">Sample Video:</label>
+            <div className={"input-wrapper"}>
+              <input
+                type="file"
+                id="sample-file"
+                accept="video/mp4, video/mov, video/webm"
+                {...register("sample-file", {
+                  required: "Sample video is required",
+                  validate: {
+                    isVideo: (files) =>
+                      files?.[0]?.type.startsWith("video/") || "only video files are allowed",
+                  },
+
+
+                })}
+              />
+            </div>
+
+            <span className="hci-text desc-text">
+              Allows MOV, MP4, and WEBM
+            </span>
+          </div>
+
+          <div className="button-row ">
+            <button
+              type="button"
+              className="btn btn-secondary"
+              onClick={() => navigate(-1)}
+            >
+              CANCEL
+            </button>
+            <button type="submit" className="btn btn-primary" onClick={handleSubmit(onSubmit)}>
+              SUBMIT
+            </button>
+          </div>
+
+
+        </form>
+
+      </main>
+
+
 
       {showPopUp && (
         <PopUpComponent
