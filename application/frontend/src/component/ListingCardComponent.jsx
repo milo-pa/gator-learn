@@ -17,7 +17,6 @@ function ListingCardComponent({
         course,
         pricePerHour,
         availableTime,
-        createdAt,
         profileImageUrl,
     } = listing;
 

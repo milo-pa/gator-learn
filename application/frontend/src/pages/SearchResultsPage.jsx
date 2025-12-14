@@ -14,7 +14,6 @@
  */
 import { useLocation } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
-import { Link } from "react-router-dom";
 import { mockListingService as TutorListingService } from "../service/mockTutorListingService";
 import MessageTutorPopUp from "../component/MessageTutorPopUp";
 import ListingCardComponent from '../component/ListingCardComponent';
@@ -35,7 +34,6 @@ function SearchResultsPage() {
     const [listings, setListings] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
-    const [sortOrder, setSortOrder] = useState(null);
     const [showPopUp, setShowPopUp] = useState(false);
     const [selectedListing, setSelectedListing] = useState(null);
     const [sortKey, setSortKey] = useState("");
@@ -107,25 +105,30 @@ function SearchResultsPage() {
         loadListings();
     }, [subject, course, all]);
 
-    const handleChange = (e) => {
-        setSortOrder(e.target.value || null);
+    const getCreatedAtDate = (listing) => {
+        const date = new Date(listing.createdAt);
+        return isNaN(date) ? 0 : date;
     }
 
-    const sortedListings = sortOrder
-        ? [...listings].sort((a, b) => {
-            const priceA = Number(a.pricePerHour) || 0;
-            const priceB = Number(b.pricePerHour) || 0;
-
-            if (sortOrder === "asc") {
-                return priceA - priceB;
-            } else {
-                return priceB - priceA;
-            }
-        })
-        : listings;
+    const sortedListings = [...listings].sort((a, b) => {
+        if (sortKey === "asc") {
+            return (Number(a.pricePerHour) - Number(b.pricePerHour));
+        }
+        if (sortKey === "desc") {
+            return (Number(b.pricePerHour) - Number(a.pricePerHour));
+        }
+        if (sortKey === "newest") {
+            return getCreatedAtDate(b) - getCreatedAtDate(a);
+        }
+        if (sortKey === "oldest") {
+            return getCreatedAtDate(a) - getCreatedAtDate(b);
+        }
+        return 0;
+    });
 
     const toCardListing = (l) => ({
         id: l.listingId,
+        createdAt: l.createdAt,
         tutorName: l.account?.name,
         subject: l.subject?.subjectName,
         course: l.course?.courseName,
@@ -133,8 +136,8 @@ function SearchResultsPage() {
         description: l.description,
         availableTime: l.availableTime,
         profileImageUrl: l.account?.photoPath,
-        createdAt: l.createdAt,
     })
+    
 
     return (
         <main className="search-results-page">
@@ -151,9 +154,9 @@ function SearchResultsPage() {
                         id="results-sort-select"
                         className="sort-dropdown"
                         value={sortKey}
-                        onChange={(e) => setSortKey(e.target.value)} 
-                        >
-                        <option value="">-- Sort by price--</option>
+                        onChange={(e) => setSortKey(e.target.value)}
+                    >
+                        <option value="">-- Sort --</option>
                         <option value="asc">$ to $$$ (cheapest first)</option>
                         <option value="desc">$$$ to $ (most expensive first)</option>
                         <option value="newest">Newest Listings</option>

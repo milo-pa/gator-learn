@@ -1,6 +1,7 @@
 export const MOCK_LISTINGS = [
     {
         listingId: 12,
+        createdAt: "2025-11-16T09:00:00Z",
         account: {
             userId: 1,
             name: "Alice Kim",
@@ -33,6 +34,7 @@ export const MOCK_LISTINGS = [
     },
     {
         listingId: 13,
+        createdAt: "2025-11-18T10:30:00Z",
         account: {
             userId: 1,
             name: "Alice Kim",
@@ -65,6 +67,7 @@ export const MOCK_LISTINGS = [
     },
     {
         listingId: 14,
+        createdAt: "2025-11-14T13:45:00Z",
         account: {
             userId: 1,
             name: "Alice Kim",
@@ -97,6 +100,7 @@ export const MOCK_LISTINGS = [
     },
     {
         listingId: 15,
+        createdAt: "2025-11-10T16:20:00Z",
         account: {
             userId: 1,
             name: "Alice Kim",
@@ -129,6 +133,7 @@ export const MOCK_LISTINGS = [
     },
     {
         listingId: 16,
+        createdAt: "2025-11-10T16:20:00Z",
         account: {
             userId: 2,
             name: "Brian Lee",
@@ -161,6 +166,7 @@ export const MOCK_LISTINGS = [
     },
     {
         listingId: 17,
+        createdAt: "2025-11-18T10:30:00Z",
         account: {
             userId: 2,
             name: "Brian Lee",
@@ -193,6 +199,7 @@ export const MOCK_LISTINGS = [
     },
     {
         listingId: 18,
+        createdAt: "2025-11-18T10:30:00Z",
         account: {
             userId: 2,
             name: "Brian Lee",
@@ -225,6 +232,7 @@ export const MOCK_LISTINGS = [
     },
     {
         listingId: 19,
+        createdAt: "2025-11-16T09:00:00Z",
         account: {
             userId: 2,
             name: "Brian Lee",
@@ -257,6 +265,7 @@ export const MOCK_LISTINGS = [
     },
     {
         listingId: 20,
+        createdAt: "2025-11-16T09:00:00Z",
         account: {
             userId: 3,
             name: "Rayan",
