@@ -237,8 +237,16 @@ function TutorListingForm() {
               <input
                 type="file"
                 id="sample-file"
-                accept=".mov, .mp4, .webm"
-                {...register("sample-file")}
+                accept="video/mp4, video/mov, video/webm"
+                {...register("sample-file", {
+                  required: "Sample video is required",
+                  validate: {
+                    isVideo: (files) => 
+                      files?.[0]?.type.startsWith("video/") || "only video files are allowed",
+                  },
+
+
+                })}
               />
             </div>
 
