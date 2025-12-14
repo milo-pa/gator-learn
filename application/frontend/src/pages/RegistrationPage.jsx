@@ -62,6 +62,7 @@ function RegistrationPage() {
               ${submitCount > 0 && errors.name ? "input-error" : ""}`}>
               <input
                 id="name"
+                placeholder="John Doe"
                 {...register("name", {
                   required: "Name is required"
                 })}
@@ -154,7 +155,10 @@ function RegistrationPage() {
           <div className={"form-row"}>
             <label htmlFor="name">Pronouns:</label>
             <div className={"input-wrapper small-input-wrapper"}>
-              <input id="name" />
+              <input
+                      id="name"
+                      placeholder="She/Her"
+              />
             </div>
             <div style={{ width: "195px" }}></div>
           </div>
