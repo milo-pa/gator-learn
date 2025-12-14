@@ -34,6 +34,7 @@
   background-color: colors.$color-surface-white;
   padding: 4px 8px;
   border-radius: 4px;
+  text-align: center;
 }
 
 .results-title-block {
@@ -54,108 +55,23 @@
   font-size: 1rem;
 }
 
-.results-list {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+
+.results-grid {
+    display: grid;
+    // Change it to auto if 4 is too small
+    grid-template-columns: repeat(4, minmax(260px, 1fr));
+    column-gap: 24px;
+    row-gap: 48px;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding:24px;
+    align-items: start;
+    box-sizing: border-box;
 }
 
-.tutor-card {
-  display: grid;
-  grid-template-columns: 160px 1fr;
-  gap: 18px;
-  padding: 12px;
-  background: colors.$color-surface-white;
-  border: 1px solid colors.$border-gray;
-  border-radius: 8px;
-}
 
-.tutor-image-wrapper {
-  display: flex;
-  align-self: center;
-  justify-content: center;
-}
-
-.tutor-image-placeholder {
-  width: 160px;
-  height: 160px;
-  background: colors.$color-surface-white;
-  border: 1px solid colors.$border-gray;
-  position: relative;
-  border-radius: 4px;
-}
-
-.tutor-info-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.tutor-info {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  color: colors.$color-text-main;
-}
-
-.tutor-name {
-  margin: 0;
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: colors.$color-text-main;
-}
-
-.tutor-subject {
-  margin: 0;
-  font-size: 1.2rem;
-  font-weight: 500;
-}
-
-.tutor-price {
-  margin: 0;
-  font-size: 1.2rem;
-  font-weight: 500;
-}
-
-.tutor-availability {
-  margin: 0;
-  font-size: 1.2rem;
-  font-weight: 500;
-}
-
-.tutor-link-button {
-  color: colors.$color-text-main;
-  border: none;
-  font-weight: 600;
-  padding: 8px 14px;
-  border-radius: 6px;
-  cursor: pointer;
-  text-decoration: underline;
-  margin-right: 12px;
-}
-
-.tutor-actions {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
 
 // Dark Mode
 body.dark-mode {
-  .tutor-name {
-    color: colors.$color-text-on-dark;
-  }
-
-  .tutor-link-button {
-    color: colors.$color-text-on-dark;
-  }
-
-  .tutor-info {
-    color: colors.$color-text-on-dark;
-  }
-
-  .tutor-card {
-    background: #353535;
-    border: 1px solid colors.$subtitle-text-gray;
-  }
+  
 }
