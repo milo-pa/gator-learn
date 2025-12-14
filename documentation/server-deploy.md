@@ -1,17 +1,7 @@
 # 📚 Tutoring Application Deployment & Server Documentation
 
-## Automatic Deployment
 
-Pushes to `main` automatically get deployed to the website through GitHub Actions.  
-
-You can also manually trigger deployment from any branch by starting the _"CI/CD on Push to Main"_ Workflow in GitHub Actions.
-- Note: This only takes effect after `.github/workflows/ci-cd.yml` is merged to default branch `main`
-
----
-
-## Manual Deployment (Outdated)
-
-Use Automatic Deployment when possible. Less error prone and we can track deployments.
+## 🚀 Deployment Steps (Recommended Order)
 
 1. **Deploy the Backend JAR File**
    - Copy your local build to the remote live deployment folder. The file **must be named** `SFSUTutoring-1.0.0.jar` to overwrite the current running version.
@@ -31,11 +21,11 @@ Use Automatic Deployment when possible. Less error prone and we can track deploy
 
 5. **Deploy Frontend Build (React)**
    - Copy the compiled frontend build (check [frontend notes](./frontend-notes.md)) to the Nginx serving directory. This step is last, ensuring the frontend calls the new, already-running backend.
-    > `scp -i <local path>/Tutoring_Server_Key.pem -r <local path>/build/* ec2-user@18.144.101.99:/var/www/tutoringapp`
+    > `scp -i <local path>/Tutoring_Server_Key.pem <local path>/build/* ec2-user@18.144.101.99:/var/www/tutoringapp`
 
 ---
 
-### ⚙️ Server File Paths & Configuration
+## ⚙️ Server File Paths & Configuration
 
 This section provides an overview of important file locations and configuration notes on the server. 
 System files used on the server are here in `/server_files`

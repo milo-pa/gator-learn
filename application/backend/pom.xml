@@ -41,19 +41,6 @@
                 </exclusion>
             </exclusions>
         </dependency>
-
-        <!-- MySQL Connector/J for MySQL database connectivity -->
-        <dependency>
-            <groupId>com.mysql</groupId>
-            <artifactId>mysql-connector-j</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-
-        <!-- Spring Data JPA for database interactions e.g. Entity annotations to represent rows in a table -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa</artifactId>
-        </dependency>
     </dependencies>
 
     <build>

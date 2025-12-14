@@ -32,7 +32,17 @@ target/
 logs/
 *.log
 
-# Secret dirs (never commit)
+# --- Spring Boot config & secrets ---
+# Keep a safe default config in repo, ignore env-specific overrides
+application-*.yml
+application-*.properties
+!application.yml
+!application.properties.example
+
+# Env files / secret dirs (never commit)
+.env
+.env.*
+.envrc
 secrets/
 secrets/**
 
