@@ -113,16 +113,16 @@
 .yellow-sticky {
   position: static;
   background: colors.$yub-gold;
+  padding: 4px 6px;
   color: colors.$color-text-main;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  
+
 
   .yub-left {
     display: flex;
-    gap: 8px;
     align-items: center;
     width: 100%;
   }
@@ -130,13 +130,13 @@
   .yub-link {
     text-decoration: none;
     color: colors.$color-text-main;
-    font-weight: 700;
+    font-weight: 600;
     display: inline-block;
-    padding: 8px 16px;
+    padding: 8px 12px;
     border: 2px solid transparent;
     border-radius: 8px;
     transition: background-color 0.2s ease, border-color 0.2s ease;
-    font-size: 14px;
+    font-size: 16px;
 
     &:hover {
       background-color: colors.$yub-hover;
@@ -144,11 +144,6 @@
       color: colors.$color-text-main;
       cursor: pointer;
     }
-
-    &.right-link {
-      margin-left: auto;
-    }
-
   }
 }
 
