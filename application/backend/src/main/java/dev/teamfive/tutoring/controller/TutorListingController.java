@@ -16,7 +16,15 @@ package dev.teamfive.tutoring.controller;
 import java.util.List;
 import java.util.Map;
 
+import jakarta.servlet.http.HttpSession;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,19 +34,18 @@ import dev.teamfive.tutoring.repository.TutorListingRepository;
 
 /**
  * This class defines the API endpoint for managing tutor listings.
- * <p>
- * Currently, it only has GET endpoints, which when accessed externally will return json data:
- * TutorListing object(s) serialized by Jackson library
  */
 @RestController
 @RequestMapping("api/listings")
 public class TutorListingController
 {
     private final TutorListingRepository repository;
+    private final HttpSession session;
 
-    public TutorListingController(TutorListingRepository repository)
+    public TutorListingController(TutorListingRepository repository, HttpSession session)
     {
         this.repository = repository;
+        this.session = session;
     }
 
     /**
@@ -99,5 +106,34 @@ public class TutorListingController
         String courseNumber = params.get("courseNumber");
 
         return repository.findBySearchQueryCombination(listingId, listingDesc, accountName, subjectName, courseName, courseNumber);
+    }
+
+    @PostMapping("/create")
+    public ResponseEntity<?> createListing(@RequestBody TutorListing listing)
+    {
+        Long userId = (Long) session.getAttribute("userId");
+
+        if (userId == null)
+        {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("You must be logged in to create a listing");
+        }
+
+        TutorListing saved = repository.save(listing);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(saved);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Void> deleteListing(@PathVariable Long id)
+    {
+        try
+        {
+            repository.deleteById(id);
+            return ResponseEntity.noContent().build();
+        }
+        catch (EmptyResultDataAccessException e)
+        {
+            return ResponseEntity.notFound().build();
+        }
     }
 }
