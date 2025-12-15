@@ -12,33 +12,48 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import {useLocation} from 'react-router-dom';
-import React, { useEffect, useState} from 'react';
-import { Link } from "react-router-dom";
-import TutorListingService from '../service/tutorsListingService';
+import { useLocation } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { mockListingService as TutorListingService } from "../service/mockTutorListingService";
+import MessageTutorPopUp from "../component/MessageTutorPopUp";
+import ListingCardComponent from '../component/ListingCardComponent';
 
 /* Custom hook to parse query parameters */
 function useQueryParams() {
-    const {search} = useLocation();
+    const { search } = useLocation();
     return new URLSearchParams(search);
 }
 
 function SearchResultsPage() {
     const params = useQueryParams();
 
-    const subject = (params.get("subject") || "").toLowerCase().trim();
+    const subject = (params.get("subject") || "all").toLowerCase().trim();
     const course = (params.get("course") || "").toLowerCase().trim();
     const all = (params.get("all") || "").toLowerCase().trim();
 
     const [listings, setListings] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
-    const [sortOrder,setSortOrder] = useState(null);
+    const [showPopUp, setShowPopUp] = useState(false);
+    const [selectedListing, setSelectedListing] = useState(null);
+    const [sortKey, setSortKey] = useState("");
+
+    // open popup for a specific listing
+    const handleMessageClick = (listing) => {
+        setSelectedListing(listing);
+        setShowPopUp(true);
+    };
+
+    // close popup
+    const handleClosePopUp = () => {
+        setShowPopUp(false);
+        setSelectedListing(null);
+    };
 
     function removeDuplicates(arr) {
         const uniqueIds = new Set();
         return arr.filter((item) => {
-            if(uniqueIds.has(item.id)) {
+            if (uniqueIds.has(item.id)) {
                 return false;
             }
             uniqueIds.add(item.id);
@@ -46,12 +61,12 @@ function SearchResultsPage() {
         });
     }
 
-    useEffect(() => { 
+    useEffect(() => {
         async function loadListings() {
             try {
                 setLoading(true);
                 setError(null);
-                
+
                 if (all) {
                     const [subjectRes, courseRes] = await Promise.all([
                         TutorListingService.getListingsBySubjectSubstring(all),
@@ -64,102 +79,116 @@ function SearchResultsPage() {
                     setListings(removeDuplicates(combined));
                     setLoading(false);
                     return;
-                    
+
                 }
-                if (subject) {
+                if (subject && subject !== "all") {
                     const response = await TutorListingService.getListingsBySubjectSubstring(subject);
                     setListings(response.data);
                     setLoading(false);
                     return;
-                } 
+                }
                 if (course) {
                     const response = await TutorListingService.getListingsByCourseSubstring(course);
                     setListings(response.data);
-                    setLoading(false);  
+                    setLoading(false);
                     return;
-                } 
+                }
                 const response = await TutorListingService.getAllListings();
                 setListings(response.data);
                 setLoading(false);
-                
+
             } catch (error) {
                 setError("Failed to fetch listings.");
                 setLoading(false);
             }
         }
-
         loadListings();
     }, [subject, course, all]);
-    
-    const handleChange = (e) => {
-        setSortOrder(e.target.value || null);
+
+    const getCreatedAtDate = (listing) => {
+        const date = new Date(listing.createdAt);
+        return isNaN(date) ? 0 : date;
     }
 
-    const sortedListings = sortOrder 
-        ?[...listings].sort((a,b) => {
-            const priceA = Number(a.pricePerHour) || 0;
-            const priceB = Number(b.pricePerHour) || 0;
+    const sortedListings = [...listings].sort((a, b) => {
+        if (sortKey === "asc") {
+            return (Number(a.pricePerHour) - Number(b.pricePerHour));
+        }
+        if (sortKey === "desc") {
+            return (Number(b.pricePerHour) - Number(a.pricePerHour));
+        }
+        if (sortKey === "newest") {
+            return getCreatedAtDate(b) - getCreatedAtDate(a);
+        }
+        if (sortKey === "oldest") {
+            return getCreatedAtDate(a) - getCreatedAtDate(b);
+        }
+        return 0;
+    });
 
-            if (sortOrder === "asc") {
-                return priceA - priceB;
-            } else {
-                return priceB - priceA;
-            }
-        })
-        : listings;
+    const toCardListing = (l) => ({
+        id: l.listingId,
+        createdAt: l.createdAt,
+        tutorName: l.account?.name,
+        subject: l.subject?.subjectName,
+        course: l.course?.courseName,
+        pricePerHour: l.pricePerHour,
+        description: l.description,
+        availableTime: l.availableTime,
+        profileImageUrl: l.account?.photoPath,
+    })
+    
 
     return (
         <main className="search-results-page">
 
             <header className="results-header">
-                <div className = "results-header-left">
+                <div className="results-header-left">
                     <h1 className="results-title">Current Listings</h1>
                     <p className="results-subtitle">
                         Found <strong>{listings.length}</strong> {listings.length === 1 ? 'tutor' : 'tutors'}
                     </p>
                 </div>
                 <div className="results-header-right">
-                    
-                    <select 
-                        id = "results-sort-select"
+                    <select
+                        id="results-sort-select"
                         className="sort-dropdown"
-                        value={sortOrder || ""}
-                        onChange={handleChange} 
+                        value={sortKey}
+                        onChange={(e) => setSortKey(e.target.value)}
                     >
-                        <option value="">-- Sort by price--</option>
-                        <option value="asc">$ to $$$ (cheapest first)</option>
-                        <option value="desc">$$$ to $ (most expensive first)</option>
+                        <option value="">-- Sort --</option>
+                        <option value="asc">$ to $$$</option>
+                        <option value="desc">$$$ to $</option>
+                        <option value="newest">Newest Listings</option>
+                        <option value="oldest">Oldest Listings</option>
                     </select>
-
                 </div>
             </header>
             {loading && <p className="loading-message">Loading listings...</p>}
             {error && <p className="error-message">Error: {error}</p>}
-            <section className="results-list">
-                {sortedListings.map((listing) => (
-                    <article key={listing.listingId} className="tutor-card">
-                        <div className="tutor-image-wrapper">
-                            {/* Placeholder for tutor image */}
-                            <img className="tutor-image-placeholder" src = "/images/tutor/iu_.png" alt="Tutor" />
-                        </div>
-                        <div className="tutor-info">
-                            <div className="tutor-info-header">
-                                <h2 className="tutor-name">{listing.account.name}</h2>
-                                <Link className="tutor-link-button" to={`/listing/${encodeURIComponent(listing.listingId)}`}>View details</Link>
-                            </div>
-                            <p className="tutor-subject">Subject: {listing.subject?.subjectName}</p>
-                            <p className="tutor-price">Price: ${listing.pricePerHour}/hr</p>
-                        <div className="tutor-actions">
-                             <p className="tutor-availability">Availability: {listing.availableTime}</p>
-                            <button className="tutor-message-button">MESSAGE TUTOR</button>
-                        </div>
-                    </div>
-                </article>
-                ))}
+            <section className="results-grid">
+                {sortedListings.map((listing) => {
+                    const cardListing = toCardListing(listing);
+                    return (
+                        <ListingCardComponent
+                            key={listing.listingId}
+                            listing={cardListing}
+                            onMessage={handleMessageClick}
+                        />
+                    );
+                })}
                 {listings.length === 0 && (
                     <p className="no-results">No tutors found matching your criteria.</p>
                 )}
             </section>
+
+            {showPopUp && selectedListing && (
+                <MessageTutorPopUp
+                    listing={selectedListing}
+                    onClose={handleClosePopUp}
+                />
+            )}
+
         </main>
     );
 }

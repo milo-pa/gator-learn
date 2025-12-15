@@ -1,0 +1,115 @@
+.listing-card {
+    // card wrapper color 
+    // fff0b6  - pale yellow might save later
+    background: #fff0b6;
+    padding: 16px;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.listing-card:hover {
+    background: #ffeb52;
+}
+
+.listing-card-img {
+    width: 100%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    background: #ffffff;
+    display: block;
+    border-radius: 6px;
+}
+
+.listing-card-body {
+    margin-top: 12px;
+    padding: 0 4px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.listing-card-name {
+    margin: 0 0 10px 0;
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 1.05;
+    display: inline-block;
+    padding: 4px 0px;
+    text-decoration: underline;
+}
+
+.listing-card-row {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin: 6px 0;
+    font-size: 16px;
+}
+
+.listing-card-label {
+    font-weight: 600;
+    min-width: 90px;
+}
+
+.listing-card-value {
+    font-weight: 400;
+    flex: 1;
+}
+
+.listing-card-availability {
+    margin-top: 10px;
+    display: block;
+}
+
+.listing-card-availability .listing-card-label {
+    min-width: 0;
+    display: block;
+    margin-bottom: 6px;
+}
+
+.listing-card-times {
+    margin: 0 0 0 18px;
+    padding: 0;
+    line-height: 1.35;
+
+}
+.listing-card-times li {
+    margin: 2px 0;
+}
+
+.listing-card-btns {
+    margin-top: auto;
+    padding-top: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.listing-card-link {
+    background: none;
+    border: none;
+    text-decoration: underline;
+    cursor: pointer;
+    padding: 0;
+    text-align: left;
+    font-weight: 700;
+}
+
+.listing-card-message {
+    width: auto;
+    max-width: 220px;
+    min-width: 160px;
+    padding: 10px 18px;
+    font-size: 1rem;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    background: #ffcc00;
+    border-radius: 4px;
+}

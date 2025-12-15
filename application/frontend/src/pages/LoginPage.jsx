@@ -38,101 +38,92 @@ function LoginPage() {
   };
 
   return (
-      <div className="form-page">
-        <header className="form-header">
-          <h1>Gator Learn Login</h1>
-          <div className="underline"></div>
-        </header>
+    <div className="form-page">
+      <header className="form-header">
+        <h1>Gator Learn Login</h1>
+        <div className="underline"></div>
+      </header>
 
-        <main className="form-main">
-          <form className="form" onSubmit={handleSubmit(onSubmit)}>
-            {/* School Email */}
-            <div className="form-row">
-              <label htmlFor="school-email">School Email:</label>
-              <div className={`input-wrapper 
-                ${submitCount > 0 && errors.email ? "input-error" : ""}`}>
-                <input
-                    id="school-email"
-                    placeholder="example@sfsu.edu"
-                    {...register("email", {
-                      required: "Email is required",
-                      validate: value =>
-                          value.endsWith("@sfsu.edu") || "Email must end with @sfsu.edu"
-                    })}
-                />
-              </div>
+      <main className="form-main">
+        <form className="form" onSubmit={handleSubmit(onSubmit)}>
+
+          {/* School Email */}
+          <div className="form-row">
+            <label htmlFor="school-email">SFSU Email:</label>
+
+            <div className={`input-wrapper 
+              ${submitCount > 0 && errors.email ? "input-error" : ""}`}>
+              <input
+                  id="school-email"
+                  placeholder="example@sfsu.edu"
+                  {...register("email", {
+                    required: "Email is required",
+                    validate: value =>
+                        value.endsWith("@sfsu.edu") || "Email must end with @sfsu.edu"
+                  })}
+              />
             </div>
-
-            {/* Password */}
-            <div className="form-row">
-              <label htmlFor="password">Password:</label>
-              <div className={`input-wrapper password-wrapper
-                ${submitCount > 0 && errors.password ? "input-error" : ""}`}>
-                <input
-                    type={showPassword ? "text" : "password"}
-                    id="password"
-                    {...register("password", {
-                      required: "Password is required",
-                      minLength: {
-                        value: 6,
-                        message: "Min password length is 6 characters"
-                      }
-                    })}
-                />
-                <button
-                    type="button"
-                    className="toggle-password"
-                    onClick={() => setShowPassword((prev) => !prev)}
-                >
-                  {showPassword ? "Hide" : "Show"}
-                </button>
-              </div>
-            </div>
-
-            {/* Error Message Popups*/}
-            {submitCount > 0 && (errors.email || errors.password) && (
-                <div className="error-popup-container">
-                  {errors.email && (
-                      <div className="error-popup">{errors.email.message}</div>
-                  )}
-                  {errors.password && (
-                      <div className="error-popup">{errors.password.message}</div>
-                  )}
-                </div>
+            {submitCount > 0 && errors.email && (
+                    <div className="error-text desc-text">{errors.email.message}</div>
             )}
+          </div>
 
-            {/* Cancel/Login Buttons */}
-            <div className="button-row">
-              <button type="button" className="btn btn-secondary">
-                <Link to="/" style={{ color: "inherit", textDecoration: "none" }}>
-                  CANCEL
-                </Link>
-              </button>
-              <button type="submit" className="btn btn-primary">
-                LOGIN
+          {/* Password */}
+          <div className="form-row">
+            <label htmlFor="password">Password:</label>
+            <div className={`input-wrapper password-wrapper
+              ${submitCount > 0 && errors.password ? "input-error" : ""}`}>
+              <input
+                  type={showPassword ? "text" : "password"}
+                  id="password"
+                  {...register("password", {
+                    required: "Password is required",
+                    minLength: {
+                      value: 6,
+                      message: "Min password length is 6 characters"
+                    }
+                  })}
+              />
+              <button
+                  type="button"
+                  className="toggle-password"
+                  onClick={() => setShowPassword((prev) => !prev)}
+              >
+                {showPassword ? "Hide" : "Show"}
               </button>
             </div>
-          </form>
-
-          {/* Forgot Password */}
-          <div className="helper-row">
-            <p className="helper-text">Forgot your password?</p>
-            <button type="button" className="btn btn-light">
-              Click here
-            </button>
+            {submitCount > 0 && errors.password && (
+                    <div className="error-text desc-text">{errors.password.message}</div>
+            )}
           </div>
 
-          {/* Sign Up */}
-          <div className="helper-row">
-            <p className="helper-text">Don’t have an account?</p>
-            <button type="button" className="btn btn-secondary">
-              <Link to="/register" style={{ color: "inherit", textDecoration: "none" }}>
-                SIGN UP
-              </Link>
+          {/* Cancel/Login Buttons */}
+          <div className="button-row">
+            <Link className="btn btn-secondary" to="/">
+              CANCEL
+            </Link>
+            <button type="submit" className="btn btn-primary">
+              LOGIN
             </button>
           </div>
-        </main>
-      </div>
+        </form>
+
+        {/* Sign Up */}
+        <div className="helper-row">
+          <p className="helper-text">Don’t have an account?</p>
+            <Link className="btn btn-secondary" to="/register">
+              SIGN UP
+            </Link>
+        </div>
+
+        {/* Forgot Password */}
+        <div className="helper-row">
+          <button type="button" className="btn btn-light">
+            Forgot your password?
+          </button>
+        </div>
+      </main>
+    </div>
   );
 }
 

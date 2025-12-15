@@ -1,27 +1,26 @@
-
+@use "./colors";
 
 .create-listing-page {
     margin: 3rem auto 4rem;
     padding: 0 2rem;
-    color: $color-text-main;
+    color: colors.$color-text-main;
     text-align: center;
     width: 700px;
 
-
     h1 {
-        font-size: 3rem;
+        font-size: 2.6rem;
         font-weight: 700;
         margin-bottom: 2.5rem;
         padding-bottom: 0.5rem;
-        border-bottom: 2px solid $color-text-main;
+        border-bottom: 2px solid colors.$color-text-main;
     }
 }
 
 .tutor-listing-form {
     width: 700px;
     margin: 3rem auto 4rem;
+    border-radius: 6px;
 }
-
 
 .row-subject {
     display: flex;
@@ -32,21 +31,21 @@
 .label-subject {
     width: 180px;
     text-align: right;
-    font-size: 1.6rem;
+    font-size: 1.25rem;
     font-weight: 600;
-    color: $color-text-main;
+    color: colors.$color-text-main;
     margin-right: 1rem;
 }
 
 .input-subject {
     flex: 1;
     padding: 0.75rem 1rem;
-    font-size: 1.3rem;
+    font-size: 1rem;
     border: 1px solid #d1d1d1;
     border-radius: 4px;
-    background: $color-surface-white;
-    color: $color-text-main;
-
+    background: colors.$color-surface-white;
+    color: colors.$color-text-main;
+    height: 42px;
 }
 
 .row-course {
@@ -58,20 +57,21 @@
 .label-course {
     width: 180px;
     text-align: right;
-    font-size: 1.6rem;
+    font-size: 1.25rem;
     font-weight: 600;
-    color: $color-text-main;
+    color: colors.$color-text-main;
     margin-right: 1rem;
 }
 
 .input-course {
     flex: 1;
     padding: 0.75rem 1rem;
-    font-size: 1.3rem;
+    font-size: 1rem;
     border: 1px solid #d1d1d1;
     border-radius: 4px;
-    background: $color-surface-white;
-    color: $color-text-main;
+    background: colors.$color-surface-white;
+    color: colors.$color-text-main;
+    height: 42px;
 }
 
 .row-price {
@@ -83,9 +83,9 @@
 .label-price {
     width: 180px;
     text-align: right;
-    font-size: 1.6rem;
+    font-size: 1.25rem;
     font-weight: 600;
-    color: $color-text-main;
+    color: colors.$color-text-main;
     margin-right: 1rem;
 }
 
@@ -95,8 +95,9 @@
     font-size: 1.3rem;
     border: 1px solid #d1d1d1;
     border-radius: 4px;
-    background: $color-surface-white;
-    color: $color-text-main;
+    background: colors.$color-surface-white;
+    color: colors.$color-text-main;
+    height: 16px;
 }
 
 .price-unit {
@@ -114,25 +115,24 @@
 .label-description {
     width: 180px;
     text-align: right;
-    font-size: 1.6rem;
+    font-size: 1.25rem;
     font-weight: 600;
-    color: $color-text-main;
+    color: colors.$color-text-main;
     margin-right: 1rem;
     padding-top: 0.4rem;
 }
 
 .input-description {
     flex: 1;
-    min-height: 200px;
+    min-height: 100px;
     padding: 1rem;
-    font-size: 1.3rem;
+    font-size: 1rem;
     border: 1px solid #d1d1d1;
     border-radius: 4px;
-    background: $color-surface-white;
-    color: $color-text-main;
+    background: colors.$color-surface-white;
+    color: colors.$color-text-main;
     resize: vertical;
 }
-
 
 .row-availability {
     display: flex;
@@ -143,22 +143,29 @@
 .label-availability {
     width: 180px;
     text-align: right;
-    font-size: 1.6rem;
+    font-size: 1.25rem;
     font-weight: 600;
-    color: $color-text-main;
+    color: colors.$color-text-main;
     margin-right: 1rem;
     padding-top: 0.2rem;
 }
 
 .availability-block {
-    flex: 1;
+  padding: 10px 12px;
+  border-radius: 6px;
+}
+
+.availability-block.input-error {
+  border: 1px solid #e63946;
+  border-radius: 6px;
+  padding: 10px 12px;
 }
 
 .days-column {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    font-size: 1.3rem;
+    font-size: 0.85rem;
 }
 
 .day-row {
@@ -174,12 +181,10 @@
 }
 
 .day-checkbox input[type="checkbox"] {
-    width: 22px;
-    height: 22px;
-    accent-color: $color-text-on-dark;
+    width: 18px;
+    height: 18px;
+    accent-color: colors.$color-text-on-dark;
 }
-
-
 
 .day-time-range {
     display: flex;
@@ -191,7 +196,7 @@
 
 .time-label {
     font-weight: 600;
-    font-size: 1.25rem;
+    font-size: 1rem;
 }
 
 .time-input {
@@ -200,6 +205,17 @@
     font-size: 1.25rem;
     border: 1px solid #b5b5b5;
     border-radius: 5px;
+    height: 15px;
+}
+
+.time-input.input-error {
+  outline: 1px solid #e63946;
+  border-color: transparent;
+}
+
+.day-error {
+  margin-left: 2.1rem; // same indent as your day-time-range
+  margin-top: 6px;
 }
 
 .row-optional {
@@ -211,9 +227,9 @@
 .label-optional {
     width: 180px;
     text-align: right;
-    font-size: 1.6rem;
+    font-size: 1.25rem;
     font-weight: 600;
-    color: $color-text-main;
+    color: colors.$color-text-main;
     margin-right: 1rem;
     padding-top: 0.2rem;
 }
@@ -234,19 +250,19 @@
 }
 
 .optional-label {
-    font-size: 1.3rem;
+    font-size: 1rem;
     font-weight: 600;
-    color: $color-text-main;
+    color: colors.$color-text-main;
 }
 
 .file-button {
     position: relative;
     display: inline-block;
-    padding: 0.45rem 1rem;
+    padding: 0.35rem 0.85rem;
     border-radius: 4px;
-    border: 1px solid $color-text-main;
-    background: $color-surface-white;
-    font-size: 0.95rem;
+    border: 1px solid colors.$color-text-main;
+    background: colors.$color-surface-white;
+    font-size: 0.85rem;
     font-weight: 600;
     cursor: pointer;
 }
@@ -259,7 +275,7 @@
 }
 
 .optional-hint {
-    font-size: 1rem;
+    font-size: 0.85rem;
     color: #505050;
 }
 
@@ -270,6 +286,8 @@
     align-items: center;
     gap: 5rem;
 }
+
+
 
 .btn-cancel,
 .btn-submit {
@@ -282,7 +300,11 @@
 
 .btn-cancel {
     border: 1px solid #d1d1d1;
-    background: $color-surface-white;
+    background: colors.$color-surface-white;
+}
+
+.btn-cancel:hover {
+    background: #b5b5b5;
 }
 
 .btn-submit {
@@ -291,7 +313,7 @@
 }
 
 .btn-submit:hover {
-    background: $yub-hover;
+    background: colors.$yub-hover;
 }
 
 /* ERRORS */
@@ -300,4 +322,48 @@
     margin: 0.2rem 0 0.6rem 180px;
     font-size: 0.9rem;
     color: #c0392b;
+}
+
+body.dark-mode {
+    .create-listing-page {
+        color: colors.$color-text-on-dark;
+    }
+    .tutor-listing-form {
+        color: colors.$color-text-on-dark;
+        background-color: colors.$color-surface-dark;
+    }
+    .label-availability,
+    .label-description,
+    .label-price,
+    .label-course,
+    .label-subject,
+    .label-optional,
+    .optional-label {
+        color: colors.$color-text-on-dark;
+    }
+
+    .input-subject,
+    .input-course,
+    .input-price,
+    .input-description,
+    .time-input {
+        background: colors.$gray-input-bg-dark;
+        border: 1px solid colors.$border-dark;
+        color: #222;
+    }
+
+    .file-button {
+        border: 1px solid colors.$color-text-on-dark;
+        background: colors.$color-surface-dark;
+        color: colors.$color-text-on-dark;
+    }
+
+    .btn-cancel {
+        background: colors.$gray-input-bg-dark;
+        border: 1px solid colors.$border-dark;
+
+        &:hover {
+            background: colors.$hover-dark;
+        }
+    }
 }
