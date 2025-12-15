@@ -224,6 +224,7 @@ body { background: var(--bg); color: var(--ink); }
     background: #fff;
     border-top: 1px solid #f1f5f9;
     color: #111827;               /* ensure row text is dark */
+    cursor: pointer;
 }
 
 .db-table__empty {

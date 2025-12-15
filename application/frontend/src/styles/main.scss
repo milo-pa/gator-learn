@@ -1,0 +1,85 @@
+@use "./colors";
+@use "./buttons";
+@use "about-page";
+@use "./user-profile";
+@use "./tutor-listing-page";
+@use "./tutor-listing-form";
+@use "./tutor-listing";
+@use "./pop-up";
+@use "./message-pop-up";
+@use "./loading";
+@use "./dashboard";
+@use "./top-bar";
+@use "./forms";
+@use "./registration";
+@use "./listing-card";
+
+/* Global Styles- default light mode */
+body {
+	background-color: colors.$page-bg-light;
+	color: colors.$color-text-main;
+}
+
+/* Dark Mode Styles */
+body.dark-mode {
+	background-color: colors.$page-bg-dark;
+	color: colors.$color-text-on-dark;
+}
+
+/* Content Styles */
+main {
+	padding: 24px 16px;
+	margin: 0 auto;
+}
+.back-link {
+	margin: 24px 0;
+	color: colors.$card-text-muted-gray;
+	text-decoration: underline;
+}
+
+/* Home Page Styles */
+.home-container {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	align-items: center;
+	gap: 40px;
+	max-width: 1200px;
+	margin: 60px auto;
+	padding: 0 20px;
+}
+.home-image {
+	width: 100%;
+	aspect-ratio: 1 / 1;
+	background-color: colors.$home-img-bg;
+	border: 1px solid colors.$gray-border-stronger;
+}
+.home-text {
+	h1 {
+		font-size: 2.8rem;
+		font-weight: 900;
+		margin-bottom: 20px;
+		color: colors.$gray-text-home;
+	}
+	p {
+		font-size: 1rem;
+		line-height: 1.5;
+		margin-bottom: 16px;
+		color: colors.$gray-text-home;
+		max-width: 480px;
+	}
+}
+/* Assuming responsive styles for smaller screens */
+@media (max-width: 900px) {
+	.home-container {
+		grid-template-columns: 1fr;
+		text-align: center;
+	}
+	.home-text {
+		h1 {
+			font-size: 2.2rem;
+		}
+		p {
+			margin: 0 auto 16px;
+		}
+	}
+}

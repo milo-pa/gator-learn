@@ -1,0 +1,224 @@
+@use "./colors";
+
+// Header Styles - Purple Bar
+.header-wrapper {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.purple-titlebar {
+  position: static;
+  background: #2f1e77;
+  padding: 10px 24px 10px 24px;
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.ptb-inner {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin: 0 auto;
+  gap: 24px;
+}
+
+.brand-section {
+  display: flex;
+}
+
+.brand-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: colors.$color-text-on-dark;
+  font-weight: 600;
+  gap: 8px;
+}
+
+#logo {
+  width: 40px;
+  height: 40px;
+}
+
+.spacer {
+  flex: 1;
+  &.demo-line {
+    padding: 6px 16px 10px;
+    text-align: right;
+    font-size: 0.8rem;
+    font-weight: 400;
+  }
+}
+
+.search-container {
+  display: flex;
+  align-items: stretch;
+  background: colors.$card-text-gray;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 2px solid #febd69;
+  height: 36px;
+  flex: 0 1 520px;
+  max-width: 60vw;
+  
+
+  .search-btn {
+    height: 100%;
+    border-radius: 0 8px 8px 0;
+    border: none;
+    padding-inline: 12px;
+    font-weight: 600;
+  }
+}
+
+.search-category {
+  background: colors.$border-gray;
+  border: none;
+  width: 120px;
+  padding: 10px auto;
+  font-size: 12px;
+  outline: none;
+  text-align: center;
+  white-space: nowrap;  
+}
+
+.search-input {
+  flex: 1;
+  height: 100%;
+  border: none;
+  outline: none;
+  padding: 0 10px;
+  font-size: 14px;
+  color: colors.$color-text-main;
+}
+
+.login-button {
+  background-color: colors.$yub-gold;
+  color: colors.$color-text-main;
+  border: none;
+  font-weight: 600;
+  font-size: 0.85rem;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  flex: 0 0 auto;
+  text-decoration: none;
+}
+
+// Yellow Bar Styles
+.yellow-sticky {
+  position: static;
+  background: colors.$yub-gold;
+  padding: 4px 6px;
+  color: colors.$color-text-main;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+
+
+  .yub-left {
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+
+  .yub-link {
+    text-decoration: none;
+    color: colors.$color-text-main;
+    font-weight: 600;
+    display: inline-block;
+    padding: 8px 12px;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+    font-size: 16px;
+
+    &:hover {
+      background-color: colors.$yub-hover;
+      border-color: colors.$border-accent-gold;
+      color: colors.$color-text-main;
+      cursor: pointer;
+    }
+  }
+}
+
+.profile-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  object-fit: cover;
+  cursor: pointer;
+  border: 2px solid #d0d0d0;
+  background-color: #e6e6e6;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.profile-icon:hover {
+  opacity: 0.85;
+}
+
+.brand {
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: colors.$color-text-on-dark;
+  text-wrap: nowrap;
+}
+
+.brand-team {
+  font-size: 15px;
+  font-weight: 700;
+  margin-left: 4px;
+  color: white;
+  position: relative;
+  text-wrap: nowrap;
+  align-self: center;
+}
+
+.brand-link {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  text-decoration: none;
+}
+
+.brand-link img {
+  align-self: center;
+}
+
+.demo-line {
+  text-align: right;
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: white;
+}
+
+// Dark Mode
+body.dark-mode {
+  .yub-link {
+    color: colors.$color-text-main;
+  }
+
+  #search-bar {
+    border: 1px solid colors.$border-gray;
+  }
+
+  .search-category {
+    background: #3c3c3c;
+    color: colors.$color-text-on-dark;
+    border-right: solid colors.$subtitle-text-gray;
+  }
+
+  .search-input {
+    background: #2b2b2b;
+    color: colors.$card-text-gray;
+  }
+}

@@ -1,89 +1,84 @@
-import React from "react";
+/*
+ * Institution: San Francisco State University
+ * Class: CSC 648 Project, Team 05
+ * Project: Gator Learn, Tutoring Website
+ * Author: Samantha Chombo-Rodriguez 
+ * Created: 11/18/25
+ * Description: Component for hosting page navigation menu links.
+ *
+ * Copyright (c) 2025 San Francisco State University Team 05
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { mockListingService as TutorListingService } from "../service/mockTutorListingService";
 
-import {MOCK_USER, MOCK_USER_LISTINGS} from "../mock/mockUser";
+export default function UserProfilePage() {
+    const [listings, setListings] = useState([]);
+    const navigate = useNavigate();
 
-function UserProfilePage() {
+    useEffect(() => {
+        TutorListingService.getListingsByAccount(1).then((res) => setListings(res.data));
+    }, []);
+
+    if (!listings.length) {
+        return null;
+    }
 
     return (
         <main className="user-profile-page">
             <header className="user-header">
                 <div className="user-photo-wrapper">
-                    <img 
-                        src={MOCK_USER.profileImage}
-                        alt={`${MOCK_USER.name} profile`}
-                        className="user-photo"/>
+                    <img src="/images/tutor/iu_.png" alt={`${listings[0].account.name}'s profile`} className="user-photo" />
                 </div>
                 <div className="user-info">
-                    <h1 className="user-name">{MOCK_USER.name}</h1>
-                    <p className="user-pronouns">{MOCK_USER.pronouns}</p>
-                    <p className="user-bio">{MOCK_USER.bio}</p>
-
+                    <h1 className="user-name">{listings[0].account.name}</h1>
+                    <p className="user-pronouns">{listings[0].account.pronouns}</p>
+                    <p className="user-bio">{listings[0].account.description}</p>
                 </div>
             </header>
             <section className="user-listings-section">
                 <h2 className="user-listings-title">Tutor Listings</h2>
-                {MOCK_USER_LISTINGS.length === 0 && (
-                    <p className="no-listings">
-                        Currently no listings posted.
-
-                    </p>
-                )}
+                {listings.length === 0 && <p className="no-listings">Currently no listings posted.</p>}
 
                 <div className="user-listing-list">
-                    {MOCK_USER_LISTINGS.map((listing) => (
+                    {listings.map((listing) => (
                         <article key={listing.id} className="user-listing-card">
                             <div className="listing-image-wrap">
-                                <img
-                                    src="/images/tutor/iu_.png"
-                                    alt="Tutor"
-                                    className="listing-image"
-                                />
-
+                                <img src="/images/tutor/iu_.png" alt="Tutor" className="listing-image" />
                             </div>
 
                             <div className="listing-main">
-                                <h3 className="listing-tutor-name">{MOCK_USER.name}</h3>
+                                <h3 className="listing-tutor-name">{listings[0].account.name}</h3>
                                 <p className="listing-tutor-for">
                                     <span className="listing-label">Tutoring for:</span>{" "}
                                     <span className="listing-value">
-                                        {listing.subject} - {listing.course}
+                                        {listing.course.courseName} - {listing.course.courseNumber}
                                     </span>
-
                                 </p>
                                 <p className="listing-price">
                                     <span className="listing-label">Price:</span>{" "}
-                                    <span className="listing-value">
-                                        ${listing.pricePerHour}/hr
-                                    </span>
+                                    <span className="listing-value">${listing.pricePerHour}/hr</span>
                                 </p>
                                 <p className="listing-times">
                                     <span className="listing-label">Times Available:</span>{" "}
-                                    <span className="listing-value">
-                                        {listing.timeAvailable}
-                                    </span>
+                                    <span className="listing-value">{listing.availableTime}</span>
                                 </p>
                             </div>
                             <div className="listing-action">
-                                <button className="listing-details-btn">
+                                <button
+                                    className="listing-details-btn"
+                                    onClick={() => navigate(`/listing/${encodeURIComponent(listing.listingId)}`)}
+                                >
                                     View more details
                                 </button>
-                                <button className="listing-message-btn">
-                                    MESSAGE TUTOR
-                                </button>
-
                             </div>
-
                         </article>
                     ))}
-
                 </div>
-
-
             </section>
-
         </main>
-
     );
 }
-
-export default UserProfilePage;

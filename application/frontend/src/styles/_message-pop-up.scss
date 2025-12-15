@@ -1,0 +1,94 @@
+@use "./colors";
+
+.popup.message-popup {
+  position: relative;
+  width: 640px;
+  max-width: 95vw;
+  padding: 24px 28px 20px;
+  border-radius: 12px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+  text-align: left;
+}
+
+.message-popup-title {
+  font-size: 1.6rem;
+  font-weight: 800;
+  margin: 0 32px 8px 0;
+  color: colors.$color-text-main;
+}
+
+.message-popup-strong {
+  text-decoration: underline;
+}
+
+.message-popup-divider {
+  height: 2px;
+  background-color: colors.$border-gray;
+  margin-bottom: 16px;
+}
+
+.message-popup-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.message-popup-label {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: colors.$color-text-main;
+}
+
+.message-popup-textarea {
+  width: 100%;
+  min-height: 80px;
+  border-radius: 6px;
+  border: 1px solid colors.$border-gray;
+  background: #e4e4e4;
+  font-size: 0.95rem;
+  color: colors.$color-text-main;
+  resize: none;
+  outline: none;
+  margin-left: 0;
+  padding-left: 10px;
+  padding-right: 10px;
+  box-sizing: border-box;
+}
+
+.message-popup-textarea-comments {
+  min-height: 130px;
+}
+
+.message-popup-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 14px;
+}
+
+.message-popup-close-icon {
+  position: absolute;
+  top: 14px;
+  right: 18px;
+  font-size: 1.4rem;
+  line-height: 1;
+}
+
+/* Dark mode tweaks */
+body.dark-mode {
+  .popup.message-popup {
+    background: #353535;
+    color: colors.$color-text-on-dark;
+  }
+
+  .message-popup-title,
+  .message-popup-label {
+    color: colors.$color-text-on-dark;
+  }
+
+  .message-popup-textarea {
+    background: #2b2b2b;
+    border-color: colors.$subtitle-text-gray;
+    color: colors.$color-text-on-dark;
+  }
+}
