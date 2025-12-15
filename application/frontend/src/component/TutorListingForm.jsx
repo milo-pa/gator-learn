@@ -2,7 +2,7 @@
  * Institution: San Francisco State University
  * Class: CSC 648 Project, Team 05
  * Project: Gator Learn, Tutoring Website
- * Author: Samantha Chombo-Rodriguez 
+ * Author: Samantha Chombo-Rodriguez
  * Created: 11/18/25
  * Description: Component for hosting page navigation menu links.
  *
@@ -16,7 +16,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { SUBJECT_OPTIONS, COURSE_OPTIONS } from "../mock/mockOptions";
 import PopUpComponent from "./PopUpComponent";
-
+import tutorListingService from "../service/tutorListingService";
 
 function TutorListingForm() {
   const navigate = useNavigate();
@@ -64,7 +64,19 @@ function TutorListingForm() {
 
   const onSubmit = (data) => {
     console.log("Tutor listing form submitted (mock):", data);
-    setPopUp(true);
+
+    // TODO: P1 CRUCIAL! need to transform frontend data to match backend and database model for a listing
+    // remove popup while at it maybe?
+    tutorListingService
+      .createListing(data)
+      .then(() => {
+        setPopUp(true);
+        // navigate("/dashboard");
+      })
+      .catch((err) => {
+        const status = err.response?.status;
+        alert(`Listing creation failed with status ${status}.`);
+      });
   };
 
   const handlePriceChange = (e) => {
@@ -81,16 +93,17 @@ function TutorListingForm() {
     setPriceValue(formattedPrice);
   };
 
-const hasAnyDaySelected = Object.values(availableDays || {}).some((d) => d?.enabled);
+  const hasAnyDaySelected = Object.values(availableDays || {}).some((d) => d?.enabled);
 
   return (
     // Title in pages folder
     <>
       <main className="form-main">
         <form className="form" onSubmit={handleSubmit(onSubmit)}>
-
           <div className="form-row">
-            <label className="required-label" htmlFor="subject">Subject:</label>
+            <label className="required-label" htmlFor="subject">
+              Subject:
+            </label>
             <select
               id="subject"
               className={`input-wrapper ${errors.subject ? "input-error" : ""}`}
@@ -98,18 +111,19 @@ const hasAnyDaySelected = Object.values(availableDays || {}).some((d) => d?.enab
             >
               <option value="">Select a subject</option>
               {SUBJECT_OPTIONS.map((s) => (
-                <option key={s.id} value={s.name}>{s.name}</option>
+                <option key={s.id} value={s.name}>
+                  {s.name}
+                </option>
               ))}
             </select>
 
-            {errors.subject && (
-              (<div className="error-text desc-text">{errors.subject.message}</div>)
-            )}
+            {errors.subject && <div className="error-text desc-text">{errors.subject.message}</div>}
           </div>
 
-
           <div className="form-row">
-            <label className="required-label" htmlFor="course">Course:</label>
+            <label className="required-label" htmlFor="course">
+              Course:
+            </label>
             <select
               id="course"
               className={`input-wrapper ${errors.course ? "input-error" : ""}`}
@@ -118,22 +132,20 @@ const hasAnyDaySelected = Object.values(availableDays || {}).some((d) => d?.enab
                 required: subject ? "Course is required" : false,
               })}
             >
-              <option value="">
-                {subject ? "Select class" : "Choose subject first"}
-              </option>
+              <option value="">{subject ? "Select class" : "Choose subject first"}</option>
               {filteredCourses.map((c) => (
                 <option key={c.id} value={c.code}>
                   {c.code} {c.name}
                 </option>
               ))}
             </select>
-            {errors.course && (
-              (<div className="error-text desc-text">{errors.course.message}</div>))}
+            {errors.course && <div className="error-text desc-text">{errors.course.message}</div>}
           </div>
 
-
           <div className="form-row">
-            <label className="required-label" htmlFor="pricePerHour">Price per hour: $</label>
+            <label className="required-label" htmlFor="pricePerHour">
+              Price per hour: $
+            </label>
             <div className={`input-wrapper small-input-wrapper ${errors.pricePerHour ? "input-error" : ""}`}>
               <input
                 id="pricePerHour"
@@ -152,42 +164,27 @@ const hasAnyDaySelected = Object.values(availableDays || {}).some((d) => d?.enab
                 }}
               />
             </div>
-            {errors.pricePerHour && (
-              (<div className="error-text desc-text">{errors.pricePerHour.message}</div>))}
+            {errors.pricePerHour && <div className="error-text desc-text">{errors.pricePerHour.message}</div>}
           </div>
-
 
           <div className="form-row description-area">
             <label htmlFor="description">Description:</label>
             <div className="input-wrapper textarea-wrapper">
-              <textarea
-                id="description"
-                rows="5"
-                {...register("description")}
-              />
+              <textarea id="description" rows="5" {...register("description")} />
             </div>
           </div>
           <input
             type="hidden"
             {...register("availableDays", {
               required: "Please select at least one available day",
-              validate: () =>
-                hasAnyDaySelected || "Please select at least one available day",
+              validate: () => hasAnyDaySelected || "Please select at least one available day",
             })}
           />
           <div className="form-row">
             <label className="required-label">Availablity: </label>
             <div className={`availability-block ${errors.availableDays && !hasAnyDaySelected ? "input-error" : ""}`}>
               <div className="days-column">
-                {[
-                  "monday",
-                  "tuesday",
-                  "wednesday",
-                  "thursday",
-                  "friday",
-                  "saturday",
-                  "sunday",
-                ].map((day) => {
+                {["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"].map((day) => {
                   const label = day.charAt(0).toUpperCase() + day.slice(1);
                   const dayData = availableDays?.[day] || {};
                   const fromError = errors?.availableDays?.[day]?.fromTime;
@@ -197,10 +194,7 @@ const hasAnyDaySelected = Object.values(availableDays || {}).some((d) => d?.enab
                   return (
                     <div key={day} className={`day-row ${hasTimeError ? "input-error" : ""}`}>
                       <label className="day-checkbox">
-                        <input
-                          type="checkbox"
-                          {...register(`availableDays.${day}.enabled`)}
-                        />
+                        <input type="checkbox" {...register(`availableDays.${day}.enabled`)} />
                         <span>{label}</span>
                       </label>
 
@@ -211,31 +205,23 @@ const hasAnyDaySelected = Object.values(availableDays || {}).some((d) => d?.enab
                             <input
                               type="time"
                               className={`time-input ${fromError ? "input-error" : ""}`}
-                              {...register(`availableDays.${day}.fromTime`,
-                                {
-                                  required: "Start time required",
-                                }
-                              )}
+                              {...register(`availableDays.${day}.fromTime`, {
+                                required: "Start time required",
+                              })}
                             />
                             <span className="time-label">To:</span>
                             <input
                               type="time"
                               className={`time-input ${toError ? "input-error" : ""}`}
-                              {...register(`availableDays.${day}.toTime`,
-                                {
-                                  required: "End time required",
-                                }
-                              )}
+                              {...register(`availableDays.${day}.toTime`, {
+                                required: "End time required",
+                              })}
                             />
                           </div>
                           {(fromError || toError) && (
-                            <div className="error-text day-error-text">
-                              {fromError?.message || toError?.message}
-                            </div>
+                            <div className="error-text day-error-text">{fromError?.message || toError?.message}</div>
                           )}
-
                         </>
-
                       )}
                     </div>
                   );
@@ -243,26 +229,17 @@ const hasAnyDaySelected = Object.values(availableDays || {}).some((d) => d?.enab
               </div>
             </div>
             {errors.availableDays && !hasAnyDaySelected && (
-              (<div className="error-text desc-text">{errors.availableDays.message}</div>))}
+              <div className="error-text desc-text">{errors.availableDays.message}</div>
+            )}
           </div>
-
-
-
 
           <div className="form-row">
             <label htmlFor="resumeFile">Resume/CV:</label>
             <div className={"input-wrapper"}>
-              <input
-                type="file"
-                id="resumeFile"
-                accept=".pdf, .jpg,.jpeg, .webp"
-                {...register("resumeFile")}
-              />
+              <input type="file" id="resumeFile" accept=".pdf, .jpg,.jpeg, .webp" {...register("resumeFile")} />
             </div>
 
-            <span className="hci-text desc-text">
-              Allows JPG, PNG, and WEBP
-            </span>
+            <span className="hci-text desc-text">Allows JPG, PNG, and WEBP</span>
           </div>
 
           <div className="form-row">
@@ -275,49 +252,29 @@ const hasAnyDaySelected = Object.values(availableDays || {}).some((d) => d?.enab
                 {...register("sample-file", {
                   required: "Sample video is required",
                   validate: {
-                    isVideo: (files) =>
-                      files?.[0]?.type.startsWith("video/") || "only video files are allowed",
+                    isVideo: (files) => files?.[0]?.type.startsWith("video/") || "only video files are allowed",
                   },
-
-
                 })}
               />
             </div>
 
-            <span className="hci-text desc-text">
-              Allows MOV, MP4, and WEBM
-            </span>
+            <span className="hci-text desc-text">Allows MOV, MP4, and WEBM</span>
           </div>
 
           <div className="button-row ">
-            <button
-              type="button"
-              className="btn btn-secondary"
-              onClick={() => navigate(-1)}
-            >
+            <button type="button" className="btn btn-secondary" onClick={() => navigate(-1)}>
               CANCEL
             </button>
             <button type="submit" className="btn btn-primary" onClick={handleSubmit(onSubmit)}>
               SUBMIT
             </button>
           </div>
-
-
         </form>
-
       </main>
 
-
-
       {showPopUp && (
-        <PopUpComponent
-          title="Thank you for submitting your listing"
-          onClose={() => setPopUp(false)}
-        >
-          <p>
-            Please wait 24 to 48 hours for approval message in your dashboard
-            inbox
-          </p>
+        <PopUpComponent title="Thank you for submitting your listing" onClose={() => setPopUp(false)}>
+          <p>Please wait 24 to 48 hours for approval message in your dashboard inbox</p>
         </PopUpComponent>
       )}
     </>
