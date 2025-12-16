@@ -25,6 +25,12 @@ class TutorListingService {
     return res.data[0];
   }
 
+  getListingsForAccountId(id) {
+    return api.get("/api/listings/search", {
+      params: { accountId: id },
+    });
+  }
+
   getListingsBySubjectSubstring(str) {
     return api.get("/api/listings/search", {
       params: { subjectName: str },

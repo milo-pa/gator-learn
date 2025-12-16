@@ -24,7 +24,11 @@ export default function UserProfilePage() {
   useEffect(() => {
     if (!user) return; // wait until we have the logged-in user's id
 
-    TutorListingService.getListingsByAccount(user.userId).then((res) => setListings(res.data));
+    TutorListingService.getListingsForAccountId(user.userId)
+      .then((res) => {
+        setListings(res.data);
+      })
+      .catch((err) => console.error(err));
   }, [user]);
 
   // while auth is being checked, don't render
