@@ -14,7 +14,7 @@
  */
 
 import React from "react";
-import "../styles/HomePage.css";
+import "../styles/HomePage.scss";
 
 export default function HomePage() {
     return (
