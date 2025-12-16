@@ -21,41 +21,40 @@ import DashboardMessagesPanel from "../component/dashboard/DashboardMessagesPane
 import SentMessageDashboardPage from "./SentMessageDashboardPage.jsx";
 import ReceivedMessageDashboardPage from "./ReceivedMessageDashboardPage.jsx";
 
-import { DASHBOARD_STATS, MY_LISTINGS, MESSAGES } from "../mock/dashboardData";
-
+import { DASHBOARD_STATS, MESSAGES } from "../mock/dashboardData";
 
 export default function DashboardPage() {
-    const [active, setActive] = useState("overview");
+  const [active, setActive] = useState("overview");
 
-    return (
-        <div className="db_page">
-            <h2>Welcome back, Gator Learner!</h2>
+  return (
+    <div className="db_page">
+      <h2>Welcome back, Gator Learner!</h2>
 
-            <div className="db-wrap">
-                <DashboardSidebar active={active} onSelect={setActive} />
+      <div className="db-wrap">
+        <DashboardSidebar active={active} onSelect={setActive} />
 
-                <section className="db-card db-main">
-                    {active === "overview" && (
-                        <>
-                            <DashboardStatsRow activeListings={DASHBOARD_STATS.activeListings} pendingRequests={DASHBOARD_STATS.pendingRequests} totalRequests={DASHBOARD_STATS.totalRequests} />
+        <section className="db-card db-main">
+          {active === "overview" && (
+            <>
+              <DashboardStatsRow
+                activeListings={DASHBOARD_STATS.activeListings}
+                pendingRequests={DASHBOARD_STATS.pendingRequests}
+                totalRequests={DASHBOARD_STATS.totalRequests}
+              />
 
-                            <MyListingsPanel
-                                items = {MY_LISTINGS}
-                            />
+              <MyListingsPanel />
 
-                            <DashboardMessagesPanel
-                                messages= {MESSAGES}
-                            />
-                        </>
-                    )}
+              <DashboardMessagesPanel messages={MESSAGES} />
+            </>
+          )}
 
-                    {active === "sentMessages" && (<SentMessageDashboardPage />)}
+          {active === "sentMessages" && <SentMessageDashboardPage />}
 
-                    {active === "receivedMessages" && (<ReceivedMessageDashboardPage />)}
+          {active === "receivedMessages" && <ReceivedMessageDashboardPage />}
 
-                    {active === "myListings" && (<MyListingsPanel items={MY_LISTINGS} />)}
-                </section>
-            </div>
-        </div>
-    );
+          {active === "myListings" && <MyListingsPanel />}
+        </section>
+      </div>
+    </div>
+  );
 }

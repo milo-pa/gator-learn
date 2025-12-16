@@ -33,12 +33,13 @@ export default function MyListingsPanel() {
 
     (async () => {
       try {
-        const listing = await TutorListingService.getListingById(user.userId);
-        if (!listing) {
+        const res = await TutorListingService.getListingsForAccountId(user.userId);
+        const listings = res?.data;
+        if (!listings || (Array.isArray(listings) && listings.length === 0)) {
           setListings([]);
           return;
         }
-        setListings(Array.isArray(listing) ? listing : [listing]);
+        setListings(Array.isArray(listings) ? listings : [listings]);
       } catch (err) {
         console.error(err);
         setListings([]);
