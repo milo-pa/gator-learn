@@ -74,6 +74,7 @@ public class TutorListingController
      * ----------------------------------------------------------------------------------
      * |  listingId           |  listingId              |  tutor_listing / listing_id   |
      * |  listingDescription  |  description            |  tutor_listing / description  |
+     * |  accountId           |  account#userId         |  user_account / user_i        |
      * |  accountName         |  account#name           |  user_account / name          |
      * |  subjectName         |  subject#subjectName    |  subject / subject_name       |
      * |  courseName          |  course#courseName      |  course / course_name         |
@@ -99,13 +100,14 @@ public class TutorListingController
         String listingDesc = params.get("listingDescription");
 
         String accountName = params.get("accountName");
+        String accountId = params.get("accountId");
 
         String subjectName = params.get("subjectName");
 
         String courseName = params.get("courseName");
         String courseNumber = params.get("courseNumber");
 
-        return repository.findBySearchQueryCombination(listingId, listingDesc, accountName, subjectName, courseName, courseNumber);
+        return repository.findBySearchQueryCombination(listingId, listingDesc, accountName, accountId, subjectName, courseName, courseNumber);
     }
 
     @PostMapping("/create")
