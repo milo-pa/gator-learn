@@ -24,8 +24,10 @@ export default function UserProfilePage() {
   useEffect(() => {
     if (!user) return; // wait until we have the logged-in user's id
 
-    TutorListingService.getListingById(user.userId)
-      .then((res) => setListings(res.data))
+    TutorListingService.getListingsForAccountId(user.userId)
+      .then((res) => {
+        setListings(res.data);
+      })
       .catch((err) => console.error(err));
   }, [user]);
 
