@@ -33,6 +33,7 @@ public interface TutorListingRepository extends JpaRepository<TutorListing, Long
             @Param("listingId") Long listingId,
             @Param("listingDescSubstring") String listingDescSubstring,
             @Param("accountNameSubstring") String accountNameSubstring,
+            @Param("accountId") String accountId,
             @Param("subjectNameSubstring") String subjectNameSubstring,
             @Param("courseNameSubstring") String courseNameSubstring,
             @Param("courseNumberSubstring") String courseNumberSubstring);
