@@ -60,7 +60,6 @@ class App extends Component {
                         <Route path="/listing/:id" element={<ListingWithParams />} />
                         <Route path="/messages/received" element={<ReceivedMessageDashboardPage />} />
                         <Route path="/messages/sent" element={<SentMessageDashboardPage />} />
-
                         <Route path="/user-profile" element={<UserProfilePage/>}/>
                         <Route path="/create-tutor-listing" element={<CreateTutorListingPage/>}/>
                         

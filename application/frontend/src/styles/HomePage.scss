@@ -89,3 +89,155 @@ body.dark-mode .hero-text p {
         font-size: 1rem;
     }
 }
+
+/* ============================= */
+/* RECENTLY POSTED LISTINGS */
+/* ============================= */
+
+.recent-listings {
+    max-width: 1200px;
+    margin: 80px auto 60px;
+    padding: 0 20px;
+}
+
+.recent-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 24px;
+
+    h2 {
+        font-size: 2rem;
+        font-weight: 700;
+        margin: 0;
+    }
+
+    .view-all-link {
+        font-size: 0.95rem;
+        text-decoration: underline;
+        color: #ffdc72;
+    }
+}
+
+.recent-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 24px;
+}
+
+.recent-card {
+    background: #fff3b0;
+    border-radius: 12px;
+    padding: 16px;
+    text-align: left;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    transition: transform 0.2s ease;
+
+    &:hover {
+        transform: translateY(-4px);
+    }
+
+    h3 {
+        margin: 12px 0 8px;
+        font-size: 1.2rem;
+        font-weight: 700;
+    }
+
+    p {
+        margin: 4px 0;
+        font-size: 0.95rem;
+    }
+
+    .price {
+        margin-top: 8px;
+        font-weight: 700;
+    }
+}
+
+.avatar-placeholder {
+    width: 100%;
+    height: 140px;
+    border-radius: 8px;
+    background: #d6d6d6;
+}
+
+.message-btn {
+    margin-top: 12px;
+    width: 100%;
+    padding: 8px;
+    border-radius: 6px;
+    border: none;
+    font-weight: 700;
+    background: #ffcc00;
+    cursor: pointer;
+
+    &:hover {
+        background: #f2b800;
+    }
+}
+
+/* DARK MODE */
+
+body.dark-mode .recent-card {
+    background: #2e2e2e;
+    color: #fdfdfd;
+}
+
+body.dark-mode .message-btn {
+    background: #ffdc72;
+    color: #222;
+}
+
+.recent-listings {
+    max-width: 1200px;
+    margin: 60px auto;
+    padding: 0 20px;
+
+    h2 {
+        margin-bottom: 24px;
+        font-size: 2rem;
+        font-weight: 700;
+    }
+}
+
+.recent-listings-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 24px;
+}
+
+.recent-listing-card {
+    background: #fff4b8;
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    h3 {
+        margin: 0;
+        font-size: 1.2rem;
+        font-weight: 700;
+    }
+
+    p {
+        margin: 0;
+        font-size: 0.95rem;
+    }
+
+    .price {
+        font-weight: 700;
+        margin-top: 4px;
+    }
+
+    button {
+        margin-top: auto;
+    }
+}
+
+/* Dark mode support */
+body.dark-mode .recent-listing-card {
+    background: #3a3a3a;
+    color: #fdfdfd;
+}
