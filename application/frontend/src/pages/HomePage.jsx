@@ -17,7 +17,6 @@ import React, { useState } from "react";
 import "../styles/HomePage.scss";
 import MessageTutorPopUp from "../component/MessageTutorPopUp";
 
-// TEMP mock data (later replace with API call)
 const recentListings = [
     {
         listingId: 1,
@@ -54,7 +53,6 @@ export default function HomePage() {
 
     return (
         <>
-            {/* HERO SECTION */}
             <div className="home-hero">
                 <img
                     src="/images/HomePage/CoolGator.webp"
@@ -74,7 +72,7 @@ export default function HomePage() {
                 </div>
             </div>
 
-            {/* RECENTLY POSTED LISTINGS */}
+            {/* Recently Posted Listings section */}
             <section className="recent-listings">
                 <h2>Recently Posted Listings</h2>
 
@@ -102,7 +100,7 @@ export default function HomePage() {
                 </div>
             </section>
 
-            {/* MESSAGE POPUP */}
+            {/* Message Pop-up section */}
             {selectedListing && (
                 <MessageTutorPopUp
                     listing={selectedListing}
