@@ -289,6 +289,13 @@ body {
     text-underline-offset: 2px;
 }
 
+/* Messages table hover effects */
+.db-table--messages .db-table__row--clickable:hover .col--name,
+.db-table--messages .db-table__row--clickable:hover .col--course {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
 /* ---- badges for Status column ---- */
 
 .badge {
