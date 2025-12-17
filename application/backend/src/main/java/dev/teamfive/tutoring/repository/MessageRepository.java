@@ -16,9 +16,9 @@ public interface MessageRepository extends JpaRepository<Message, Long>
         FROM Message m
         WHERE m.account.userId = :userId
     """)
-    List<Message> findMessagesSentToUser(@Param("userId") Long userId);
+    List<Message> findMessagesSentByUser(@Param("userId") Long userId);
 
-    @Query(""" 
+    @Query("""
         SELECT m
         FROM Message m
         JOIN m.listing l
