@@ -54,9 +54,8 @@ class TutorListingService {
         return api.post("/api/listings/create", data, { withCredentials: true });
     }
 
-    // TODO: is this correct syntax
     deleteListing(id) {
-        return api.delete("/api/listings/delete", { id }, { withCredentials: true });
+        return api.delete(`/api/listings/delete/${id}`, { withCredentials: true });
     }
 }
 const tutorListingService = new TutorListingService();
