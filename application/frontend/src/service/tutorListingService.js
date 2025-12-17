@@ -58,6 +58,14 @@ class TutorListingService {
     deleteListing(id) {
         return api.delete("/api/listings/delete", { id }, { withCredentials: true });
     }
+
+    getAllSubjects() {
+        return api.get("/api/subjects");
+    }
+
+    getCoursesBySubjectId(subjectId) {
+        return api.get(`/api/courses/bySubject/${subjectId}`);
+    }
 }
 const tutorListingService = new TutorListingService();
 export default tutorListingService;
