@@ -73,7 +73,7 @@ function SearchResultsPage() {
   }
 
   async function fetchCourseMatches(courseQuery) {
-    const { courseName, courseNumber, raw } = parseCourseQuery(courseQuery);
+  const { courseName, courseNumber, raw } = parseCourseQuery(courseQuery);
 
   if (!raw) return [];
 
@@ -92,8 +92,8 @@ function SearchResultsPage() {
     TutorListingService.searchListings({ courseNumber }),
   ]);
 
-    return removeDuplicates([...(nameRes.data || []), ...(numRes.data || [])]);
-  }
+  return removeDuplicates([...(nameRes.data || []), ...(numRes.data || [])]);
+}
 
   useEffect(() => {
   async function loadListings() {
@@ -127,10 +127,7 @@ function SearchResultsPage() {
       if (subject && subject !== "all") {
         const response = await TutorListingService.getListingsBySubjectSubstring(subject);
         setListings(response.data || []);
-      } catch (err) {
-        setError("Failed to fetch listings.");
-      } finally {
-        setLoading(false);
+        return;
       }
 
       if (course) {
@@ -146,9 +143,10 @@ function SearchResultsPage() {
     } finally {
       setLoading(false);
     }
+  }
 
-    loadListings();
-  }, [subject, course]);
+  loadListings();
+}, [subject, course]);
 
 
 
