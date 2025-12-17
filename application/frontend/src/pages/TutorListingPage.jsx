@@ -57,7 +57,11 @@ function TutorListingPage(props) {
 
       <div className="tutor-top-row">
         <div className="tutor-image-box">
-          <img src="/images/tutor/iu_.png" /*{listing.account.photoPath}*/ alt="User Account" width="200px"></img>
+          <img
+            src={listing.account?.photoPath || "/images/tutor/iu_.png"}
+            alt="User Account"
+            width="200px"
+          ></img>
         </div>
 
         <div className="tutor-info-col">
@@ -85,8 +89,26 @@ function TutorListingPage(props) {
       </div>
 
       <div className="tutor-buttons-row">
-        <button className="btn btn-secondary">View Resume</button>
-        <button className="btn btn-secondary">View Sample Video</button>
+        {listing.resumePath && (
+          <a
+            className="btn btn-secondary"
+            href={listing.resumePath}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            View Resume
+          </a>
+        )}
+        {listing.tutoringVideoSamplePath && (
+          <a
+            className="btn btn-secondary"
+            href={listing.tutoringVideoSamplePath}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            View Sample Video
+          </a>
+        )}
         <button className="btn btn-primary" onClick={() => handleContact(listing)}>
           Contact
         </button>
