@@ -12,29 +12,47 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../component/AuthContext";
+import {cleanText } from "../util/sanitize.js";
 
 function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
 
   const {
     register,
-    handleSubmit ,
+    handleSubmit,
     formState: { errors, submitCount },
-    reset
+    reset,
   } = useForm({
     mode: "onBlur",
-    reValidateMode: "onBlur"
+    reValidateMode: "onBlur",
   });
 
-  const onSubmit = (data) => {
-    alert(`Form submitted with data: ${JSON.stringify(data)}`);
-    reset({
-      email: "",
-      password: ""
-    })
+  const { login } = useAuth();
+
+  const onSubmit = async (data) => {
+    try {
+      const payload = {
+        email: cleanText(data.email).toLowerCase(),
+        password: data.password.trim(),
+      }
+      await login(payload);
+
+      reset({
+        email: "",
+        password: "",
+      });
+
+      navigate("/dashboard");
+    } catch (err) {
+      const status = err.response?.status ?? "network";
+      if (status === 401) alert("Invalid credentials");
+      else alert(`Login failed: ${status}`);
+    }
   };
 
   return (
@@ -46,54 +64,50 @@ function LoginPage() {
 
       <main className="form-main">
         <form className="form" onSubmit={handleSubmit(onSubmit)}>
-
           {/* School Email */}
           <div className="form-row">
             <label htmlFor="school-email">SFSU Email:</label>
 
-            <div className={`input-wrapper 
-              ${submitCount > 0 && errors.email ? "input-error" : ""}`}>
+            <div
+              className={`input-wrapper 
+              ${submitCount > 0 && errors.email ? "input-error" : ""}`}
+            >
               <input
-                  id="school-email"
-                  placeholder="example@sfsu.edu"
-                  {...register("email", {
-                    required: "Email is required",
-                    validate: value =>
-                        value.endsWith("@sfsu.edu") || "Email must end with @sfsu.edu"
-                  })}
+                id="school-email"
+                placeholder="example@sfsu.edu"
+                {...register("email", {
+                  required: "Email is required",
+                  validate: (value) => value.endsWith("@sfsu.edu") || "Email must end with @sfsu.edu",
+                })}
               />
             </div>
-            {submitCount > 0 && errors.email && (
-                    <div className="error-text desc-text">{errors.email.message}</div>
-            )}
+            {submitCount > 0 && errors.email && <div className="error-text desc-text">{errors.email.message}</div>}
           </div>
 
           {/* Password */}
           <div className="form-row">
             <label htmlFor="password">Password:</label>
-            <div className={`input-wrapper password-wrapper
-              ${submitCount > 0 && errors.password ? "input-error" : ""}`}>
+            <div
+              className={`input-wrapper password-wrapper
+              ${submitCount > 0 && errors.password ? "input-error" : ""}`}
+            >
               <input
-                  type={showPassword ? "text" : "password"}
-                  id="password"
-                  {...register("password", {
-                    required: "Password is required",
-                    minLength: {
-                      value: 6,
-                      message: "Min password length is 6 characters"
-                    }
-                  })}
+                type={showPassword ? "text" : "password"}
+                id="password"
+                {...register("password", {
+                  required: "Password is required",
+                  minLength: {
+                    value: 6,
+                    message: "Min password length is 6 characters",
+                  },
+                })}
               />
-              <button
-                  type="button"
-                  className="toggle-password"
-                  onClick={() => setShowPassword((prev) => !prev)}
-              >
+              <button type="button" className="toggle-password" onClick={() => setShowPassword((prev) => !prev)}>
                 {showPassword ? "Hide" : "Show"}
               </button>
             </div>
             {submitCount > 0 && errors.password && (
-                    <div className="error-text desc-text">{errors.password.message}</div>
+              <div className="error-text desc-text">{errors.password.message}</div>
             )}
           </div>
 
@@ -111,9 +125,9 @@ function LoginPage() {
         {/* Sign Up */}
         <div className="helper-row">
           <p className="helper-text">Don’t have an account?</p>
-            <Link className="btn btn-secondary" to="/register">
-              SIGN UP
-            </Link>
+          <Link className="btn btn-secondary" to="/register">
+            SIGN UP
+          </Link>
         </div>
 
         {/* Forgot Password */}
