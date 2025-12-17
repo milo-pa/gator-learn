@@ -32,7 +32,6 @@ function parseCourseQuery(q) {
   };
 }
 
-/* Custom hook to parse query parameters */
 function useQueryParams() {
   const { search } = useLocation();
   return new URLSearchParams(search);
@@ -53,13 +52,11 @@ function SearchResultsPage() {
   const [sortKey, setSortKey] = useState("");
 
 
-  // open popup for a specific listing
   const handleMessageClick = (listing) => {
     setSelectedListing(listing);
     setShowPopUp(true);
   };
 
-  // close popup
   const handleClosePopUp = () => {
     setShowPopUp(false);
     setSelectedListing(null);
@@ -68,7 +65,7 @@ function SearchResultsPage() {
   function removeDuplicates(arr) {
     const seen = new Set();
     return arr.filter((item) => {
-      const key = item.listingId ?? item.id; // fallback just in case
+      const key = item.listingId ?? item.id; 
       if (seen.has(key)) return false;
       seen.add(key);
       return true;
@@ -78,22 +75,18 @@ function SearchResultsPage() {
   async function fetchCourseMatches(courseQuery) {
   const { courseName, courseNumber, raw } = parseCourseQuery(courseQuery);
 
-  // nothing typed
   if (!raw) return [];
 
-  // digits only → courseNumber
   if (courseNumber && !courseName) {
     const res = await TutorListingService.searchListings({ courseNumber });
     return res.data || [];
   }
 
-  // letters only → courseName
   if (courseName && !courseNumber) {
     const res = await TutorListingService.searchListings({ courseName });
     return res.data || [];
   }
 
-  // letters + digits → do both and UNION (NOT AND)
   const [nameRes, numRes] = await Promise.all([
     TutorListingService.searchListings({ courseName }),
     TutorListingService.searchListings({ courseNumber }),
@@ -108,7 +101,6 @@ function SearchResultsPage() {
       setLoading(true);
       setError(null);
 
-      // Subject=all + course query → global search (subjectName OR courseName/courseNumber)
       if (subject === "all" && course) {
         const [subjectRes, courseMatches] = await Promise.all([
           TutorListingService.getListingsBySubjectSubstring(course),
@@ -119,7 +111,6 @@ function SearchResultsPage() {
         return;
       }
 
-      // Subject + course → AND behavior (intersection)
       if (subject && subject !== "all" && course) {
         const [subjectRes, courseMatches] = await Promise.all([
           TutorListingService.getListingsBySubjectSubstring(subject),
@@ -133,21 +124,18 @@ function SearchResultsPage() {
         return;
       }
 
-      // Subject only
       if (subject && subject !== "all") {
         const response = await TutorListingService.getListingsBySubjectSubstring(subject);
         setListings(response.data || []);
         return;
       }
 
-      // Course only
       if (course) {
         const courseMatches = await fetchCourseMatches(course);
         setListings(courseMatches);
         return;
       }
 
-      // Default
       const response = await TutorListingService.getAllListings();
       setListings(response.data || []);
     } catch (err) {
@@ -162,10 +150,21 @@ function SearchResultsPage() {
 
 
 
-  const getCreatedAtDate = (listing) => {
-    const date = new Date(listing.createdAt);
-    return isNaN(date) ? 0 : date;
-  };
+  const getCreatedAtMs = (listing) => {
+  // try common backend field names
+  const raw =
+    listing.createdAt ??
+    listing.created_at ??
+    listing.createdDate ??
+    listing.created_on ??
+    listing.timestamp;
+
+  const ms = raw ? new Date(raw).getTime() : NaN;
+
+  if (!Number.isFinite(ms)) return Number(listing.listingId) || 0;
+
+  return ms;
+};
 
   const sortedListings = [...listings].sort((a, b) => {
     if (sortKey === "asc") {
@@ -175,10 +174,10 @@ function SearchResultsPage() {
       return Number(b.pricePerHour) - Number(a.pricePerHour);
     }
     if (sortKey === "newest") {
-      return getCreatedAtDate(b) - getCreatedAtDate(a);
+      return getCreatedAtMs(b) - getCreatedAtMs(a);
     }
     if (sortKey === "oldest") {
-      return getCreatedAtDate(a) - getCreatedAtDate(b);
+      return getCreatedAtMs(a) - getCreatedAtMs(b);
     }
     return 0;
   });
