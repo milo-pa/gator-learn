@@ -13,6 +13,7 @@
  */
 
 import React, { useState } from "react";
+import { cleanFreeText } from "../util/sanitize";
 
 function MessageTutorPopUp({ listing, onClose }) {
     const [contactMethod, setContactMethod] = useState("");
@@ -24,11 +25,13 @@ function MessageTutorPopUp({ listing, onClose }) {
     const handleSubmit = (e) => {
         e.preventDefault();
         // later: send to backend
-        console.log({
+
+        const payload = {
             listingId: listing?.listingId,
-            contactMethod,
-            comments,
-        });
+            contactMethod: cleanFreeText(contactMethod),
+            comments: cleanFreeText(comments),
+        }
+        console.log({ payload });
         onClose && onClose();
     };
 
