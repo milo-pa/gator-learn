@@ -70,6 +70,7 @@ body {
     color: c.$color-text-main;
     border: 1px solid c.$border-gray;
     border-radius: 10px;
+    padding: 16px;
 }
 .db-card__title {
     margin: 0px 0 8px;
@@ -93,8 +94,8 @@ body {
 }
 
 .db-main {
-    padding: 16px;
-    margin-bottom: 10px;
+    margin-left: 10px;
+    border: 1px solid transparent;
 }
 
 .db-muted {
