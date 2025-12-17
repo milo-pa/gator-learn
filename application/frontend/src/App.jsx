@@ -14,6 +14,7 @@
 import React, { Component } from "react";
 import "./styles/main.scss";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { AuthProvider } from "./component/AuthContext";
 
 import RouteChangeTracker from "./analytics/RouteChangeTracker";
 
@@ -30,6 +31,7 @@ import AboutPage from "./pages/AboutPage";
 import LoginPage from "./pages/LoginPage";
 import UserProfilePage from "./pages/UserProfilePage";
 import CreateTutorListingPage from "./pages/CreateTutorListingPage";
+import ProtectedRoute from "./component/ProtectedRoute";
 import RegistrationPage from "./pages/RegistrationPage";
 
 import ReceivedMessageDashboardPage from "./pages/ReceivedMessageDashboardPage.jsx";
@@ -39,36 +41,65 @@ const DetailWithParams = withNavigation(TeamMemberDetail);
 const ListingWithParams = withNavigation(TutorListingPage);
 
 class App extends Component {
-    render() {
-        return (
-            <Router>
-                <RouteChangeTracker />
-                <header className="header-wrapper">
-                    <TopBarComponent />
-                    <MenuComponent />
-                </header>
+  render() {
+    return (
+      <AuthProvider>
+        <Router>
+          <RouteChangeTracker />
+          <header className="header-wrapper">
+            <TopBarComponent />
+            <MenuComponent />
+          </header>
 
-                <main>
-                    <Routes>
-                        <Route path="/" element={<HomePage/>} />
-                        <Route path="/results" element={<SearchResultsPage />} />
-                        <Route path="/team-members" element={<AboutPage />} />
-                        <Route path="/login" element={<LoginPage />} />
-                        <Route path="/register" element={<RegistrationPage />} />
-                        <Route path="/team-members/:name" element={<DetailWithParams />} />
-                        <Route path="/dashboard" element={<DashboardPage />} />
-                        <Route path="/listing/:id" element={<ListingWithParams />} />
-                        <Route path="/messages/received" element={<ReceivedMessageDashboardPage />} />
-                        <Route path="/messages/sent" element={<SentMessageDashboardPage />} />
-                        <Route path="/user-profile" element={<UserProfilePage/>}/>
-                        <Route path="/create-tutor-listing" element={<CreateTutorListingPage/>}/>
-                        
-                    </Routes>
-                </main>
-            </Router>
-        );
-    }
+          <main>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/results" element={<SearchResultsPage />} />
+              <Route path="/team-members" element={<AboutPage />} />
+              <Route path="/login" element={<LoginPage />} />
+              <Route path="/register" element={<RegistrationPage />} />
+              <Route path="/team-members/:name" element={<DetailWithParams />} />
+              <Route
+                path="/dashboard"
+                element={
+                  <ProtectedRoute>
+                    <DashboardPage />
+                  </ProtectedRoute>
+                }
+              />
+              <Route path="/listing/:id" element={<ListingWithParams />} />
+              <Route
+                path="/messages/received"
+                element={
+                  <ProtectedRoute>
+                    <ReceivedMessageDashboardPage />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/messages/sent"
+                element={
+                  <ProtectedRoute>
+                    <SentMessageDashboardPage />
+                  </ProtectedRoute>
+                }
+              />
+
+              <Route
+                path="/user-profile"
+                element={
+                  <ProtectedRoute>
+                    <UserProfilePage />
+                  </ProtectedRoute>
+                }
+              />
+              <Route path="/create-tutor-listing" element={<CreateTutorListingPage />} />
+            </Routes>
+          </main>
+        </Router>
+      </AuthProvider>
+    );
+  }
 }
-
 
 export default App;

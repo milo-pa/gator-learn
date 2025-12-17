@@ -9,6 +9,7 @@ abstract class TutorListingSearchQuery
             "WHERE " + Clauses.QUERY_LISTING_ID + " " +
             "AND " + Clauses.QUERY_LISTING_DESC + " " +
             "AND " + Clauses.QUERY_ACCOUNT_NAME + " " +
+            "AND " + Clauses.QUERY_ACCOUNT_ID + " " +
             "AND " + Clauses.QUERY_SUBJECT_NAME + " " +
             "AND " + Clauses.QUERY_COURSE_NAME + " " +
             "AND " + Clauses.QUERY_COURSE_NUMBER;
@@ -23,6 +24,7 @@ abstract class TutorListingSearchQuery
         static final String QUERY_LISTING_DESC = "(:listingDescSubstring IS NULL OR t.description LIKE CONCAT('%', :listingDescSubstring, '%'))";
 
         static final String QUERY_ACCOUNT_NAME = "(:accountNameSubstring IS NULL OR a.name LIKE CONCAT('%', :accountNameSubstring, '%'))";
+        static final String QUERY_ACCOUNT_ID = "(:accountId IS NULL OR a.userId = :accountId)";
 
         static final String QUERY_SUBJECT_NAME = "(:subjectNameSubstring IS NULL OR s.subjectName LIKE CONCAT('%', :subjectNameSubstring, '%'))";
 

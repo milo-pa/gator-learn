@@ -12,17 +12,13 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import { mockListingService as TutorListingService } from "../service/mockTutorListingService";
-
 export const DASHBOARD_STATS = {
-    activeListings: 4,
-    pendingRequests: 1,
-    totalRequests: 9,
+  activeListings: 4,
+  pendingRequests: 1,
+  totalRequests: 9,
 };
 
-export const MY_LISTINGS = TutorListingService.getListingsByAccount(1);
-
 export const MESSAGES = [
-    { id: 1, name: "Sarah", course: "CSC 220", kind: "received", ago: "2 hr" },
-    { id: 2, name: "Jamal", course: "CSC 220", kind: "sent",     ago: "10 hr" },
+  { id: 1, name: "Sarah", course: "CSC 220", kind: "received", ago: "2 hr" },
+  { id: 2, name: "Jamal", course: "CSC 220", kind: "sent", ago: "10 hr" },
 ];
