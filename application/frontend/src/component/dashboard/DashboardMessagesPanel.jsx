@@ -20,15 +20,50 @@ const TABS = [
     { key: "sent", label: "Sent" },
 ];
 
-// Example message shape:
-// { id: 1, name: "Sarah", course: "CSC 220", kind: "received" | "sent", ago: "2 hr" }
-export default function DashboardMessagesPanel({ messages = [] }) {
+function formatDateTime(dateTimeStr) {
+    const isoUtc = dateTimeStr.replace(" ", "T") + "Z";
+
+    const date = new Date(isoUtc);
+
+    return date.toLocaleString(undefined, {
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+        hour: "numeric",
+        minute: "2-digit",
+        hour12: true,
+    });
+}
+
+export default function DashboardMessagesPanel({ sentMessages = [], receivedMessages = [] }) {
     const [tab, setTab] = useState("all");
 
+    const rows = useMemo(() => {
+        const sent = (sentMessages || []).map((m) => ({
+            id: m.messageId,
+            name: m.listing?.account?.name || m.account?.name || "?",
+            course: m.listing.course.courseNumber,
+            kind: "sent",
+            ago: formatDateTime(m.dateAndTime),
+            raw: m,
+        }));
+
+        const received = (receivedMessages || []).map((m) => ({
+            id: m.messageId,
+            name: m.account?.name || m.listing?.account?.name || "?",
+            course: m.listing.course.courseNumber,
+            kind: "received",
+            ago: formatDateTime(m.dateAndTime),
+            raw: m,
+        }));
+
+        return [...received, ...sent];
+    }, [sentMessages, receivedMessages]);
+
     const filtered = useMemo(() => {
-        if (tab === "all") return messages;
-        return messages.filter((m) => m.kind === tab);
-    }, [messages, tab]);
+        if (tab === "all") return rows;
+        return rows.filter((r) => r.kind === tab);
+    }, [rows, tab]);
 
     return (
         <section className="db-card">

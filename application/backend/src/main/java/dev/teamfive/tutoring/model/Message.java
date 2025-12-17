@@ -99,4 +99,10 @@ public class Message
     {
         this.dateAndTime = dateAndTime;
     }
+
+    @Override
+    public String toString()
+    {
+        return "Message{" + "messageId=" + messageId + ", listing=" + listing + ", account=" + account + ", message='" + message + '\'' + ", phoneNumber='" + phoneNumber + '\'' + ", dateAndTime='" + dateAndTime + '\'' + '}';
+    }
 }
