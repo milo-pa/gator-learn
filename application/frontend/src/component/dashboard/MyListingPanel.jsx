@@ -15,48 +15,68 @@
 
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { mockListingService as TutorListingService } from "../../service/mockTutorListingService";
+import TutorListingService from "../../service/tutorListingService";
+import { useAuth } from "../../component/AuthContext";
 
 export default function MyListingsPanel() {
-    const [listings, setListings] = useState([]);
-    const navigate = useNavigate();
+  const [listings, setListings] = useState([]);
+  const navigate = useNavigate();
 
-    useEffect(() => {
-        TutorListingService.getListingsByAccount(1).then((res) => setListings(res.data));
-    }, []);
+  const { user, isLoggedIn } = useAuth();
 
-    console.log(listings);
+  useEffect(() => {
+    if (isLoggedIn === null) return;
+    if (!user?.userId) {
+      setListings([]);
+      return;
+    }
 
-    const badgeClass = (status) =>
-        status === 1 ? "badge badge--success" : status === 0 ? "badge badge--warning" : "badge badge--muted";
+    (async () => {
+      try {
+        const res = await TutorListingService.getListingsForAccountId(user.userId);
+        const listings = res?.data;
+        if (!listings || (Array.isArray(listings) && listings.length === 0)) {
+          setListings([]);
+          return;
+        }
+        setListings(Array.isArray(listings) ? listings : [listings]);
+      } catch (err) {
+        console.error(err);
+        setListings([]);
+      }
+    })();
+  }, [user?.userId, isLoggedIn]);
 
-    return (
-        <section className="db-card">
-            <h3 style={{ marginBottom: "0.75rem" }}>My Listings</h3>
+  const badgeClass = (status) =>
+    status === 1 ? "badge badge--success" : status === 0 ? "badge badge--warning" : "badge badge--muted";
 
-            <div className="db-table db-table--listings">
-                <div className="db-table__head">
-                    <div>Courses</div>
-                    <div>Price</div>
-                    <div>Requests</div>
-                    <div>Status</div>
-                </div>
+  return (
+    <section className="db-card">
+      <h3 style={{ marginBottom: "0.75rem" }}>My Listings</h3>
 
-                {listings.map((row, i) => (
-                    <div
-                        key={`${row.course.courseNumber}-${i}`}
-                        className="db-table__row"
-                        onClick={() => navigate(`/listing/${encodeURIComponent(row.listingId)}`)}
-                    >
-                        <div>{row.course.courseNumber}</div>
-                        <div>{row.pricePerHour}$ / hr</div>
-                        <div>???</div>
-                        <div>
-                            <span className={badgeClass(row.live)}>{row.live === 1 ? "Active" : "Inactive"}</span>
-                        </div>
-                    </div>
-                ))}
+      <div className="db-table db-table--listings">
+        <div className="db-table__head">
+          <div>Courses</div>
+          <div>Price</div>
+          <div>Requests</div>
+          <div>Status</div>
+        </div>
+
+        {listings.map((row, i) => (
+          <div
+            key={`${row.course.courseNumber}-${i}`}
+            className="db-table__row"
+            onClick={() => navigate(`/listing/${encodeURIComponent(row.listingId)}`)}
+          >
+            <div>{row.course.courseNumber}</div>
+            <div>{row.pricePerHour}$ / hr</div>
+            <div>???</div>
+            <div>
+              <span className={badgeClass(row.live)}>{row.live === 1 ? "Active" : "Inactive"}</span>
             </div>
-        </section>
-    );
+          </div>
+        ))}
+      </div>
+    </section>
+  );
 }
