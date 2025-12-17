@@ -14,6 +14,8 @@
 
 .listing-card:hover {
     background: #ffeb52;
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 .listing-card-img {
@@ -78,6 +80,7 @@
     line-height: 1.35;
 
 }
+
 .listing-card-times li {
     margin: 2px 0;
 }
@@ -112,4 +115,90 @@
     cursor: pointer;
     background: #ffcc00;
     border-radius: 4px;
+}
+
+body.dark-mode .listing-card {
+    background: #ffcc00;
+    color: rgb(0, 0, 0);
+    border: 1px solid #7a7a7a;
+
+    .listing-card-btns .listing-card-message {
+        background: #ad9843;
+    }
+
+    .listing-card:hover {
+        background: #ffe682;
+    }
+}
+
+body.dark-mode .listing-card:hover {
+    background: #a38800;
+}
+
+@media (max-width: 600px) {
+    .listing-card {
+        padding: 12px;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        
+    }
+
+    .listing-card-name {
+        font-size: 22px;
+        line-height: 1.15;
+        margin-bottom: 8px;
+    }
+
+    .listing-card-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+        margin: 4px 0;
+        font-size: 14px;
+    }
+
+    .listing-card-img {
+        aspect-ratio: 16 / 10;
+    }
+
+    .listing-card-label {
+        min-width: 0;
+        font-weight: 700;
+    }
+
+    .listing-card-value {
+        width: 100%;
+        word-break: break-word; 
+    }
+
+    .listing-card-times {
+        margin-left: 16px; 
+    }
+
+    .listing-card-btns {
+        gap: 8px;
+    }
+
+    .listing-card-message {
+        width: 100%; 
+        max-width: none;
+        min-width: 0;
+    }
+
+    .listing-card-link {
+        text-align: center; 
+    }
+}
+
+/* Tiny phones */
+@media (max-width: 380px) {
+    .listing-card-name {
+        font-size: 20px;
+    }
+
+    .listing-card {
+        padding: 10px;
+    }
 }

@@ -16,6 +16,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import userAccountService from "../service/userAccountService.js";
+import {cleanText, cleanFreeText } from "../util/sanitize.js";
 
 function RegistrationPage() {
   const [showPassword, setShowPassword] = useState(false);
@@ -35,8 +36,15 @@ function RegistrationPage() {
   const passwordValue = watch("password");
 
   const onSubmit = (data) => {
+    const payload = {
+      ...data,
+      name: cleanText(data.name),
+      email: cleanText(data.email).toLowerCase(),
+      description: cleanFreeText(data.description),
+      pronouns: cleanText(data.pronouns),
+    }
     userAccountService
-      .register(data)
+      .register(payload)
       // Navigate to login page if successful registration
       .then(() => {
         navigate("/login");

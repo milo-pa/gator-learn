@@ -17,6 +17,7 @@ import { useNavigate } from "react-router-dom";
 import { SUBJECT_OPTIONS, COURSE_OPTIONS } from "../mock/mockOptions";
 import PopUpComponent from "./PopUpComponent";
 import tutorListingService from "../service/tutorListingService";
+import { cleanText, cleanFreeText } from "../util/sanitize";
 
 function TutorListingForm() {
   const navigate = useNavigate();
@@ -62,23 +63,25 @@ function TutorListingForm() {
     return COURSE_OPTIONS.filter((c) => c.subjectId === selectedSubject.id);
   }, [selectedSubject]);
 
-  const onSubmit = (data) => {
-    console.log("Tutor listing form submitted (mock):", data);
-
-    // TODO: P1 CRUCIAL! need to transform frontend data to match backend and database model for a listing
-    // remove popup while at it maybe?
-    tutorListingService
-      .createListing(data)
-      .then(() => {
-        setPopUp(true);
-        // navigate("/dashboard");
-      })
-      .catch((err) => {
-        const status = err.response?.status;
-        alert(`Listing creation failed with status ${status}.`);
-      });
+const onSubmit = (data) => {
+  const payload = {
+    subject: cleanText(data.subject),
+    course: cleanText(data.course),
+    description: cleanFreeText(data.description),
+    pricePerHour: priceValue === "" ? null : Number(priceValue),
   };
 
+  console.log("PAYLOAD (CLEANED):", payload);
+
+  tutorListingService
+    .createListing(payload)
+    .then(() => setPopUp(true))
+    .catch((err) => {
+      console.log("CREATE LISTING ERROR:", err);
+      const status = err.response?.status;
+      alert(`Listing creation failed with status ${status}.`);
+    });
+};
   const handlePriceChange = (e) => {
     const value = e.target.value;
     const regex = /^\d*\.?\d{0,2}$/;
@@ -99,7 +102,8 @@ function TutorListingForm() {
     // Title in pages folder
     <>
       <main className="form-main">
-        <form className="form" onSubmit={handleSubmit(onSubmit)}>
+        <form className="form"
+          onSubmit={handleSubmit(onSubmit)}>
           <div className="form-row">
             <label className="required-label" htmlFor="subject">
               Subject:
@@ -243,40 +247,43 @@ function TutorListingForm() {
           </div>
 
           <div className="form-row">
-            <label htmlFor="sample-file">Sample Video:</label>
+            <label htmlFor="videoSample">Sample Video:</label>
             <div className={"input-wrapper"}>
               <input
                 type="file"
-                id="sample-file"
-                accept="video/mp4, video/mov, video/webm"
-                {...register("sample-file", {
-                  required: "Sample video is required",
+                id="videoSample"
+                accept="video/mp4, video/webm"
+                {...register("videoSample", {
                   validate: {
-                    isVideo: (files) => files?.[0]?.type.startsWith("video/") || "only video files are allowed",
+                    isVideo: (files) => {
+                      if (!files || files.length === 0) return true; // no file = ok (optional)
+                      return files[0].type?.startsWith("video/") || "only video files are allowed";
+                    },
                   },
                 })}
               />
             </div>
 
-            <span className="hci-text desc-text">Allows MOV, MP4, and WEBM</span>
+            <span className="hci-text desc-text">Allows MP4, and WEBM</span>
           </div>
 
           <div className="button-row ">
             <button type="button" className="btn btn-secondary" onClick={() => navigate(-1)}>
               CANCEL
             </button>
-            <button type="submit" className="btn btn-primary" onClick={handleSubmit(onSubmit)}>
+            <button type="submit" className="btn btn-primary"  >
               SUBMIT
             </button>
           </div>
         </form>
-      </main>
+      </main >
 
       {showPopUp && (
         <PopUpComponent title="Thank you for submitting your listing" onClose={() => setPopUp(false)}>
           <p>Please wait 24 to 48 hours for approval message in your dashboard inbox</p>
         </PopUpComponent>
-      )}
+      )
+      }
     </>
   );
 }

@@ -22,143 +22,16 @@
     border-radius: 6px;
 }
 
-.row-subject {
-    display: flex;
-    align-items: center;
-    margin-bottom: 1.2rem;
-}
-
-.label-subject {
-    width: 180px;
-    text-align: right;
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: colors.$color-text-main;
-    margin-right: 1rem;
-}
-
-.input-subject {
-    flex: 1;
-    padding: 0.75rem 1rem;
-    font-size: 1rem;
-    border: 1px solid #d1d1d1;
-    border-radius: 4px;
-    background: colors.$color-surface-white;
-    color: colors.$color-text-main;
-    height: 42px;
-}
-
-.row-course {
-    display: flex;
-    align-items: center;
-    margin-bottom: 1.2rem;
-}
-
-.label-course {
-    width: 180px;
-    text-align: right;
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: colors.$color-text-main;
-    margin-right: 1rem;
-}
-
-.input-course {
-    flex: 1;
-    padding: 0.75rem 1rem;
-    font-size: 1rem;
-    border: 1px solid #d1d1d1;
-    border-radius: 4px;
-    background: colors.$color-surface-white;
-    color: colors.$color-text-main;
-    height: 42px;
-}
-
-.row-price {
-    display: flex;
-    align-items: center;
-    margin-bottom: 1.2rem;
-}
-
-.label-price {
-    width: 180px;
-    text-align: right;
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: colors.$color-text-main;
-    margin-right: 1rem;
-}
-
-.input-price {
-    width: 200px;
-    padding: 0.75rem 1rem;
-    font-size: 1.3rem;
-    border: 1px solid #d1d1d1;
-    border-radius: 4px;
-    background: colors.$color-surface-white;
-    color: colors.$color-text-main;
-    height: 16px;
-}
-
-.price-unit {
-    margin-left: 0.5rem;
-    font-size: 1.2rem;
-    white-space: nowrap;
-}
-
-.row-description {
-    display: flex;
-    align-items: flex-start;
-    margin-bottom: 1.2rem;
-}
-
-.label-description {
-    width: 180px;
-    text-align: right;
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: colors.$color-text-main;
-    margin-right: 1rem;
-    padding-top: 0.4rem;
-}
-
-.input-description {
-    flex: 1;
-    min-height: 100px;
-    padding: 1rem;
-    font-size: 1rem;
-    border: 1px solid #d1d1d1;
-    border-radius: 4px;
-    background: colors.$color-surface-white;
-    color: colors.$color-text-main;
-    resize: vertical;
-}
-
-.row-availability {
-    display: flex;
-    align-items: flex-start;
-    margin-bottom: 2rem;
-}
-
-.label-availability {
-    width: 180px;
-    text-align: right;
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: colors.$color-text-main;
-    margin-right: 1rem;
-    padding-top: 0.2rem;
-}
 
 .availability-block {
-  padding: 10px 12px;
-  border-radius: 6px;
+    padding: 10px 12px;
+    border-radius: 6px;
 }
 
 .availability-block.input-error {
-  border: 1px solid #e63946;
-  border-radius: 6px;
-  padding: 10px 12px;
+    border: 1px solid #e63946;
+    border-radius: 6px;
+    padding: 10px 12px;
 }
 
 .days-column {
@@ -168,11 +41,7 @@
     font-size: 0.85rem;
 }
 
-.day-row {
-    display: flex;
-    flex-direction: column;
-    gap: 0.35rem;
-}
+
 
 .day-checkbox {
     display: flex;
@@ -194,10 +63,6 @@
     font-size: 1.2rem;
 }
 
-.time-label {
-    font-weight: 600;
-    font-size: 1rem;
-}
 
 .time-input {
     width: 140px;
@@ -209,51 +74,15 @@
 }
 
 .time-input.input-error {
-  outline: 1px solid #e63946;
-  border-color: transparent;
+    outline: 1px solid #e63946;
+    border-color: transparent;
 }
 
 .day-error {
-  margin-left: 2.1rem; // same indent as your day-time-range
-  margin-top: 6px;
+    margin-left: 2.1rem;
+    margin-top: 6px;
 }
 
-.row-optional {
-    display: flex;
-    align-items: flex-start;
-    margin-top: 2rem;
-}
-
-.label-optional {
-    width: 180px;
-    text-align: right;
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: colors.$color-text-main;
-    margin-right: 1rem;
-    padding-top: 0.2rem;
-}
-
-.optional-block {
-    flex: 1;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1.5rem;
-}
-
-.optional-item {
-    flex: 1 1 30%;
-    min-width: 180px;
-    display: flex;
-    flex-direction: column;
-    gap: 0.4rem;
-}
-
-.optional-label {
-    font-size: 1rem;
-    font-weight: 600;
-    color: colors.$color-text-main;
-}
 
 .file-button {
     position: relative;
@@ -328,30 +157,24 @@ body.dark-mode {
     .create-listing-page {
         color: colors.$color-text-on-dark;
     }
+
     .tutor-listing-form {
         color: colors.$color-text-on-dark;
         background-color: colors.$color-surface-dark;
     }
-    .label-availability,
-    .label-description,
-    .label-price,
-    .label-course,
-    .label-subject,
-    .label-optional,
-    .optional-label {
+
+    .input-wrapper {
         color: colors.$color-text-on-dark;
     }
 
-    .input-subject,
-    .input-course,
-    .input-price,
-    .input-description,
-    .time-input {
-        background: colors.$gray-input-bg-dark;
-        border: 1px solid colors.$border-dark;
-        color: #222;
+    .textarea-wrapper {
+        color: colors.$color-text-on-dark;
     }
 
+    
+
+
+a
     .file-button {
         border: 1px solid colors.$color-text-on-dark;
         background: colors.$color-surface-dark;

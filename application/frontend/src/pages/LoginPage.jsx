@@ -16,6 +16,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../component/AuthContext";
+import {cleanText } from "../util/sanitize.js";
 
 function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
@@ -35,7 +36,11 @@ function LoginPage() {
 
   const onSubmit = async (data) => {
     try {
-      await login(data);
+      const payload = {
+        email: cleanText(data.email).toLowerCase(),
+        password: data.password.trim(),
+      }
+      await login(payload);
 
       reset({
         email: "",
