@@ -1,18 +1,12 @@
 import api from "./api";
 
 class MessageService {
-    getMessagesSentToUserId(id) {
-        return api.get("/api/message/sent-to", {
-            params: { userId: id },
-            withCredentials: true,
-        });
+    getMessagesSentByUserId(id) {
+        return api.get(`/api/message/sent-by/${id}`, { withCredentials: true });
     }
 
     getMessagesReceivedByUserId(id) {
-        return api.get("/api/message/received-by", {
-            params: { userId: id },
-            withCredentials: true,
-        });
+        return api.get(`/api/message/received-by/${id}`, { withCredentials: true });
     }
 
     createMessage(data) {
