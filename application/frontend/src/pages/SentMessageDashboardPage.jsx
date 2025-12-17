@@ -1,41 +1,8 @@
 import React, { useState } from "react";
 import "../styles/sentmessagedashboard.scss";
 
-
-const sampleMessages = [
-    {
-        id: 1,
-        sender: "Sarah",
-        course: "CSC 648 / Software Engineering",
-        contact: "(123) 456-7890",
-        comments: "I am more than happy to help you in explaining some concepts about Milestone 2. When is a good time?"
-    },
-    {
-        id: 2,
-        sender: "Michael Lee",
-        course: "CSC 210 / Intro to CS",
-        contact: "(555) 555-5555",
-        comments: "Sure! When is a good day for you to meet?"
-    },
-    {
-        id: 3,
-        sender: "Enrique Liganor",
-        course: "CSC 648 / Software Engineering",
-        contact: "(234) 272-8328",
-        comments: "We've been over this, Enrique. We can schedule another meeting to go over the basics again." +
-            " When is a good meeting time with you?"
-    },
-    {
-        id: 4,
-        sender: "Dragutin Petkovic",
-        course: "CSC 648 / Software Engineering",
-        contact: "(999) 234-9823",
-        comments: "Me too Professor Petkovic. Me too."
-    },
-];
-
-export default function SentMessageDashboard() {
-    const [selected, setSelected] = useState(sampleMessages[0]);
+export default function SentMessageDashboard({ sentMessages = [] }) {
+    const [selected, setSelected] = useState(sentMessages[0]);
 
     return (
         <div className="message-dashboard">
@@ -43,14 +10,16 @@ export default function SentMessageDashboard() {
 
             <div className="message-layout">
                 <div className="message-list">
-                    {sampleMessages.map(msg => (
+                    {sentMessages.map((msg) => (
                         <div
-                            key={msg.id}
-                            className={`message-item ${selected.id === msg.id ? "active" : ""}`}
+                            key={msg.messageId}
+                            className={`message-item ${selected.messageId === msg.messageId ? "active" : ""}`}
                             onClick={() => setSelected(msg)}
                         >
-                            <strong>{msg.sender}</strong>
-                            <div className="course">{msg.course}</div>
+                            <strong>{msg.listing.account.name}</strong>
+                            <div className="course">
+                                {msg.listing.course.courseNumber}: {msg.listing.course.courseName}
+                            </div>
                         </div>
                     ))}
                 </div>
@@ -58,20 +27,24 @@ export default function SentMessageDashboard() {
                 {/* Right Column — selected message details */}
                 <div className="message-details">
                     <div className="detail-header">
-                        <p><strong>To:</strong> {selected.sender}</p>
-                        <p><strong>Sub:</strong> {selected.course}</p>
-                        <p><strong>Contact Information:</strong> {selected.contact}</p>
+                        <p>
+                            <strong>To:</strong> {selected.listing.account.name}
+                        </p>
+                        <p>
+                            <strong>Course:</strong> {selected.listing.course.courseNumber}:{" "}
+                            {selected.listing.course.courseName}
+                        </p>
+                        <p>
+                            <strong>My Phone Number:</strong> {selected.phoneNumber}
+                        </p>
                     </div>
 
                     <div className="comments-section">
-                        <strong>Comments:</strong>
-                        <div className="comment-box">
-                            {selected.comments}
-                        </div>
+                        <strong>Message:</strong>
+                        <div className="comment-box">{selected.message}</div>
                     </div>
                 </div>
             </div>
         </div>
     );
-
 }
