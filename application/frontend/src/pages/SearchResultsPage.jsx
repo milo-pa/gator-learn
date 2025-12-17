@@ -76,89 +76,89 @@ function SearchResultsPage() {
   }
 
   async function fetchCourseMatches(courseQuery) {
-  const { courseName, courseNumber, raw } = parseCourseQuery(courseQuery);
+    const { courseName, courseNumber, raw } = parseCourseQuery(courseQuery);
 
-  // nothing typed
-  if (!raw) return [];
+    // nothing typed
+    if (!raw) return [];
 
-  // digits only → courseNumber
-  if (courseNumber && !courseName) {
-    const res = await TutorListingService.searchListings({ courseNumber });
-    return res.data || [];
+    // digits only → courseNumber
+    if (courseNumber && !courseName) {
+      const res = await TutorListingService.searchListings({ courseNumber });
+      return res.data || [];
+    }
+
+    // letters only → courseName
+    if (courseName && !courseNumber) {
+      const res = await TutorListingService.searchListings({ courseName });
+      return res.data || [];
+    }
+
+    // letters + digits → do both and UNION (NOT AND)
+    const [nameRes, numRes] = await Promise.all([
+      TutorListingService.searchListings({ courseName }),
+      TutorListingService.searchListings({ courseNumber }),
+    ]);
+
+    return removeDuplicates([...(nameRes.data || []), ...(numRes.data || [])]);
   }
-
-  // letters only → courseName
-  if (courseName && !courseNumber) {
-    const res = await TutorListingService.searchListings({ courseName });
-    return res.data || [];
-  }
-
-  // letters + digits → do both and UNION (NOT AND)
-  const [nameRes, numRes] = await Promise.all([
-    TutorListingService.searchListings({ courseName }),
-    TutorListingService.searchListings({ courseNumber }),
-  ]);
-
-  return removeDuplicates([...(nameRes.data || []), ...(numRes.data || [])]);
-}
 
   useEffect(() => {
-  async function loadListings() {
-    try {
-      setLoading(true);
-      setError(null);
+    async function loadListings() {
+      try {
+        setLoading(true);
+        setError(null);
 
-      // Subject=all + course query → global search (subjectName OR courseName/courseNumber)
-      if (subject === "all" && course) {
-        const [subjectRes, courseMatches] = await Promise.all([
-          TutorListingService.getListingsBySubjectSubstring(course),
-          fetchCourseMatches(course),
-        ]);
+        // Subject=all + course query → global search (subjectName OR courseName/courseNumber)
+        if (subject === "all" && course) {
+          const [subjectRes, courseMatches] = await Promise.all([
+            TutorListingService.getListingsBySubjectSubstring(course),
+            fetchCourseMatches(course),
+          ]);
 
-        setListings(removeDuplicates([...(subjectRes.data || []), ...courseMatches]));
-        return;
-      }
+          setListings(removeDuplicates([...(subjectRes.data || []), ...courseMatches]));
+          return;
+        }
 
-      // Subject + course → AND behavior (intersection)
-      if (subject && subject !== "all" && course) {
-        const [subjectRes, courseMatches] = await Promise.all([
-          TutorListingService.getListingsBySubjectSubstring(subject),
-          fetchCourseMatches(course),
-        ]);
+        // Subject + course → AND behavior (intersection)
+        if (subject && subject !== "all" && course) {
+          const [subjectRes, courseMatches] = await Promise.all([
+            TutorListingService.getListingsBySubjectSubstring(subject),
+            fetchCourseMatches(course),
+          ]);
 
-        const courseIds = new Set(courseMatches.map(l => l.listingId));
-        const intersection = (subjectRes.data || []).filter(l => courseIds.has(l.listingId));
+          const courseIds = new Set(courseMatches.map(l => l.listingId));
+          const intersection = (subjectRes.data || []).filter(l => courseIds.has(l.listingId));
 
-        setListings(intersection);
-        return;
-      }
+          setListings(intersection);
+          return;
+        }
 
-      // Subject only
-      if (subject && subject !== "all") {
-        const response = await TutorListingService.getListingsBySubjectSubstring(subject);
+        // Subject only
+        if (subject && subject !== "all") {
+          const response = await TutorListingService.getListingsBySubjectSubstring(subject);
+          setListings(response.data || []);
+          return;
+        }
+
+        // Course only
+        if (course) {
+          const courseMatches = await fetchCourseMatches(course);
+          setListings(courseMatches);
+          return;
+        }
+
+        // Default
+        const response = await TutorListingService.getAllListings();
         setListings(response.data || []);
-        return;
+      } catch (err) {
+        setError("Failed to fetch listings.");
+      } finally {
+        setLoading(false);
       }
-
-      // Course only
-      if (course) {
-        const courseMatches = await fetchCourseMatches(course);
-        setListings(courseMatches);
-        return;
-      }
-
-      // Default
-      const response = await TutorListingService.getAllListings();
-      setListings(response.data || []);
-    } catch (err) {
-      setError("Failed to fetch listings.");
-    } finally {
-      setLoading(false);
     }
-  }
 
-  loadListings();
-}, [subject, course]);
+    loadListings();
+  }, [subject, course]);
 
 
 
