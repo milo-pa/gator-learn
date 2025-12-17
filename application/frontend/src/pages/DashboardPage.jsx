@@ -61,14 +61,15 @@ export default function DashboardPage() {
                     {active === "overview" && (
                         <>
                             <MyListingsPanel />
-
                             <DashboardMessagesPanel sentMessages={sentMessages} receivedMessages={receivedMessages} />
                         </>
                     )}
 
-                    {active === "sentMessages" && <SentMessageDashboardPage />}
+                    {active === "sentMessages" && <SentMessageDashboardPage sentMessages={sentMessages} />}
 
-                    {active === "receivedMessages" && <ReceivedMessageDashboardPage />}
+                    {active === "receivedMessages" && (
+                        <ReceivedMessageDashboardPage receivedMessages={receivedMessages} />
+                    )}
 
                     {active === "myListings" && <MyListingsPanel />}
                 </section>
