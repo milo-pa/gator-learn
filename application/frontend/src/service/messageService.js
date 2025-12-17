@@ -13,9 +13,8 @@ class MessageService {
         return api.post("/api/message/create", data, { withCredentials: true });
     }
 
-    // TODO: correct syntax?
     deleteMessage(id) {
-        return api.delete("/api/message/delete", { id }, { withCredentials: true });
+        return api.delete(`/api/message/delete/${id}`, { withCredentials: true });
     }
 }
 

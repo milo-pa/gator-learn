@@ -14,6 +14,7 @@
  */
 import React, { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import messageService from "../../service/messageService";
 
 const TABS = [
     { key: "all", label: "All" },
@@ -36,7 +37,7 @@ function formatDateTime(dateTimeStr) {
     });
 }
 
-export default function DashboardMessagesPanel({ sentMessages = [], receivedMessages = [] }) {
+export default function DashboardMessagesPanel({ sentMessages = [], receivedMessages = [], onDelete }) {
     const [tab, setTab] = useState("all");
     const navigate = useNavigate();
 
@@ -67,9 +68,25 @@ export default function DashboardMessagesPanel({ sentMessages = [], receivedMess
         return rows.filter((r) => r.kind === tab);
     }, [rows, tab]);
 
+    const handleDelete = async (e, messageId) => {
+        e.stopPropagation();
+        e.preventDefault();
+        if (!window.confirm("Delete this message?")) return;
+        console.log("Deleting message", messageId);
+        try {
+            await messageService.deleteMessage(messageId);
+            if (typeof onDelete === "function") onDelete(messageId);
+        } catch (err) {
+            console.error("Failed to delete message", err);
+            alert("Failed to delete message.");
+        }
+    };
+
     return (
         <section className="db-card db-card--messages">
-            <header className="db-panel__header" ><h3>Messages</h3></header>
+            <header className="db-panel__header">
+                <h3>Messages</h3>
+            </header>
 
             <div className="db-tabs">
                 {TABS.map((t) => (
@@ -105,6 +122,18 @@ export default function DashboardMessagesPanel({ sentMessages = [], receivedMess
                         <div className="col col--course">{row.course}</div>
                         <div className="col col--kind">{row.kind === "received" ? "Received" : "Sent"}</div>
                         <div className="col col--ago">{row.ago}</div>
+                        {row.kind === "sent" && (
+                            <div className="col col--delete">
+                                <button
+                                    type="button"
+                                    aria-label="Delete message"
+                                    className="btn btn-icon"
+                                    onClick={(e) => handleDelete(e, row.id)}
+                                >
+                                    <img src="images/trash.png" alt="Delete" width="16" height="16" />
+                                </button>
+                            </div>
+                        )}
                     </div>
                 ))}
 

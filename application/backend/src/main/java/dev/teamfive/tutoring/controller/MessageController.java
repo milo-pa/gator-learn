@@ -1,6 +1,7 @@
 package dev.teamfive.tutoring.controller;
 
 import dev.teamfive.tutoring.model.Message;
+import dev.teamfive.tutoring.model.TutorListing;
 import dev.teamfive.tutoring.repository.MessageRepository;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -92,16 +93,28 @@ public class MessageController
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Void> deleteMessage(@PathVariable Long id)
+    public ResponseEntity<?> deleteMessage(@PathVariable Long id)
     {
-        try
+        Long sessionUserId = (Long) session.getAttribute("userId");
+
+        if (sessionUserId == null)
         {
-            repository.deleteById(id);
-            return ResponseEntity.noContent().build();
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("You must be logged in to delete a message");
         }
-        catch (EmptyResultDataAccessException e)
+
+        Message m = repository.findById(id).orElse(null);
+
+        if (m == null)
         {
             return ResponseEntity.notFound().build();
         }
+        // Prevent deleting other user's message
+        if (!sessionUserId.equals(m.getAccount().getUserId()))
+        {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
+
+        repository.deleteById(id);
+        return ResponseEntity.ok("Deleted message " + id);
     }
 }
