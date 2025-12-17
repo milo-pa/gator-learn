@@ -265,7 +265,7 @@ function TutorListingForm() {
             <button type="button" className="btn btn-secondary" onClick={() => navigate(-1)}>
               CANCEL
             </button>
-            <button type="submit" className="btn btn-primary" onClick={handleSubmit(onSubmit)}>
+            <button type="submit" className="btn btn-primary"  >
               SUBMIT
             </button>
           </div>
