@@ -17,6 +17,7 @@ import { useNavigate } from "react-router-dom";
 import { SUBJECT_OPTIONS, COURSE_OPTIONS } from "../mock/mockOptions";
 import PopUpComponent from "./PopUpComponent";
 import tutorListingService from "../service/tutorListingService";
+import { cleanText, cleanFreeText } from "../util/sanitize";
 
 function TutorListingForm() {
   const navigate = useNavigate();
@@ -63,15 +64,21 @@ function TutorListingForm() {
   }, [selectedSubject]);
 
   const onSubmit = (data) => {
+    const payload = {
+      ...data,
+      subject: cleanText(data.subject),
+      course: cleanText(data.course),
+      description: cleanFreeText(data.description),
+      pricePerHour: priceValue === "" ? null : Number(priceValue),
+    };
     console.log("Tutor listing form submitted (mock):", data);
 
     // TODO: P1 CRUCIAL! need to transform frontend data to match backend and database model for a listing
-    // remove popup while at it maybe?
+    // remove popup while at it maybe?  
     tutorListingService
-      .createListing(data)
+      .createListing(payload)
       .then(() => {
         setPopUp(true);
-        // navigate("/dashboard");
       })
       .catch((err) => {
         const status = err.response?.status;
@@ -248,7 +255,7 @@ function TutorListingForm() {
               <input
                 type="file"
                 id="sample-file"
-                accept="video/mp4, video/mov, video/webm"
+                accept="video/mp4, video/webm"
                 {...register("sample-file", {
                   required: "Sample video is required",
                   validate: {
@@ -258,7 +265,7 @@ function TutorListingForm() {
               />
             </div>
 
-            <span className="hci-text desc-text">Allows MOV, MP4, and WEBM</span>
+            <span className="hci-text desc-text">Allows MP4, and WEBM</span>
           </div>
 
           <div className="button-row ">
