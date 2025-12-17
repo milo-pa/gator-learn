@@ -31,7 +31,7 @@ function MessageTutorPopUp({ listing, onClose }) {
             contactMethod: cleanFreeText(contactMethod),
             comments: cleanFreeText(comments),
         }
-        console.log({payload});
+        console.log({ payload });
         onClose && onClose();
     };
 
