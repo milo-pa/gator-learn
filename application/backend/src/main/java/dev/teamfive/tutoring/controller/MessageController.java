@@ -38,7 +38,7 @@ public class MessageController
         return repository.findById(id).orElse(null);
     }
 
-    @GetMapping("/sent-to/{userId}")
+    @GetMapping("/sent-by/{userId}")
     public ResponseEntity<?> getSentMessagesForUser(@PathVariable Long userId)
     {
         Long sessionUserId = (Long) session.getAttribute("userId");
@@ -53,7 +53,7 @@ public class MessageController
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
 
-        List<Message> messages = repository.findMessagesSentToUser(userId);
+        List<Message> messages = repository.findMessagesSentByUser(userId);
         return ResponseEntity.ok(messages);
     }
 
