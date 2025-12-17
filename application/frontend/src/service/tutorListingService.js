@@ -14,45 +14,50 @@
 import api from "./api";
 
 class TutorListingService {
-  getAllListings() {
-    return api.get("/api/listings");
-  }
+    getAllListings() {
+        return api.get("/api/listings");
+    }
 
-  async getListingById(id) {
-    const res = await api.get("/api/listings/search", {
-      params: { listingId: id },
-    });
-    return res.data[0];
-  }
+    async getListingById(id) {
+        const res = await api.get("/api/listings/search", {
+            params: { listingId: id },
+        });
+        return res.data[0];
+    }
 
-  getListingsForAccountId(id) {
-    return api.get("/api/listings/search", {
-      params: { accountId: id },
-    });
-  }
+    getListingsForAccountId(id) {
+        return api.get("/api/listings/search", {
+            params: { accountId: id },
+        });
+    }
 
-  getListingsBySubjectSubstring(str) {
-    return api.get("/api/listings/search", {
-      params: { subjectName: str },
-    });
-  }
+    getListingsBySubjectSubstring(str) {
+        return api.get("/api/listings/search", {
+            params: { subjectName: str },
+        });
+    }
 
-  getListingsByCourseSubstring(str) {
-    return api.get("/api/listings/search", {
-      params: {
-        courseName: str,
-        courseNumber: str,
-      },
-    });
-  }
+    getListingsByCourseSubstring(str) {
+        return api.get("/api/listings/search", {
+            params: {
+                courseName: str,
+                courseNumber: str,
+            },
+        });
+    }
 
-  searchListings(params) {
-    return api.get("/api/listings/search", { params });
-  }
+    searchListings(params) {
+        return api.get("/api/listings/search", { params });
+    }
 
-  createListing(data) {
-    return api.post("/api/listings/create", data, { withCredentials: true });
-  }
+    createListing(data) {
+        return api.post("/api/listings/create", data, { withCredentials: true });
+    }
+
+    // TODO: is this correct syntax
+    deleteListing(id) {
+        return api.delete("/api/listings/delete", { id }, { withCredentials: true });
+    }
 }
 const tutorListingService = new TutorListingService();
 export default tutorListingService;
