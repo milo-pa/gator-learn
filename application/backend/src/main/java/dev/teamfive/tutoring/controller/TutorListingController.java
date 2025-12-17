@@ -17,7 +17,6 @@ import java.util.List;
 import java.util.Map;
 
 import jakarta.servlet.http.HttpSession;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -126,16 +125,28 @@ public class TutorListingController
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Void> deleteListing(@PathVariable Long id)
+    public ResponseEntity<?> deleteListing(@PathVariable Long id)
     {
-        try
+        Long sessionUserId = (Long) session.getAttribute("userId");
+
+        if (sessionUserId == null)
         {
-            repository.deleteById(id);
-            return ResponseEntity.noContent().build();
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("You must be logged in to delete a listing");
         }
-        catch (EmptyResultDataAccessException e)
+
+        TutorListing l = repository.findById(id).orElse(null);
+
+        if (l == null)
         {
             return ResponseEntity.notFound().build();
         }
+        // Prevent deleting other user's listing
+        if (!sessionUserId.equals(l.getAccount().getUserId()))
+        {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
+
+        repository.deleteById(id);
+        return ResponseEntity.ok("Deleted listing " + id);
     }
 }
