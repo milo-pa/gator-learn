@@ -15,7 +15,8 @@
 
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { mockListingService as TutorListingService } from "../../service/mockTutorListingService";
+import TutorListingService from "../../service/tutorListingService";
+import { useAuth } from "../AuthContext";
 
 export default function MyListingsPanel() {
     const [listings, setListings] = useState([]);

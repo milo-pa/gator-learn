@@ -13,6 +13,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 import React, { useMemo, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const TABS = [
     { key: "all", label: "All" },
@@ -37,6 +38,7 @@ function formatDateTime(dateTimeStr) {
 
 export default function DashboardMessagesPanel({ sentMessages = [], receivedMessages = [] }) {
     const [tab, setTab] = useState("all");
+    const navigate = useNavigate();
 
     const rows = useMemo(() => {
         const sent = (sentMessages || []).map((m) => ({
@@ -91,7 +93,14 @@ export default function DashboardMessagesPanel({ sentMessages = [], receivedMess
                 </div>
 
                 {filtered.map((row) => (
-                    <div key={row.id} className="db-table__row">
+                    <div
+                        key={row.id}
+                        className="db-table__row db-table__row--clickable"
+                        onClick={() => {
+                            const path = row.kind === "received" ? "/messages/received" : "/messages/sent";
+                            navigate(`${path}?id=${row.id}`);
+                        }}
+                    >
                         <div className="col col--name">{row.name}</div>
                         <div className="col col--course">{row.course}</div>
                         <div className="col col--kind">{row.kind === "received" ? "Received" : "Sent"}</div>
