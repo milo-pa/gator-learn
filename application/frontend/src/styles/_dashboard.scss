@@ -1,133 +1,134 @@
+@use "./colors" as c;
+
 /* ===== Dashboard base ===== */
-:root{
-    --bg:#f6f7fb;
-    --ink:#111827;
-    --muted:#6b7280;
-    --card:#ffffff;
-    --border:#e5e7eb;
+
+body {
+    background: c.$page-bg-light;
+    color: c.$color-text-main;
 }
 
-body { background: var(--bg); color: var(--ink); }
+.db-page {
+    padding: 24px;
+    min-height: 1vh;
 
-.db-page {padding: 24px; }
+}
 
-.db-wrap{
+.db-panel__header{
+    margin-top: 0;
+}
+
+
+/* main layout */
+.db-wrap {
     display: grid;
+    margin-top: 0;
     grid-template-columns: 240px 1fr;
-    gap: 24px;
+    gap: 0;
+    min-height: 10%;
 }
+
+/* ---- sidebar ---- */
 
 .db-sidebar {
-    background: #f3f3f3;
-    border: 1px solid #e5e7eb;
+    background: c.$color-surface-white;
+    border: 1px solid c.$border-gray;
     border-radius: 8px;
     padding: 12px;
     min-width: 220px;
+    margin-right: 16px;
 }
 
-.db-sidebar__list{ list-style:none; margin: 0; padding:0;}
+.db-sidebar__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
 
-.db-sidebar__btn{
+.db-sidebar__btn {
     width: 100%;
     text-align: left;
     padding: 10px 12px;
     border: none;
     background: transparent;
     border-radius: 6px;
-    font-weight: 600;
+    font-weight: 700;
     cursor: pointer;
+    color: c.$color-text-main;
 }
 
-.db-sidebar_btn:hover {background: #e5e7eb; }
-.db-sidebar_btn.is-active {background: #dfe3e8; }
-
-/* My Listings table */
-.db-table-wrap{
-    background:#fff;
-    border:1px solid var(--border);
-    border-radius:12px;
-    overflow:hidden;
+.db-sidebar__btn:hover {
+    background: lighten(c.$border-gray, 22%);
 }
 
-.db-table{
-    width:100%;
-    border-collapse:separate;
-    border-spacing:0;
+.db-sidebar__btn.is-active {
+    background: c.$subtitle-text-gray;
+    color: #ffffff;
+
 }
-
-.db-table thead th{
-    text-align:left;
-    font-weight:700;
-    padding:12px 16px;
-    background:#ffffff;
-    border-bottom:1px solid var(--border);
-}
-
-.db-table tbody td{
-    padding:12px 16px;
-    border-bottom:1px solid var(--border);
-}
-
-.db-table tbody tr:last-child td{
-    border-bottom:none;
-}
-
-/* status badges */
-.db-badge{
-    display:inline-block;
-    padding:4px 10px;
-    border-radius:999px;
-    font-size:12px;
-    font-weight:600;
-    border:1px solid var(--border);
-    background:#f9fafb;
-}
-.db-badge.active{ color:#065f46; background:#ecfdf5; border-color:#a7f3d0; }   /* green */
-.db-badge.pending{ color:#92400e; background:#fffbeb; border-color:#fde68a; }  /* amber */
-
-
-
 
 /* ---- shared card + text reset ---- */
+
 .db-card {
-    background: #fff;
-    color: #111827;                 /* readable text on white */
-    border: 1px solid #e5e7eb;
+    background: c.$color-surface-white;
+    color: c.$color-text-main;
+    border: 1px solid c.$border-gray;
     border-radius: 10px;
+}
+.db-card__title {
+    margin: 0px 0 8px;
+    font-weight: 700;
+    font-size : 1rem;
+}
+.db-card--messages {
+    margin-top : 24px;
+}
+
+.db-card h1,
+.db-card h2,
+.db-card h3,
+.db-card h4,
+.db-card h5,
+.db-card h6,
+.db-card p,
+.db-card span,
+.db-card div {
+    color: inherit;
+}
+
+.db-main {
     padding: 16px;
     margin-bottom: 10px;
 }
-.db-card h1, .db-card h2, .db-card h3,
-.db-card h4, .db-card h5, .db-card h6,
-.db-card p, .db-card span, .db-card div { color: inherit; }
 
-.db-main{padding: 16px;}
-.db-muted { color: var(--muted);}
+.db-muted {
+    color: c.$subtitle-text-gray;
+}
 
 /* --- Dashboard mini stats pills --- */
+
 .db-stats-mini {
     display: flex;
     gap: 24px;
-    justify-content: space-around;   /* even spacing like the mock */
+    justify-content: space-around; /* even spacing like the mock */
     align-items: stretch;
     margin: 8px 0 20px;
-    flex-wrap: wrap;                 /* stack on small screens */
+    flex-wrap: wrap; /* stack on small screens */
 }
 
 .db-stat-mini {
-    background: #ffffff;
-    border: 1px solid #e5e7eb;
+    background: c.$color-surface-white;
+    border: 1px solid c.$border-gray;
     border-radius: 10px;
     padding: 10px 18px;
-    min-width: 170px;                /* keep pills consistent */
+    min-width: 170px; /* keep pills consistent */
     text-align: center;
-    box-shadow: 0 1px 0 rgba(0,0,0,0.02);
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.02);
 }
 
 .db-stat__title {
     font-weight: 700;
     font-size: 14px;
-    color: #111827;
+    color: c.$color-text-main;
     line-height: 1.2;
 }
 
@@ -135,30 +136,37 @@ body { background: var(--bg); color: var(--ink); }
     margin-top: 6px;
     font-weight: 700;
     font-size: 16px;
-    color: #111827;
+    color: c.$color-text-main;
 }
 
-
 /* --- Reusable dashboard panel --- */
+
 .db-panel {
-    border: 1px solid var(--border);
-    background: #f9fafb;
+    border: 1px solid c.$border-gray;
+    background: lighten(c.$page-bg-light, 3%);
     border-radius: 10px;
-    padding: 10px 12px;
+    padding: 8px 16px 16px;
     margin-bottom: 10px;
-    color: var(--muted);
+    color: c.$subtitle-text-gray;
 }
 
 .db-panel__header {
+    display: flex;
+    align-items: center;
     font-weight: 600;
-    margin-bottom: 10px;
-    background: #f9fafb;
-    border: 1px solid #e5e7eb;
-    padding: 6px 8px;
-    border-radius: 6px;
+    margin-bottom: 1px;
+    background: lighten(c.$page-bg-light, 3%);
+    padding: 0px 16px;
+    height: 48px;
+
+
 }
 
+.db-panel + .db-panel{
+    margin-top: 16px;
+}
 /* --- Courses list (chips) --- */
+
 .db-courses {
     display: flex;
     flex-wrap: wrap;
@@ -170,93 +178,147 @@ body { background: var(--bg); color: var(--ink); }
     align-items: center;
     gap: 8px;
     padding: 8px 10px;
-    border: 1px solid var(--border);
-    background: #FFFFFF;
+    border: 1px solid c.$border-gray;
+    background: c.$color-surface-white;
     border-radius: 999px;
 }
 
 .db-course__code {
     font-weight: 700;
+    color: c.$color-text-main;
 }
 
 .db-course__name {
-    color: var(--muted);
+    color: c.$subtitle-text-gray;
     font-size: 14px;
 }
 
 /* --- Tabs --- */
-.db-tabs { display: flex; gap: .5rem; margin: .5rem 0 1rem; }
+
+.db-tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin: 0.5rem 0 1rem;
+}
+
 .db-tab {
-    padding: .35rem .75rem;
-    border: 1px solid #e5e7eb;
+    padding: 0.35rem 0.75rem;
+    border: 1px solid c.$border-gray;
     border-radius: 999px;
-    background: #fff;
-    color: #111827;
+    background: c.$color-surface-white;
+    color: c.$color-text-main;
 }
+
 .db-tab.is-active {
-    background: #111827;
-    color: #fff;
-    border-color: #111827;
+    background: c.$color-text-main;
+    color: c.$color-text-on-dark;
+    border-color: c.$color-text-main;
 }
 
-/* --- Table --- */
+/* --- Table shell --- */
+
 .db-table {
-    border: 1px solid #e5e7eb;
-    border-radius: .5rem;
+    border: 1px solid c.$border-gray;
+    border-radius: 0.5rem;
     overflow: hidden;
-    background: #fff;
+    background: c.$color-surface-white;
+
+
 }
 
-.db-table__head, .db-table__row {
+
+.db-table__head,
+.db-table__row {
     display: grid;
-    grid-template-columns: 2fr 2fr 1fr 1fr; /* Name | Course | Status | Time */
-    gap: .75rem;
-    padding: .75rem 1rem;
-    color: #111827;
+    grid-template-columns: 2fr 2fr 1fr 1fr; /* overridden below per table type */
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    color: c.$color-text-main;
 }
 
 .db-table__head {
-    background: #f3f4f6;
+    background: lighten(c.$page-bg-light, 4%);
     font-weight: 600;
-    color: #111827;               /* ensure header text is dark */
 }
 
 .db-table__row {
-    background: #fff;
-    border-top: 1px solid #f1f5f9;
-    color: #111827;               /* ensure row text is dark */
+    background: c.$color-surface-white;
+    border-top: 1px solid lighten(c.$border-gray, 18%);
     cursor: pointer;
 }
 
 .db-table__empty {
     padding: 1rem;
-    color: #6b7280;
+    color: c.$subtitle-text-gray;
     text-align: center;
 }
-.db-table__head { background:#f3f4f6; font-weight:600; }
-.db-table__row { border-top:1px solid #f1f5f9; }
 
 /* ---- layouts (choose per table) ---- */
+
 /* Messages: Name | Course | Status | Time */
 .db-table--messages .db-table__head,
 .db-table--messages .db-table__row {
     grid-template-columns: 2fr 2fr 1fr 1fr;
 }
+
 /* Listings: Course | Price | Requests | Status */
 .db-table--listings .db-table__head,
 .db-table--listings .db-table__row {
     grid-template-columns: 2fr 1fr 1fr 1fr;
 }
 
-/* ---- badges for Status column ---- */
-.badge {
-    display:inline-flex; align-items:center; gap:.4rem;
-    padding:.25rem .6rem; font-size:.85rem; border-radius:999px;
-    border:1px solid transparent; line-height:1;
+.db-table__row--clickable{
+    cursor: pointer;
+    transition: background-color 0.15s ease, box-shadow 0.15s ease, transform 0.05s ease;
 }
-.badge--success { background:#ecfdf5; color:#065f46; border-color:#a7f3d0; } /* Active */
-.badge--warning { background:#fffbeb; color:#92400e; border-color:#fde68a; }  /* Pending */
-.badge--muted   { background:#f3f4f6; color:#374151; border-color:#e5e7eb; }   /* Default */
 
-/* optional: hover highlight */
-/*.db-table__row:hover { background:#fafafa; }*/
+.db-table__row--clickable:hover{
+    background: c.$page-bg-light;
+    box-shadow: 0 1px 3px rgba(15,23,42,0.08);
+
+}
+.db-table__course-name{
+
+    font-weight: 600;
+
+}
+.db-table__row--clickable:hover .db-table__course-name{
+    color: #111827;
+
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+/* ---- badges for Status column ---- */
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.25rem 0.6rem;
+    font-size: 0.85rem;
+    border-radius: 999px;
+    border: 1px solid transparent;
+    line-height: 1;
+}
+
+/* these three still use hex because your color file
+   doesn’t define success / warning tokens. You can
+   add them to _colors.scss later if you want. */
+.badge--success {
+    background: #ecfdf5;
+    color: #065f46;
+    border-color: #a7f3d0;
+}
+
+.badge--warning {
+    background: #fffbeb;
+    color: #92400e;
+    border-color: #fde68a;
+}
+
+.badge--muted {
+    background: #f3f4f6;
+    color: #374151;
+    border-color: c.$border-gray;
+}

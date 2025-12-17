@@ -15,12 +15,11 @@
 
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import TutorListingService from "../../service/tutorListingService";
-import { useAuth } from "../../component/AuthContext";
+import { mockListingService as TutorListingService } from "../../service/mockTutorListingService";
 
 export default function MyListingsPanel() {
-  const [listings, setListings] = useState([]);
-  const navigate = useNavigate();
+    const [listings, setListings] = useState([]);
+    const navigate = useNavigate();
 
   const { user, isLoggedIn } = useAuth();
 
@@ -62,21 +61,23 @@ export default function MyListingsPanel() {
           <div>Status</div>
         </div>
 
-        {listings.map((row, i) => (
-          <div
-            key={`${row.course.courseNumber}-${i}`}
-            className="db-table__row"
-            onClick={() => navigate(`/listing/${encodeURIComponent(row.listingId)}`)}
-          >
-            <div>{row.course.courseNumber}</div>
-            <div>{row.pricePerHour}$ / hr</div>
-            <div>???</div>
-            <div>
-              <span className={badgeClass(row.live)}>{row.live === 1 ? "Active" : "Inactive"}</span>
+                {listings.map((row, i) => (
+                    <div
+                        key={`${row.course.courseNumber}-${i}`}
+                        className="db-table__row db-table__row--clickable"
+                        onClick={() => navigate(`/listing/${encodeURIComponent(row.listingId)}`)}
+                    >
+                        <div className="db-table__cell db-table__cell--course">
+                            <span className="db-table__course-name">{row.course.courseNumber}</span>
+                        </div>
+                        <div className="db-table__cell">{row.pricePerHour}$ / hr</div>
+                        <div className="db-table__cell">???</div>
+                        <div className="db-table__cell">
+                            <span className={badgeClass(row.live)}>{row.live === 1 ? "Active" : "Inactive"}</span>
+                        </div>
+                    </div>
+                ))}
             </div>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
+        </section>
+    );
 }
