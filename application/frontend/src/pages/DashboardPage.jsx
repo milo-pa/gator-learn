@@ -30,6 +30,11 @@ export default function DashboardPage() {
     const [sentMessages, setSentMessages] = useState([]);
     const [receivedMessages, setReceivedMessages] = useState([]);
 
+    const handleMessageDelete = (messageId) => {
+        setSentMessages((prev) => prev.filter((m) => m.messageId !== messageId));
+        setReceivedMessages((prev) => prev.filter((m) => m.messageId !== messageId));
+    };
+
     useEffect(() => {
         messageService
             .getMessagesSentByUserId(user.userId)
@@ -52,8 +57,9 @@ export default function DashboardPage() {
 
     return (
         <div className="db-page">
-            <div><h2>Welcome back, Gator Learner!</h2></div>
-
+            <div>
+                <h2>Welcome back, {user.name}!</h2>
+            </div>
 
             <div className="db-wrap">
                 <DashboardSidebar active={active} onSelect={setActive} />
@@ -62,7 +68,11 @@ export default function DashboardPage() {
                     {active === "overview" && (
                         <>
                             <MyListingsPanel />
-                            <DashboardMessagesPanel sentMessages={sentMessages} receivedMessages={receivedMessages} />
+                            <DashboardMessagesPanel
+                                sentMessages={sentMessages}
+                                receivedMessages={receivedMessages}
+                                onDelete={handleMessageDelete}
+                            />
                         </>
                     )}
 

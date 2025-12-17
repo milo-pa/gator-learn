@@ -22,45 +22,59 @@ export default function MyListingsPanel() {
     const [listings, setListings] = useState([]);
     const navigate = useNavigate();
 
-  const { user, isLoggedIn } = useAuth();
+    const { user, isLoggedIn } = useAuth();
 
-  useEffect(() => {
-    if (isLoggedIn === null) return;
-    if (!user?.userId) {
-      setListings([]);
-      return;
-    }
-
-    (async () => {
-      try {
-        const res = await TutorListingService.getListingsForAccountId(user.userId);
-        const listings = res?.data;
-        if (!listings || (Array.isArray(listings) && listings.length === 0)) {
-          setListings([]);
-          return;
+    const handleDelete = async (e, listingId) => {
+        e.stopPropagation();
+        e.preventDefault();
+        if (!window.confirm("Delete this listing?")) return;
+        console.log("Deleting listing", listingId);
+        try {
+            await TutorListingService.deleteListing(listingId);
+            setListings((prev) => prev.filter((l) => l.listingId !== listingId));
+        } catch (err) {
+            console.error("Failed to delete listing", err);
+            alert("Failed to delete listing.");
         }
-        setListings(Array.isArray(listings) ? listings : [listings]);
-      } catch (err) {
-        console.error(err);
-        setListings([]);
-      }
-    })();
-  }, [user?.userId, isLoggedIn]);
+    };
 
-  const badgeClass = (status) =>
-    status === 1 ? "badge badge--success" : status === 0 ? "badge badge--warning" : "badge badge--muted";
+    useEffect(() => {
+        if (isLoggedIn === null) return;
+        if (!user?.userId) {
+            setListings([]);
+            return;
+        }
 
-  return (
-    <section className="db-card">
-      <h3 style={{ marginBottom: "0.75rem" }}>My Listings</h3>
+        (async () => {
+            try {
+                const res = await TutorListingService.getListingsForAccountId(user.userId);
+                const listings = res?.data;
+                if (!listings || (Array.isArray(listings) && listings.length === 0)) {
+                    setListings([]);
+                    return;
+                }
+                setListings(Array.isArray(listings) ? listings : [listings]);
+            } catch (err) {
+                console.error(err);
+                setListings([]);
+            }
+        })();
+    }, [user?.userId, isLoggedIn]);
 
-      <div className="db-table db-table--listings">
-        <div className="db-table__head">
-          <div>Courses</div>
-          <div>Price</div>
-          <div>Requests</div>
-          <div>Status</div>
-        </div>
+    const badgeClass = (status) =>
+        status === 1 ? "badge badge--success" : status === 0 ? "badge badge--warning" : "badge badge--muted";
+
+    return (
+        <section className="db-card">
+            <h3 style={{ marginBottom: "0.75rem" }}>My Listings</h3>
+
+            <div className="db-table db-table--listings">
+                <div className="db-table__head">
+                    <div>Courses</div>
+                    <div>Price</div>
+                    <div>Requests</div>
+                    <div>Status</div>
+                </div>
 
                 {listings.map((row, i) => (
                     <div
@@ -75,6 +89,16 @@ export default function MyListingsPanel() {
                         <div className="db-table__cell">???</div>
                         <div className="db-table__cell">
                             <span className={badgeClass(row.live)}>{row.live === 1 ? "Active" : "Inactive"}</span>
+                        </div>
+                        <div className="db-table__cell">
+                            <button
+                                type="button"
+                                aria-label="Delete listing"
+                                className="btn btn-icon"
+                                onClick={(e) => handleDelete(e, row.listingId)}
+                            >
+                                <img src="images/trash.png" alt="Delete" width="16" height="16" />
+                            </button>
                         </div>
                     </div>
                 ))}
