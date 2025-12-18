@@ -13,7 +13,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import DashboardSidebar from "../component/dashboard/DashboardSidebar";
 import DashboardStatsRow from "../component/dashboard/DashboardStatsRow";
 import MyListingsPanel from "../component/dashboard/MyListingPanel";
@@ -21,40 +21,70 @@ import DashboardMessagesPanel from "../component/dashboard/DashboardMessagesPane
 import SentMessageDashboardPage from "./SentMessageDashboardPage.jsx";
 import ReceivedMessageDashboardPage from "./ReceivedMessageDashboardPage.jsx";
 
-import { DASHBOARD_STATS, MESSAGES } from "../mock/dashboardData";
+import messageService from "../service/messageService";
+import { useAuth } from "../component/AuthContext";
 
 export default function DashboardPage() {
-  const [active, setActive] = useState("overview");
+    const [active, setActive] = useState("overview");
+    const { user } = useAuth();
+    const [sentMessages, setSentMessages] = useState([]);
+    const [receivedMessages, setReceivedMessages] = useState([]);
 
-  return (
-    <div className="db_page">
-      <h2>Welcome back, Gator Learner!</h2>
+    const handleMessageDelete = (messageId) => {
+        setSentMessages((prev) => prev.filter((m) => m.messageId !== messageId));
+        setReceivedMessages((prev) => prev.filter((m) => m.messageId !== messageId));
+    };
 
-      <div className="db-wrap">
-        <DashboardSidebar active={active} onSelect={setActive} />
+    useEffect(() => {
+        messageService
+            .getMessagesSentByUserId(user.userId)
+            .then((res) => setSentMessages(res.data || []))
+            .catch((err) => {
+                const status = err.response?.status;
+                console.error("Failed to fetch sent messages", err);
+                alert(`Message retrieval failed with status ${status}.`);
+            });
 
-        <section className="db-card db-main">
-          {active === "overview" && (
-            <>
-              <DashboardStatsRow
-                activeListings={DASHBOARD_STATS.activeListings}
-                pendingRequests={DASHBOARD_STATS.pendingRequests}
-                totalRequests={DASHBOARD_STATS.totalRequests}
-              />
+        messageService
+            .getMessagesReceivedByUserId(user.userId)
+            .then((res) => setReceivedMessages(res.data || []))
+            .catch((err) => {
+                const status = err.response?.status;
+                console.error("Failed to fetch received messages", err);
+                alert(`Message retrieval failed with status ${status}.`);
+            });
+    }, []);
 
-              <MyListingsPanel />
+    return (
+        <div className="db-page">
+            <div>
+                <h2>Welcome back, {user.name}!</h2>
+            </div>
 
-              <DashboardMessagesPanel messages={MESSAGES} />
-            </>
-          )}
+            <div className="db-wrap">
+                <DashboardSidebar active={active} onSelect={setActive} />
 
-          {active === "sentMessages" && <SentMessageDashboardPage />}
+                <section className="db-card db-main">
+                    {active === "overview" && (
+                        <>
+                            <MyListingsPanel />
+                            <DashboardMessagesPanel
+                                sentMessages={sentMessages}
+                                receivedMessages={receivedMessages}
+                                onDelete={handleMessageDelete}
+                            />
+                        </>
+                    )}
 
-          {active === "receivedMessages" && <ReceivedMessageDashboardPage />}
+                    {active === "sentMessages" && <SentMessageDashboardPage sentMessages={sentMessages} />}
 
-          {active === "myListings" && <MyListingsPanel />}
-        </section>
-      </div>
-    </div>
-  );
+                    {active === "receivedMessages" && (
+                        <ReceivedMessageDashboardPage receivedMessages={receivedMessages} />
+                    )}
+
+                    {active === "myListings" && <MyListingsPanel />}
+                </section>
+            </div>
+        </div>
+    );
 }

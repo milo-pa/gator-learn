@@ -1,3 +1,5 @@
+@use "./colors" as c;
+
 /* ===== Dashboard base ===== */
 :root {
     --bg: #f6f7fb;
@@ -18,16 +20,21 @@ body {
 
 .db-wrap {
     display: grid;
+    margin-top: 0;
     grid-template-columns: 240px 1fr;
-    gap: 24px;
+    gap: 0;
+    min-height: 10%;
 }
 
+/* ---- sidebar ---- */
+
 .db-sidebar {
-    background: #f3f3f3;
-    border: 1px solid #e5e7eb;
+    background: c.$color-surface-white;
+    border: 1px solid c.$border-gray;
     border-radius: 8px;
     padding: 12px;
     min-width: 220px;
+    margin-right: 16px;
 }
 
 .db-sidebar__list {
@@ -43,8 +50,9 @@ body {
     border: none;
     background: transparent;
     border-radius: 6px;
-    font-weight: 600;
+    font-weight: 700;
     cursor: pointer;
+    color: c.$color-text-main;
 }
 
 .db-sidebar_btn:hover {
@@ -114,6 +122,17 @@ body {
 
 
 
+.db-card h1,
+.db-card h2,
+.db-card h3,
+.db-card h4,
+.db-card h5,
+.db-card h6,
+.db-card p,
+.db-card span,
+.db-card div {
+    color: inherit;
+}
 
 /* ---- shared card + text reset ---- */
 .db-card {
@@ -146,6 +165,7 @@ body {
 }
 
 /* --- Dashboard mini stats pills --- */
+
 .db-stats-mini {
     display: flex;
     gap: 24px;
@@ -158,8 +178,8 @@ body {
 }
 
 .db-stat-mini {
-    background: #ffffff;
-    border: 1px solid #e5e7eb;
+    background: c.$color-surface-white;
+    border: 1px solid c.$border-gray;
     border-radius: 10px;
     padding: 10px 18px;
     min-width: 170px;
@@ -171,7 +191,7 @@ body {
 .db-stat__title {
     font-weight: 700;
     font-size: 14px;
-    color: #111827;
+    color: c.$color-text-main;
     line-height: 1.2;
 }
 
@@ -179,30 +199,35 @@ body {
     margin-top: 6px;
     font-weight: 700;
     font-size: 16px;
-    color: #111827;
+    color: c.$color-text-main;
 }
 
-
 /* --- Reusable dashboard panel --- */
+
 .db-panel {
-    border: 1px solid var(--border);
-    background: #f9fafb;
+    border: 1px solid c.$border-gray;
+    background: lighten(c.$page-bg-light, 3%);
     border-radius: 10px;
-    padding: 10px 12px;
+    padding: 8px 16px 16px;
     margin-bottom: 10px;
-    color: var(--muted);
+    color: c.$subtitle-text-gray;
 }
 
 .db-panel__header {
+    display: flex;
+    align-items: center;
     font-weight: 600;
-    margin-bottom: 10px;
-    background: #f9fafb;
-    border: 1px solid #e5e7eb;
-    padding: 6px 8px;
-    border-radius: 6px;
+    margin-bottom: 1px;
+    background: lighten(c.$page-bg-light, 3%);
+    padding: 0px 16px;
+    height: 48px;
 }
 
+.db-panel + .db-panel {
+    margin-top: 16px;
+}
 /* --- Courses list (chips) --- */
+
 .db-courses {
     display: flex;
     flex-wrap: wrap;
@@ -214,17 +239,18 @@ body {
     align-items: center;
     gap: 8px;
     padding: 8px 10px;
-    border: 1px solid var(--border);
-    background: #FFFFFF;
+    border: 1px solid c.$border-gray;
+    background: c.$color-surface-white;
     border-radius: 999px;
 }
 
 .db-course__code {
     font-weight: 700;
+    color: c.$color-text-main;
 }
 
 .db-course__name {
-    color: var(--muted);
+    color: c.$subtitle-text-gray;
     font-size: 14px;
 }
 
@@ -236,25 +262,26 @@ body {
 }
 
 .db-tab {
-    padding: .35rem .75rem;
-    border: 1px solid #e5e7eb;
+    padding: 0.35rem 0.75rem;
+    border: 1px solid c.$border-gray;
     border-radius: 999px;
-    background: #fff;
-    color: #111827;
+    background: c.$color-surface-white;
+    color: c.$color-text-main;
 }
 
 .db-tab.is-active {
-    background: #111827;
-    color: #fff;
-    border-color: #111827;
+    background: c.$color-text-main;
+    color: c.$color-text-on-dark;
+    border-color: c.$color-text-main;
 }
 
-/* --- Table --- */
+/* --- Table shell --- */
+
 .db-table {
-    border: 1px solid #e5e7eb;
-    border-radius: .5rem;
+    border: 1px solid c.$border-gray;
+    border-radius: 0.5rem;
     overflow: hidden;
-    background: #fff;
+    background: c.$color-surface-white;
 }
 
 .db-table__head,
@@ -268,7 +295,7 @@ body {
 }
 
 .db-table__head {
-    background: #f3f4f6;
+    background: lighten(c.$page-bg-light, 4%);
     font-weight: 600;
     color: #111827;
     /* ensure header text is dark */
@@ -284,7 +311,7 @@ body {
 
 .db-table__empty {
     padding: 1rem;
-    color: #6b7280;
+    color: c.$subtitle-text-gray;
     text-align: center;
 }
 
@@ -298,19 +325,62 @@ body {
 }
 
 /* ---- layouts (choose per table) ---- */
+
 /* Messages: Name | Course | Status | Time */
 .db-table--messages .db-table__head,
 .db-table--messages .db-table__row {
-    grid-template-columns: 2fr 2fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 0.4fr;
 }
 
 /* Listings: Course | Price | Requests | Status */
 .db-table--listings .db-table__head,
 .db-table--listings .db-table__row {
-    grid-template-columns: 2fr 1fr 1fr 1fr;
+    grid-template-columns: 2fr 1fr 1fr 1fr 0.4fr;
 }
 
+.db-table__row--clickable {
+    cursor: pointer;
+    transition: background-color 0.15s ease, box-shadow 0.15s ease, transform 0.05s ease;
+}
+
+.db-table__row--clickable:hover {
+    background: c.$page-bg-light;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.08);
+}
+.db-table__course-name {
+    font-weight: 600;
+}
+.db-table__row--clickable:hover .db-table__course-name {
+    color: #111827;
+
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+/* Messages table hover effects */
+.db-table--messages .db-table__row--clickable:hover .col--name,
+.db-table--messages .db-table__row--clickable:hover .col--course {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.db-table__cell {
+    display: flex;
+    align-items: center;
+}
+
+.col {
+    display: flex;
+    align-items: center;
+}
+
+// .col--delete {
+//     display: flex;
+//     justify-content: center;
+// }
+
 /* ---- badges for Status column ---- */
+
 .badge {
     display: inline-flex;
     align-items: center;
