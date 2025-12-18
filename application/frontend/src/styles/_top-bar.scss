@@ -51,6 +51,7 @@
 .spacer {
   flex: 1;
   min-width: 0;
+
   &.demo-line {
     padding: 6px 16px 10px;
     text-align: right;
@@ -73,7 +74,7 @@
   min-width: 240px;
   display: flex;
 
-  
+
 
   .search-btn {
     height: 100%;
@@ -93,8 +94,8 @@
   font-size: 12px;
   outline: none;
   text-align: center;
-  white-space: nowrap; 
-  flex: 0 0 auto; 
+  white-space: nowrap;
+  flex: 0 0 auto;
 }
 
 .search-input {
@@ -265,19 +266,30 @@ body.dark-mode {
     flex: 0 0 auto;
     align-self: stretch;
   }
+
   .search-category {
     width: 95px;
     font-size: 11px;
   }
 
-  .login-button {
-    width: 100%;
-    max-width: 320px;
-    margin: 0 auto;
-    display: block;
-    text-align: center;
-    padding: 10px 14px;
+  .action-wrapper {
+    display: flex;
+    .profile-icon {
+      width: 36px;
+      height: 36px;
+      
+    }
+
+
+    .login-button {
+      max-width: 320px;
+      margin: 0 auto;
+      text-align: center;
+      padding: 10px 14px;
+    }
+
   }
+
 
   .yellow-sticky {
     flex-wrap: wrap;
@@ -292,10 +304,6 @@ body.dark-mode {
   .yellow-sticky .yub-left {
     flex-wrap: wrap;
     justify-content: center;
-  }
-  .profile-icon {
-    width: 36px;
-    height: 36px;
   }
 
 }

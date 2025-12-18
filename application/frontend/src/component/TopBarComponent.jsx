@@ -102,6 +102,7 @@ class TopBarComponent extends Component {
             if (isLoggedIn) {
               return (
                 <>
+                <div className="action-wrapper">
                   <button
                     id="logout-button"
                     className="btn btn-primary login-button"
@@ -114,6 +115,9 @@ class TopBarComponent extends Component {
                   <Link to="/user-profile">
                     <img src="/images/default-profile.png" alt="Profile" className="profile-icon" />
                   </Link>
+
+                </div>
+                  
                 </>
               );
             }
