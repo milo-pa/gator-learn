@@ -98,7 +98,7 @@ class TopBarComponent extends Component {
 
           {/* Login / Logout and profile icon behavior based on auth status */}
           {(() => {
-            const { isLoggedIn, logout } = this.context || {};
+            const { isLoggedIn,user, logout } = this.context || {};
             if (isLoggedIn) {
               return (
                 <>
@@ -113,7 +113,7 @@ class TopBarComponent extends Component {
                     Logout
                   </button>
                   <Link to="/user-profile">
-                    <img src="/images/default-profile.png" alt="Profile" className="profile-icon" />
+                    <img src= {user.photoPath ||"/images/default-profile.png"} alt="Profile" className="profile-icon" />
                   </Link>
 
                 </div>

@@ -10,7 +10,7 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 public class SecurityConfig
 {
-    // For testing, disables default auth
+    // For testing, disables some default spring boot security features
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception
     {

@@ -19,8 +19,8 @@ export default function DashboardStatsRow({ activeListings = 0, pendingRequests 
     return (
         <div className="db-stats-mini" role="group" aria-label="Listing stats">
             <Stat title="Active Listings" value={activeListings} />
-            <Stat title="Pending Request" value={pendingRequests} />
-            <Stat title="Total Request" value={totalRequests} />
+            <Stat title="Pending Requests" value={pendingRequests} />
+            <Stat title="Total Requests" value={totalRequests} />
         </div>
     );
 }
