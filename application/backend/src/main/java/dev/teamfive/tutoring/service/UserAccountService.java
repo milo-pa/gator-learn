@@ -24,11 +24,6 @@ public class UserAccountService
         return userRepository;
     }
 
-    public PasswordEncoder getPasswordEncoder()
-    {
-        return passwordEncoder;
-    }
-
     public UserAccount createAccount(UserAccount user)
     {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
