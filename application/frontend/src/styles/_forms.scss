@@ -31,7 +31,7 @@
   .form-main {
     display: flex;
     flex-direction: column;
-    gap:24px;
+    gap: 24px;
 
     // The actual form element
     .form {
@@ -45,7 +45,7 @@
     // Label + field row (shared across login / registration)
     .form-row {
       display: grid;
-      grid-template-columns: 200px 1fr;  // label | input
+      grid-template-columns: 200px 1fr; // label | input
       align-items: center;
       width: 100%;
       max-width: 900px;
@@ -76,7 +76,7 @@
     .hci-text {
       font-size: 0.85rem;
       color: colors.$gray-text-home;
-      white-space: nowrap;             // prevent wrapping
+      white-space: nowrap; // prevent wrapping
     }
 
     // Shared wrapper for text inputs
@@ -231,5 +231,76 @@ body.dark-mode {
         color: colors.$color-text-on-dark;
       }
     }
+  }
+}
+
+
+@media (max-width: 768px) {
+  .form-page {
+    width: calc(100% - 24px);
+    margin: 12px auto 18px;
+    padding: 16px;
+  }
+
+  .form-page .form-header h1 {
+    font-size: 2rem;
+  }
+
+  .form-page .form-main .form-row {
+    grid-template-columns: 1fr;
+    row-gap: 8px;
+  }
+  .form-page .form-main .form-row label {
+    width: 100%;
+    text-align: left;
+    font-size: 1.05rem;
+  }
+
+  .form-page .form-main .form-row .desc-text {
+    grid-column: 1;
+  }
+  .form-page .form-main .input-wrapper {
+    max-width: 100%;
+    height: 44px; // touch-friendly
+  }
+
+  .form-page .form-main .input-wrapper.textarea-wrapper {
+    min-height: 140px;
+  }
+  .form-page .form-main .hci-text {
+    white-space: normal;
+  }
+
+  .form-page .form-main .button-row {
+    flex-direction: column;
+    gap: 12px;
+    align-items: stretch;
+  }
+
+  .form-page .form-main .button-row button,
+  .form-page .form-main .button-row a {
+    width: 100%;
+    max-width: none;
+  }
+  .form-page .form-main .helper-row {
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    text-align: center;
+  }
+  .form-page .form-main .helper-row .helper-text {
+    font-size: 1rem;
+  }
+  .form-page .form-main .password-wrapper {
+    padding-right: 10px;
+  }
+
+  .form-page .form-main .toggle-password {
+    font-size: 0.9rem;
+  }
+  .form-page input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    accent-color: #ffcc00;
   }
 }
