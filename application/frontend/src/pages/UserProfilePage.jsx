@@ -47,12 +47,12 @@ export default function UserProfilePage() {
         </div>
       </header>
       <section className="user-listings-section">
-        <h2 className="user-listings-title">Tutor Listings</h2>
+        <h2 className="user-listings-title" >Tutor Listings</h2>
         {listings.length === 0 && <p className="no-listings">Currently no listings posted.</p>}
 
         <div className="user-listing-list">
           {listings.map((listing) => (
-            <article key={listing.id} className="user-listing-card">
+            <article key={listing.id} className="user-listing-card" onClick={() => navigate(`/listing/${encodeURIComponent(listing.listingId)}`)}>
               <div className="listing-image-wrap">
                 <img src="/images/tutor/iu_.png" alt="Tutor" className="listing-image" />
               </div>
@@ -73,14 +73,6 @@ export default function UserProfilePage() {
                   <span className="listing-label">Times Available:</span>{" "}
                   <span className="listing-value">{listing.availableTime}</span>
                 </p>
-              </div>
-              <div className="listing-action">
-                <button
-                  className="listing-details-btn"
-                  onClick={() => navigate(`/listing/${encodeURIComponent(listing.listingId)}`)}
-                >
-                  View more details
-                </button>
               </div>
             </article>
           ))}
