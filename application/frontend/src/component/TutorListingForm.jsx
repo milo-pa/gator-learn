@@ -11,10 +11,9 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { SUBJECT_OPTIONS, COURSE_OPTIONS } from "../mock/mockOptions";
 import PopUpComponent from "./PopUpComponent";
 import tutorListingService from "../service/tutorListingService";
 import { cleanText, cleanFreeText } from "../util/sanitize";
@@ -25,6 +24,8 @@ function TutorListingForm() {
     const [showPopUp, setPopUp] = useState(false);
     const [priceValue, setPriceValue] = useState("");
     const { user } = useAuth();
+    const [subjects, setSubjects] = useState([]);
+    const [courses, setCourses] = useState([]);
 
     const {
         register,
@@ -58,12 +59,35 @@ function TutorListingForm() {
     const availableDays = watch("availableDays");
     const subject = watch("subject");
 
-    const selectedSubject = SUBJECT_OPTIONS.find((s) => s.name === subject);
+    const subjectId = subject ? Number(subject) : 0;
 
-    const filteredCourses = useMemo(() => {
-        if (!selectedSubject) return [];
-        return COURSE_OPTIONS.filter((c) => c.subjectId === selectedSubject.id);
-    }, [selectedSubject]);
+    useEffect(() => {
+        tutorListingService
+            .getAllSubjects()
+            .then((res) => {
+                console.log("SUBJECTS STATUS:", res.status);
+                console.log("SUBJECTS DATA:", res.data);
+                setSubjects(Array.isArray(res.data) ? res.data : []);
+            })
+            .catch((err) => {
+                console.log("GET SUBJECTS ERROR:", err);
+                console.log("STATUS:", err.response?.status);
+                console.log("DATA:", err.response?.data);
+            });
+    }, []);
+
+    useEffect(() => {
+        if (!subjectId) {
+            setCourses([]);
+            return;
+        }
+
+        tutorListingService
+            .getCoursesBySubjectId(subjectId)
+            .then((res) => setCourses(res.data || []))
+            .catch((err) => console.log("GET COURSES ERROR:", err));
+    }, [subjectId]);
+    const filteredCourses = useMemo(() => courses, [courses]);
 
     // blatantly ai generated function
     function formatAvailableDays(availableDays) {
@@ -93,22 +117,25 @@ function TutorListingForm() {
             .join(", ");
     }
 
+    console.log("AUTH USER:", user);
+    console.log("AUTH USER ID:", user?.userId);
     const onSubmit = (data) => {
+        if (!user?.userId) {
+            alert("User not loaded yet. Please wait a moment.");
+            return;
+        }
         const payload = {
-            // This syntax sends a dummy listing and user object with only the IDs
-            // - should be fine as long as backend only needs IDs to create message in db?
-            account: { userId: user.userId },
+            account: { userId: user.userId },               // maps to user_id
+            subject: { subjectId: Number(data.subject) },   // maps to subject_id
+            course: { courseId: Number(data.course) },      // maps to course_id
 
-            // TODO: Need to map subjectId and courseId from the subject text names!!!
-            subject: { subjectId: cleanText(data.subject) },
-            course: { courseId: cleanText(data.course) },
+            pricePerHour: Number(priceValue || 0),
+            live: 1,                                        // IMPORTANT (int)
+            description: cleanFreeText(data.description || ""),
+            availableTime: formatAvailableDays(data.availableDays) || "",
 
-            pricePerHour: priceValue === "" ? null : Number(priceValue),
-            availableTime: formatAvailableDays(data.availableDays),
-            resumePath: data.resumeFile?.[0] || null,
-            description: cleanFreeText(data.description),
-            tutoringVideoSamplePath: data.videoSample?.[0] || null,
-            live: 1, // new listings are live by default for testing purposes?
+            resumePath: data.resumeFile?.[0]?.name ?? "",   // IMPORTANT (not null)
+            videoSamplePath: data.videoSample?.[0]?.name ?? null,
         };
 
         console.log("FORM DATA:", data);
@@ -119,9 +146,12 @@ function TutorListingForm() {
             .createListing(payload)
             .then(() => setPopUp(true))
             .catch((err) => {
-                console.log("CREATE LISTING ERROR:", err);
-                const status = err.response?.status;
-                alert(`Listing creation failed with status ${status}.`);
+                const data = err.response?.data;
+                console.log("CREATE LISTING ERROR:", data);
+                alert(
+                    "Listing creation failed: " +
+                    (typeof data === "string" ? data : JSON.stringify(data, null, 2))
+                );
             });
     };
     const handlePriceChange = (e) => {
@@ -155,9 +185,9 @@ function TutorListingForm() {
                             {...register("subject", { required: "Subject is required" })}
                         >
                             <option value="">Select a subject</option>
-                            {SUBJECT_OPTIONS.map((s) => (
-                                <option key={s.id} value={s.name}>
-                                    {s.name}
+                            {subjects.map((s) => (
+                                <option key={s.subjectId} value={s.subjectId}>
+                                    {s.subjectName}
                                 </option>
                             ))}
                         </select>
@@ -172,15 +202,15 @@ function TutorListingForm() {
                         <select
                             id="course"
                             className={`input-wrapper ${errors.course ? "input-error" : ""}`}
-                            disabled={!subject}
+                            disabled={!subjectId}
                             {...register("course", {
                                 required: subject ? "Course is required" : false,
                             })}
                         >
                             <option value="">{subject ? "Select class" : "Choose subject first"}</option>
                             {filteredCourses.map((c) => (
-                                <option key={c.id} value={c.code}>
-                                    {c.code} {c.name}
+                                <option key={c.courseId} value={c.courseId}>
+                                    {c.courseNumber} {c.courseName}
                                 </option>
                             ))}
                         </select>
@@ -232,9 +262,8 @@ function TutorListingForm() {
                     <div className="form-row">
                         <label className="required-label">Availablity: </label>
                         <div
-                            className={`availability-block ${
-                                errors.availableDays && !hasAnyDaySelected ? "input-error" : ""
-                            }`}
+                            className={`availability-block ${errors.availableDays && !hasAnyDaySelected ? "input-error" : ""
+                                }`}
                         >
                             <div className="days-column">
                                 {["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"].map(
@@ -261,9 +290,8 @@ function TutorListingForm() {
                                                             <span className="time-label">From:</span>
                                                             <input
                                                                 type="time"
-                                                                className={`time-input ${
-                                                                    fromError ? "input-error" : ""
-                                                                }`}
+                                                                className={`time-input ${fromError ? "input-error" : ""
+                                                                    }`}
                                                                 {...register(`availableDays.${day}.fromTime`, {
                                                                     required: "Start time required",
                                                                 })}
@@ -336,7 +364,7 @@ function TutorListingForm() {
                         <button type="button" className="btn btn-secondary" onClick={() => navigate(-1)}>
                             CANCEL
                         </button>
-                        <button type="submit" className="btn btn-primary">
+                        <button type="submit" className="btn btn-primary" disabled={!user?.userId}>
                             SUBMIT
                         </button>
                     </div>
