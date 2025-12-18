@@ -74,10 +74,15 @@
   grid-template-columns: 140px 1fr 210px;
   gap: 1.25rem;
   align-items: stretch;
-  background: #f5f5f5;
+  background: #fff0b6;
   border-radius: 4px;
   border: 1px solid #d1d1d1;
   padding: 0.50rem 0.75rem;
+}
+
+.user-listing-card:hover{
+  background: #ffcc00;
+
 }
 
 .listing-image-wrap {
