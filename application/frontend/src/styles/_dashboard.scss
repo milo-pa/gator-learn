@@ -223,9 +223,10 @@ body {
     height: 48px;
 }
 
-.db-panel + .db-panel {
+.db-panel+.db-panel {
     margin-top: 16px;
 }
+
 /* --- Courses list (chips) --- */
 
 .db-courses {
@@ -347,9 +348,11 @@ body {
     background: c.$page-bg-light;
     box-shadow: 0 1px 3px rgba(15, 23, 42, 0.08);
 }
+
 .db-table__course-name {
     font-weight: 600;
 }
+
 .db-table__row--clickable:hover .db-table__course-name {
     color: #111827;
 
@@ -428,48 +431,143 @@ body {
 
 @media (max-width: 768px) {
     .db-page {
-        padding: 12px;
-    }
-
-    .db-main {
-        padding: 0;
-    }
-
-    .db-page,
-    .db_page {
-        padding: 12px;
-    }
-
-    .db-stats-mini {
-        gap: 12px;
-        justify-content: center;
-    }
-
-    .db-stat-mini {
-        min-width: 0;
         width: 100%;
-        max-width: 360px;
-    }
-
-    .db-table-wrap,
-    .db-table {
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-    }
-
-    .db-table__head,
-    .db-table__row {
-        min-width: 680px;
+        max-width: 100%;
+        margin: 0;
+        padding: 12px;
     }
 
     .db-wrap {
+        width: 100%;
         grid-template-columns: 1fr;
-        gap: 16px;
     }
 
     .db-sidebar {
         min-width: 0;
-        width: 100%;
+        margin-right: 0;
+        padding: 10px;
+        border-radius: 12px;
     }
 
+    .db-sidebar__list {
+        display: flex;
+        gap: 8px;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 6px;
+    }
+
+    .db-sidebar__btn {
+        width: auto;
+        flex: 0 0 auto;
+        white-space: nowrap;
+        padding: 10px 12px;
+        border-radius: 999px;
+    }
+
+    .db-main {
+        padding: 12px;
+        min-width: 0;
+        overflow: hidden;
+    }
+
+    .db-panel {
+        padding: 12px;
+        border-radius: 12px;
+        margin-bottom: 12px;
+        overflow: hidden;
+    }
+
+    .db-panel__header {
+        padding: 10px 12px;
+        margin: 0 0 8px 0;
+        height: auto;
+        border-radius: 10px;
+    }
+
+    .db-tabs {
+        gap: 8px;
+        margin: 8px 0 10px;
+        flex-wrap: wrap;
+    }
+
+    .db-tab {
+        padding: 8px 12px;
+        font-weight: 700;
+    }
+
+  
+
+    .db-table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+    }
+
+    .db-table th,
+    .db-table td {
+        white-space: nowrap;
+    }
+
+    .db-card,
+    .db-main {
+        max-width: 100%;
+    }
+}
+
+/* =========================
+   DARK MODE (phone-friendly)
+   Works with body.dark-mode
+   ========================= */
+body.dark-mode {
+    .db-page {
+        background: transparent;
+    }
+
+    .db-sidebar,
+    .db-card,
+    .db-panel {
+        background: #111827;
+        border-color: #374151;
+        color: #e5e7eb;
+    }
+
+    .db-panel__header {
+        background: #1f2937;
+        color: #e5e7eb;
+    }
+
+    .db-sidebar__btn {
+        color: #e5e7eb;
+    }
+
+    .db-sidebar__btn:hover {
+        background: #1f2937;
+    }
+
+    .db-sidebar__btn.is-active {
+        background: #1f2937;
+        border: 1px solid #374151;
+    }
+
+    .db-tab {
+        background: #1f2937;
+        border-color: #374151;
+        color: #e5e7eb;
+    }
+
+    .db-tab.is-active {
+        background: #111827;
+    }
+
+    .db-table thead th {
+        background: #1f2937;
+        border-color: #374151;
+        color: #e5e7eb;
+    }
+
+    .db-table tbody td {
+        border-color: #374151;
+        color: #e5e7eb;
+    }
 }
