@@ -190,7 +190,7 @@ function TutorListingForm() {
                 course: { courseId: Number(data.course) },      // maps to course_id
 
                 pricePerHour: Number(priceValue || 0),
-                live: 1,                                        // IMPORTANT (int)
+                live: 0,                                        // IMPORTANT (int)
                 description: cleanFreeText(data.description || ""),
                 availableTime: formatAvailableDays(data.availableDays) || "",
 
@@ -239,7 +239,7 @@ function TutorListingForm() {
                             id="subject"
                             className={`input-wrapper ${errors.subject ? "input-error" : ""}`}
                             {...register("subject", { required: "Subject is required" })}
-                        >
+                        >    
                             <option value="">Select a subject</option>
                             {subjects.map((s) => (
                                 <option key={s.subjectId} value={s.subjectId}>

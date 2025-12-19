@@ -66,7 +66,8 @@
 .user-listings-list {
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 1.75rem;
+  
 }
 
 .user-listing-card {
@@ -78,9 +79,11 @@
   border-radius: 4px;
   border: 1px solid #d1d1d1;
   padding: 0.50rem 0.75rem;
+  color: colors.$color-text-main;
+  margin-bottom: 1rem;
 }
 
-.user-listing-card:hover{
+.user-listing-card:hover {
   background: #ffcc00;
 
 }
@@ -135,4 +138,20 @@
   color: colors.$color-text-main;
   margin-left: 40px;
   margin-top: 90px;
+}
+
+body.dark-mode {
+  .user-profile-page {
+    color: colors.$color-text-on-dark;
+  }
+
+  .user-listing-card {
+    background-color: #ffcc00e1;
+  }
+
+  .user-listing-card:hover {
+    background-color: #fff0b6;
+
+  }
+
 }

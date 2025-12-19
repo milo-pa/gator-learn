@@ -15,6 +15,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import TutorListingService from "../service/tutorListingService";
 import { useAuth } from "../component/AuthContext";
+import { buildMediaUrl } from "../util/media";
 
 export default function UserProfilePage() {
   const [listings, setListings] = useState([]);
@@ -38,7 +39,7 @@ export default function UserProfilePage() {
     <main className="user-profile-page">
       <header className="user-header">
         <div className="user-photo-wrapper">
-          <img src="/images/tutor/iu_.png" alt={`${user.name}'s profile`} className="user-photo" />
+          <img src ={buildMediaUrl(user.photoPath) || "/images/default-profile.png"} alt={`${user.name}'s profile`} className="user-photo" />
         </div>
         <div className="user-info">
           <h1 className="user-name">{user.name}</h1>
@@ -54,7 +55,7 @@ export default function UserProfilePage() {
           {listings.map((listing) => (
             <article key={listing.id} className="user-listing-card" onClick={() => navigate(`/listing/${encodeURIComponent(listing.listingId)}`)}>
               <div className="listing-image-wrap">
-                <img src="/images/tutor/iu_.png" alt="Tutor" className="listing-image" />
+                <img src={buildMediaUrl(user.photoPath) || "/images/default-profile.png"} alt="Tutor" className="listing-image" />
               </div>
 
               <div className="listing-main">

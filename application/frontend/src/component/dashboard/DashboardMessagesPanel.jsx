@@ -130,7 +130,7 @@ export default function DashboardMessagesPanel({ sentMessages = [], receivedMess
                                     className="btn btn-icon"
                                     onClick={(e) => handleDelete(e, row.id)}
                                 >
-                                    <img src="images/trash.png" alt="Delete" width="16" height="16" />
+                                    <img src="images/trash.svg" alt="Delete" width="40" height="40" />
                                 </button>
                             </div>
                         )}
