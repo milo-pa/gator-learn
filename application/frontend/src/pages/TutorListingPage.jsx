@@ -60,7 +60,7 @@ function TutorListingPage(props) {
           <img
             src={listing.account?.photoPath || "/images/tutor/iu_.png"}
             alt="User Account"
-            width="200px"
+            className = "tutor-img"
           ></img>
         </div>
 
