@@ -13,12 +13,7 @@
      - You should see Java files with blue circle icons (instead of orange mugs).
 
 2. **Open a local connection to the database and the web port running on AWS**
-   - ```
-     ssh -i Tutoring_Server_Key.pem \
-     -L 3306:127.0.0.1:3306 \
-     -L 8081:127.0.0.1:80 \
-     ec2-user@18.144.101.99
-     ```
+   - `ssh -i Tutoring_Server_Key.pem -L 3306:127.0.0.1:3306 -L 8081:127.0.0.1:80 ec2-user@18.144.101.99`
      - This is the same as the command from milo's ssh command from [server-deploy.md](./server-deploy.md)
         except for the extra part in the middle to configure port forwarding
      - This essentially forwards all traffic from your localhost port 3306 to the aws instance's port 3306, 
