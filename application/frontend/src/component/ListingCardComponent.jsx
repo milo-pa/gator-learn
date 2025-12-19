@@ -41,10 +41,7 @@ function ListingCardComponent({
         if (onMessage) {
             onMessage(listing);
         }
-        // TODO: need to link to listing id/tuotr to actually send message
     }
-
-    // TODO: need to add the date for sorting 
     return (
         <article className={`listing-card listing-card-${variant}`} onClick={showViewMoreButton ? handleViewMore : undefined}>
             <img className="listing-card-img" src={profileImageUrl || "/images/tutor/iu_.png"} alt={`${tutorName}'s profile`} />
