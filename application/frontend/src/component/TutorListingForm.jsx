@@ -239,7 +239,7 @@ function TutorListingForm() {
                             id="subject"
                             className={`input-wrapper ${errors.subject ? "input-error" : ""}`}
                             {...register("subject", { required: "Subject is required" })}
-                        >    
+                        >
                             <option value="">Select a subject</option>
                             {subjects.map((s) => (
                                 <option key={s.subjectId} value={s.subjectId}>

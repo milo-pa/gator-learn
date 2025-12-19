@@ -1,3 +1,16 @@
+/*
+ * Institution: San Francisco State University
+ * Class: CSC 648 Project, Team 05
+ * Project: Gator Learn, Tutoring Website
+ * Author: Samantha Chombo-Rodriguez 
+ * Created: 12/13/2025
+ * Description: Component for hosting page navigation menu links.
+ *
+ * Copyright (c) 2025 San Francisco State University Team 05
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
 import React, { createContext, useState, useEffect, useContext } from "react";
 import userAccountService from "../service/userAccountService";
 

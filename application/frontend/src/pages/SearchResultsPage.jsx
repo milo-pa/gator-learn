@@ -159,19 +159,19 @@ function SearchResultsPage() {
         return ms;
     };
 
-    const sortedListings = [...listings].sort((a, b) => {
-        if (sortKey === "asc") {
-            return Number(a.pricePerHour) - Number(b.pricePerHour);
-        }
-        if (sortKey === "desc") {
-            return Number(b.pricePerHour) - Number(a.pricePerHour);
-        }
-        if (sortKey === "newest") {
-            return getCreatedAtMs(b) - getCreatedAtMs(a);
-        }
-        if (sortKey === "oldest") {
-            return getCreatedAtMs(a) - getCreatedAtMs(b);
-        }
+    const isLive = (l) => {
+        const v = l?.live;
+        if (v === undefined || v === null) return true;
+        return v === 1 || v === true || v === "1";
+    };
+
+    const liveListings = listings.filter(isLive);
+
+    const sortedListings = [...liveListings].sort((a, b) => {
+        if (sortKey === "asc") return Number(a.pricePerHour) - Number(b.pricePerHour);
+        if (sortKey === "desc") return Number(b.pricePerHour) - Number(a.pricePerHour);
+        if (sortKey === "newest") return getCreatedAtMs(b) - getCreatedAtMs(a);
+        if (sortKey === "oldest") return getCreatedAtMs(a) - getCreatedAtMs(b);
         return 0;
     });
 
@@ -193,7 +193,7 @@ function SearchResultsPage() {
                 <div className="results-header-left">
                     <h1 className="results-title">Current Listings</h1>
                     <p className="results-subtitle">
-                        Found <strong>{listings.length}</strong> {listings.length === 1 ? "tutor" : "tutors"}
+                        Found <strong>{liveListings.length}</strong> {liveListings.length === 1 ? "tutor" : "tutors"}
                     </p>
                 </div>
                 <div className="results-header-right">
@@ -224,7 +224,7 @@ function SearchResultsPage() {
                         />
                     );
                 })}
-                {listings.length === 0 && <p className="no-results">No tutors found matching your criteria.</p>}
+                {liveListings.length === 0 && <p className="no-results">No tutors found matching your criteria.</p>}
             </section>
 
             {showPopUp && selectedListing && <MessageTutorPopUp listing={selectedListing} onClose={handleClosePopUp} />}

@@ -24,26 +24,28 @@ export default function HomePage() {
   const [recentListings, setRecentListings] = useState([]);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  
+
   const handleViewMore = (listingId) => {
-        navigate(`/listing/${listingId}`);
-    }
+    navigate(`/listing/${listingId}`);
+  }
 
   const RECENT_LIMIT = 4;
 
   useEffect(() => {
     async function loadRecent() {
+      const isLive = (l) => {
+        const v = l?.live;
+        // if backend sends live as 0/1:
+        return v === 1 || v === true || v === "1";
+      };
       try {
         setLoading(true);
 
         const res = await TutorListingService.getAllListings();
-         console.log(
-        "Listing IDs from backend:",
-        res.data.map(l => l.listingId)
-      );
         const data = res.data || [];
+        const liveOnly = data.filter(isLive);
 
-        const sorted = [...data].sort((a, b) => {
+        const sorted = [...liveOnly].sort((a, b) => {
           if (a.createdAt && b.createdAt) {
             return new Date(b.createdAt) - new Date(a.createdAt);
           }
