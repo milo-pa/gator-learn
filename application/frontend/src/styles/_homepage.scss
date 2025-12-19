@@ -245,4 +245,7 @@ body.dark-mode .message-btn {
 body.dark-mode .recent-listing-card {
     background: #3a3a3a;
     color: #fdfdfd;
+    &:hover {
+        background: #626262;
+    }
 }
