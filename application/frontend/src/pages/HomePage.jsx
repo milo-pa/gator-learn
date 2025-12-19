@@ -14,7 +14,6 @@
  */
 
 import React, { useState, useEffect } from "react";
-import "../styles/HomePage.scss";
 import MessageTutorPopUp from "../component/MessageTutorPopUp";
 import TutorListingService from "../service/tutorListingService";
 
