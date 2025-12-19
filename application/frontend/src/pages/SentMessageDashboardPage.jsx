@@ -70,7 +70,7 @@ export default function SentMessageDashboard({ sentMessages: propSentMessages })
                 }
             }
         }
-    }, [searchParams, sentMessages]);
+    }, [searchParams, sentMessages, selected]);
 
     return (
         <div className="message-dashboard">
