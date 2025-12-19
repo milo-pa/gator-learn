@@ -16,6 +16,7 @@ import { useLocation } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import TutorListingService from "../service/tutorListingService";
 import MessageTutorPopUp from "../component/MessageTutorPopUp";
+import { buildMediaUrl } from "../util/media";
 import ListingCardComponent from "../component/ListingCardComponent";
 
 function parseCourseQuery(q) {
@@ -184,7 +185,7 @@ function SearchResultsPage() {
         pricePerHour: l.pricePerHour,
         description: l.description,
         availableTime: l.availableTime,
-        profileImageUrl: l.account?.photoPath,
+        profileImageUrl: buildMediaUrl(l.account?.photoPath),
     });
 
     return (

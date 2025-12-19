@@ -14,6 +14,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import TutorListingService from "../service/tutorListingService";
+import { buildMediaUrl } from "../util/media";
 import MessageTutorPopUp from "../component/MessageTutorPopUp";
 
 function TutorListingPage(props) {
@@ -58,10 +59,10 @@ function TutorListingPage(props) {
       <div className="tutor-top-row">
         <div className="tutor-image-box">
           <img
-            src={listing.account?.photoPath || "/images/tutor/iu_.png"}
-            alt="User Account"
-            width="200px"
-          ></img>
+                  src={buildMediaUrl(listing.account?.photoPath) || "/images/tutor/iu_.png"}
+                  alt="User Account"
+                  width="200px"
+          />
         </div>
 
         <div className="tutor-info-col">
@@ -92,7 +93,7 @@ function TutorListingPage(props) {
         {listing.resumePath && (
           <a
             className="btn btn-secondary"
-            href={listing.resumePath}
+            href={buildMediaUrl(listing.resumePath)}
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -102,7 +103,7 @@ function TutorListingPage(props) {
         {listing.tutoringVideoSamplePath && (
           <a
             className="btn btn-secondary"
-            href={listing.tutoringVideoSamplePath}
+            href={buildMediaUrl(listing.tutoringVideoSamplePath)}
             target="_blank"
             rel="noopener noreferrer"
           >
