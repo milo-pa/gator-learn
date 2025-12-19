@@ -70,7 +70,7 @@ export default function ReceivedMessageDashboard({ receivedMessages: propReceive
                 }
             }
         }
-    }, [searchParams, receivedMessages]);
+    }, [searchParams, receivedMessages, selected]);
 
     return (
         <div className="message-dashboard">

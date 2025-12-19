@@ -13,6 +13,7 @@
  */
 import React, { Component } from "react";
 import SearchBar from "./SearchBarComponent";
+import { buildMediaUrl } from "../util/media";
 import { Link } from "react-router-dom";
 import { AuthContext } from "./AuthContext";
 
@@ -113,7 +114,11 @@ class TopBarComponent extends Component {
                     Logout
                   </button>
                   <Link to="/user-profile">
-                    <img src= {user.photoPath ||"/images/default-profile.png"} alt="Profile" className="profile-icon" />
+                    <img
+                            src={buildMediaUrl(user.photoPath) || "/images/default-profile.png"}
+                            alt="Profile"
+                            className="profile-icon"
+                    />
                   </Link>
 
                 </div>
