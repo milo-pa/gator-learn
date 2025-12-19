@@ -15,7 +15,6 @@
 
 import React, { useState, useEffect } from "react";
 import DashboardSidebar from "../component/dashboard/DashboardSidebar";
-import DashboardStatsRow from "../component/dashboard/DashboardStatsRow";
 import MyListingsPanel from "../component/dashboard/MyListingPanel";
 import DashboardMessagesPanel from "../component/dashboard/DashboardMessagesPanel";
 import SentMessageDashboardPage from "./SentMessageDashboardPage.jsx";
@@ -36,24 +35,26 @@ export default function DashboardPage() {
     };
 
     useEffect(() => {
-        messageService
-            .getMessagesSentByUserId(user.userId)
-            .then((res) => setSentMessages(res.data || []))
-            .catch((err) => {
-                const status = err.response?.status;
-                console.error("Failed to fetch sent messages", err);
-                alert(`Message retrieval failed with status ${status}.`);
-            });
+      if (!user?.userId) return;
 
-        messageService
-            .getMessagesReceivedByUserId(user.userId)
-            .then((res) => setReceivedMessages(res.data || []))
-            .catch((err) => {
-                const status = err.response?.status;
-                console.error("Failed to fetch received messages", err);
-                alert(`Message retrieval failed with status ${status}.`);
-            });
-    }, []);
+      messageService
+          .getMessagesSentByUserId(user.userId)
+          .then((res) => setSentMessages(res.data || []))
+          .catch((err) => {
+              const status = err.response?.status;
+              console.error("Failed to fetch sent messages", err);
+              alert(`Message retrieval failed with status ${status}.`);
+          });
+
+      messageService
+          .getMessagesReceivedByUserId(user.userId)
+          .then((res) => setReceivedMessages(res.data || []))
+          .catch((err) => {
+              const status = err.response?.status;
+              console.error("Failed to fetch received messages", err);
+              alert(`Message retrieval failed with status ${status}.`);
+          });
+    }, [user?.userId]);
 
     return (
         <div className="db-page">
