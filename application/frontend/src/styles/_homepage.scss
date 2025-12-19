@@ -235,10 +235,17 @@ body.dark-mode .message-btn {
     button {
         margin-top: auto;
     }
+    &:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+    }
 }
 
 /* Dark mode support */
 body.dark-mode .recent-listing-card {
     background: #3a3a3a;
     color: #fdfdfd;
+    &:hover {
+        background: #626262;
+    }
 }

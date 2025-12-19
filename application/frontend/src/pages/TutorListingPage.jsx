@@ -59,10 +59,10 @@ function TutorListingPage(props) {
       <div className="tutor-top-row">
         <div className="tutor-image-box">
           <img
-                  src={buildMediaUrl(listing.account?.photoPath) || "/images/tutor/iu_.png"}
-                  alt="User Account"
-                  width="200px"
-          />
+            src={buildMediaUrl(listing.account?.photoPath) || "/images/tutor/iu_.png"}
+            alt="User Account"
+            className = "tutor-img"
+          ></img>
         </div>
 
         <div className="tutor-info-col">
