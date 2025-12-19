@@ -25,7 +25,7 @@
   margin: 0 auto;
   gap: 24px;
 
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   min-width: 0;
 }
 
@@ -110,16 +110,14 @@
 }
 
 .login-button {
-  background-color: colors.$yub-gold;
-  color: colors.$color-text-main;
-  border: none;
-  font-weight: 600;
-  font-size: 0.85rem;
-  padding: 8px 14px;
-  border-radius: 6px;
-  cursor: pointer;
-  flex: 0 0 auto;
-  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 40px;           /* matches profile icon */
+  padding: 0 14px;        /* cleaner than 8px 14px for consistent height */
+  line-height: 1;
+  border-radius: 8px;
 }
 
 // Yellow Bar Styles
@@ -159,16 +157,22 @@
     }
   }
 }
+.action-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  flex: 0 0 auto;
+  min-width: 0;
+  white-space: nowrap;
+}
 
 .profile-icon {
+  flex: 0 0 auto;
   width: 40px;
   height: 40px;
   border-radius: 8px;
   object-fit: cover;
-  cursor: pointer;
-  border: 2px solid #d0d0d0;
-  background-color: #e6e6e6;
-
   &:hover {
     cursor: pointer;
   }
@@ -273,21 +277,23 @@ body.dark-mode {
   }
 
   .action-wrapper {
-    display: flex;
-    .profile-icon {
-      width: 36px;
-      height: 36px;
-      
-    }
+    width: 100%;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
 
+  .login-button {
+    width: 100%;
+    max-width: 320px;
+    height: 44px;          
+    padding: 0 16px;
+  }
 
-    .login-button {
-      max-width: 320px;
-      margin: 0 auto;
-      text-align: center;
-      padding: 10px 14px;
-    }
-
+  .profile-icon {
+    width: 36px;
+    height: 36px;
+    background: white;
   }
 
 
