@@ -15,7 +15,6 @@
 
 import React, { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
-import "../styles/messagedashboard.scss";
 import messageService from "../service/messageService";
 import { useAuth } from "../component/AuthContext";
 

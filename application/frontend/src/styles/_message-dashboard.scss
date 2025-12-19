@@ -1,0 +1,138 @@
+.message-dashboard {
+  padding: 20px;
+
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+}
+
+.message-layout {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 20px;
+}
+
+.message-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.message-item {
+  background: #eaeaea;
+  padding: 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+
+  strong { font-size: 1rem; }
+
+  .course {
+    font-size: 0.9rem;
+    color: #666;
+    margin-top: 4px;
+  }
+
+  &:hover { background: #dcdcdc; }
+
+  &.active {
+    background: #fff;
+    border: 2px solid #111827;
+  }
+}
+
+.message-details {
+  background: #e0e0e0;
+  padding: 20px;
+  border-radius: 12px;
+
+  p { margin: 6px 0; }
+}
+
+.detail-header { margin-bottom: 16px; }
+
+.comments-section {
+  strong {
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  .comment-box {
+    background: white;
+    padding: 14px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    line-height: 1.35;
+    word-break: break-word;
+  }
+}
+
+@media (max-width: 768px) {
+  .message-dashboard {
+    padding: 12px;
+  }
+
+  .message-dashboard h1 {
+    font-size: 1.4rem;
+    margin-bottom: 12px;
+  }
+
+  .message-layout {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .message-list {
+    max-height: 240px;         
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-right: 4px;        
+  }
+
+  .message-item {
+    padding: 12px;
+  }
+
+  .message-details {
+    padding: 14px;
+  }
+
+  .comments-section .comment-box {
+    padding: 12px;
+  }
+}
+
+body.dark-mode {
+  .message-dashboard {
+    color: #e5e7eb;
+  }
+
+  .message-item {
+    background: #2c2c2c;
+    border-color: #374151;
+    color: #e5e7eb;
+
+    .course { color: #9ca3af; }
+
+    &:hover { background: #5e5e5e; }
+
+    &.active {
+      background: #3c3c3c;
+      border-color: #fbbf24; /* gold accent */
+    }
+  }
+
+  .message-details {
+    background: #252525;
+    border: 1px solid #374151;
+    color: #e5e7eb;
+  }
+
+  .comments-section .comment-box {
+    background: #171717;
+    border-color: #374151;
+    color: #e5e7eb;
+  }
+}
