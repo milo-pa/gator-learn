@@ -14,6 +14,7 @@
  */
 
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import MessageTutorPopUp from "../component/MessageTutorPopUp";
 import TutorListingService from "../service/tutorListingService";
 
@@ -22,7 +23,11 @@ export default function HomePage() {
   const [selectedListing, setSelectedListing] = useState(null);
   const [recentListings, setRecentListings] = useState([]);
   const [loading, setLoading] = useState(false);
-
+  const navigate = useNavigate();
+  
+  const handleViewMore = (listingId) => {
+        navigate(`/listing/${listingId}`);
+    }
 
   const RECENT_LIMIT = 4;
 
@@ -89,7 +94,10 @@ export default function HomePage() {
 
         <div className="recent-listings-grid">
           {recentListings.map((listing) => (
-            <div key={listing.listingId} className="recent-listing-card">
+            <div key={listing.listingId} className="recent-listing-card"
+              role="button"
+              tabIndex={0}
+              onClick={() => handleViewMore(listing.listingId)}>
               <h3>{listing.account?.name || "Unknown Tutor"}</h3>
 
               <p>
