@@ -26,6 +26,10 @@ function TutorListingForm() {
     const { user } = useAuth();
     const [subjects, setSubjects] = useState([]);
     const [courses, setCourses] = useState([]);
+    const [resumePath, setResumePath] = useState("");
+    const [videoPath, setVideoPath] = useState(null);
+    const [uploading, setUploading] = useState(false);
+    const [uploadError, setUploadError] = useState("");
 
     const {
         register,
@@ -119,40 +123,92 @@ function TutorListingForm() {
 
     console.log("AUTH USER:", user);
     console.log("AUTH USER ID:", user?.userId);
-    const onSubmit = (data) => {
+
+    /**
+     * Handles file uploads (Phase 1 of two-phase upload)
+     * Uploads resume and video files if provided, then creates the listing
+     */
+    const handleFileUploads = async (data) => {
+        setUploading(true);
+        setUploadError("");
+
+        try {
+            let finalResumePath = resumePath;
+            let finalVideoPath = videoPath;
+
+            // Upload resume if file is provided and hasn't been uploaded yet
+            if (data.resumeFile?.[0] && !resumePath) {
+                console.log("Uploading resume file...");
+                const resumeResponse = await tutorListingService.uploadResume(data.resumeFile[0]);
+                finalResumePath = resumeResponse.data.path;
+                setResumePath(finalResumePath);
+                console.log("Resume uploaded:", finalResumePath);
+            }
+
+            // Upload video if file is provided and hasn't been uploaded yet
+            if (data.videoSample?.[0] && !videoPath) {
+                console.log("Uploading video file...");
+                const videoResponse = await tutorListingService.uploadVideo(data.videoSample[0]);
+                finalVideoPath = videoResponse.data.path;
+                setVideoPath(finalVideoPath);
+                console.log("Video uploaded:", finalVideoPath);
+            }
+
+            // Ensure resume path exists (required field)
+            if (!finalResumePath && !data.resumeFile?.[0]) {
+                throw new Error("Resume file is required");
+            }
+
+            // Return the paths for listing creation
+            return { resumePath: finalResumePath, videoPath: finalVideoPath };
+        } catch (error) {
+            const errorMessage = error.response?.data?.error || error.message || "File upload failed";
+            setUploadError(errorMessage);
+            throw error;
+        } finally {
+            setUploading(false);
+        }
+    };
+
+    /**
+     * Creates the tutor listing with uploaded file paths (Phase 2 of two-phase upload)
+     */
+    const onSubmit = async (data) => {
         if (!user?.userId) {
             alert("User not loaded yet. Please wait a moment.");
             return;
         }
-        const payload = {
-            account: { userId: user.userId },               // maps to user_id
-            subject: { subjectId: Number(data.subject) },   // maps to subject_id
-            course: { courseId: Number(data.course) },      // maps to course_id
 
-            pricePerHour: Number(priceValue || 0),
-            live: 1,                                        // IMPORTANT (int)
-            description: cleanFreeText(data.description || ""),
-            availableTime: formatAvailableDays(data.availableDays) || "",
+        try {
+            // Phase 1: Upload files first
+            const { resumePath: finalResumePath, videoPath: finalVideoPath } = await handleFileUploads(data);
 
-            resumePath: data.resumeFile?.[0]?.name ?? "",   // IMPORTANT (not null)
-            videoSamplePath: data.videoSample?.[0]?.name ?? null,
-        };
+            // Phase 2: Create listing with file paths
+            const payload = {
+                account: { userId: user.userId },               // maps to user_id
+                subject: { subjectId: Number(data.subject) },   // maps to subject_id
+                course: { courseId: Number(data.course) },      // maps to course_id
 
-        console.log("FORM DATA:", data);
+                pricePerHour: Number(priceValue || 0),
+                live: 1,                                        // IMPORTANT (int)
+                description: cleanFreeText(data.description || ""),
+                availableTime: formatAvailableDays(data.availableDays) || "",
 
-        console.log("PAYLOAD (CLEANED):", payload);
+                resumePath: finalResumePath || "",              // Use uploaded path
+                videoSamplePath: finalVideoPath || null,        // Use uploaded path (nullable)
+            };
 
-        tutorListingService
-            .createListing(payload)
-            .then(() => setPopUp(true))
-            .catch((err) => {
-                const data = err.response?.data;
-                console.log("CREATE LISTING ERROR:", data);
-                alert(
-                    "Listing creation failed: " +
-                    (typeof data === "string" ? data : JSON.stringify(data, null, 2))
-                );
-            });
+            console.log("FORM DATA:", data);
+            console.log("PAYLOAD (CLEANED):", payload);
+
+            await tutorListingService.createListing(payload);
+            setPopUp(true);
+        } catch (err) {
+            const errorData = err.response?.data;
+            console.log("CREATE LISTING ERROR:", errorData);
+            const errorMessage = errorData?.error || (typeof errorData === "string" ? errorData : JSON.stringify(errorData, null, 2));
+            alert("Listing creation failed: " + errorMessage);
+        }
     };
     const handlePriceChange = (e) => {
         const value = e.target.value;
@@ -324,17 +380,26 @@ function TutorListingForm() {
                     </div>
 
                     <div className="form-row">
-                        <label htmlFor="resumeFile">Resume/CV:</label>
+                        <label className="required-label" htmlFor="resumeFile">Resume/CV:</label>
                         <div className={"input-wrapper"}>
                             <input
                                 type="file"
                                 id="resumeFile"
-                                accept=".pdf, .jpg,.jpeg, .webp"
-                                {...register("resumeFile")}
+                                accept=".pdf, .jpg,.jpeg, .png, .webp"
+                                {...register("resumeFile", {
+                                    required: "Resume file is required",
+                                })}
                             />
                         </div>
-
-                        <span className="hci-text desc-text">Allows JPG, PNG, and WEBP</span>
+                        {resumePath && (
+                            <span className="hci-text desc-text" style={{ color: "green" }}>
+                                ✓ Resume uploaded: {resumePath.split("/").pop()}
+                            </span>
+                        )}
+                        {errors.resumeFile && (
+                            <div className="error-text desc-text">{errors.resumeFile.message}</div>
+                        )}
+                        <span className="hci-text desc-text">Allows PDF, JPG, PNG, and WEBP (Max 10MB)</span>
                     </div>
 
                     <div className="form-row">
@@ -356,16 +421,25 @@ function TutorListingForm() {
                                 })}
                             />
                         </div>
-
-                        <span className="hci-text desc-text">Allows MP4, and WEBM</span>
+                        {videoPath && (
+                            <span className="hci-text desc-text" style={{ color: "green" }}>
+                                ✓ Video uploaded: {videoPath.split("/").pop()}
+                            </span>
+                        )}
+                        <span className="hci-text desc-text">Allows MP4 and WEBM (Optional, Max 50MB)</span>
                     </div>
+                    {uploadError && (
+                        <div className="error-text desc-text" style={{ marginTop: "10px", color: "red" }}>
+                            Upload Error: {uploadError}
+                        </div>
+                    )}
 
                     <div className="button-row ">
                         <button type="button" className="btn btn-secondary" onClick={() => navigate(-1)}>
                             CANCEL
                         </button>
-                        <button type="submit" className="btn btn-primary" disabled={!user?.userId}>
-                            SUBMIT
+                        <button type="submit" className="btn btn-primary" disabled={!user?.userId || uploading}>
+                            {uploading ? "UPLOADING..." : "SUBMIT"}
                         </button>
                     </div>
                 </form>
