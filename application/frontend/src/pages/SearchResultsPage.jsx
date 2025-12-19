@@ -13,9 +13,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 import { useLocation } from "react-router-dom";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import TutorListingService from "../service/tutorListingService";
 import MessageTutorPopUp from "../component/MessageTutorPopUp";
+import { buildMediaUrl } from "../util/media";
 import ListingCardComponent from "../component/ListingCardComponent";
 
 function parseCourseQuery(q) {
@@ -37,12 +38,21 @@ function useQueryParams() {
     return new URLSearchParams(search);
 }
 
+function removeDuplicates(arr) {
+    const seen = new Set();
+    return arr.filter((item) => {
+        const key = item.listingId ?? item.id;
+        if (seen.has(key)) return false;
+        seen.add(key);
+        return true;
+    });
+}
+
 function SearchResultsPage() {
     const params = useQueryParams();
 
     const subject = (params.get("subject") || "all").trim();
     const course = (params.get("course") || "").trim();
-    const all = (params.get("all") || "").trim();
 
     const [listings, setListings] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -61,17 +71,7 @@ function SearchResultsPage() {
         setSelectedListing(null);
     };
 
-    function removeDuplicates(arr) {
-        const seen = new Set();
-        return arr.filter((item) => {
-            const key = item.listingId ?? item.id;
-            if (seen.has(key)) return false;
-            seen.add(key);
-            return true;
-        });
-    }
-
-    async function fetchCourseMatches(courseQuery) {
+    const fetchCourseMatches = useCallback(async (courseQuery) => {
         const { courseName, courseNumber, raw } = parseCourseQuery(courseQuery);
 
         if (!raw) return [];
@@ -92,7 +92,7 @@ function SearchResultsPage() {
         ]);
 
         return removeDuplicates([...(nameRes.data || []), ...(numRes.data || [])]);
-    }
+    }, []);
 
     useEffect(() => {
         async function loadListings() {
@@ -145,7 +145,7 @@ function SearchResultsPage() {
         }
 
         loadListings();
-    }, [subject, course]);
+    }, [subject, course, fetchCourseMatches]);
 
     const getCreatedAtMs = (listing) => {
         // try common backend field names
@@ -184,7 +184,7 @@ function SearchResultsPage() {
         pricePerHour: l.pricePerHour,
         description: l.description,
         availableTime: l.availableTime,
-        profileImageUrl: l.account?.photoPath,
+        profileImageUrl: buildMediaUrl(l.account?.photoPath),
     });
 
     return (

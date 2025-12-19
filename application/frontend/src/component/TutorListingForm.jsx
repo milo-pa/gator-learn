@@ -16,7 +16,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import PopUpComponent from "./PopUpComponent";
 import tutorListingService from "../service/tutorListingService";
-import { cleanText, cleanFreeText } from "../util/sanitize";
+import { cleanFreeText } from "../util/sanitize";
 import { useAuth } from "./AuthContext";
 
 function TutorListingForm() {
