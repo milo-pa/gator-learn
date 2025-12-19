@@ -597,7 +597,8 @@ body.dark-mode {
     }
 
     .btn-icon {
-        background-color: #5b5b5b57;
+        filter: invert(1) brightness(1.2);
+        opacity: 0.9;
     }
 
 
