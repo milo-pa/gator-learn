@@ -190,7 +190,7 @@ function TutorListingForm() {
                 course: { courseId: Number(data.course) },      // maps to course_id
 
                 pricePerHour: Number(priceValue || 0),
-                live: 1,                                        // IMPORTANT (int)
+                live: 0,                                        // IMPORTANT (int)
                 description: cleanFreeText(data.description || ""),
                 availableTime: formatAvailableDays(data.availableDays) || "",
 
