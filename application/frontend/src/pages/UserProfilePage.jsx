@@ -38,7 +38,7 @@ export default function UserProfilePage() {
     <main className="user-profile-page">
       <header className="user-header">
         <div className="user-photo-wrapper">
-          <img src="/images/tutor/iu_.png" alt={`${user.name}'s profile`} className="user-photo" />
+          <img src={user.photoPath} alt={`${user.name}'s profile`} className="user-photo" />
         </div>
         <div className="user-info">
           <h1 className="user-name">{user.name}</h1>
