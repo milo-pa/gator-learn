@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -85,5 +86,37 @@ public class UserAccountController
         UserAccount user = userService.getUserRepository().findById(userId).get();
 
         return ResponseEntity.ok(user);
+    }
+
+    /**
+     * Update user profile photo path.
+     * POST /api/user/update-photo
+     * Body: { "photoPath": "/uploads/tutor_photo/photo_user1_abc123.jpg" }
+     *
+     * @param requestBody Map containing "photoPath"
+     * @return Updated user account
+     */
+    @PutMapping("/update-photo")
+    public ResponseEntity<?> updatePhoto(@RequestBody Map<String, String> requestBody)
+    {
+        Long userId = (Long) httpSession.getAttribute("userId");
+
+        if (userId == null)
+        {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("User not logged in");
+        }
+
+        Optional<UserAccount> userOpt = userService.getUserRepository().findById(userId);
+        if (userOpt.isEmpty())
+        {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+        }
+
+        UserAccount user = userOpt.get();
+        String photoPath = requestBody.get("photoPath");
+        user.setPhotoPath(photoPath);
+        UserAccount updated = userService.getUserRepository().save(user);
+
+        return ResponseEntity.ok(updated);
     }
 }

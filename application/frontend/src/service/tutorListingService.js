@@ -65,6 +65,38 @@ class TutorListingService {
     getCoursesBySubjectId(subjectId) {
         return api.get(`/api/courses/bySubject/${subjectId}`);
     }
+
+    /**
+     * Upload a resume file
+     * @param {File} file - The resume file to upload
+     * @returns {Promise} Promise that resolves with the file path
+     */
+    uploadResume(file) {
+        const formData = new FormData();
+        formData.append("file", file);
+        return api.post("/api/upload/resume", formData, {
+            headers: {
+                "Content-Type": "multipart/form-data",
+            },
+            withCredentials: true,
+        });
+    }
+
+    /**
+     * Upload a video file
+     * @param {File} file - The video file to upload
+     * @returns {Promise} Promise that resolves with the file path
+     */
+    uploadVideo(file) {
+        const formData = new FormData();
+        formData.append("file", file);
+        return api.post("/api/upload/video", formData, {
+            headers: {
+                "Content-Type": "multipart/form-data",
+            },
+            withCredentials: true,
+        });
+    }
 }
 const tutorListingService = new TutorListingService();
 export default tutorListingService;
