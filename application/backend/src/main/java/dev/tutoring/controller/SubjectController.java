@@ -1,7 +1,7 @@
-package dev.teamfive.tutoring.controller;
+package dev.tutoring.controller;
 
-import dev.teamfive.tutoring.model.Subject;
-import dev.teamfive.tutoring.repository.SubjectRepository;
+import dev.tutoring.model.Subject;
+import dev.tutoring.repository.SubjectRepository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

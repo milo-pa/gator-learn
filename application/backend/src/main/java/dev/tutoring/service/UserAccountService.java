@@ -1,7 +1,7 @@
-package dev.teamfive.tutoring.service;
+package dev.tutoring.service;
 
-import dev.teamfive.tutoring.model.UserAccount;
-import dev.teamfive.tutoring.repository.UserAccountRepository;
+import dev.tutoring.model.UserAccount;
+import dev.tutoring.repository.UserAccountRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 

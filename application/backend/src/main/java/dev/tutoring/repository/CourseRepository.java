@@ -1,6 +1,6 @@
-package dev.teamfive.tutoring.repository;
+package dev.tutoring.repository;
 
-import dev.teamfive.tutoring.model.Course;
+import dev.tutoring.model.Course;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package dev.teamfive.tutoring.config;
+package dev.tutoring.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

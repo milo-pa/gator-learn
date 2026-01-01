@@ -1,4 +1,4 @@
-package dev.teamfive.tutoring;
+package dev.tutoring;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,6 +1,6 @@
-package dev.teamfive.tutoring.repository;
+package dev.tutoring.repository;
 
-import dev.teamfive.tutoring.model.UserAccount;
+import dev.tutoring.model.UserAccount;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

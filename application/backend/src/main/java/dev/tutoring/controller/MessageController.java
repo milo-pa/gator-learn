@@ -1,10 +1,8 @@
-package dev.teamfive.tutoring.controller;
+package dev.tutoring.controller;
 
-import dev.teamfive.tutoring.model.Message;
-import dev.teamfive.tutoring.model.TutorListing;
-import dev.teamfive.tutoring.repository.MessageRepository;
+import dev.tutoring.model.Message;
+import dev.tutoring.repository.MessageRepository;
 import jakarta.servlet.http.HttpSession;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;

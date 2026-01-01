@@ -11,14 +11,14 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-package dev.teamfive.tutoring.repository;
+package dev.tutoring.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import dev.teamfive.tutoring.model.TutorListing;
+import dev.tutoring.model.TutorListing;
 
 import java.util.List;
 

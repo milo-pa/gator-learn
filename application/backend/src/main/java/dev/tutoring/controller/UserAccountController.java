@@ -1,7 +1,7 @@
-package dev.teamfive.tutoring.controller;
+package dev.tutoring.controller;
 
-import dev.teamfive.tutoring.service.UserAccountService;
-import dev.teamfive.tutoring.model.UserAccount;
+import dev.tutoring.service.UserAccountService;
+import dev.tutoring.model.UserAccount;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

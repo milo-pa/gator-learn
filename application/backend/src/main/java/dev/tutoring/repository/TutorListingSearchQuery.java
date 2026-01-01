@@ -1,4 +1,4 @@
-package dev.teamfive.tutoring.repository;
+package dev.tutoring.repository;
 
 abstract class TutorListingSearchQuery
 {

@@ -1,6 +1,6 @@
-package dev.teamfive.tutoring.repository;
+package dev.tutoring.repository;
 
-import dev.teamfive.tutoring.model.Message;
+import dev.tutoring.model.Message;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

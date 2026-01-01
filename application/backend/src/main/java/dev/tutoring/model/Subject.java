@@ -1,4 +1,4 @@
-package dev.teamfive.tutoring.model;
+package dev.tutoring.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.Column;
@@ -10,35 +10,22 @@ import jakarta.persistence.Table;
 
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
-@Table(name = "course")
-public class Course
+@Table(name = "subject")
+public class Subject
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "course_id")
-    private Long courseId;
-
     @Column(name = "subject_id")
     private Long subjectId;
 
-    @Column(name = "course_name")
-    private String courseName;
+    @Column(name = "subject_name")
+    private String subjectName;
 
-    @Column(name = "course_number")
-    private String courseNumber;
+    @Column(name = "category")
+    private String category;
 
     @Column(name = "description")
     private String description;
-
-    public Long getCourseId()
-    {
-        return courseId;
-    }
-
-    public void setCourseId(Long courseId)
-    {
-        this.courseId = courseId;
-    }
 
     public Long getSubjectId()
     {
@@ -50,24 +37,24 @@ public class Course
         this.subjectId = subjectId;
     }
 
-    public String getCourseName()
+    public String getSubjectName()
     {
-        return courseName;
+        return subjectName;
     }
 
-    public void setCourseName(String courseName)
+    public void setSubjectName(String subjectName)
     {
-        this.courseName = courseName;
+        this.subjectName = subjectName;
     }
 
-    public String getCourseNumber()
+    public String getCategory()
     {
-        return courseNumber;
+        return category;
     }
 
-    public void setCourseNumber(String courseNumber)
+    public void setCategory(String category)
     {
-        this.courseNumber = courseNumber;
+        this.category = category;
     }
 
     public String getDescription()
@@ -83,6 +70,6 @@ public class Course
     @Override
     public String toString()
     {
-        return "Course{" + "courseId=" + courseId + ", subjectId=" + subjectId + ", courseName='" + courseName + '\'' + ", courseNumber='" + courseNumber + '\'' + ", description='" + description + '\'' + '}';
+        return "Subject{" + "subjectId=" + subjectId + ", subjectName='" + subjectName + '\'' + ", category='" + category + '\'' + ", description='" + description + '\'' + '}';
     }
 }

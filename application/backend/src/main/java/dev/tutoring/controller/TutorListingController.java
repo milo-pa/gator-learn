@@ -11,7 +11,7 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-package dev.teamfive.tutoring.controller;
+package dev.tutoring.controller;
 
 import java.util.List;
 import java.util.Map;
@@ -28,8 +28,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import dev.teamfive.tutoring.model.TutorListing;
-import dev.teamfive.tutoring.repository.TutorListingRepository;
+import dev.tutoring.model.TutorListing;
+import dev.tutoring.repository.TutorListingRepository;
 
 /**
  * This class defines the API endpoint for managing tutor listings.

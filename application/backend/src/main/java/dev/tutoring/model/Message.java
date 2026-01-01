@@ -1,4 +1,4 @@
-package dev.teamfive.tutoring.model;
+package dev.tutoring.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.Column;

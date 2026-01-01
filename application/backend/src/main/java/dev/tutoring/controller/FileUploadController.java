@@ -11,9 +11,9 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-package dev.teamfive.tutoring.controller;
+package dev.tutoring.controller;
 
-import dev.teamfive.tutoring.service.FileUploadService;
+import dev.tutoring.service.FileUploadService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
