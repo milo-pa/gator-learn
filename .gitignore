@@ -1,26 +1,17 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
 # --- Editors/IDE ---
 .vscode/git
 
-# IntelliJ IDEA - Files to ignore (user-specific, local configuration, caches)
-.idea/workspace.xml
-.idea/jarRepositories.xml
-.idea/compiler.xml
-.idea/modules.xml
-.idea/csc648-fa25-03-team05.iml
-
-# IntelliJ IDEA - Files to keep (do NOT ignore these)
-# .idea/misc.xml
-# .idea/vcs.xml
-# .idea/encodings.xml
-# .idea/checkstyle-idea.xml
+# IntelliJ IDEA
+.idea
 
 # --- Java / Maven / Build Artifacts ---
 *.class
 *.jar
 *.war
 target/
+
+# --- Spring Boot ---
+application/backend/src/main/resources/application-local.properties
 
 # --- Logs ---
 logs/
@@ -37,12 +28,10 @@ dump*.sql
 
 
 # ===== FRONTEND IGNORE RULES =====
-# (moved from application/frontend/.gitignore)
 
 # dependencies
 application/frontend/node_modules
 application/frontend/.pnp
-.pnp.js
 
 # testing
 application/frontend/coverage
@@ -59,6 +48,3 @@ application/frontend/build
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-
-# macOS system files
-**/.DS_Store
