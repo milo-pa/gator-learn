@@ -10,6 +10,10 @@
 *.war
 target/
 
+# --- Keys ---
+credentials/
+*.pem
+
 # --- Spring Boot ---
 application/backend/src/main/resources/application-local.properties
 
@@ -25,7 +29,6 @@ dist/
 # --- Database dumps (but keep Flyway migrations) ---
 *.sql
 dump*.sql
-
 
 # ===== FRONTEND IGNORE RULES =====
 
